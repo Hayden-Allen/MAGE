@@ -1,5 +1,5 @@
 #pragma once
-#include "core.h"
+#include "pch.h"
 
 namespace mage
 {

@@ -1,0 +1,3 @@
+[submodule "MAGE/vendor/spdlog"]
+	path = MAGE/vendor/spdlog
+	url = https://github.com/gabime/spdlog

@@ -12,7 +12,13 @@
 #include <thread>
 #include <fstream>
 #include <sstream>
+#include <memory>
 
 #ifdef MAGE_PLATFORM_WINDOWS
 	#include <Windows.h>
 #endif
+
+#include <spdlog/spdlog.h>
+#include <spdlog/sinks/stdout_color_sinks.h>
+
+#include "mage/core.h"
