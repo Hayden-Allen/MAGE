@@ -16,7 +16,7 @@ namespace mage
 }
 
 
-#ifndef MAGE_BUILD_PRODUCTION
+#ifndef MAGE_DIST
 	#define MAGE_CORE_TRACE(...) ::mage::log::get_core()->trace(__VA_ARGS__)
 	#define MAGE_CORE_INFO(...)  ::mage::log::get_core()->info(__VA_ARGS__)
 	#define MAGE_CORE_WARN(...)  ::mage::log::get_core()->warn(__VA_ARGS__)
