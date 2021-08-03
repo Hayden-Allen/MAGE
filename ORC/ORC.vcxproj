@@ -13,8 +13,8 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{ca70f840-cd5b-4c17-9536-caca385e5c23}</ProjectGuid>
-    <RootNamespace>Sandbox</RootNamespace>
+    <ProjectGuid>{6c01e59d-6716-4e19-bfb6-2a18b802f107}</ProjectGuid>
+    <RootNamespace>ORC</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -45,21 +45,21 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <OutDir>$(SolutionDir)$(ProjectName)\bin\$(Configuration)-$(Platform)\</OutDir>
-    <IntDir>$(SolutionDir)$(ProjectName)\bin-int\$(Configuration)-$(Platform)\</IntDir>
+    <OutDir>$(SolutionDir)bin\$(ProjectName)\$(Configuration)-$(Platform)\</OutDir>
+    <IntDir>$(SolutionDir)bin-int\$(ProjectName)\$(Configuration)-$(Platform)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
-    <OutDir>$(SolutionDir)$(ProjectName)\bin\$(Configuration)-$(Platform)\</OutDir>
-    <IntDir>$(SolutionDir)$(ProjectName)\bin-int\$(Configuration)-$(Platform)\</IntDir>
+    <OutDir>$(SolutionDir)bin\$(ProjectName)\$(Configuration)-$(Platform)\</OutDir>
+    <IntDir>$(SolutionDir)bin-int\$(ProjectName)\$(Configuration)-$(Platform)\</IntDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>MAGE_PLATFORM_WINDOWS;</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <LanguageStandard>stdcpplatest</LanguageStandard>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)src\;$(SolutionDir)MAGE\;$(SolutionDir)MAGE\src\;</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -72,9 +72,9 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>MAGE_PLATFORM_WINDOWS;</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <LanguageStandard>stdcpplatest</LanguageStandard>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)src\;$(SolutionDir)MAGE\;$(SolutionDir)MAGE\src\;</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -84,12 +84,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="src\main.cpp" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\MAGE\MAGE.vcxproj">
       <Project>{8a0cd567-da92-4bf7-b027-0aa9a79692bb}</Project>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\main.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

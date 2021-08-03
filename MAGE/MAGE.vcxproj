@@ -10,6 +10,20 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\mage\application.h" />
+    <ClInclude Include="src\mage.h" />
+    <ClInclude Include="src\mage\core.h" />
+    <ClInclude Include="src\mage\entry_point.h" />
+    <ClInclude Include="src\pch.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\mage\application.cpp" />
+    <ClCompile Include="src\pch.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
+    </ClCompile>
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
@@ -45,21 +59,24 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <OutDir>$(SolutionDir)$(ProjectName)\bin\$(Configuration)-$(Platform)\</OutDir>
-    <IntDir>$(SolutionDir)$(ProjectName)\bin-int\$(Configuration)-$(Platform)\</IntDir>
+    <OutDir>$(SolutionDir)bin\$(ProjectName)\$(Configuration)-$(Platform)\</OutDir>
+    <IntDir>$(SolutionDir)bin-int\$(ProjectName)\$(Configuration)-$(Platform)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
-    <OutDir>$(SolutionDir)$(ProjectName)\bin\$(Configuration)-$(Platform)\</OutDir>
-    <IntDir>$(SolutionDir)$(ProjectName)\bin-int\$(Configuration)-$(Platform)\</IntDir>
+    <OutDir>$(SolutionDir)bin\$(ProjectName)\$(Configuration)-$(Platform)\</OutDir>
+    <IntDir>$(SolutionDir)bin-int\$(ProjectName)\$(Configuration)-$(Platform)\</IntDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>MAGE_PLATFORM_WINDOWS; MAGE_BUILD_DLL;</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpplatest</LanguageStandard>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)src\;</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -72,9 +89,12 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>MAGE_PLATFORM_WINDOWS; MAGE_BUILD_DLL;</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpplatest</LanguageStandard>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)src\;</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
