@@ -87,6 +87,7 @@
       <Filter>platform\windows</Filter>
     </ClInclude>
     <ClInclude Include="src\mage\layer\imgui_layer.h" />
+    <ClInclude Include="src\mage\util\functions.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\mage\layer\layer_stack.cpp">

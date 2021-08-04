@@ -18,6 +18,9 @@ namespace mage
 
 
 	bool windows_window::s_glfw_init = false;
+
+
+
 	windows_window::windows_window(const window_constructor& data) :
 		window(data)
 	{
@@ -46,6 +49,7 @@ namespace mage
 
 		// callbacks
 		glfwSetErrorCallback(error_callback);
+		glfwSetCharCallback(m_window, char_callback);
 		glfwSetKeyCallback(m_window, key_callback);
 		glfwSetMouseButtonCallback(m_window, mouse_button_callback);
 		glfwSetCursorPosCallback(m_window, mouse_move_callback);
@@ -69,9 +73,6 @@ namespace mage
 		glfwSwapBuffers(m_window);
 		return true;
 	}
-
-
-
 	/**
 	 * GLFW callbacks
 	 */
@@ -79,6 +80,11 @@ namespace mage
 	void windows_window::error_callback(int code, const char* desc)
 	{
 		MAGE_CORE_ERROR("[GLFW Error {}]: {}", code, desc);
+	}
+	void windows_window::char_callback(GLFWwindow* window, uint32_t code)
+	{
+		key_type_event e(MAGE_CAST(int, code));
+		WIN->invoke(e);
 	}
 	void windows_window::key_callback(GLFWwindow* window, int key, int scan, int action, int mods)
 	{

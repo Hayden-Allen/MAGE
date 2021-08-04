@@ -1,11 +1,17 @@
 #include "pch.h"
 #include "imgui_layer.h"
+#include "util/functions.h"
 #include "application.h"
 #include "log.h"
 #include "platform/OpenGL/imgui_renderer.h"
 
 namespace mage
 {
+    int imgui_layer::s_imgui_min_charcode = 1;
+    int imgui_layer::s_imgui_max_charcode = 0xffff;
+
+
+
 	void imgui_layer::on_attach()
 	{
 		ImGui::CreateContext();
@@ -43,7 +49,7 @@ namespace mage
 	}
 	void imgui_layer::on_detach()
 	{
-
+        ImGui_ImplOpenGL3_Shutdown();
 	}
 
 
@@ -73,5 +79,88 @@ namespace mage
         ImGui::Render();
         ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
         return true;
+    }
+    bool imgui_layer::on_key_press(key_press_event& e)
+    {
+        on_key_base(e, true);
+        return false;
+    }
+    bool imgui_layer::on_key_release(key_release_event& e)
+    {
+        on_key_base(e, false);
+        return false;
+    }
+    bool imgui_layer::on_key_type(key_type_event& e)
+    {
+        ImGuiIO& io = ImGui::GetIO();
+
+        int c = e.get_code();
+        if(c >= s_imgui_min_charcode && c <= s_imgui_max_charcode)
+            io.AddInputCharacter(c);
+
+        return false;
+    }
+    bool imgui_layer::on_mouse_press(mouse_press_event& e)
+    {
+        ImGuiIO& io = ImGui::GetIO();
+
+        int b = e.get_button();
+        if(b >= 0 && b < ImGuiMouseButton_COUNT)
+            io.MouseDown[e.get_button()] = true;
+
+        return false;
+    }
+    bool imgui_layer::on_mouse_release(mouse_release_event& e)
+    {
+        ImGuiIO& io = ImGui::GetIO();
+
+        int b = e.get_button();
+        if (b >= 0 && b < ImGuiMouseButton_COUNT)
+            io.MouseDown[e.get_button()] = false;
+
+        return false;
+    }
+    bool imgui_layer::on_mouse_move(mouse_move_event& e)
+    {
+        ImGuiIO& io = ImGui::GetIO();
+
+        io.MousePos = ImVec2(e.get_x<float>(), e.get_y<float>());
+
+        return false;
+    }
+    bool imgui_layer::on_mouse_scroll(mouse_scroll_event& e)
+    {
+        ImGuiIO& io = ImGui::GetIO();
+
+        io.MouseWheel += e.get_y();
+        io.MouseWheelH += e.get_x();
+
+        return false;
+    }
+    bool imgui_layer::on_window_resize(window_resize_event& e)
+    {
+        ImGuiIO& io = ImGui::GetIO();
+
+        io.DisplaySize = ImVec2(e.get_w<float>(), e.get_h<float>());
+        io.DisplayFramebufferScale = ImVec2(1.f, 1.f);
+
+        return false;
+    }
+    void imgui_layer::on_key_base(key_event& e, bool pressed)
+    {
+        ImGuiIO& io = ImGui::GetIO();
+
+        int c = e.get_code();
+        if (c >= 0 && c < arrlen(io.KeysDown))
+            io.KeysDown[c] = pressed;
+
+        io.KeyCtrl = io.KeysDown[GLFW_KEY_LEFT_CONTROL] || io.KeysDown[GLFW_KEY_RIGHT_CONTROL];
+        io.KeyShift = io.KeysDown[GLFW_KEY_LEFT_SHIFT] || io.KeysDown[GLFW_KEY_RIGHT_SHIFT];
+        io.KeyAlt = io.KeysDown[GLFW_KEY_LEFT_ALT] || io.KeysDown[GLFW_KEY_RIGHT_ALT];
+    #ifdef MAGE_PLATFORM_WINDOWS
+        io.KeySuper = false;
+    #else
+        io.KeySuper = io.KeysDown[GLFW_KEY_LEFT_SUPER] || io.KeysDown[GLFW_KEY_RIGHT_SUPER];
+    #endif
     }
 }

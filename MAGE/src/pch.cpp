@@ -11,6 +11,7 @@
 
 #include "mage/util/color.h"
 #include "mage/util/dimensional.h"
+#include "mage/util/functions.h"
 #include "mage/util/positional.h"
 #include "mage/util/typed.h"
 

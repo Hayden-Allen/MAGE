@@ -27,6 +27,7 @@ namespace mage
 			// key
 			e.dispatch<key_press_event>(MAGE_BIND_EVENT_CALLBACK(event_handler::on_key_press));
 			e.dispatch<key_release_event>(MAGE_BIND_EVENT_CALLBACK(event_handler::on_key_release));
+			e.dispatch<key_type_event>(MAGE_BIND_EVENT_CALLBACK(event_handler::on_key_type));
 			// mouse
 			e.dispatch<mouse_press_event>(MAGE_BIND_EVENT_CALLBACK(event_handler::on_mouse_press));
 			e.dispatch<mouse_release_event>(MAGE_BIND_EVENT_CALLBACK(event_handler::on_mouse_release));
@@ -49,6 +50,7 @@ namespace mage
 		// key
 		virtual bool on_key_press(key_press_event& e) { return false; }
 		virtual bool on_key_release(key_release_event& e) { return false; }
+		virtual bool on_key_type(key_type_event& e) { return false; }
 		// mouse
 		virtual bool on_mouse_press(mouse_press_event& e) { return false; }
 		virtual bool on_mouse_release(mouse_release_event& e) { return false; }

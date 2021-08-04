@@ -170,6 +170,7 @@
     <ClInclude Include="src\mage\log.h" />
     <ClInclude Include="src\mage\util\color.h" />
     <ClInclude Include="src\mage\util\dimensional.h" />
+    <ClInclude Include="src\mage\util\functions.h" />
     <ClInclude Include="src\mage\util\positional.h" />
     <ClInclude Include="src\mage\util\typed.h" />
     <ClInclude Include="src\mage\window.h" />

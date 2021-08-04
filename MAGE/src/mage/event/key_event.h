@@ -71,4 +71,13 @@ namespace mage
 		MAGE_DCM(key_release_event);
 		MAGE_EVENT_TYPE(event_type::key_release);
 	};
+	class MAGE_API key_type_event : public key_event
+	{
+	public:
+		key_type_event(int code) :
+			key_event(code)
+		{}
+		MAGE_DCM(key_type_event);
+		MAGE_EVENT_TYPE(event_type::key_type);
+	};
 }

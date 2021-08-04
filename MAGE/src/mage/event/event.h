@@ -15,7 +15,7 @@ namespace mage
 	{
 		none = 0,
 		app_tick, app_render,
-		key_press, key_release,
+		key_press, key_release, key_type,
 		mouse_press, mouse_release, mouse_move, mouse_scroll,
 		window_close, window_resize, window_focus, window_unfocus, window_move
 	};

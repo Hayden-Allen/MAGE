@@ -3,8 +3,8 @@
 
 namespace mage
 {
-	spdlog::logger* log::s_core;
-	spdlog::logger* log::s_client;
+	spdlog::logger* log::s_core = nullptr;
+	spdlog::logger* log::s_client = nullptr;
 
 
 

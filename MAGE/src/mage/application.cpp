@@ -3,6 +3,10 @@
 
 namespace mage
 {
+	application* application::s_instance = nullptr;
+
+
+
 	void application::run() const
 	{
 		app_tick_event tick;
@@ -23,7 +27,6 @@ namespace mage
 
 
 
-	application* application::s_instance = nullptr;
 	application::application(const window_constructor& data) :
 		m_running(true)
 	{
@@ -33,9 +36,6 @@ namespace mage
 		m_window = window::create(data);
 		m_window->set_event_callback(MAGE_BIND_EVENT_CALLBACK(application::on_event));
 	}
-
-
-
 	void application::on_event(mage::event& e)
 	{
 		event_handler::on_event(e);

@@ -30,6 +30,7 @@ namespace mage
 		bool on_app_render(app_render_event& e) override;
 		// GLFW callback functions
 		static void error_callback(int code, const char* desc);
+		static void char_callback(GLFWwindow* window, uint32_t code);
 		static void key_callback(GLFWwindow* window, int key, int scan, int action, int mods);
 		static void mouse_button_callback(GLFWwindow* window, int button, int action, int mods);
 		static void mouse_move_callback(GLFWwindow* window, double x, double y);
