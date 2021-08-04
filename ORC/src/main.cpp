@@ -18,6 +18,9 @@ namespace orc
 
 		void run() const override
 		{
+			mage::key_press_event e(65, true);
+			MAGE_TRACE(e.to_string());
+
 			while (true);
 		}
 	};

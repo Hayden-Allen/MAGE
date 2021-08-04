@@ -18,6 +18,9 @@ project "MAGE"
 	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
 
+	pchheader "pch.h"
+	pchsource "MAGE/src/pch.cpp"
+
 	files
 	{
 		"%{prj.name}/src/**.h",
@@ -30,6 +33,7 @@ project "MAGE"
 	{
 		"%{prj.name}/",
 		"%{prj.name}/src/",
+		"%{prj.name}/src/mage/",
 		"%{prj.name}/vendor/spdlog/include/"
 	}
 

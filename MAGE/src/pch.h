@@ -1,5 +1,5 @@
 #pragma once
-
+// basic
 #include <cmath>
 #include <stdio.h>
 #include <vector>
@@ -13,11 +13,13 @@
 #include <fstream>
 #include <sstream>
 #include <memory>
-
+#include <string>
+#include <functional>
+// platform
 #ifdef MAGE_PLATFORM_WINDOWS
 	#include <Windows.h>
 #endif
-
+// vendor
 #include <spdlog/spdlog.h>
 #include <spdlog/sinks/stdout_color_sinks.h>
 

@@ -4,6 +4,12 @@
     <Filter Include="mage">
       <UniqueIdentifier>{1F7F9A7C-0BB6-9B0D-B4A2-8110A0B8170F}</UniqueIdentifier>
     </Filter>
+    <Filter Include="mage\event">
+      <UniqueIdentifier>{D0AB93F3-BC63-D540-256B-AE9C11427031}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="mage\math">
+      <UniqueIdentifier>{78BBE1F7-E425-966E-2D64-4714990D74C3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\mage.h" />
@@ -16,15 +22,28 @@
     <ClInclude Include="src\mage\entry_point.h">
       <Filter>mage</Filter>
     </ClInclude>
+    <ClInclude Include="src\mage\event\event.h">
+      <Filter>mage\event</Filter>
+    </ClInclude>
+    <ClInclude Include="src\mage\event\key_event.h">
+      <Filter>mage\event</Filter>
+    </ClInclude>
+    <ClInclude Include="src\mage\event\mouse_event.h">
+      <Filter>mage\event</Filter>
+    </ClInclude>
+    <ClInclude Include="src\mage\event\window_event.h">
+      <Filter>mage\event</Filter>
+    </ClInclude>
     <ClInclude Include="src\mage\log.h">
       <Filter>mage</Filter>
     </ClInclude>
+    <ClInclude Include="src\mage\math\vec2.h">
+      <Filter>mage\math</Filter>
+    </ClInclude>
     <ClInclude Include="src\pch.h" />
+    <ClInclude Include="src\mage\event\app_event.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\mage\application.cpp">
-      <Filter>mage</Filter>
-    </ClCompile>
     <ClCompile Include="src\mage\log.cpp">
       <Filter>mage</Filter>
     </ClCompile>

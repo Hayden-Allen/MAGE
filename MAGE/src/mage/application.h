@@ -7,12 +7,11 @@ namespace mage
 	{
 	public:
 		MAGE_DCM(application);
-		virtual ~application();
 
 
-		virtual void run() const;
+		virtual void run() const = 0;
 	protected:
-		application();
+		application() {}
 	};
 
 
