@@ -16,6 +16,9 @@
     <Filter Include="platform">
       <UniqueIdentifier>{4A63C33C-3630-1E48-5F49-0CF04B7553D6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="platform\OpenGL">
+      <UniqueIdentifier>{3E351A86-AAC0-874A-B3D1-0A3F1FDCE34A}</UniqueIdentifier>
+    </Filter>
     <Filter Include="platform\windows">
       <UniqueIdentifier>{A44FC440-9048-E392-B97A-C817A5D2C29E}</UniqueIdentifier>
     </Filter>
@@ -77,9 +80,13 @@
       <Filter>mage</Filter>
     </ClInclude>
     <ClInclude Include="src\pch.h" />
+    <ClInclude Include="src\platform\OpenGL\imgui_renderer.h">
+      <Filter>platform\OpenGL</Filter>
+    </ClInclude>
     <ClInclude Include="src\platform\windows\windows_window.h">
       <Filter>platform\windows</Filter>
     </ClInclude>
+    <ClInclude Include="src\mage\layer\imgui_layer.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\mage\layer\layer_stack.cpp">
@@ -89,8 +96,13 @@
       <Filter>mage</Filter>
     </ClCompile>
     <ClCompile Include="src\pch.cpp" />
+    <ClCompile Include="src\platform\OpenGL\imgui_renderer.cpp">
+      <Filter>platform\OpenGL</Filter>
+    </ClCompile>
     <ClCompile Include="src\platform\windows\windows_window.cpp">
       <Filter>platform\windows</Filter>
     </ClCompile>
+    <ClCompile Include="src\mage\layer\imgui_layer.cpp" />
+    <ClCompile Include="src\mage\application.cpp" />
   </ItemGroup>
 </Project>

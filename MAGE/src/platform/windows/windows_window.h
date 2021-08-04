@@ -27,6 +27,7 @@ namespace mage
 
 
 		bool on_app_tick(app_tick_event& e) override;
+		bool on_app_render(app_render_event& e) override;
 		// GLFW callback functions
 		static void error_callback(int code, const char* desc);
 		static void key_callback(GLFWwindow* window, int key, int scan, int action, int mods);

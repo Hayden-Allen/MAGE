@@ -5,6 +5,7 @@
 #include "mage/log.h"
 #include "mage/window.h"
 
+#include "mage/layer/imgui_layer.h"
 #include "mage/layer/layer.h"
 #include "mage/layer/layer_stack.h"
 

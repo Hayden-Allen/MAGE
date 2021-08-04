@@ -78,8 +78,8 @@
     <ClCompile>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
-      <PreprocessorDefinitions>MAGE_PLATFORM_WINDOWS;MAGE_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>.;src;..\MAGE;..\MAGE\src;..\MAGE\vendor\spdlog\include;..\MAGE\vendor\GLFW\include;..\MAGE\vendor\glad\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>MAGE_PLATFORM_WINDOWS;_CRT_SECURE_NO_WARNINGS;MAGE_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>.;src;..\MAGE;..\MAGE\src;..\MAGE\vendor\spdlog\include;..\MAGE\vendor\GLFW\include;..\MAGE\vendor\glad\include;..\MAGE\vendor\imgui\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
@@ -95,8 +95,8 @@
     <ClCompile>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
-      <PreprocessorDefinitions>MAGE_PLATFORM_WINDOWS;MAGE_RELEASE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>.;src;..\MAGE;..\MAGE\src;..\MAGE\vendor\spdlog\include;..\MAGE\vendor\GLFW\include;..\MAGE\vendor\glad\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>MAGE_PLATFORM_WINDOWS;_CRT_SECURE_NO_WARNINGS;MAGE_RELEASE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>.;src;..\MAGE;..\MAGE\src;..\MAGE\vendor\spdlog\include;..\MAGE\vendor\GLFW\include;..\MAGE\vendor\glad\include;..\MAGE\vendor\imgui\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
@@ -105,6 +105,7 @@
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <AdditionalOptions>/MD %(AdditionalOptions)</AdditionalOptions>
       <LanguageStandard>stdcpplatest</LanguageStandard>
+      <DisableSpecificWarnings>4251</DisableSpecificWarnings>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -116,8 +117,8 @@
     <ClCompile>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
-      <PreprocessorDefinitions>MAGE_PLATFORM_WINDOWS;MAGE_DIST;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>.;src;..\MAGE;..\MAGE\src;..\MAGE\vendor\spdlog\include;..\MAGE\vendor\GLFW\include;..\MAGE\vendor\glad\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>MAGE_PLATFORM_WINDOWS;_CRT_SECURE_NO_WARNINGS;MAGE_DIST;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>.;src;..\MAGE;..\MAGE\src;..\MAGE\vendor\spdlog\include;..\MAGE\vendor\GLFW\include;..\MAGE\vendor\glad\include;..\MAGE\vendor\imgui\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>

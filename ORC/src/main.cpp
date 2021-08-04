@@ -6,7 +6,7 @@ namespace orc
 	{
 	public:
 		orc_layer() :
-			mage::layer("ORC Layer")
+			mage::layer("ORC")
 		{
 			MAGE_ERROR("CREATE ORC LAYER");
 		}
@@ -26,6 +26,7 @@ namespace orc
 			application(c)
 		{
 			attach_layer(new orc_layer());
+			attach_layer(new mage::imgui_layer());
 		}
 		MAGE_DCM(orc_application);
 	protected:
@@ -40,5 +41,5 @@ namespace orc
 
 mage::application* mage::create_application()
 {
-	return new orc::orc_application(mage::window_constructor("Test", 800, 600, false, { 0.f, 0.f, 1.f, 1.f }));
+	return new orc::orc_application(mage::window_constructor("Test", 1280, 720, false, { 0.f, 0.f, 1.f, 1.f }));
 }

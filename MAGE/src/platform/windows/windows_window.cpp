@@ -60,6 +60,11 @@ namespace mage
 
 	bool windows_window::on_app_tick(app_tick_event& e)
 	{
+		glClear(GL_COLOR_BUFFER_BIT);
+		return true;
+	}
+	bool windows_window::on_app_render(app_render_event& e)
+	{
 		glfwPollEvents();
 		glfwSwapBuffers(m_window);
 		return true;

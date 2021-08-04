@@ -11,13 +11,15 @@ namespace mage
 	class MAGE_API positional : public typed<T>
 	{
 	public:
-		T get_x() const
+		template<typename U = T>
+		U get_x() const
 		{
-			return m_x;
+			return MAGE_CAST(U, m_x);
 		}
-		T get_y() const
+		template<typename U = T>
+		U get_y() const
 		{
-			return m_y;
+			return MAGE_CAST(U, m_y);
 		}
 	protected:
 		T m_x, m_y;

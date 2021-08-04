@@ -12,6 +12,7 @@ outputdir = "%{cfg.buildcfg}-%{cfg.architecture}-%{cfg.system}"
 
 include "MAGE/vendor/GLFW"
 include "MAGE/vendor/glad"
+include "MAGE/vendor/imgui"
 
 project "MAGE"
 	location "MAGE"
@@ -39,14 +40,16 @@ project "MAGE"
 		"%{prj.name}/src/mage/",
 		"%{prj.name}/vendor/spdlog/include/",
 		"%{prj.name}/vendor/GLFW/include/",
-		"%{prj.name}/vendor/glad/include/"
+		"%{prj.name}/vendor/glad/include/",
+		"%{prj.name}/vendor/imgui/"
 	}
 
 	links
 	{
 		"GLFW",
 		"opengl32.lib",
-		"glad"
+		"glad",
+		"imgui"
 	}
 
 	filter "system:windows"
@@ -57,7 +60,8 @@ project "MAGE"
 		defines
 		{
 			"MAGE_PLATFORM_WINDOWS",
-			"MAGE_BUILD_DLL"
+			"MAGE_BUILD_DLL",
+			"_CRT_SECURE_NO_WARNINGS"
 		}
 
 		postbuildcommands
@@ -104,7 +108,8 @@ project "ORC"
 		"MAGE/src/",
 		"MAGE/vendor/spdlog/include/",
 		"MAGE/vendor/GLFW/include/",
-		"MAGE/vendor/glad/include/"
+		"MAGE/vendor/glad/include/",
+		"MAGE/vendor/imgui/include/"
 	}
 
 	links
@@ -119,7 +124,8 @@ project "ORC"
 
 		defines
 		{
-			"MAGE_PLATFORM_WINDOWS"
+			"MAGE_PLATFORM_WINDOWS",
+			"_CRT_SECURE_NO_WARNINGS"
 		}
 		
 	filter "configurations:Debug"

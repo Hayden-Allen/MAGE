@@ -4,3 +4,6 @@
 [submodule "MAGE/vendor/GLFW"]
 	path = MAGE/vendor/GLFW
 	url = https://github.com/glfw/glfw
+[submodule "MAGE/vendor/imgui"]
+	path = MAGE/vendor/imgui
+	url = https://github.com/ocornut/imgui

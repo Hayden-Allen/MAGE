@@ -11,13 +11,15 @@ namespace mage
 	class MAGE_API dimensional : public typed<T>
 	{
 	public:
-		T get_w() const
+		template<typename U = T>
+		U get_w() const
 		{
-			return m_w;
+			return MAGE_CAST(U, m_w);
 		}
-		T get_h() const
+		template<typename U = T>
+		U get_h() const
 		{
-			return m_h;
+			return MAGE_CAST(U, m_h);
 		}
 	protected:
 		T m_w, m_h;
