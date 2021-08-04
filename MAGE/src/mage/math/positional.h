@@ -4,10 +4,10 @@
 namespace mage
 {
 	template<typename T>
-	class MAGE_API vec2
+	class MAGE_API positional
 	{
 	public:
-		MAGE_DCM(vec2);
+		MAGE_DCM(positional);
 
 
 		T get_x() const
@@ -21,7 +21,7 @@ namespace mage
 	protected:
 		T m_x, m_y;
 
-		vec2(T x, T y) :
+		positional(T x, T y) :
 			m_x(x),
 			m_y(y)
 		{}

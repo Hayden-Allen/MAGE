@@ -5,7 +5,7 @@
 namespace mage
 {
 	template<event_type TYPE>
-	class MAGE_API key_event : public event<TYPE, event_category::input | event_category::keyboard>
+	class MAGE_API key_event : public event<TYPE, ec_input | ec_keyboard>
 	{
 	public:
 		MAGE_DCM(key_event);

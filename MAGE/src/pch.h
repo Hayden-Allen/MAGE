@@ -18,6 +18,8 @@
 // platform
 #ifdef MAGE_PLATFORM_WINDOWS
 	#include <Windows.h>
+	#include "../vendor/GLFW/include/GLFW/glfw3.h"
+	#include "../vendor/GLFW/include/GLFW/glfw3native.h"
 #endif
 // vendor
 #include <spdlog/spdlog.h>

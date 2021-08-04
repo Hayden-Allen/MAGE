@@ -10,6 +10,11 @@ workspace "MAGE"
 
 outputdir = "%{cfg.buildcfg}-%{cfg.architecture}-%{cfg.system}"
 
+includepaths = {}
+includepaths["GLFW"] = "MAGE/vendor/GLFW/include"
+
+include "MAGE/vendor/GLFW"
+
 project "MAGE"
 	location "MAGE"
 	kind "SharedLib"
@@ -34,7 +39,14 @@ project "MAGE"
 		"%{prj.name}/",
 		"%{prj.name}/src/",
 		"%{prj.name}/src/mage/",
-		"%{prj.name}/vendor/spdlog/include/"
+		"%{prj.name}/vendor/spdlog/include/",
+		"%{includepaths.GLFW}"
+	}
+
+	links
+	{
+		"GLFW",
+		"opengl32.lib"
 	}
 
 	filter "system:windows"

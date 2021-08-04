@@ -16,6 +16,7 @@ namespace mage
 }
 
 
+
 #ifndef MAGE_DIST
 	#define MAGE_CORE_TRACE(...) ::mage::log::get_core()->trace(__VA_ARGS__)
 	#define MAGE_CORE_INFO(...)  ::mage::log::get_core()->info(__VA_ARGS__)
@@ -38,4 +39,14 @@ namespace mage
 	#define MAGE_WARN(...) 
 	#define MAGE_ERROR(...)
 	#define MAGE_FATAL(...)
+#endif
+
+
+
+#ifdef MAGE_DEBUG
+	#define MAGE_CORE_ASSERT(x, ...) if(!(x)) { MAGE_CORE_FATAL("Assertion failed {}", __VA_ARGS__); __debug_break(); }
+	#define MAGE_ASSERT(x, ...) if(!(x)) { MAGE_FATAL("Assertion failed {}", __VA_ARGS__); __debug_break(); }
+#else
+	#define MAGE_CORE_ASSERT(x, ...)
+	#define MAGE_ASSERT(x, ...)
 #endif

@@ -5,7 +5,7 @@
 namespace mage
 {
 	template<event_type TYPE>
-	class MAGE_API app_event : public event<TYPE, event_category::app>
+	class MAGE_API app_event : public event<TYPE, ec_app>
 	{
 	public:
 		MAGE_DCM(app_event);

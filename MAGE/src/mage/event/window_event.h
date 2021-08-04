@@ -1,12 +1,13 @@
 #pragma once
 #include "pch.h"
 #include "event.h"
-#include "mage/math/vec2.h"
+#include "mage/math/positional.h"
+#include "mage/math/dimensional.h"
 
 namespace mage
 {
 	template<event_type TYPE>
-	class MAGE_API window_event : public event<TYPE, event_category::window>
+	class MAGE_API window_event : public event<TYPE, ec_window>
 	{
 	public:
 		MAGE_DCM(window_event);
@@ -45,24 +46,12 @@ namespace mage
 	};
 
 
-	template<event_type TYPE>
-	class MAGE_API window_vector_event : public window_event<TYPE>, public vec2<int>
-	{
-	public:
-		MAGE_DCM(window_vector_event);
-	protected:
-		window_vector_event(int x, int y) :
-			vec2<int>(x, y)
-		{}
-	};
 
-
-
-	class MAGE_API window_resize_event : public window_vector_event<event_type::window_resize>
+	class MAGE_API window_resize_event : public window_event<event_type::window_resize>, public dimensional<int>
 	{
 	public:
 		window_resize_event(int x, int y) :
-			window_vector_event(x, y)
+			dimensional<int>(x, y)
 		{}
 		MAGE_DCM(window_resize_event);
 		MAGE_EVENT_NAME(window_resize_event);
@@ -70,11 +59,11 @@ namespace mage
 
 
 
-	class MAGE_API window_move_event : public window_vector_event<event_type::window_move>
+	class MAGE_API window_move_event : public window_event<event_type::window_move>, public positional<int>
 	{
 	public:
 		window_move_event(int x, int y) :
-			window_vector_event(x, y)
+			positional<int>(x, y)
 		{}
 		MAGE_DCM(window_move_event);
 		MAGE_EVENT_NAME(window_move_event);

@@ -1,12 +1,12 @@
 #pragma once
 #include "pch.h"
 #include "event.h"
-#include "mage/math/vec2.h"
+#include "mage/math/positional.h"
 
 namespace mage
 {
-	template<event_type TYPE, int CATEGORIES = event_category::none>
-	class MAGE_API mouse_event : public event<TYPE, event_category::input | event_category::mouse | CATEGORIES>, public vec2<float>
+	template<event_type TYPE, int CATEGORIES = ec_none>
+	class MAGE_API mouse_event : public event<TYPE, ec_input | ec_mouse | CATEGORIES>, public positional<float>
 	{
 	public:
 		MAGE_DCM(mouse_event);
@@ -20,7 +20,7 @@ namespace mage
 		}
 	protected:
 		mouse_event(float x, float y) :
-			vec2<float>(x, y)
+			positional<float>(x, y)
 		{}
 	};
 
@@ -45,7 +45,7 @@ namespace mage
 
 
 	template<event_type TYPE>
-	class MAGE_API mouse_button_event : public mouse_event<TYPE, event_category::mouse_button>
+	class MAGE_API mouse_button_event : public mouse_event<TYPE, ec_mouse_button>
 	{
 	public:
 		MAGE_DCM(mouse_button_event);
@@ -66,7 +66,7 @@ namespace mage
 
 
 		mouse_button_event(float x, float y, int button) :
-			mouse_event<TYPE, event_category::mouse_button>(x, y),
+			mouse_event<TYPE, ec_mouse_button>(x, y),
 			m_button(button)
 		{}
 	};

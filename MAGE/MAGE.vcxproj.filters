@@ -22,6 +22,9 @@
     <ClInclude Include="src\mage\entry_point.h">
       <Filter>mage</Filter>
     </ClInclude>
+    <ClInclude Include="src\mage\event\app_event.h">
+      <Filter>mage\event</Filter>
+    </ClInclude>
     <ClInclude Include="src\mage\event\event.h">
       <Filter>mage\event</Filter>
     </ClInclude>
@@ -37,16 +40,20 @@
     <ClInclude Include="src\mage\log.h">
       <Filter>mage</Filter>
     </ClInclude>
-    <ClInclude Include="src\mage\math\vec2.h">
+    <ClInclude Include="src\mage\math\positional.h">
       <Filter>mage\math</Filter>
     </ClInclude>
     <ClInclude Include="src\pch.h" />
-    <ClInclude Include="src\mage\event\app_event.h" />
+    <ClInclude Include="src\mage\window.h" />
+    <ClInclude Include="src\mage\math\dimensional.h" />
+    <ClInclude Include="src\platform\windows\windows_window.h" />
+    <ClInclude Include="src\mage\math\color.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\mage\log.cpp">
       <Filter>mage</Filter>
     </ClCompile>
     <ClCompile Include="src\pch.cpp" />
+    <ClCompile Include="src\platform\windows\windows_window.cpp" />
   </ItemGroup>
 </Project>

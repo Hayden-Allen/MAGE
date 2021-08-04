@@ -16,13 +16,13 @@ namespace mage
 	};
 	enum event_category
 	{
-		none		 = 0,
-		input		 = MAGE_BIT(0),
-		keyboard	 = MAGE_BIT(1),
-		mouse		 = MAGE_BIT(2),
-		mouse_button = MAGE_BIT(3),
-		app			 = MAGE_BIT(4),
-		window		 = MAGE_BIT(5)
+		ec_none			 = 0,
+		ec_input		 = MAGE_BIT(0),
+		ec_keyboard		 = MAGE_BIT(1),
+		ec_mouse		 = MAGE_BIT(2),
+		ec_mouse_button  = MAGE_BIT(3),
+		ec_app			 = MAGE_BIT(4),
+		ec_window		 = MAGE_BIT(5)
 	};
 
 

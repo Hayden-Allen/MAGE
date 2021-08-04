@@ -4,7 +4,8 @@
 #include "mage/core.h"
 #include "mage/log.h"
 
-#include "mage/math/vec2.h"
+#include "mage/math/positional.h"
+#include "mage/math/dimensional.h"
 
 #include "mage/event/app_event.h"
 #include "mage/event/event.h"
