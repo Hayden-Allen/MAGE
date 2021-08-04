@@ -1,15 +1,16 @@
 #pragma once
 #include "pch.h"
+#include "typed.h"
 
 namespace mage
 {
+	/**
+	 * An object with position
+	 */
 	template<typename T>
-	class MAGE_API positional
+	class MAGE_API positional : public typed<T>
 	{
 	public:
-		MAGE_DCM(positional);
-
-
 		T get_x() const
 		{
 			return m_x;

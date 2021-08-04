@@ -3,7 +3,9 @@
 #include "log.h"
 #include "application.h"
 
-#ifdef MAGE_PLATFORM_WINDOWS
+/**
+ * Driver file. This is the entry point for any client application. Behaviour is controlled by creating an application implementation in the client and defining create_application.
+ */
 
 extern mage::application* create_application();
 
@@ -17,5 +19,3 @@ int main(int argc, char** argv)
 
 	return 0;
 }
-
-#endif

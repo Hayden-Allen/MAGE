@@ -3,15 +3,15 @@
 
 namespace mage
 {
-	class log
+	class MAGE_API log
 	{
 	public:
-		static MAGE_API void init();
-		static MAGE_API const std::shared_ptr<spdlog::logger>& get_core();
-		static MAGE_API const std::shared_ptr<spdlog::logger>& get_client();
+		static void init();
+		static spdlog::logger* const get_core();
+		static spdlog::logger* const get_client();
 	private:
-		static MAGE_API std::shared_ptr<spdlog::logger> s_core;
-		static MAGE_API std::shared_ptr<spdlog::logger> s_client;
+		static spdlog::logger* s_core;
+		static spdlog::logger* s_client;
 	};
 }
 

@@ -40,14 +40,17 @@
     <ClInclude Include="src\mage\log.h">
       <Filter>mage</Filter>
     </ClInclude>
-    <ClInclude Include="src\mage\math\positional.h">
+    <ClInclude Include="src\mage\util\positional.h">
       <Filter>mage\math</Filter>
     </ClInclude>
     <ClInclude Include="src\pch.h" />
     <ClInclude Include="src\mage\window.h" />
-    <ClInclude Include="src\mage\math\dimensional.h" />
+    <ClInclude Include="src\mage\util\dimensional.h" />
     <ClInclude Include="src\platform\windows\windows_window.h" />
-    <ClInclude Include="src\mage\math\color.h" />
+    <ClInclude Include="src\mage\util\color.h" />
+    <ClInclude Include="src\mage\event\event_handler.h" />
+    <ClInclude Include="src\mage\event\event_propagator.h" />
+    <ClInclude Include="src\mage\util\typed.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\mage\log.cpp">

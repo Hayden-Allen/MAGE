@@ -1,17 +1,24 @@
 #pragma once
 #include "pch.h"
 #include "event.h"
-#include "mage/math/positional.h"
+#include "mage/util/positional.h"
 
 namespace mage
 {
-	template<event_type TYPE, int CATEGORIES = ec_none>
-	class MAGE_API mouse_event : public event<TYPE, ec_input | ec_mouse | CATEGORIES>, public positional<float>
+	/**
+	 * Base
+	 */
+	class MAGE_API mouse_event : public event
 	{
 	public:
 		MAGE_DCM(mouse_event);
-
-
+		MAGE_EVENT_CATEGORIES(event_category::input | event_category::mouse);
+	protected:
+		mouse_event() {}
+	};
+	class MAGE_API mouse_vector_event : public mouse_event, public positional<float>
+	{
+	public:
 		std::string to_string() const override
 		{
 			std::stringstream ss;
@@ -19,38 +26,17 @@ namespace mage
 			return ss.str();
 		}
 	protected:
-		mouse_event(float x, float y) :
+		mouse_vector_event(float x, float y) :
 			positional<float>(x, y)
 		{}
 	};
-
-
-
-	class MAGE_API mouse_move_event : public mouse_event<event_type::mouse_move>
-	{
-	public:
-		MAGE_DCM(mouse_move_event);
-		MAGE_EVENT_NAME(mouse_move);
-	};
-
-
-
-	class MAGE_API mouse_scroll_event : public mouse_event<event_type::mouse_scroll>
-	{
-	public:
-		MAGE_DCM(mouse_scroll_event);
-		MAGE_EVENT_NAME(mouse_scroll);
-	};
-
-
-
-	template<event_type TYPE>
-	class MAGE_API mouse_button_event : public mouse_event<TYPE, ec_mouse_button>
+	class MAGE_API mouse_button_event : public mouse_event
 	{
 	public:
 		MAGE_DCM(mouse_button_event);
 
 
+		MAGE_EVENT_CATEGORIES(event_category::input | event_category::mouse | event_category::mouse_button);
 		int get_button() const
 		{
 			return m_button;
@@ -58,40 +44,57 @@ namespace mage
 		std::string to_string() const override
 		{
 			std::stringstream ss;
-			ss << this->get_name() << ": <" << this->m_x << ", " << this->m_y << "> | " << m_button;
+			ss << this->get_name() << ": " << m_button;
 			return ss.str();
 		}
 	protected:
 		int m_button;
 
 
-		mouse_button_event(float x, float y, int button) :
-			mouse_event<TYPE, ec_mouse_button>(x, y),
+		mouse_button_event(int button) :
 			m_button(button)
 		{}
 	};
 
 
 
-	class MAGE_API mouse_press_event : public mouse_button_event<event_type::mouse_press>
+	/**
+	 * Implementation
+	 */
+	class MAGE_API mouse_move_event : public mouse_vector_event
 	{
 	public:
-		mouse_press_event(float x, float y, int button) :
-			mouse_button_event<event_type::mouse_press>(x, y, button)
+		mouse_move_event(float x, float y) :
+			mouse_vector_event(x, y)
+		{}
+		MAGE_DCM(mouse_move_event);
+		MAGE_EVENT_TYPE(event_type::mouse_move);
+	};
+	class MAGE_API mouse_scroll_event : public mouse_vector_event
+	{
+	public:
+		mouse_scroll_event(float x, float y) :
+			mouse_vector_event(x, y)
+		{}
+		MAGE_DCM(mouse_scroll_event);
+		MAGE_EVENT_TYPE(event_type::mouse_scroll);
+	};
+	class MAGE_API mouse_press_event : public mouse_button_event
+	{
+	public:
+		mouse_press_event(int button) :
+			mouse_button_event(button)
 		{}
 		MAGE_DCM(mouse_press_event);
-		MAGE_EVENT_NAME(mouse_press_event);
+		MAGE_EVENT_TYPE(event_type::mouse_press);
 	};
-
-
-
-	class MAGE_API mouse_release_event : public mouse_button_event<event_type::mouse_release>
+	class MAGE_API mouse_release_event : public mouse_button_event
 	{
 	public:
-		mouse_release_event(float x, float y, int button) :
-			mouse_button_event<event_type::mouse_release>(x, y, button)
+		mouse_release_event(int button) :
+			mouse_button_event(button)
 		{}
 		MAGE_DCM(mouse_release_event);
-		MAGE_EVENT_NAME(mouse_release_event);
+		MAGE_EVENT_TYPE(event_type::mouse_release);
 	};
 }

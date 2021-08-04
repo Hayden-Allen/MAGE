@@ -3,24 +3,25 @@
 
 namespace mage
 {
-	std::shared_ptr<spdlog::logger> log::s_core;
-	std::shared_ptr<spdlog::logger> log::s_client;
+	spdlog::logger* log::s_core;
+	spdlog::logger* log::s_client;
 
 
 
 	void log::init()
 	{
 		spdlog::set_pattern("%^[%T | %n]: %v%$");
-		s_core = spdlog::stdout_color_mt("MAGE");
+		// returned pointers are std::shared_pointers, and will be deleted by spdlog automatically when the program terminates
+		s_core = spdlog::stdout_color_mt("MAGE").get();
+		s_client = spdlog::stdout_color_mt("APP ").get();
 		s_core->set_level(spdlog::level::trace);
-		s_client = spdlog::stdout_color_mt("APP ");
 		s_client->set_level(spdlog::level::trace);
 	}
-	const std::shared_ptr<spdlog::logger>& log::get_core()
+	spdlog::logger* const log::get_core()
 	{
 		return s_core;
 	}
-	const std::shared_ptr<spdlog::logger>& log::get_client()
+	spdlog::logger* const log::get_client()
 	{
 		return s_client;
 	}

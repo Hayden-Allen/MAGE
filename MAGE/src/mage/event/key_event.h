@@ -4,13 +4,16 @@
 
 namespace mage
 {
-	template<event_type TYPE>
-	class MAGE_API key_event : public event<TYPE, ec_input | ec_keyboard>
+	/**
+	 * Base
+	 */
+	class MAGE_API key_event : public event
 	{
 	public:
 		MAGE_DCM(key_event);
 
 
+		MAGE_EVENT_CATEGORIES(event_category::input | event_category::keyboard);
 		int get_code() const
 		{
 			return m_code;
@@ -31,18 +34,21 @@ namespace mage
 	};
 
 
-
-	class MAGE_API key_press_event : public key_event<event_type::key_press>
+	
+	/**
+	 * Implementation
+	 */
+	class MAGE_API key_press_event : public key_event
 	{
 	public:
 		key_press_event(int code, bool repeat) :
-			key_event<event_type::key_press>(code),
+			key_event(code),
 			m_repeat(repeat)
 		{}
 		MAGE_DCM(key_press_event);
 
 
-		MAGE_EVENT_NAME(key_press_event);
+		MAGE_EVENT_TYPE(event_type::key_press);
 		bool is_repeat() const
 		{
 			return m_repeat;
@@ -56,16 +62,13 @@ namespace mage
 	private:
 		bool m_repeat;
 	};
-
-
-
-	class MAGE_API key_release_event : public key_event<event_type::key_release>
+	class MAGE_API key_release_event : public key_event
 	{
 	public:
 		key_release_event(int code) :
-			key_event<event_type::key_release>(code)
+			key_event(code)
 		{}
 		MAGE_DCM(key_release_event);
-		MAGE_EVENT_NAME(key_release_event);
+		MAGE_EVENT_TYPE(event_type::key_release);
 	};
 }

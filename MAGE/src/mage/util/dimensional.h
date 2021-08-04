@@ -1,15 +1,16 @@
 #pragma once
 #include "pch.h"
+#include "typed.h"
 
 namespace mage
 {
+	/**
+	 * An object with area
+	 */
 	template<typename T>
-	class MAGE_API dimensional
+	class MAGE_API dimensional : public typed<T>
 	{
 	public:
-		MAGE_DCM(dimensional);
-
-
 		T get_w() const
 		{
 			return m_w;

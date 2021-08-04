@@ -1,54 +1,56 @@
 #pragma once
 #include "pch.h"
 #include "event/event.h"
-#include "math/dimensional.h"
-#include "math/color.h"
+#include "event/event_propagator.h"
+#include "util/dimensional.h"
+#include "util/color.h"
 
 namespace mage
 {
-	struct window_data
+	// just to make parameters cleaner
+	struct window_constructor
 	{
 		std::string title;
-		uint32_t width, height;
+		uint32_t w, h;
 		bool vsync;
 		color<float> clear;
-
-		window_data(const std::string& t, uint32_t w, uint32_t h, bool v, color<float> c) :
-			title(t),
-			width(w),
-			height(h),
-			vsync(v),
-			clear(c)
-		{}
 	};
 
 
 
-	class window : public dimensional<uint32_t>
+	/**
+	 * Interface for a non-mobile OS window
+	 */
+	class MAGE_API window : public event_propagator, public positional<uint32_t>, public dimensional<uint32_t>
 	{
 	public:
 		MAGE_DCM(window);
 		virtual ~window() {}
 
 
-		static window* create(const window_data& data);
+		static window* create(const window_constructor& c);
 		virtual void on_update() = 0;
 		virtual void set_vsync(bool enabled) = 0;
 		const std::string& get_title() const
 		{
-			return m_data.title;
+			return m_title;
 		}
 		bool is_vsync() const
 		{
-			return m_data.vsync;
+			return m_vsync;
 		}
 	protected:
-		window_data m_data;
+		std::string m_title;
+		bool m_vsync;
+		color<float> m_clear;
 
 
-		window(const window_data& data) :
-			dimensional<uint32_t>(data.width, data.height),
-			m_data(data)
+		window(const window_constructor& c) :
+			positional<uint32_t>(0, 0),
+			dimensional<uint32_t>(c.w, c.h),
+			m_title(c.title),
+			m_vsync(c.vsync),
+			m_clear(c.clear)
 		{}
 	};
 }
