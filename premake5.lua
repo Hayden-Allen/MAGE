@@ -10,10 +10,8 @@ workspace "MAGE"
 
 outputdir = "%{cfg.buildcfg}-%{cfg.architecture}-%{cfg.system}"
 
-includepaths = {}
-includepaths["GLFW"] = "MAGE/vendor/GLFW/include"
-
 include "MAGE/vendor/GLFW"
+include "MAGE/vendor/glad"
 
 project "MAGE"
 	location "MAGE"
@@ -40,13 +38,15 @@ project "MAGE"
 		"%{prj.name}/src/",
 		"%{prj.name}/src/mage/",
 		"%{prj.name}/vendor/spdlog/include/",
-		"%{includepaths.GLFW}"
+		"%{prj.name}/vendor/GLFW/include/",
+		"%{prj.name}/vendor/glad/include/"
 	}
 
 	links
 	{
 		"GLFW",
-		"opengl32.lib"
+		"opengl32.lib",
+		"glad"
 	}
 
 	filter "system:windows"
@@ -102,7 +102,9 @@ project "ORC"
 		"%{prj.name}/src/",
 		"MAGE/",
 		"MAGE/src/",
-		"MAGE/vendor/spdlog/include/"
+		"MAGE/vendor/spdlog/include/",
+		"MAGE/vendor/GLFW/include/",
+		"MAGE/vendor/glad/include/"
 	}
 
 	links

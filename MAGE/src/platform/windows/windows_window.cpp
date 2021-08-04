@@ -36,6 +36,10 @@ namespace mage
 		glfwMakeContextCurrent(m_window);
 		glfwSetWindowUserPointer(m_window, this);
 
+		// initialize Glad
+		bool success = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
+		MAGE_CORE_ASSERT(success, "Failed to initialize glad")
+
 		// window settings
 		set_vsync(m_vsync);
 		glClearColor(m_clear.r, m_clear.g, m_clear.b, 1.f);
@@ -56,7 +60,6 @@ namespace mage
 
 	bool windows_window::on_app_tick(app_tick_event& e)
 	{
-		MAGE_CORE_WARN("Window tick");
 		glfwPollEvents();
 		glfwSwapBuffers(m_window);
 		return true;
