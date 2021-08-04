@@ -5,6 +5,9 @@
 #include "mage/log.h"
 #include "mage/window.h"
 
+#include "mage/layer/layer.h"
+#include "mage/layer/layer_stack.h"
+
 #include "mage/util/color.h"
 #include "mage/util/dimensional.h"
 #include "mage/util/positional.h"
@@ -17,6 +20,7 @@
 #include "mage/event/key_event.h"
 #include "mage/event/mouse_event.h"
 #include "mage/event/window_event.h"
+
 
 
 #ifdef MAGE_PLATFORM_WINDOWS

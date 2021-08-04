@@ -67,12 +67,15 @@ project "MAGE"
 
 	filter "configurations:Debug"
 		defines "MAGE_DEBUG"
+		buildoptions "/MDd"
 		symbols "On"
 	filter "configurations:Release"
 		defines "MAGE_RELEASE"
+		buildoptions "/MD"
 		optimize "On"
 	filter "configurations:Dist"
 		defines "MAGE_DIST"
+		buildoptions "/MD"
 		optimize "On"
 
 
@@ -116,13 +119,16 @@ project "ORC"
 		{
 			"MAGE_PLATFORM_WINDOWS"
 		}
-
+		
 	filter "configurations:Debug"
 		defines "MAGE_DEBUG"
+		buildoptions "/MDd"
 		symbols "On"
 	filter "configurations:Release"
 		defines "MAGE_RELEASE"
+		buildoptions "/MD"
 		optimize "On"
 	filter "configurations:Dist"
 		defines "MAGE_DIST"
+		buildoptions "/MD"
 		optimize "On"

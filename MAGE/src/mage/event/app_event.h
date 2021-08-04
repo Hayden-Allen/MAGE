@@ -24,21 +24,14 @@ namespace mage
 	class MAGE_API app_tick_event : public app_event
 	{
 	public:
-		app_tick_event();
+		app_tick_event() {}
 		MAGE_DCM(app_tick_event);
 		MAGE_EVENT_TYPE(event_type::app_tick);
-	};
-	class MAGE_API app_update_event : public app_event
-	{
-	public:
-		app_update_event();
-		MAGE_DCM(app_update_event);
-		MAGE_EVENT_TYPE(event_type::app_update);
 	};
 	class MAGE_API app_render_event : public app_event
 	{
 	public:
-		app_render_event();
+		app_render_event() {}
 		MAGE_DCM(app_render_event);
 		MAGE_EVENT_TYPE(event_type::app_render);
 	};

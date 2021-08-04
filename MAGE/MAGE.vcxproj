@@ -84,6 +84,7 @@
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <AdditionalOptions>/MDd %(AdditionalOptions)</AdditionalOptions>
       <LanguageStandard>stdcpplatest</LanguageStandard>
     </ClCompile>
     <Link>
@@ -109,6 +110,7 @@
       <MinimalRebuild>false</MinimalRebuild>
       <StringPooling>true</StringPooling>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <AdditionalOptions>/MD %(AdditionalOptions)</AdditionalOptions>
       <LanguageStandard>stdcpplatest</LanguageStandard>
     </ClCompile>
     <Link>
@@ -135,6 +137,7 @@
       <MinimalRebuild>false</MinimalRebuild>
       <StringPooling>true</StringPooling>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <AdditionalOptions>/MD %(AdditionalOptions)</AdditionalOptions>
       <LanguageStandard>stdcpplatest</LanguageStandard>
     </ClCompile>
     <Link>
@@ -160,6 +163,8 @@
     <ClInclude Include="src\mage\event\key_event.h" />
     <ClInclude Include="src\mage\event\mouse_event.h" />
     <ClInclude Include="src\mage\event\window_event.h" />
+    <ClInclude Include="src\mage\layer\layer.h" />
+    <ClInclude Include="src\mage\layer\layer_stack.h" />
     <ClInclude Include="src\mage\log.h" />
     <ClInclude Include="src\mage\util\color.h" />
     <ClInclude Include="src\mage\util\dimensional.h" />
@@ -170,6 +175,7 @@
     <ClInclude Include="src\platform\windows\windows_window.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\mage\layer\layer_stack.cpp" />
     <ClCompile Include="src\mage\log.cpp" />
     <ClCompile Include="src\pch.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>

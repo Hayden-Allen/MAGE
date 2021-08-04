@@ -1,6 +1,7 @@
 #pragma once
 #include "pch.h"
 #include "event/event.h"
+#include "event/event_handler.h"
 #include "event/event_propagator.h"
 #include "util/dimensional.h"
 #include "util/color.h"
@@ -21,7 +22,7 @@ namespace mage
 	/**
 	 * Interface for a non-mobile OS window
 	 */
-	class MAGE_API window : public event_propagator, public positional<uint32_t>, public dimensional<uint32_t>
+	class MAGE_API window : public event_handler, public event_propagator, public positional<uint32_t>, public dimensional<uint32_t>
 	{
 	public:
 		MAGE_DCM(window);
@@ -29,7 +30,6 @@ namespace mage
 
 
 		static window* create(const window_constructor& c);
-		virtual void on_update() = 0;
 		virtual void set_vsync(bool enabled) = 0;
 		const std::string& get_title() const
 		{

@@ -17,7 +17,6 @@ namespace mage
 		}
 
 
-		void on_update() override;
 		void set_vsync(bool enabled) override
 		{
 			glfwSwapInterval((m_vsync = enabled) ? 1 : 0);
@@ -27,6 +26,7 @@ namespace mage
 		GLFWwindow* m_window;
 
 
+		bool on_app_tick(app_tick_event& e) override;
 		// GLFW callback functions
 		static void error_callback(int code, const char* desc);
 		static void key_callback(GLFWwindow* window, int key, int scan, int action, int mods);

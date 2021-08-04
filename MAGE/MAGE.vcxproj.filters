@@ -7,8 +7,17 @@
     <Filter Include="mage\event">
       <UniqueIdentifier>{D0AB93F3-BC63-D540-256B-AE9C11427031}</UniqueIdentifier>
     </Filter>
-    <Filter Include="mage\math">
-      <UniqueIdentifier>{78BBE1F7-E425-966E-2D64-4714990D74C3}</UniqueIdentifier>
+    <Filter Include="mage\layer">
+      <UniqueIdentifier>{4B2707F4-37DF-4841-A0E6-219D8CBDE331}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="mage\util">
+      <UniqueIdentifier>{EC6DE6F7-58D8-9A6E-A116-4C140DC078C3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="platform">
+      <UniqueIdentifier>{4A63C33C-3630-1E48-5F49-0CF04B7553D6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="platform\windows">
+      <UniqueIdentifier>{A44FC440-9048-E392-B97A-C817A5D2C29E}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -28,6 +37,12 @@
     <ClInclude Include="src\mage\event\event.h">
       <Filter>mage\event</Filter>
     </ClInclude>
+    <ClInclude Include="src\mage\event\event_handler.h">
+      <Filter>mage\event</Filter>
+    </ClInclude>
+    <ClInclude Include="src\mage\event\event_propagator.h">
+      <Filter>mage\event</Filter>
+    </ClInclude>
     <ClInclude Include="src\mage\event\key_event.h">
       <Filter>mage\event</Filter>
     </ClInclude>
@@ -37,26 +52,45 @@
     <ClInclude Include="src\mage\event\window_event.h">
       <Filter>mage\event</Filter>
     </ClInclude>
+    <ClInclude Include="src\mage\layer\layer.h">
+      <Filter>mage\layer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\mage\layer\layer_stack.h">
+      <Filter>mage\layer</Filter>
+    </ClInclude>
     <ClInclude Include="src\mage\log.h">
       <Filter>mage</Filter>
     </ClInclude>
+    <ClInclude Include="src\mage\util\color.h">
+      <Filter>mage\util</Filter>
+    </ClInclude>
+    <ClInclude Include="src\mage\util\dimensional.h">
+      <Filter>mage\util</Filter>
+    </ClInclude>
     <ClInclude Include="src\mage\util\positional.h">
-      <Filter>mage\math</Filter>
+      <Filter>mage\util</Filter>
+    </ClInclude>
+    <ClInclude Include="src\mage\util\typed.h">
+      <Filter>mage\util</Filter>
+    </ClInclude>
+    <ClInclude Include="src\mage\window.h">
+      <Filter>mage</Filter>
     </ClInclude>
     <ClInclude Include="src\pch.h" />
-    <ClInclude Include="src\mage\window.h" />
-    <ClInclude Include="src\mage\util\dimensional.h" />
-    <ClInclude Include="src\platform\windows\windows_window.h" />
-    <ClInclude Include="src\mage\util\color.h" />
-    <ClInclude Include="src\mage\event\event_handler.h" />
-    <ClInclude Include="src\mage\event\event_propagator.h" />
-    <ClInclude Include="src\mage\util\typed.h" />
+    <ClInclude Include="src\platform\windows\windows_window.h">
+      <Filter>platform\windows</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\mage\layer\layer_stack.cpp">
+      <Filter>mage\layer</Filter>
+    </ClCompile>
     <ClCompile Include="src\mage\log.cpp">
       <Filter>mage</Filter>
     </ClCompile>
     <ClCompile Include="src\pch.cpp" />
-    <ClCompile Include="src\platform\windows\windows_window.cpp" />
+    <ClCompile Include="src\platform\windows\windows_window.cpp">
+      <Filter>platform\windows</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

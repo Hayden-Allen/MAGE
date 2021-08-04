@@ -54,10 +54,12 @@ namespace mage
 
 
 
-	void windows_window::on_update()
+	bool windows_window::on_app_tick(app_tick_event& e)
 	{
+		MAGE_CORE_WARN("Window tick");
 		glfwPollEvents();
 		glfwSwapBuffers(m_window);
+		return true;
 	}
 
 

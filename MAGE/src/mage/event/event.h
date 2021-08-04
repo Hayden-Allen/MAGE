@@ -14,7 +14,7 @@ namespace mage
 	enum class event_type
 	{
 		none = 0,
-		app_tick, app_update, app_render,
+		app_tick, app_render,
 		key_press, key_release,
 		mouse_press, mouse_release, mouse_move, mouse_scroll,
 		window_close, window_resize, window_focus, window_unfocus, window_move
@@ -58,6 +58,10 @@ namespace mage
 		bool is(event_category::ec c)
 		{
 			return get_categories() & MAGE_CAST(uint32_t, c);
+		}
+		bool was_handled() const
+		{
+			return m_handled;
 		}
 		// if this event's type matches the given type, call the given function with it
 		template<typename T>
