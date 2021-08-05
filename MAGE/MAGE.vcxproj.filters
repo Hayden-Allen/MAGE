@@ -55,6 +55,18 @@
     <ClInclude Include="src\mage\event\window_event.h">
       <Filter>mage\event</Filter>
     </ClInclude>
+    <ClInclude Include="src\mage\input.h">
+      <Filter>mage</Filter>
+    </ClInclude>
+    <ClInclude Include="src\mage\input_key.h">
+      <Filter>mage</Filter>
+    </ClInclude>
+    <ClInclude Include="src\mage\input_mouse.h">
+      <Filter>mage</Filter>
+    </ClInclude>
+    <ClInclude Include="src\mage\layer\imgui_layer.h">
+      <Filter>mage\layer</Filter>
+    </ClInclude>
     <ClInclude Include="src\mage\layer\layer.h">
       <Filter>mage\layer</Filter>
     </ClInclude>
@@ -70,6 +82,9 @@
     <ClInclude Include="src\mage\util\dimensional.h">
       <Filter>mage\util</Filter>
     </ClInclude>
+    <ClInclude Include="src\mage\util\functions.h">
+      <Filter>mage\util</Filter>
+    </ClInclude>
     <ClInclude Include="src\mage\util\positional.h">
       <Filter>mage\util</Filter>
     </ClInclude>
@@ -83,15 +98,20 @@
     <ClInclude Include="src\platform\OpenGL\imgui_renderer.h">
       <Filter>platform\OpenGL</Filter>
     </ClInclude>
+    <ClInclude Include="src\platform\windows\windows_input.h">
+      <Filter>platform\windows</Filter>
+    </ClInclude>
     <ClInclude Include="src\platform\windows\windows_window.h">
       <Filter>platform\windows</Filter>
     </ClInclude>
-    <ClInclude Include="src\mage\layer\imgui_layer.h" />
-    <ClInclude Include="src\mage\util\functions.h" />
-    <ClInclude Include="src\mage\input.h" />
-    <ClInclude Include="src\platform\windows\windows_input.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\mage\application.cpp">
+      <Filter>mage</Filter>
+    </ClCompile>
+    <ClCompile Include="src\mage\layer\imgui_layer.cpp">
+      <Filter>mage\layer</Filter>
+    </ClCompile>
     <ClCompile Include="src\mage\layer\layer_stack.cpp">
       <Filter>mage\layer</Filter>
     </ClCompile>
@@ -102,11 +122,11 @@
     <ClCompile Include="src\platform\OpenGL\imgui_renderer.cpp">
       <Filter>platform\OpenGL</Filter>
     </ClCompile>
+    <ClCompile Include="src\platform\windows\windows_input.cpp">
+      <Filter>platform\windows</Filter>
+    </ClCompile>
     <ClCompile Include="src\platform\windows\windows_window.cpp">
       <Filter>platform\windows</Filter>
     </ClCompile>
-    <ClCompile Include="src\mage\layer\imgui_layer.cpp" />
-    <ClCompile Include="src\mage\application.cpp" />
-    <ClCompile Include="src\platform\windows\windows_input.cpp" />
   </ItemGroup>
 </Project>

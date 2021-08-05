@@ -1,4 +1,4 @@
-#include <mage.h>
+#include "pch.h"
 
 namespace orc
 {
@@ -19,8 +19,8 @@ namespace orc
 
 		bool on_app_tick(mage::app_tick_event& e) override
 		{
-			float x = mage::input::get()->get_mouse_x(), y = mage::input::get()->get_mouse_y();
-			MAGE_WARN("<{}, {}>", x, y);
+			bool p = mage::input::get()->is_key_pressed(mage::key::A);
+			MAGE_WARN("{}", p);
 			return true;
 		}
 	};
@@ -33,10 +33,15 @@ namespace orc
 		orc_application(const mage::window_constructor& c) :
 			application(c)
 		{
+			MAGE_ERROR("CREATE ORC APP");
 			attach_layer(new orc_layer());
 			attach_layer(new mage::imgui_layer());
 		}
 		MAGE_DCM(orc_application);
+		~orc_application()
+		{
+			MAGE_ERROR("DELETE ORC APP");
+		}
 	protected:
 		void on_event(mage::event& e) override
 		{

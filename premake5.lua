@@ -92,6 +92,9 @@ project "ORC"
 	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
 
+	pchheader "pch.h"
+	pchsource "ORC/src/pch.cpp"
+
 	files
 	{
 		"%{prj.name}/src/**.h",
@@ -107,8 +110,6 @@ project "ORC"
 		"MAGE/",
 		"MAGE/src/",
 		"MAGE/vendor/spdlog/include/",
-		"MAGE/vendor/GLFW/include/",
-		"MAGE/vendor/glad/include/",
 		"MAGE/vendor/imgui/include/"
 	}
 

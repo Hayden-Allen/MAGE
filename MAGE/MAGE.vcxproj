@@ -112,7 +112,6 @@
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <AdditionalOptions>/MD %(AdditionalOptions)</AdditionalOptions>
       <LanguageStandard>stdcpplatest</LanguageStandard>
-      <DisableSpecificWarnings>4251</DisableSpecificWarnings>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -165,6 +164,8 @@
     <ClInclude Include="src\mage\event\mouse_event.h" />
     <ClInclude Include="src\mage\event\window_event.h" />
     <ClInclude Include="src\mage\input.h" />
+    <ClInclude Include="src\mage\input_key.h" />
+    <ClInclude Include="src\mage\input_mouse.h" />
     <ClInclude Include="src\mage\layer\imgui_layer.h" />
     <ClInclude Include="src\mage\layer\layer.h" />
     <ClInclude Include="src\mage\layer\layer_stack.h" />
@@ -188,9 +189,7 @@
     <ClCompile Include="src\pch.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="src\platform\OpenGL\imgui_renderer.cpp">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
-    </ClCompile>
+    <ClCompile Include="src\platform\OpenGL\imgui_renderer.cpp" />
     <ClCompile Include="src\platform\windows\windows_input.cpp" />
     <ClCompile Include="src\platform\windows\windows_window.cpp" />
   </ItemGroup>

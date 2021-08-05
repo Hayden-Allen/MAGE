@@ -16,7 +16,7 @@ namespace mage
 	{
 	public:
 		MAGE_DCM(application);
-		~application()
+		virtual ~application()
 		{
 			delete m_window;
 		}

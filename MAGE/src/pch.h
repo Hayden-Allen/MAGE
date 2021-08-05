@@ -16,11 +16,11 @@
 #include <string>
 #include <functional>
 // platform
-#ifdef MAGE_PLATFORM_WINDOWS
+#if defined(MAGE_PLATFORM_WINDOWS) && defined(MAGE_BUILD_DLL)
 	#include <Windows.h>
 	#include <glad/glad.h>
-	#include "../vendor/GLFW/include/GLFW/glfw3.h"
-	#include "../vendor/GLFW/include/GLFW/glfw3native.h"
+	#include <GLFW/glfw3.h>
+	#include <GLFW/glfw3native.h>
 #endif
 // vendor
 #include <spdlog/spdlog.h>

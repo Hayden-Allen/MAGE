@@ -3,6 +3,8 @@
 #include "mage/application.h"
 #include "mage/core.h"
 #include "mage/input.h"
+#include "mage/input_key.h"
+#include "mage/input_mouse.h"
 #include "mage/log.h"
 #include "mage/window.h"
 
@@ -26,7 +28,7 @@
 
 
 
-#ifdef MAGE_PLATFORM_WINDOWS
+#if defined(MAGE_PLATFORM_WINDOWS) && defined(MAGE_BUILD_DLL)
 	#include "platform/windows/windows_input.h"
 	#include "platform/windows/windows_window.h"
 #endif
