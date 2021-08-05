@@ -9,7 +9,7 @@ namespace mage
 	 */
 	class MAGE_API layer_stack
 	{
-		typedef std::vector<layer*> list;
+		using list = std::vector<layer*>;
 	public:
 		layer_stack() {}
 		MAGE_DCM(layer_stack);
@@ -38,7 +38,7 @@ namespace mage
 		}
 	private:
 		list m_layers;
-		list::iterator m_insert;
+		size_t m_insert;
 
 
 		void detach_base(layer* const layer);
