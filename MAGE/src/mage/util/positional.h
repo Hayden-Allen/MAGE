@@ -8,7 +8,7 @@ namespace mage
 	 * An object with position
 	 */
 	template<typename T>
-	class MAGE_API positional : public typed<T>
+	class positional : public typed<T>
 	{
 	public:
 		template<typename U = T>

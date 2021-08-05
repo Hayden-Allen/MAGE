@@ -11,7 +11,7 @@ namespace mage
 	/**
 	 * An object that creates and sends events to an event_handler
 	 */
-	class MAGE_API event_propagator
+	class event_propagator
 	{
 	public:
 		MAGE_DCM(event_propagator);

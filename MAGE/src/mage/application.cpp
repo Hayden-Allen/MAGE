@@ -10,17 +10,24 @@ namespace mage
 	void application::run() const
 	{
 		app_tick_event tick;
+		app_draw_event draw;
 		app_render_event render;
 		while (m_running)
 		{
+			// clear screen
 			m_window->on_event(tick);
-			// traverse from the bottom up
-			for (auto layer : m_layer_stack)
-			{
-				layer->on_event(tick);
-				layer->on_event(render);
-			}
 
+			// clear layers
+			for (auto layer : m_layer_stack)
+				layer->on_event(tick);
+			// draw layers
+			for (auto layer : m_layer_stack)
+				layer->on_event(draw);
+			// render layers
+			for (auto layer : m_layer_stack)
+				layer->on_event(render);
+
+			// render screen
 			m_window->on_event(render);
 		}
 	}

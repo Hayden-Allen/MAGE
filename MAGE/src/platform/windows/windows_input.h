@@ -1,13 +1,13 @@
 #pragma once
 #include "pch.h"
-#include "mage/input.h"
+#include "mage/input/input.h"
 
 namespace mage
 {
 	/**
 	 * Windows implementation of the input polling interface
 	 */
-	class MAGE_API windows_input : public input
+	class windows_input : public input
 	{
 	public:
 		windows_input() {}

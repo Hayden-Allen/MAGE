@@ -3,7 +3,7 @@
 
 namespace mage
 {
-	class MAGE_API log
+	class log
 	{
 	public:
 		static void init();

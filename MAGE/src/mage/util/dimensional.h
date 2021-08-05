@@ -8,7 +8,7 @@ namespace mage
 	 * An object with area
 	 */
 	template<typename T>
-	class MAGE_API dimensional : public typed<T>
+	class dimensional : public typed<T>
 	{
 	public:
 		template<typename U = T>

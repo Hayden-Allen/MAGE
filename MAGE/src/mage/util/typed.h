@@ -4,7 +4,7 @@
 namespace mage
 {
 	template<typename T>
-	class MAGE_API typed
+	class typed
 	{
 	public:
 		MAGE_DCM(typed);

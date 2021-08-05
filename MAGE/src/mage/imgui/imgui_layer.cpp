@@ -1,9 +1,9 @@
 #include "pch.h"
 #include "imgui_layer.h"
+#include "input/input_key.h"
 #include "util/functions.h"
 #include "application.h"
 #include "log.h"
-#include "platform/OpenGL/imgui_renderer.h"
 
 namespace mage
 {
@@ -12,45 +12,34 @@ namespace mage
 
 
 
-	void imgui_layer::on_attach()
-	{
-		ImGui::CreateContext();
-		ImGui::StyleColorsDark();
+    void imgui_layer::on_attach()
+    {
+        IMGUI_CHECKVERSION();
+        ImGui::CreateContext();
+        ImGuiIO& io = ImGui::GetIO();
+        io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;
+        io.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad;
+        io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;
+        io.ConfigFlags |= ImGuiConfigFlags_ViewportsEnable;
 
-		ImGuiIO& io = ImGui::GetIO();
-		io.BackendFlags |= ImGuiBackendFlags_HasMouseCursors;
-		io.BackendFlags |= ImGuiBackendFlags_HasSetMousePos;
+        ImGui::StyleColorsDark();
 
-		// temporary keycodes
-        io.KeyMap[ImGuiKey_Tab] = GLFW_KEY_TAB;
-        io.KeyMap[ImGuiKey_LeftArrow] = GLFW_KEY_LEFT;
-        io.KeyMap[ImGuiKey_RightArrow] = GLFW_KEY_RIGHT;
-        io.KeyMap[ImGuiKey_UpArrow] = GLFW_KEY_UP;
-        io.KeyMap[ImGuiKey_DownArrow] = GLFW_KEY_DOWN;
-        io.KeyMap[ImGuiKey_PageUp] = GLFW_KEY_PAGE_UP;
-        io.KeyMap[ImGuiKey_PageDown] = GLFW_KEY_PAGE_DOWN;
-        io.KeyMap[ImGuiKey_Home] = GLFW_KEY_HOME;
-        io.KeyMap[ImGuiKey_End] = GLFW_KEY_END;
-        io.KeyMap[ImGuiKey_Insert] = GLFW_KEY_INSERT;
-        io.KeyMap[ImGuiKey_Delete] = GLFW_KEY_DELETE;
-        io.KeyMap[ImGuiKey_Backspace] = GLFW_KEY_BACKSPACE;
-        io.KeyMap[ImGuiKey_Space] = GLFW_KEY_SPACE;
-        io.KeyMap[ImGuiKey_Enter] = GLFW_KEY_ENTER;
-        io.KeyMap[ImGuiKey_Escape] = GLFW_KEY_ESCAPE;
-        io.KeyMap[ImGuiKey_KeyPadEnter] = GLFW_KEY_KP_ENTER;
-        io.KeyMap[ImGuiKey_A] = GLFW_KEY_A;
-        io.KeyMap[ImGuiKey_C] = GLFW_KEY_C;
-        io.KeyMap[ImGuiKey_V] = GLFW_KEY_V;
-        io.KeyMap[ImGuiKey_X] = GLFW_KEY_X;
-        io.KeyMap[ImGuiKey_Y] = GLFW_KEY_Y;
-        io.KeyMap[ImGuiKey_Z] = GLFW_KEY_Z;
+        ImGuiStyle& style = ImGui::GetStyle();
+        if (io.ConfigFlags & ImGuiConfigFlags_ViewportsEnable)
+        {
+            style.WindowRounding = 0.0f;
+            style.Colors[ImGuiCol_WindowBg].w = 1.f;
+        }
 
+        ImGui_ImplGlfw_InitForOpenGL(MAGE_CAST(GLFWwindow*, application::get().get_window().get_native_window()), true);
         ImGui_ImplOpenGL3_Init("#version 410");
-	}
-	void imgui_layer::on_detach()
-	{
+    }
+    void imgui_layer::on_detach()
+    {
         ImGui_ImplOpenGL3_Shutdown();
-	}
+        ImGui_ImplGlfw_Shutdown();
+        ImGui::DestroyContext();
+    }
 
 
 
@@ -62,23 +51,35 @@ namespace mage
         ImGuiIO& io = ImGui::GetIO();
         io.DeltaTime = (last == 0.f ? 1.f : current - last);
         last = current;
-        const window& win = application::get().get_window();
-        io.DisplaySize = ImVec2(win.get_w<float>(), win.get_h<float>());
-
-
 
         ImGui_ImplOpenGL3_NewFrame();
+        ImGui_ImplGlfw_NewFrame();
         ImGui::NewFrame();
-        return true;
+        return false;
 	}
-    bool imgui_layer::on_app_render(app_render_event& e)
+    bool imgui_layer::on_app_draw(app_draw_event& e)
     {
         static bool show = true;
         ImGui::ShowDemoWindow(&show);
+        return false;
+    }
+    bool imgui_layer::on_app_render(app_render_event& e)
+    {
+        ImGuiIO& io = ImGui::GetIO();
+        const window& window = application::get().get_window();
+        io.DisplaySize = ImVec2(window.get_w<float>(), window.get_h<float>());
 
         ImGui::Render();
         ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
-        return true;
+
+        if (io.ConfigFlags & ImGuiConfigFlags_ViewportsEnable)
+        {
+            GLFWwindow* ctx = glfwGetCurrentContext();
+            ImGui::UpdatePlatformWindows();
+            ImGui::RenderPlatformWindowsDefault();
+            glfwMakeContextCurrent(ctx);
+        }
+        return false;
     }
     bool imgui_layer::on_key_press(key_press_event& e)
     {
@@ -154,13 +155,13 @@ namespace mage
         if (c >= 0 && c < arrlen(io.KeysDown))
             io.KeysDown[c] = pressed;
 
-        io.KeyCtrl = io.KeysDown[GLFW_KEY_LEFT_CONTROL] || io.KeysDown[GLFW_KEY_RIGHT_CONTROL];
-        io.KeyShift = io.KeysDown[GLFW_KEY_LEFT_SHIFT] || io.KeysDown[GLFW_KEY_RIGHT_SHIFT];
-        io.KeyAlt = io.KeysDown[GLFW_KEY_LEFT_ALT] || io.KeysDown[GLFW_KEY_RIGHT_ALT];
+        io.KeyCtrl = io.KeysDown[mage::key::left_control] || io.KeysDown[mage::key::right_control];
+        io.KeyShift = io.KeysDown[mage::key::left_shift] || io.KeysDown[mage::key::right_shift];
+        io.KeyAlt = io.KeysDown[mage::key::left_alt] || io.KeysDown[mage::key::right_alt];
     #ifdef MAGE_PLATFORM_WINDOWS
         io.KeySuper = false;
     #else
-        io.KeySuper = io.KeysDown[GLFW_KEY_LEFT_SUPER] || io.KeysDown[GLFW_KEY_RIGHT_SUPER];
+        io.KeySuper = io.KeysDown[mage::key::left_super] || io.KeysDown[mage::key::right_super];
     #endif
     }
 }

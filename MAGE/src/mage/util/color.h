@@ -4,7 +4,7 @@
 namespace mage
 {
 	template<typename T>
-	struct MAGE_API color
+	struct color
 	{
 		T r, g, b, a;
 	};

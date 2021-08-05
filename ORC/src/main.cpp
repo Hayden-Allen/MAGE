@@ -15,13 +15,22 @@ namespace orc
 		{
 			MAGE_ERROR("DELETE ORC LAYER");
 		}
+	};
 
+	
 
-		bool on_app_tick(mage::app_tick_event& e) override
+	class orc_imgui_layer : public mage::imgui_layer
+	{
+	public:
+		orc_imgui_layer() :
+			mage::imgui_layer("ORC ImGui")
 		{
-			bool p = mage::input::get()->is_key_pressed(mage::key::A);
-			MAGE_WARN("{}", p);
-			return true;
+			MAGE_ERROR("CREATE ORC IMGUI LAYER");
+		}
+		MAGE_DCM(orc_imgui_layer);
+		~orc_imgui_layer()
+		{
+			MAGE_ERROR("DELETE ORC IMGUI LAYER");
 		}
 	};
 
@@ -35,18 +44,12 @@ namespace orc
 		{
 			MAGE_ERROR("CREATE ORC APP");
 			attach_layer(new orc_layer());
-			attach_layer(new mage::imgui_layer());
+			attach_layer_top(new orc_imgui_layer());
 		}
 		MAGE_DCM(orc_application);
 		~orc_application()
 		{
 			MAGE_ERROR("DELETE ORC APP");
-		}
-	protected:
-		void on_event(mage::event& e) override
-		{
-			mage::application::on_event(e);
-			MAGE_TRACE("{}", e.to_string());
 		}
 	};
 }

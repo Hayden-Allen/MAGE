@@ -9,7 +9,7 @@ namespace mage
 	/**
 	 * Base
 	 */
-	class MAGE_API window_event : public event
+	class window_event : public event
 	{
 	public:
 		MAGE_DCM(window_event);
@@ -23,28 +23,28 @@ namespace mage
 	/**
 	 * Implementation
 	 */
-	class MAGE_API window_close_event : public window_event
+	class window_close_event : public window_event
 	{
 	public:
 		window_close_event() {}
 		MAGE_DCM(window_close_event);
 		MAGE_EVENT_TYPE(event_type::window_close);
 	};
-	class MAGE_API window_focus_event : public window_event
+	class window_focus_event : public window_event
 	{
 	public:
 		window_focus_event() {}
 		MAGE_DCM(window_focus_event);
 		MAGE_EVENT_TYPE(event_type::window_focus);
 	};
-	class MAGE_API window_unfocus_event : public window_event
+	class window_unfocus_event : public window_event
 	{
 	public:
 		window_unfocus_event() {}
 		MAGE_DCM(window_unfocus_event);
 		MAGE_EVENT_TYPE(event_type::window_unfocus);
 	};
-	class MAGE_API window_resize_event : public window_event, public dimensional<int>
+	class window_resize_event : public window_event, public dimensional<int>
 	{
 	public:
 		window_resize_event(int x, int y) :
@@ -61,7 +61,7 @@ namespace mage
 			return ss.str();
 		}
 	};
-	class MAGE_API window_move_event : public window_event, public positional<int>
+	class window_move_event : public window_event, public positional<int>
 	{
 	public:
 		window_move_event(int x, int y) :

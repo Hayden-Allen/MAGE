@@ -7,7 +7,7 @@ namespace mage
 	/**
 	 * Base
 	 */
-	class MAGE_API key_event : public event
+	class key_event : public event
 	{
 	public:
 		MAGE_DCM(key_event);
@@ -38,7 +38,7 @@ namespace mage
 	/**
 	 * Implementation
 	 */
-	class MAGE_API key_press_event : public key_event
+	class key_press_event : public key_event
 	{
 	public:
 		key_press_event(int code, bool repeat) :
@@ -62,7 +62,7 @@ namespace mage
 	private:
 		bool m_repeat;
 	};
-	class MAGE_API key_release_event : public key_event
+	class key_release_event : public key_event
 	{
 	public:
 		key_release_event(int code) :
@@ -71,7 +71,7 @@ namespace mage
 		MAGE_DCM(key_release_event);
 		MAGE_EVENT_TYPE(event_type::key_release);
 	};
-	class MAGE_API key_type_event : public key_event
+	class key_type_event : public key_event
 	{
 	public:
 		key_type_event(int code) :

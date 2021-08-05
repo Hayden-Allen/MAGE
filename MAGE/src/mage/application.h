@@ -12,7 +12,7 @@ namespace mage
 	/**
 	 * Main driver class. Must be implemented in the client.
 	 */
-	class MAGE_API application : public event_handler
+	class application : public event_handler
 	{
 	public:
 		MAGE_DCM(application);
@@ -54,6 +54,14 @@ namespace mage
 		void detach_layer(layer* const layer)
 		{
 			m_layer_stack.detach(layer);
+		}
+		void attach_layer_top(layer* const layer)
+		{
+			m_layer_stack.attach_top(layer);
+		}
+		void detach_layer_top(layer* const layer)
+		{
+			m_layer_stack.detach_top(layer);
 		}
 		// terminate execution when the window is closed
 		bool on_window_close(window_close_event& e) override

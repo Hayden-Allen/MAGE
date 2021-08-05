@@ -13,7 +13,7 @@ namespace mage
 	/**
 	 * An object that responds to events
 	 */
-	class MAGE_API event_handler
+	class event_handler
 	{
 	public:
 		MAGE_DCM(event_handler);
@@ -23,6 +23,7 @@ namespace mage
 		{
 			// app
 			e.dispatch<app_tick_event>(MAGE_BIND_EVENT_CALLBACK(event_handler::on_app_tick));
+			e.dispatch<app_draw_event>(MAGE_BIND_EVENT_CALLBACK(event_handler::on_app_draw));
 			e.dispatch<app_render_event>(MAGE_BIND_EVENT_CALLBACK(event_handler::on_app_render));
 			// key
 			e.dispatch<key_press_event>(MAGE_BIND_EVENT_CALLBACK(event_handler::on_key_press));
@@ -46,6 +47,7 @@ namespace mage
 
 		// app
 		virtual bool on_app_tick(app_tick_event& e)	{ return false; }
+		virtual bool on_app_draw(app_draw_event& e) { return false; }
 		virtual bool on_app_render(app_render_event& e) { return false; }
 		// key
 		virtual bool on_key_press(key_press_event& e) { return false; }

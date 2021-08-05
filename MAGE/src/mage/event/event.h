@@ -14,7 +14,7 @@ namespace mage
 	enum class event_type
 	{
 		none = 0,
-		app_tick, app_render,
+		app_tick, app_draw, app_render,
 		key_press, key_release, key_type,
 		mouse_press, mouse_release, mouse_move, mouse_scroll,
 		window_close, window_resize, window_focus, window_unfocus, window_move
@@ -36,7 +36,7 @@ namespace mage
 
 
 
-	class MAGE_API event
+	class event
 	{
 		template<typename T>
 		using dispatch_fn = std::function<bool(T&)>;

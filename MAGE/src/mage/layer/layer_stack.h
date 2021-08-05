@@ -7,7 +7,7 @@ namespace mage
 	/**
 	 * Data structure to manage application layers. Supports attaching to/detaching from the middle and top of the stack.
 	 */
-	class MAGE_API layer_stack
+	class layer_stack
 	{
 		using list = std::vector<layer*>;
 	public:

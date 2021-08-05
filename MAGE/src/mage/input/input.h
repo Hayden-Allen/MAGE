@@ -1,13 +1,13 @@
 #pragma once
 #include "pch.h"
-#include "log.h"
+#include "mage/log.h"
 
 namespace mage
 {
 	/**
 	 * Interface for polling various input devices
 	 */
-	class MAGE_API input
+	class input
 	{
 	public:
 		MAGE_DCM(input);

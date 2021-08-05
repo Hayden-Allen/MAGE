@@ -1,15 +1,4 @@
 #pragma once
-
-#ifdef MAGE_PLATFORM_WINDOWS
-	#ifdef MAGE_BUILD_DLL
-		#define MAGE_API __declspec(dllexport)
-	#else
-		#define MAGE_API __declspec(dllimport)
-	#endif
-#else
-	#error MAGE only supports Windows.
-#endif
-
 // for convenience to delete copy/move constructors
 #define MAGE_DCM(name) \
 	name(const name& other) = delete; \

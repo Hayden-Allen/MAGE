@@ -7,7 +7,7 @@ namespace mage
 	/**
 	 * Interface for an application layer. Stored in a layer_stack within an application. 
 	 */
-	class MAGE_API layer : public event_handler
+	class layer : public event_handler
 	{
 	public:
 		MAGE_DCM(layer);

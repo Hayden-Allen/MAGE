@@ -7,6 +7,12 @@
     <Filter Include="mage\event">
       <UniqueIdentifier>{D0AB93F3-BC63-D540-256B-AE9C11427031}</UniqueIdentifier>
     </Filter>
+    <Filter Include="mage\imgui">
+      <UniqueIdentifier>{C927D7F3-B5DF-1841-1EE7-F19C0ABEB331}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="mage\input">
+      <UniqueIdentifier>{7EDAD7F3-6A92-1941-D399-F29CBF70B431}</UniqueIdentifier>
+    </Filter>
     <Filter Include="mage\layer">
       <UniqueIdentifier>{4B2707F4-37DF-4841-A0E6-219D8CBDE331}</UniqueIdentifier>
     </Filter>
@@ -15,9 +21,6 @@
     </Filter>
     <Filter Include="platform">
       <UniqueIdentifier>{4A63C33C-3630-1E48-5F49-0CF04B7553D6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="platform\OpenGL">
-      <UniqueIdentifier>{3E351A86-AAC0-874A-B3D1-0A3F1FDCE34A}</UniqueIdentifier>
     </Filter>
     <Filter Include="platform\windows">
       <UniqueIdentifier>{A44FC440-9048-E392-B97A-C817A5D2C29E}</UniqueIdentifier>
@@ -55,17 +58,17 @@
     <ClInclude Include="src\mage\event\window_event.h">
       <Filter>mage\event</Filter>
     </ClInclude>
-    <ClInclude Include="src\mage\input.h">
-      <Filter>mage</Filter>
+    <ClInclude Include="src\mage\imgui\imgui_layer.h">
+      <Filter>mage\imgui</Filter>
     </ClInclude>
-    <ClInclude Include="src\mage\input_key.h">
-      <Filter>mage</Filter>
+    <ClInclude Include="src\mage\input\input.h">
+      <Filter>mage\input</Filter>
     </ClInclude>
-    <ClInclude Include="src\mage\input_mouse.h">
-      <Filter>mage</Filter>
+    <ClInclude Include="src\mage\input\input_key.h">
+      <Filter>mage\input</Filter>
     </ClInclude>
-    <ClInclude Include="src\mage\layer\imgui_layer.h">
-      <Filter>mage\layer</Filter>
+    <ClInclude Include="src\mage\input\input_mouse.h">
+      <Filter>mage\input</Filter>
     </ClInclude>
     <ClInclude Include="src\mage\layer\layer.h">
       <Filter>mage\layer</Filter>
@@ -95,9 +98,6 @@
       <Filter>mage</Filter>
     </ClInclude>
     <ClInclude Include="src\pch.h" />
-    <ClInclude Include="src\platform\OpenGL\imgui_renderer.h">
-      <Filter>platform\OpenGL</Filter>
-    </ClInclude>
     <ClInclude Include="src\platform\windows\windows_input.h">
       <Filter>platform\windows</Filter>
     </ClInclude>
@@ -109,8 +109,11 @@
     <ClCompile Include="src\mage\application.cpp">
       <Filter>mage</Filter>
     </ClCompile>
-    <ClCompile Include="src\mage\layer\imgui_layer.cpp">
-      <Filter>mage\layer</Filter>
+    <ClCompile Include="src\mage\imgui\build.cpp">
+      <Filter>mage\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="src\mage\imgui\imgui_layer.cpp">
+      <Filter>mage\imgui</Filter>
     </ClCompile>
     <ClCompile Include="src\mage\layer\layer_stack.cpp">
       <Filter>mage\layer</Filter>
@@ -119,9 +122,6 @@
       <Filter>mage</Filter>
     </ClCompile>
     <ClCompile Include="src\pch.cpp" />
-    <ClCompile Include="src\platform\OpenGL\imgui_renderer.cpp">
-      <Filter>platform\OpenGL</Filter>
-    </ClCompile>
     <ClCompile Include="src\platform\windows\windows_input.cpp">
       <Filter>platform\windows</Filter>
     </ClCompile>

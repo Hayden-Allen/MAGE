@@ -16,8 +16,10 @@ include "MAGE/vendor/imgui"
 
 project "MAGE"
 	location "MAGE"
-	kind "SharedLib"
+	kind "StaticLib"
 	language "C++"
+	cppdialect "C++latest"
+	staticruntime "on"
 
 	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
@@ -42,7 +44,7 @@ project "MAGE"
 		"%{prj.name}/vendor/GLFW/include/",
 		"%{prj.name}/vendor/glad/include/",
 		"%{prj.name}/vendor/imgui/",
-		"%{prj.name}/vendor/glm"
+		"%{prj.name}/vendor/glm/"
 	}
 
 	links
@@ -54,34 +56,29 @@ project "MAGE"
 	}
 
 	filter "system:windows"
-		cppdialect "C++latest"
-		staticruntime "On"
 		systemversion "latest"
 
 		defines
 		{
 			"MAGE_PLATFORM_WINDOWS",
-			"MAGE_BUILD_DLL",
+			"MAGE_BUILD_LIB",
 			"_CRT_SECURE_NO_WARNINGS"
-		}
-
-		postbuildcommands
-		{
-			("{COPY} %{cfg.buildtarget.relpath} ../bin/" ..outputdir .. "/ORC")
 		}
 
 	filter "configurations:Debug"
 		defines "MAGE_DEBUG"
-		buildoptions "/MDd"
-		symbols "On"
+		runtime "Debug"
+		symbols "on"
+
 	filter "configurations:Release"
 		defines "MAGE_RELEASE"
-		buildoptions "/MD"
-		optimize "On"
+		runtime "Release"
+		optimize "on"
+
 	filter "configurations:Dist"
 		defines "MAGE_DIST"
-		buildoptions "/MD"
-		optimize "On"
+		runtime "Release"
+		optimize "on"
 
 
 
@@ -89,6 +86,8 @@ project "ORC"
 	location "ORC"
 	kind "ConsoleApp"
 	language "C++"
+	cppdialect "C++latest"
+	staticruntime "on"
 
 	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
@@ -111,18 +110,17 @@ project "ORC"
 		"MAGE/",
 		"MAGE/src/",
 		"MAGE/vendor/spdlog/include/",
-		"MAGE/vendor/imgui/include/",
+		"MAGE/vendor/imgui/",
 		"MAGE/vendor/glm"
 	}
 
 	links
 	{
-		"MAGE"
+		"MAGE",
+		"imgui"
 	}
 
 	filter "system:windows"
-		cppdialect "C++latest"
-		staticruntime "On"
 		systemversion "latest"
 
 		defines
@@ -133,13 +131,15 @@ project "ORC"
 		
 	filter "configurations:Debug"
 		defines "MAGE_DEBUG"
-		buildoptions "/MDd"
-		symbols "On"
+		runtime "Debug"
+		symbols "on"
+
 	filter "configurations:Release"
 		defines "MAGE_RELEASE"
-		buildoptions "/MD"
-		optimize "On"
+		runtime "Release"
+		optimize "on"
+
 	filter "configurations:Dist"
 		defines "MAGE_DIST"
-		buildoptions "/MD"
-		optimize "On"
+		runtime "Release"
+		optimize "on"

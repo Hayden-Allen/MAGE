@@ -8,7 +8,7 @@ namespace mage
 	/**
 	 * Base
 	 */
-	class MAGE_API mouse_event : public event
+	class mouse_event : public event
 	{
 	public:
 		MAGE_DCM(mouse_event);
@@ -16,7 +16,7 @@ namespace mage
 	protected:
 		mouse_event() {}
 	};
-	class MAGE_API mouse_vector_event : public mouse_event, public positional<float>
+	class mouse_vector_event : public mouse_event, public positional<float>
 	{
 	public:
 		std::string to_string() const override
@@ -30,7 +30,7 @@ namespace mage
 			positional<float>(x, y)
 		{}
 	};
-	class MAGE_API mouse_button_event : public mouse_event
+	class mouse_button_event : public mouse_event
 	{
 	public:
 		MAGE_DCM(mouse_button_event);
@@ -61,7 +61,7 @@ namespace mage
 	/**
 	 * Implementation
 	 */
-	class MAGE_API mouse_move_event : public mouse_vector_event
+	class mouse_move_event : public mouse_vector_event
 	{
 	public:
 		mouse_move_event(float x, float y) :
@@ -70,7 +70,7 @@ namespace mage
 		MAGE_DCM(mouse_move_event);
 		MAGE_EVENT_TYPE(event_type::mouse_move);
 	};
-	class MAGE_API mouse_scroll_event : public mouse_vector_event
+	class mouse_scroll_event : public mouse_vector_event
 	{
 	public:
 		mouse_scroll_event(float x, float y) :
@@ -79,7 +79,7 @@ namespace mage
 		MAGE_DCM(mouse_scroll_event);
 		MAGE_EVENT_TYPE(event_type::mouse_scroll);
 	};
-	class MAGE_API mouse_press_event : public mouse_button_event
+	class mouse_press_event : public mouse_button_event
 	{
 	public:
 		mouse_press_event(int button) :
@@ -88,7 +88,7 @@ namespace mage
 		MAGE_DCM(mouse_press_event);
 		MAGE_EVENT_TYPE(event_type::mouse_press);
 	};
-	class MAGE_API mouse_release_event : public mouse_button_event
+	class mouse_release_event : public mouse_button_event
 	{
 	public:
 		mouse_release_event(int button) :

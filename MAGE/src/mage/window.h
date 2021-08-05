@@ -22,7 +22,7 @@ namespace mage
 	/**
 	 * Interface for a non-mobile OS window
 	 */
-	class MAGE_API window : public event_handler, public event_propagator, public positional<uint32_t>, public dimensional<uint32_t>
+	class window : public event_handler, public event_propagator, public positional<uint32_t>, public dimensional<uint32_t>
 	{
 	public:
 		MAGE_DCM(window);
