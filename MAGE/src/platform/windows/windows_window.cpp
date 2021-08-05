@@ -150,6 +150,9 @@ namespace mage
 	}
 	void windows_window::window_move_callback(GLFWwindow* window, int x, int y)
 	{
+		WIN->m_x = MAGE_CAST(positional::s_type, x);
+		WIN->m_y = MAGE_CAST(positional::s_type, y);
+
 		window_move_event e(x, y);
 		WIN->invoke(e);
 	}
@@ -157,8 +160,8 @@ namespace mage
 	{
 		glViewport(0, 0, width, height);
 
-		WIN->m_w = MAGE_CAST(s_type, width);
-		WIN->m_h = MAGE_CAST(s_type, height);
+		WIN->m_w = MAGE_CAST(dimensional::s_type, width);
+		WIN->m_h = MAGE_CAST(dimensional::s_type, height);
 
 		window_resize_event e(width, height);
 		WIN->invoke(e);

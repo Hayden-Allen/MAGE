@@ -41,7 +41,8 @@ project "MAGE"
 		"%{prj.name}/vendor/spdlog/include/",
 		"%{prj.name}/vendor/GLFW/include/",
 		"%{prj.name}/vendor/glad/include/",
-		"%{prj.name}/vendor/imgui/"
+		"%{prj.name}/vendor/imgui/",
+		"%{prj.name}/vendor/glm"
 	}
 
 	links
@@ -110,7 +111,8 @@ project "ORC"
 		"MAGE/",
 		"MAGE/src/",
 		"MAGE/vendor/spdlog/include/",
-		"MAGE/vendor/imgui/include/"
+		"MAGE/vendor/imgui/include/",
+		"MAGE/vendor/glm"
 	}
 
 	links
