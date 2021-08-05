@@ -104,6 +104,7 @@
     <ClInclude Include="src\platform\windows\windows_window.h">
       <Filter>platform\windows</Filter>
     </ClInclude>
+    <ClInclude Include="src\platform\windows\windows_imgui_layer.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\mage\application.cpp">
@@ -128,5 +129,6 @@
     <ClCompile Include="src\platform\windows\windows_window.cpp">
       <Filter>platform\windows</Filter>
     </ClCompile>
+    <ClCompile Include="src\platform\windows\windows_imgui_layer.cpp" />
   </ItemGroup>
 </Project>

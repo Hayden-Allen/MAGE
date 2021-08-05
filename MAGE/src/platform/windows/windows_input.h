@@ -7,7 +7,7 @@ namespace mage
 	/**
 	 * Windows implementation of the input polling interface
 	 */
-	class windows_input : public input
+	class windows_input final : public input
 	{
 	public:
 		windows_input() {}

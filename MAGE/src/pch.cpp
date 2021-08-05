@@ -30,8 +30,9 @@
 
 
 
-#ifdef MAGE_BUILD_LIB
-	#ifdef MAGE_PLATFORM_WINDOWS
+#ifdef MAGE_PLATFORM_WINDOWS
+	#include "platform/windows/windows_imgui_layer.h"
+	#ifdef MAGE_BUILD_LIB
 		#include "platform/windows/windows_input.h"
 		#include "platform/windows/windows_window.h"
 	#endif

@@ -6,7 +6,7 @@ namespace mage
 	/**
 	 * Windows implementation of the window interface using GLFW
 	 */
-	class windows_window : public window
+	class windows_window final : public window
 	{
 	public:
 		windows_window(const window_constructor& data);

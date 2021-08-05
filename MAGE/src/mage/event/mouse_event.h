@@ -61,7 +61,7 @@ namespace mage
 	/**
 	 * Implementation
 	 */
-	class mouse_move_event : public mouse_vector_event
+	class mouse_move_event final : public mouse_vector_event
 	{
 	public:
 		mouse_move_event(float x, float y) :
@@ -70,7 +70,7 @@ namespace mage
 		MAGE_DCM(mouse_move_event);
 		MAGE_EVENT_TYPE(event_type::mouse_move);
 	};
-	class mouse_scroll_event : public mouse_vector_event
+	class mouse_scroll_event final : public mouse_vector_event
 	{
 	public:
 		mouse_scroll_event(float x, float y) :
@@ -79,7 +79,7 @@ namespace mage
 		MAGE_DCM(mouse_scroll_event);
 		MAGE_EVENT_TYPE(event_type::mouse_scroll);
 	};
-	class mouse_press_event : public mouse_button_event
+	class mouse_press_event final : public mouse_button_event
 	{
 	public:
 		mouse_press_event(int button) :
@@ -88,7 +88,7 @@ namespace mage
 		MAGE_DCM(mouse_press_event);
 		MAGE_EVENT_TYPE(event_type::mouse_press);
 	};
-	class mouse_release_event : public mouse_button_event
+	class mouse_release_event final : public mouse_button_event
 	{
 	public:
 		mouse_release_event(int button) :

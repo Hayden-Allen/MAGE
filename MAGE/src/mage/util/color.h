@@ -4,7 +4,7 @@
 namespace mage
 {
 	template<typename T>
-	struct color
+	struct color final
 	{
 		T r, g, b, a;
 	};

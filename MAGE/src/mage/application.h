@@ -22,7 +22,7 @@ namespace mage
 		}
 
 
-		virtual void run() const;
+		void run();
 		window& get_window()
 		{
 			return *m_window;
@@ -37,6 +37,7 @@ namespace mage
 		}
 	protected:
 		bool m_running;
+		float m_time, m_delta_time;
 		layer_stack m_layer_stack;
 		window* m_window;
 

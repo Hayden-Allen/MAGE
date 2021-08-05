@@ -3,7 +3,7 @@
 
 namespace orc
 {
-	class orc_layer : public mage::layer
+	class orc_layer final : public mage::layer
 	{
 	public:
 		orc_layer() :
@@ -20,11 +20,11 @@ namespace orc
 
 	
 
-	class orc_imgui_layer : public mage::imgui_layer
+	class orc_imgui_layer final : public mage::windows_imgui_layer
 	{
 	public:
 		orc_imgui_layer() :
-			mage::imgui_layer("ORC ImGui")
+			mage::windows_imgui_layer("ORC ImGui")
 		{
 			MAGE_ERROR("CREATE ORC IMGUI LAYER");
 		}
@@ -40,8 +40,31 @@ namespace orc
 			static bool show = true;
 			ImGui::ShowDemoWindow(&show);
 
+			return false;
+		}
+	};
+
+
+
+	class orc_imgui_layer2 final : public mage::windows_imgui_layer
+	{
+	public:
+		orc_imgui_layer2() :
+			mage::windows_imgui_layer("ORC ImGui 2")
+		{
+			MAGE_ERROR("CREATE ORC IMGUI LAYER 2");
+		}
+		MAGE_DCM(orc_imgui_layer2);
+		~orc_imgui_layer2()
+		{
+			MAGE_ERROR("DELETE ORC IMGUI LAYER 2");
+		}
+
+
+		bool on_app_draw(mage::app_draw_event& e) override
+		{
 			ImGui::Begin("Test");
-			ImGui::Text("Hello, world!");
+			ImGui::Text("%.2fms | %.2ffps", e.get_delta_time(), 1000.f / e.get_delta_time());
 			ImGui::End();
 
 			return false;
@@ -50,7 +73,7 @@ namespace orc
 
 
 
-	class orc_application : public mage::application
+	class orc_application final : public mage::application
 	{
 	public:
 		orc_application(const mage::window_constructor& c) :
@@ -59,6 +82,7 @@ namespace orc
 			MAGE_ERROR("CREATE ORC APP");
 			attach_layer(new orc_layer());
 			attach_layer_top(new orc_imgui_layer());
+			attach_layer_top(new orc_imgui_layer2());
 		}
 		MAGE_DCM(orc_application);
 		~orc_application()

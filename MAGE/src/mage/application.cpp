@@ -7,13 +7,18 @@ namespace mage
 
 
 
-	void application::run() const
+	void application::run()
 	{
-		app_tick_event tick;
-		app_draw_event draw;
-		app_render_event render;
 		while (m_running)
 		{
+			const float time = MAGE_CAST(float, glfwGetTime() * 1000.f);
+			m_delta_time = time - m_time;
+			m_time = time;
+
+			app_tick_event tick(m_time, m_delta_time);
+			app_draw_event draw(m_time, m_delta_time);
+			app_render_event render(m_time, m_delta_time);
+
 			// clear screen
 			m_window->on_event(tick);
 
@@ -35,7 +40,9 @@ namespace mage
 
 
 	application::application(const window_constructor& data) :
-		m_running(true)
+		m_running(true),
+		m_time(0.f),
+		m_delta_time(0.f)
 	{
 		MAGE_CORE_ASSERT(s_instance != nullptr, "Cannot create multiple applications");
 		s_instance = this;

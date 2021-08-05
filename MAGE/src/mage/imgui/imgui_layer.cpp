@@ -9,69 +9,44 @@ namespace mage
 {
     int imgui_layer::s_imgui_min_charcode = 1;
     int imgui_layer::s_imgui_max_charcode = 0xffff;
+    uint32_t imgui_layer::s_instance_count = 0;
 
 
-
-    void imgui_layer::on_attach()
+    imgui_layer::~imgui_layer()
     {
-        IMGUI_CHECKVERSION();
-        ImGui::CreateContext();
-        ImGuiIO& io = ImGui::GetIO();
-        io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;
-        io.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad;
-        io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;
-        io.ConfigFlags |= ImGuiConfigFlags_ViewportsEnable;
+        if (s_instance_count == 0)
+            end();
+    }
 
-        ImGui::StyleColorsDark();
 
-        ImGuiStyle& style = ImGui::GetStyle();
-        if (io.ConfigFlags & ImGuiConfigFlags_ViewportsEnable)
+    bool imgui_layer::on_app_tick(app_tick_event& e)
+    {
+        if (m_instance_id == 0)
         {
-            style.WindowRounding = 0.0f;
-            style.Colors[ImGuiCol_WindowBg].w = 1.f;
+            app_tick(e);
+
+            float current = MAGE_CAST(float, glfwGetTime());
+            static float last = 0.f;
+
+            ImGuiIO& io = ImGui::GetIO();
+            io.DeltaTime = (last == 0.f ? 1.f : current - last);
+            last = current;
+
+            ImGui::NewFrame();
         }
-
-        ImGui_ImplGlfw_InitForOpenGL(MAGE_CAST(GLFWwindow*, application::get().get_window().get_native_window()), true);
-        ImGui_ImplOpenGL3_Init("#version 410");
-    }
-    void imgui_layer::on_detach()
-    {
-        ImGui_ImplOpenGL3_Shutdown();
-        ImGui_ImplGlfw_Shutdown();
-        ImGui::DestroyContext();
-    }
-
-
-
-	bool imgui_layer::on_app_tick(app_tick_event& e)
-	{
-        float current = MAGE_CAST(float, glfwGetTime());
-        static float last = 0.f;
-
-        ImGuiIO& io = ImGui::GetIO();
-        io.DeltaTime = (last == 0.f ? 1.f : current - last);
-        last = current;
-
-        ImGui_ImplOpenGL3_NewFrame();
-        ImGui_ImplGlfw_NewFrame();
-        ImGui::NewFrame();
         return false;
-	}
+    }
     bool imgui_layer::on_app_render(app_render_event& e)
     {
-        ImGuiIO& io = ImGui::GetIO();
-        const window& window = application::get().get_window();
-        io.DisplaySize = ImVec2(window.get_w<float>(), window.get_h<float>());
-
-        ImGui::Render();
-        ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
-
-        if (io.ConfigFlags & ImGuiConfigFlags_ViewportsEnable)
+        if (m_instance_id == 0)
         {
-            GLFWwindow* ctx = glfwGetCurrentContext();
-            ImGui::UpdatePlatformWindows();
-            ImGui::RenderPlatformWindowsDefault();
-            glfwMakeContextCurrent(ctx);
+            ImGuiIO& io = ImGui::GetIO();
+            const window& window = application::get().get_window();
+            io.DisplaySize = ImVec2(window.get_w<float>(), window.get_h<float>());
+
+            ImGui::Render();
+
+            app_render(e);
         }
         return false;
     }
@@ -157,5 +132,50 @@ namespace mage
     #else
         io.KeySuper = io.KeysDown[mage::key::left_super] || io.KeysDown[mage::key::right_super];
     #endif
+    }
+
+
+
+#ifndef MAGE_DIST
+    imgui_layer::imgui_layer(const std::string& name) :
+        layer(name),
+        m_instance_id(s_instance_count)
+    {
+        if (s_instance_count == 0)
+            init();
+    }
+#else
+    imgui_layer::imgui_layer()
+    {
+        if (s_instance_count == 0)
+            init();
+    }
+#endif
+
+
+
+    void imgui_layer::init()
+    {
+        IMGUI_CHECKVERSION();
+        ImGui::CreateContext();
+
+        ImGuiIO& io = ImGui::GetIO();
+        io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;
+        io.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad;
+        io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;
+        io.ConfigFlags |= ImGuiConfigFlags_ViewportsEnable;
+
+        ImGui::StyleColorsDark();
+
+        ImGuiStyle& style = ImGui::GetStyle();
+        if (io.ConfigFlags & ImGuiConfigFlags_ViewportsEnable)
+        {
+            style.WindowRounding = 0.0f;
+            style.Colors[ImGuiCol_WindowBg].w = 1.f;
+        }
+    }
+    void imgui_layer::end()
+    {
+        ImGui::DestroyContext();
     }
 }

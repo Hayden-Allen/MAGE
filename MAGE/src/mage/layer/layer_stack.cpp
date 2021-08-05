@@ -14,7 +14,10 @@ namespace mage
 
 	void layer_stack::attach(layer* const layer)
 	{
-		m_layers.insert(begin() + m_insert, layer);
+		if (m_layers.size() != 0)
+			m_layers.insert(begin() + m_insert, layer);
+		else
+			m_layers.push_back(layer);
 		m_insert++;
 		layer->on_attach();
 	}
