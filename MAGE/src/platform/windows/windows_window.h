@@ -16,7 +16,7 @@ namespace mage
 			glfwDestroyWindow(m_window);
 		}
 
-
+		void* get_native_window() const override;
 		void set_vsync(bool enabled) override
 		{
 			glfwSwapInterval((m_vsync = enabled) ? 1 : 0);

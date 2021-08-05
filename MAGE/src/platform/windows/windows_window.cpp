@@ -62,6 +62,14 @@ namespace mage
 
 
 
+	void* windows_window::get_native_window() const
+	{
+		return MAGE_CAST(void*, m_window);
+	}
+
+
+
+
 	bool windows_window::on_app_tick(app_tick_event& e)
 	{
 		glClear(GL_COLOR_BUFFER_BIT);

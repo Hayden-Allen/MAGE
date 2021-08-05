@@ -164,6 +164,7 @@
     <ClInclude Include="src\mage\event\key_event.h" />
     <ClInclude Include="src\mage\event\mouse_event.h" />
     <ClInclude Include="src\mage\event\window_event.h" />
+    <ClInclude Include="src\mage\input.h" />
     <ClInclude Include="src\mage\layer\imgui_layer.h" />
     <ClInclude Include="src\mage\layer\layer.h" />
     <ClInclude Include="src\mage\layer\layer_stack.h" />
@@ -176,6 +177,7 @@
     <ClInclude Include="src\mage\window.h" />
     <ClInclude Include="src\pch.h" />
     <ClInclude Include="src\platform\OpenGL\imgui_renderer.h" />
+    <ClInclude Include="src\platform\windows\windows_input.h" />
     <ClInclude Include="src\platform\windows\windows_window.h" />
   </ItemGroup>
   <ItemGroup>
@@ -189,6 +191,7 @@
     <ClCompile Include="src\platform\OpenGL\imgui_renderer.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="src\platform\windows\windows_input.cpp" />
     <ClCompile Include="src\platform\windows\windows_window.cpp" />
   </ItemGroup>
   <ItemGroup>

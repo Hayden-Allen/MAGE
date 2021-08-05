@@ -15,6 +15,14 @@ namespace orc
 		{
 			MAGE_ERROR("DELETE ORC LAYER");
 		}
+
+
+		bool on_app_tick(mage::app_tick_event& e) override
+		{
+			float x = mage::input::get()->get_mouse_x(), y = mage::input::get()->get_mouse_y();
+			MAGE_WARN("<{}, {}>", x, y);
+			return true;
+		}
 	};
 
 

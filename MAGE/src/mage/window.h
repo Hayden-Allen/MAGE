@@ -29,8 +29,9 @@ namespace mage
 		virtual ~window() {}
 
 
-		static window* create(const window_constructor& c);
 		virtual void set_vsync(bool enabled) = 0;
+		virtual void* get_native_window() const = 0;
+		static window* create(const window_constructor& c);
 		const std::string& get_title() const
 		{
 			return m_title;

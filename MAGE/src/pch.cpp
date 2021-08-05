@@ -2,6 +2,7 @@
 
 #include "mage/application.h"
 #include "mage/core.h"
+#include "mage/input.h"
 #include "mage/log.h"
 #include "mage/window.h"
 
@@ -26,5 +27,6 @@
 
 
 #ifdef MAGE_PLATFORM_WINDOWS
+	#include "platform/windows/windows_input.h"
 	#include "platform/windows/windows_window.h"
 #endif

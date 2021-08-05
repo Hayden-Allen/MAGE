@@ -88,6 +88,8 @@
     </ClInclude>
     <ClInclude Include="src\mage\layer\imgui_layer.h" />
     <ClInclude Include="src\mage\util\functions.h" />
+    <ClInclude Include="src\mage\input.h" />
+    <ClInclude Include="src\platform\windows\windows_input.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\mage\layer\layer_stack.cpp">
@@ -105,5 +107,6 @@
     </ClCompile>
     <ClCompile Include="src\mage\layer\imgui_layer.cpp" />
     <ClCompile Include="src\mage\application.cpp" />
+    <ClCompile Include="src\platform\windows\windows_input.cpp" />
   </ItemGroup>
 </Project>
