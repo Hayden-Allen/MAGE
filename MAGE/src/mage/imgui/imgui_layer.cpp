@@ -57,12 +57,6 @@ namespace mage
         ImGui::NewFrame();
         return false;
 	}
-    bool imgui_layer::on_app_draw(app_draw_event& e)
-    {
-        static bool show = true;
-        ImGui::ShowDemoWindow(&show);
-        return false;
-    }
     bool imgui_layer::on_app_render(app_render_event& e)
     {
         ImGuiIO& io = ImGui::GetIO();

@@ -20,7 +20,6 @@ namespace mage
 		virtual void on_detach() override;
 	protected:
 		virtual bool on_app_tick(app_tick_event& e) override;
-		virtual bool on_app_draw(app_draw_event& e) override;
 		virtual bool on_app_render(app_render_event& e) override;
 		virtual bool on_key_press(key_press_event& e) override;
 		virtual bool on_key_release(key_release_event& e) override;

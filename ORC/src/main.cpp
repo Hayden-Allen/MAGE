@@ -1,4 +1,5 @@
 #include "pch.h"
+#include "imgui.h"
 
 namespace orc
 {
@@ -31,6 +32,19 @@ namespace orc
 		~orc_imgui_layer()
 		{
 			MAGE_ERROR("DELETE ORC IMGUI LAYER");
+		}
+
+
+		bool on_app_draw(mage::app_draw_event& e) override
+		{
+			static bool show = true;
+			ImGui::ShowDemoWindow(&show);
+
+			ImGui::Begin("Test");
+			ImGui::Text("Hello, world!");
+			ImGui::End();
+
+			return false;
 		}
 	};
 
