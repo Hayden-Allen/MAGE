@@ -5,6 +5,8 @@
 	name(name&& other) = delete;
 #define MAGE_DC(name) \
 	name(const name& other) = delete;
+#define MAGE_DM(name) \
+	name(name&& other) = delete;
 // additional utils
 #define MAGE_BIT(x) (1 << x)
 #define MAGE_CAST(T, x) static_cast<T>(x)

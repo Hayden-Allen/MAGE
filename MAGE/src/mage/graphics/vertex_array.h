@@ -26,6 +26,9 @@ namespace mage::gfx
 			return *m_buffer;
 		}
 	protected:
+		typedef vertex_array_description s_desc;
+
+
 		vertex_buffer* m_buffer;
 		size_t m_vertex_size;
 

@@ -13,16 +13,17 @@ namespace orc
 			m_index_buffer(nullptr)
 		{
 			MAGE_ERROR("CREATE ORC LAYER");
-			uint32_t indices[3] = { 0, 1, 2 };
+			uint32_t indices[] = { 0, 1, 2, 0, 2, 3 };
 			m_index_buffer = mage::gfx::index_buffer::create_static(indices, mage::arrlen(indices));
-			float vertices[6] =
+			float vertices[] =
 			{
-				-.5f, -.5f,
-				 .5f, -.5f,
-				 0.f,  .5f
+				-.5f, -.5f, 1.f, 0.f, 0.f,
+				 .5f, -.5f,	0.f, 1.f, 0.f,
+				 .5f,  .5f,	0.f, 0.f, 1.f,
+				-.5f,  .5f,	1.f, 1.f, 1.f
 			};
 			m_vertex_buffer = mage::gfx::vertex_buffer::create_static(vertices, mage::arrlen(vertices));
-			m_vertex_array = mage::gfx::vertex_array::create_static(m_vertex_buffer, mage::gl::vertex_array_description({ 2 }));
+			m_vertex_array = mage::gfx::vertex_array::create_static(m_vertex_buffer, { mage::gfx::shader_type::float2, mage::gfx::shader_type::float3 });
 		}
 		MAGE_DCM(orc_layer);
 		~orc_layer()
@@ -38,7 +39,7 @@ namespace orc
 		{
 			m_vertex_array->bind();
 			m_index_buffer->bind();
-			glDrawElements(GL_TRIANGLES, MAGE_CAST(GLsizei, m_index_buffer->get_count()), mage::gl::get_type_enum<mage::gfx::index_buffer::s_type>(), nullptr);
+			glDrawElements(GL_TRIANGLES, MAGE_CAST(GLsizei, m_index_buffer->get_count()), mage::gfx::get_shader_type<mage::gfx::index_buffer::s_type>(), nullptr);
 			return false;
 		}
 	private:

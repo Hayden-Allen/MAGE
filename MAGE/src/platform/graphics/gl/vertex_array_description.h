@@ -4,7 +4,7 @@
 
 namespace mage::gl
 {
-	class vertex_array_description final : public mage::gfx::vertex_array_description
+	/*class vertex_array_description final : public mage::gfx::vertex_array_description
 	{
 	public:
 		typedef std::initializer_list<uint32_t> s_type;
@@ -22,5 +22,5 @@ namespace mage::gl
 		}
 	protected:
 		 s_type m_desc;
-	};
+	};*/
 }

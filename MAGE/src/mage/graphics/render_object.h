@@ -10,7 +10,9 @@ namespace mage::gfx
 	class render_object
 	{
 	public:
-		render_object() {}
+		render_object() :
+			m_id(0)
+		{}
 		MAGE_DCM(render_object);
 
 

@@ -10,9 +10,6 @@ namespace mage::gl
 	class vertex_array : public mage::gfx::vertex_array
 	{
 	public:
-		typedef mage::gl::vertex_array_description s_desc;
-
-
 		MAGE_DCM(vertex_array);
 		~vertex_array()
 		{

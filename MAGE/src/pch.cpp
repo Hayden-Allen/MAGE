@@ -13,6 +13,15 @@
 #include "mage/event/mouse_event.h"
 #include "mage/event/window_event.h"
 
+#include "mage/graphics/buffer.h"
+#include "mage/graphics/context.h"
+#include "mage/graphics/index_buffer.h"
+#include "mage/graphics/render_object.h"
+#include "mage/graphics/shader_type.h"
+#include "mage/graphics/vertex_array.h"
+#include "mage/graphics/vertex_array_description.h"
+#include "mage/graphics/vertex_buffer.h"
+
 #include "mage/imgui/imgui_layer.h"
 
 #include "mage/input/input.h"
@@ -25,6 +34,7 @@
 #include "mage/util/color.h"
 #include "mage/util/dimensional.h"
 #include "mage/util/functions.h"
+#include "mage/util/iterable.h"
 #include "mage/util/positional.h"
 #include "mage/util/typed.h"
 
@@ -36,8 +46,8 @@
 	#include <GLFW/glfw3.h>
 	#include "platform/graphics/gl/buffer.h"
 	#include "platform/graphics/gl/context.h"
-	#include "platform/graphics/gl/core.h"
 	#include "platform/graphics/gl/index_buffer.h"
+#include "platform/graphics/gl/shader_type.h"
 	#include "platform/graphics/gl/vertex_array.h"
 	#include "platform/graphics/gl/vertex_array_description.h"
 	#include "platform/graphics/gl/vertex_buffer.h"
