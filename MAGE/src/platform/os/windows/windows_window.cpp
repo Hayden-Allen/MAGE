@@ -62,24 +62,6 @@ namespace mage
 
 
 
-	void* windows_window::get_native_window() const
-	{
-		return MAGE_CAST(void*, m_window);
-	}
-
-
-
-
-	bool windows_window::on_app_tick(app_tick_event& e)
-	{
-		m_context->clear_screen();
-		return false;
-	}
-	bool windows_window::on_app_render(app_render_event& e)
-	{
-		m_context->swap_buffers();
-		return false;
-	}
 	/**
 	 * GLFW callbacks
 	 */

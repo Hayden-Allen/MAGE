@@ -16,8 +16,6 @@ namespace mage::gl
 
 
 		void init() override;
-		void clear_screen() override;
-		void swap_buffers() override;
 	private:
 		static bool s_initialized;
 		GLFWwindow* m_window;

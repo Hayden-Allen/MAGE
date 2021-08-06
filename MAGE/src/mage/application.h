@@ -3,6 +3,7 @@
 #include "event/app_event.h"
 #include "event/event_handler.h"
 #include "event/window_event.h"
+#include "graphics/renderer.h"
 #include "layer/layer_stack.h"
 #include "log.h"
 #include "window.h"
@@ -19,6 +20,7 @@ namespace mage
 		virtual ~application()
 		{
 			delete m_window;
+			delete m_renderer;
 		}
 
 
@@ -40,6 +42,7 @@ namespace mage
 		float m_time, m_delta_time;
 		layer_stack m_layer_stack;
 		window* m_window;
+		gfx::renderer* m_renderer;
 
 
 		application(const window_constructor& data);

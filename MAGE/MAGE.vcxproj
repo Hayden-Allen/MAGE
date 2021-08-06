@@ -153,6 +153,7 @@
     <ClInclude Include="src\mage\event\window_event.h" />
     <ClInclude Include="src\mage\graphics\buffer.h" />
     <ClInclude Include="src\mage\graphics\context.h" />
+    <ClInclude Include="src\mage\graphics\renderer.h" />
     <ClInclude Include="src\mage\graphics\shader_type.h" />
     <ClInclude Include="src\mage\graphics\index_buffer.h" />
     <ClInclude Include="src\mage\graphics\render_object.h" />
@@ -177,6 +178,7 @@
     <ClInclude Include="src\pch.h" />
     <ClInclude Include="src\platform\graphics\gl\buffer.h" />
     <ClInclude Include="src\platform\graphics\gl\context.h" />
+    <ClInclude Include="src\platform\graphics\gl\renderer.h" />
     <ClInclude Include="src\platform\graphics\gl\shader_type.h" />
     <ClInclude Include="src\platform\graphics\gl\index_buffer.h" />
     <ClInclude Include="src\platform\graphics\gl\vertex_array.h" />
@@ -197,6 +199,7 @@
     </ClCompile>
     <ClCompile Include="src\platform\graphics\gl\context.cpp" />
     <ClCompile Include="src\platform\graphics\gl\index_buffer.cpp" />
+    <ClCompile Include="src\platform\graphics\gl\renderer.cpp" />
     <ClCompile Include="src\platform\graphics\gl\vertex_array.cpp" />
     <ClCompile Include="src\platform\graphics\gl\vertex_buffer.cpp" />
     <ClCompile Include="src\platform\os\windows\windows_imgui_layer.cpp" />

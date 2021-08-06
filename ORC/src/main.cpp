@@ -19,7 +19,7 @@ namespace orc
 			{
 				-.5f, -.5f, 1.f, 0.f, 0.f,
 				 .5f, -.5f,	0.f, 1.f, 0.f,
-				 .5f,  .5f,	0.f, 0.f, 1.f,
+				 1.f,  1.f,	0.f, 0.f, 1.f,
 				-.5f,  .5f,	1.f, 1.f, 1.f
 			};
 			m_vertex_buffer = mage::gfx::vertex_buffer::create_static(vertices, mage::arrlen(vertices));
@@ -37,9 +37,7 @@ namespace orc
 
 		bool on_app_draw(mage::app_draw_event& e) override
 		{
-			m_vertex_array->bind();
-			m_index_buffer->bind();
-			glDrawElements(GL_TRIANGLES, MAGE_CAST(GLsizei, m_index_buffer->get_count()), mage::gfx::get_shader_type<mage::gfx::index_buffer::s_type>(), nullptr);
+			e.get_renderer()->draw(m_index_buffer, m_vertex_array);
 			return false;
 		}
 	private:

@@ -158,6 +158,8 @@
     <ClInclude Include="src\mage\graphics\shader_type.h" />
     <ClInclude Include="src\mage\graphics\vertex_buffer_element.h" />
     <ClInclude Include="src\mage\util\iterable.h" />
+    <ClInclude Include="src\mage\graphics\renderer.h" />
+    <ClInclude Include="src\platform\graphics\gl\renderer.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\mage\application.cpp">
@@ -197,5 +199,6 @@
     <ClCompile Include="src\platform\os\windows\windows_window.cpp">
       <Filter>platform\os\windows</Filter>
     </ClCompile>
+    <ClCompile Include="src\platform\graphics\gl\renderer.cpp" />
   </ItemGroup>
 </Project>

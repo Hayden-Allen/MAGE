@@ -15,9 +15,10 @@ namespace mage::gfx
 
 
 		virtual void update(T* data, size_t count, size_t offset) const = 0;
-		size_t get_count() const
+		template<typename T = size_t>
+		T get_count() const
 		{
-			return m_count;
+			return MAGE_CAST(T, m_count);
 		}
 	protected:
 		size_t m_count;

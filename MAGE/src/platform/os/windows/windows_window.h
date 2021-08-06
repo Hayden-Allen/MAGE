@@ -16,7 +16,10 @@ namespace mage
 			glfwDestroyWindow(m_window);
 		}
 
-		void* get_native_window() const override;
+		void* get_native_window() const override
+		{
+			return MAGE_CAST(void*, m_window);
+		}
 		void set_vsync(bool enabled) override
 		{
 			glfwSwapInterval((m_vsync = enabled) ? 1 : 0);
@@ -26,8 +29,6 @@ namespace mage
 		GLFWwindow* m_window;
 
 
-		bool on_app_tick(app_tick_event& e) override;
-		bool on_app_render(app_render_event& e) override;
 		// GLFW callback functions
 		static void error_callback(int code, const char* desc);
 		static void char_callback(GLFWwindow* window, uint32_t code);

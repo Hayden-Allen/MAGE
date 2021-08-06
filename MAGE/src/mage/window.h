@@ -24,7 +24,6 @@ namespace mage
 	 * Interface for a non-mobile OS window
 	 */
 	class window :
-		public event_handler,
 		public event_propagator,
 		public positional<uint32_t>,
 		public dimensional<uint32_t>

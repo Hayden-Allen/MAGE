@@ -17,13 +17,4 @@ namespace mage::gl
 		bool success = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
 		MAGE_CORE_ASSERT(success, "Failed to initialize glad")
 	}
-	void context::clear_screen()
-	{
-		glClear(GL_COLOR_BUFFER_BIT);
-	}
-	void context::swap_buffers()
-	{
-		glfwPollEvents();
-		glfwSwapBuffers(m_window);
-	}
 }
