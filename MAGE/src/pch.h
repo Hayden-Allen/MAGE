@@ -32,3 +32,4 @@
 #include <spdlog/sinks/stdout_color_sinks.h>
 
 #include "mage/core.h"
+#include "mage/log.h"

@@ -61,6 +61,7 @@ project "MAGE"
 		defines
 		{
 			"MAGE_PLATFORM_WINDOWS",
+			"MAGE_RENDER_API_GL",
 			"MAGE_BUILD_LIB",
 			"_CRT_SECURE_NO_WARNINGS"
 		}
@@ -110,6 +111,8 @@ project "ORC"
 		"MAGE/",
 		"MAGE/src/",
 		"MAGE/vendor/spdlog/include/",
+		"MAGE/vendor/GLFW/include/",
+		"MAGE/vendor/glad/include/",
 		"MAGE/vendor/imgui/",
 		"MAGE/vendor/glm"
 	}
@@ -126,6 +129,7 @@ project "ORC"
 		defines
 		{
 			"MAGE_PLATFORM_WINDOWS",
+			"MAGE_RENDER_API_GL",
 			"_CRT_SECURE_NO_WARNINGS"
 		}
 		

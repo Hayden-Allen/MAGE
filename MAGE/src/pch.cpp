@@ -30,10 +30,26 @@
 
 
 
+// render api
+#ifdef MAGE_RENDER_API_GL
+	#include <glad/glad.h>
+	#include <GLFW/glfw3.h>
+	#include "platform/graphics/gl/buffer.h"
+	#include "platform/graphics/gl/context.h"
+	#include "platform/graphics/gl/core.h"
+	#include "platform/graphics/gl/index_buffer.h"
+	#include "platform/graphics/gl/vertex_array.h"
+	#include "platform/graphics/gl/vertex_array_description.h"
+	#include "platform/graphics/gl/vertex_buffer.h"
+#endif
+
+
+
+// os
 #ifdef MAGE_PLATFORM_WINDOWS
-	#include "platform/windows/windows_imgui_layer.h"
+	#include "platform/os/windows/windows_imgui_layer.h"
 	#ifdef MAGE_BUILD_LIB
-		#include "platform/windows/windows_input.h"
-		#include "platform/windows/windows_window.h"
+		#include "platform/os/windows/windows_input.h"
+		#include "platform/os/windows/windows_window.h"
 	#endif
 #endif

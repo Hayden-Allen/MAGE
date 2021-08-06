@@ -79,8 +79,8 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
-      <PreprocessorDefinitions>MAGE_PLATFORM_WINDOWS;_CRT_SECURE_NO_WARNINGS;MAGE_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>.;src;..\MAGE;..\MAGE\src;..\MAGE\vendor\spdlog\include;..\MAGE\vendor\imgui;..\MAGE\vendor\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>MAGE_PLATFORM_WINDOWS;MAGE_RENDER_API_GL;_CRT_SECURE_NO_WARNINGS;MAGE_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>.;src;..\MAGE;..\MAGE\src;..\MAGE\vendor\spdlog\include;..\MAGE\vendor\GLFW\include;..\MAGE\vendor\glad\include;..\MAGE\vendor\imgui;..\MAGE\vendor\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
@@ -96,8 +96,8 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
-      <PreprocessorDefinitions>MAGE_PLATFORM_WINDOWS;_CRT_SECURE_NO_WARNINGS;MAGE_RELEASE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>.;src;..\MAGE;..\MAGE\src;..\MAGE\vendor\spdlog\include;..\MAGE\vendor\imgui;..\MAGE\vendor\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>MAGE_PLATFORM_WINDOWS;MAGE_RENDER_API_GL;_CRT_SECURE_NO_WARNINGS;MAGE_RELEASE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>.;src;..\MAGE;..\MAGE\src;..\MAGE\vendor\spdlog\include;..\MAGE\vendor\GLFW\include;..\MAGE\vendor\glad\include;..\MAGE\vendor\imgui;..\MAGE\vendor\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
@@ -117,8 +117,8 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
-      <PreprocessorDefinitions>MAGE_PLATFORM_WINDOWS;_CRT_SECURE_NO_WARNINGS;MAGE_DIST;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>.;src;..\MAGE;..\MAGE\src;..\MAGE\vendor\spdlog\include;..\MAGE\vendor\imgui;..\MAGE\vendor\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>MAGE_PLATFORM_WINDOWS;MAGE_RENDER_API_GL;_CRT_SECURE_NO_WARNINGS;MAGE_DIST;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>.;src;..\MAGE;..\MAGE\src;..\MAGE\vendor\spdlog\include;..\MAGE\vendor\GLFW\include;..\MAGE\vendor\glad\include;..\MAGE\vendor\imgui;..\MAGE\vendor\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>

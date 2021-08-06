@@ -1,9 +1,10 @@
 #include "pch.h"
+#include "windows_window.h"
 #include "event/key_event.h"
 #include "event/mouse_event.h"
 #include "event/window_event.h"
 #include "log.h"
-#include "windows_window.h"
+#include "platform/graphics/gl/context.h"
 
 namespace mage
 {
@@ -36,12 +37,11 @@ namespace mage
 
 		// create window and make it the current context
 		m_window = glfwCreateWindow(MAGE_CAST(int, m_w), MAGE_CAST(int, m_h), m_title.c_str(), nullptr, nullptr);
-		glfwMakeContextCurrent(m_window);
 		glfwSetWindowUserPointer(m_window, this);
 
-		// initialize Glad
-		bool success = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
-		MAGE_CORE_ASSERT(success, "Failed to initialize glad")
+		// initialize graphics context
+		m_context = new gl::context(m_window);
+		m_context->init();
 
 		// window settings
 		set_vsync(m_vsync);
@@ -72,14 +72,13 @@ namespace mage
 
 	bool windows_window::on_app_tick(app_tick_event& e)
 	{
-		glClear(GL_COLOR_BUFFER_BIT);
-		return true;
+		m_context->clear_screen();
+		return false;
 	}
 	bool windows_window::on_app_render(app_render_event& e)
 	{
-		glfwPollEvents();
-		glfwSwapBuffers(m_window);
-		return true;
+		m_context->swap_buffers();
+		return false;
 	}
 	/**
 	 * GLFW callbacks

@@ -3,6 +3,7 @@
 #include "event/event.h"
 #include "event/event_handler.h"
 #include "event/event_propagator.h"
+#include "graphics/context.h"
 #include "util/dimensional.h"
 #include "util/color.h"
 
@@ -22,11 +23,18 @@ namespace mage
 	/**
 	 * Interface for a non-mobile OS window
 	 */
-	class window : public event_handler, public event_propagator, public positional<uint32_t>, public dimensional<uint32_t>
+	class window :
+		public event_handler,
+		public event_propagator,
+		public positional<uint32_t>,
+		public dimensional<uint32_t>
 	{
 	public:
 		MAGE_DCM(window);
-		virtual ~window() {}
+		virtual ~window()
+		{
+			delete m_context;
+		}
 
 
 		virtual void set_vsync(bool enabled) = 0;
@@ -44,6 +52,7 @@ namespace mage
 		std::string m_title;
 		bool m_vsync;
 		color<float> m_clear;
+		gfx::context* m_context;
 
 
 		window(const window_constructor& c) :
@@ -51,7 +60,8 @@ namespace mage
 			dimensional<uint32_t>(c.w, c.h),
 			m_title(c.title),
 			m_vsync(c.vsync),
-			m_clear(c.clear)
+			m_clear(c.clear),
+			m_context(nullptr)
 		{}
 	};
 }

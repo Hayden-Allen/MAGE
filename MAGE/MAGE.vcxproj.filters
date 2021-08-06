@@ -7,6 +7,9 @@
     <Filter Include="mage\event">
       <UniqueIdentifier>{D0AB93F3-BC63-D540-256B-AE9C11427031}</UniqueIdentifier>
     </Filter>
+    <Filter Include="mage\graphics">
+      <UniqueIdentifier>{5F564FA8-CB16-CBDE-9451-145C00D10FBB}</UniqueIdentifier>
+    </Filter>
     <Filter Include="mage\imgui">
       <UniqueIdentifier>{C927D7F3-B5DF-1841-1EE7-F19C0ABEB331}</UniqueIdentifier>
     </Filter>
@@ -22,8 +25,17 @@
     <Filter Include="platform">
       <UniqueIdentifier>{4A63C33C-3630-1E48-5F49-0CF04B7553D6}</UniqueIdentifier>
     </Filter>
-    <Filter Include="platform\windows">
-      <UniqueIdentifier>{A44FC440-9048-E392-B97A-C817A5D2C29E}</UniqueIdentifier>
+    <Filter Include="platform\graphics">
+      <UniqueIdentifier>{EA1A7F2C-5631-7DC2-9FA8-08E40BFE4D4A}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="platform\graphics\gl">
+      <UniqueIdentifier>{4C00E25E-388F-6B28-E1AD-7F23CD1B7CCE}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="platform\os">
+      <UniqueIdentifier>{BBED55E0-27A3-CED5-B097-C8AC1C4CC5D9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="platform\os\windows">
+      <UniqueIdentifier>{15BB2ED6-811C-0CE4-0A8A-529676EA42A3}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -57,6 +69,24 @@
     </ClInclude>
     <ClInclude Include="src\mage\event\window_event.h">
       <Filter>mage\event</Filter>
+    </ClInclude>
+    <ClInclude Include="src\mage\graphics\buffer.h">
+      <Filter>mage\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="src\mage\graphics\context.h">
+      <Filter>mage\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="src\mage\graphics\index_buffer.h">
+      <Filter>mage\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="src\mage\graphics\render_object.h">
+      <Filter>mage\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="src\mage\graphics\vertex_array.h">
+      <Filter>mage\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="src\mage\graphics\vertex_buffer.h">
+      <Filter>mage\graphics</Filter>
     </ClInclude>
     <ClInclude Include="src\mage\imgui\imgui_layer.h">
       <Filter>mage\imgui</Filter>
@@ -98,13 +128,33 @@
       <Filter>mage</Filter>
     </ClInclude>
     <ClInclude Include="src\pch.h" />
-    <ClInclude Include="src\platform\windows\windows_input.h">
-      <Filter>platform\windows</Filter>
+    <ClInclude Include="src\platform\graphics\gl\buffer.h">
+      <Filter>platform\graphics\gl</Filter>
     </ClInclude>
-    <ClInclude Include="src\platform\windows\windows_window.h">
-      <Filter>platform\windows</Filter>
+    <ClInclude Include="src\platform\graphics\gl\context.h">
+      <Filter>platform\graphics\gl</Filter>
     </ClInclude>
-    <ClInclude Include="src\platform\windows\windows_imgui_layer.h" />
+    <ClInclude Include="src\platform\graphics\gl\index_buffer.h">
+      <Filter>platform\graphics\gl</Filter>
+    </ClInclude>
+    <ClInclude Include="src\platform\graphics\gl\vertex_array.h">
+      <Filter>platform\graphics\gl</Filter>
+    </ClInclude>
+    <ClInclude Include="src\platform\graphics\gl\vertex_buffer.h">
+      <Filter>platform\graphics\gl</Filter>
+    </ClInclude>
+    <ClInclude Include="src\platform\os\windows\windows_imgui_layer.h">
+      <Filter>platform\os\windows</Filter>
+    </ClInclude>
+    <ClInclude Include="src\platform\os\windows\windows_input.h">
+      <Filter>platform\os\windows</Filter>
+    </ClInclude>
+    <ClInclude Include="src\platform\os\windows\windows_window.h">
+      <Filter>platform\os\windows</Filter>
+    </ClInclude>
+    <ClInclude Include="src\mage\graphics\vertex_array_description.h" />
+    <ClInclude Include="src\platform\graphics\gl\vertex_array_description.h" />
+    <ClInclude Include="src\platform\graphics\gl\core.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\mage\application.cpp">
@@ -123,12 +173,26 @@
       <Filter>mage</Filter>
     </ClCompile>
     <ClCompile Include="src\pch.cpp" />
-    <ClCompile Include="src\platform\windows\windows_input.cpp">
-      <Filter>platform\windows</Filter>
+    <ClCompile Include="src\platform\graphics\gl\context.cpp">
+      <Filter>platform\graphics\gl</Filter>
     </ClCompile>
-    <ClCompile Include="src\platform\windows\windows_window.cpp">
-      <Filter>platform\windows</Filter>
+    <ClCompile Include="src\platform\graphics\gl\index_buffer.cpp">
+      <Filter>platform\graphics\gl</Filter>
     </ClCompile>
-    <ClCompile Include="src\platform\windows\windows_imgui_layer.cpp" />
+    <ClCompile Include="src\platform\graphics\gl\vertex_array.cpp">
+      <Filter>platform\graphics\gl</Filter>
+    </ClCompile>
+    <ClCompile Include="src\platform\graphics\gl\vertex_buffer.cpp">
+      <Filter>platform\graphics\gl</Filter>
+    </ClCompile>
+    <ClCompile Include="src\platform\os\windows\windows_imgui_layer.cpp">
+      <Filter>platform\os\windows</Filter>
+    </ClCompile>
+    <ClCompile Include="src\platform\os\windows\windows_input.cpp">
+      <Filter>platform\os\windows</Filter>
+    </ClCompile>
+    <ClCompile Include="src\platform\os\windows\windows_window.cpp">
+      <Filter>platform\os\windows</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

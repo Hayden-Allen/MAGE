@@ -76,7 +76,7 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
-      <PreprocessorDefinitions>MAGE_PLATFORM_WINDOWS;MAGE_BUILD_LIB;_CRT_SECURE_NO_WARNINGS;MAGE_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>MAGE_PLATFORM_WINDOWS;MAGE_RENDER_API_GL;MAGE_BUILD_LIB;_CRT_SECURE_NO_WARNINGS;MAGE_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>.;src;src\mage;vendor\spdlog\include;vendor\GLFW\include;vendor\glad\include;vendor\imgui;vendor\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
@@ -96,7 +96,7 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
-      <PreprocessorDefinitions>MAGE_PLATFORM_WINDOWS;MAGE_BUILD_LIB;_CRT_SECURE_NO_WARNINGS;MAGE_RELEASE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>MAGE_PLATFORM_WINDOWS;MAGE_RENDER_API_GL;MAGE_BUILD_LIB;_CRT_SECURE_NO_WARNINGS;MAGE_RELEASE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>.;src;src\mage;vendor\spdlog\include;vendor\GLFW\include;vendor\glad\include;vendor\imgui;vendor\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
@@ -120,7 +120,7 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
-      <PreprocessorDefinitions>MAGE_PLATFORM_WINDOWS;MAGE_BUILD_LIB;_CRT_SECURE_NO_WARNINGS;MAGE_DIST;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>MAGE_PLATFORM_WINDOWS;MAGE_RENDER_API_GL;MAGE_BUILD_LIB;_CRT_SECURE_NO_WARNINGS;MAGE_DIST;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>.;src;src\mage;vendor\spdlog\include;vendor\GLFW\include;vendor\glad\include;vendor\imgui;vendor\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
@@ -151,6 +151,13 @@
     <ClInclude Include="src\mage\event\key_event.h" />
     <ClInclude Include="src\mage\event\mouse_event.h" />
     <ClInclude Include="src\mage\event\window_event.h" />
+    <ClInclude Include="src\mage\graphics\buffer.h" />
+    <ClInclude Include="src\mage\graphics\context.h" />
+    <ClInclude Include="src\mage\graphics\index_buffer.h" />
+    <ClInclude Include="src\mage\graphics\render_object.h" />
+    <ClInclude Include="src\mage\graphics\vertex_array.h" />
+    <ClInclude Include="src\mage\graphics\vertex_array_description.h" />
+    <ClInclude Include="src\mage\graphics\vertex_buffer.h" />
     <ClInclude Include="src\mage\imgui\imgui_layer.h" />
     <ClInclude Include="src\mage\input\input.h" />
     <ClInclude Include="src\mage\input\input_key.h" />
@@ -165,9 +172,16 @@
     <ClInclude Include="src\mage\util\typed.h" />
     <ClInclude Include="src\mage\window.h" />
     <ClInclude Include="src\pch.h" />
-    <ClInclude Include="src\platform\windows\windows_imgui_layer.h" />
-    <ClInclude Include="src\platform\windows\windows_input.h" />
-    <ClInclude Include="src\platform\windows\windows_window.h" />
+    <ClInclude Include="src\platform\graphics\gl\buffer.h" />
+    <ClInclude Include="src\platform\graphics\gl\context.h" />
+    <ClInclude Include="src\platform\graphics\gl\core.h" />
+    <ClInclude Include="src\platform\graphics\gl\index_buffer.h" />
+    <ClInclude Include="src\platform\graphics\gl\vertex_array.h" />
+    <ClInclude Include="src\platform\graphics\gl\vertex_array_description.h" />
+    <ClInclude Include="src\platform\graphics\gl\vertex_buffer.h" />
+    <ClInclude Include="src\platform\os\windows\windows_imgui_layer.h" />
+    <ClInclude Include="src\platform\os\windows\windows_input.h" />
+    <ClInclude Include="src\platform\os\windows\windows_window.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\mage\application.cpp" />
@@ -178,9 +192,13 @@
     <ClCompile Include="src\pch.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="src\platform\windows\windows_imgui_layer.cpp" />
-    <ClCompile Include="src\platform\windows\windows_input.cpp" />
-    <ClCompile Include="src\platform\windows\windows_window.cpp" />
+    <ClCompile Include="src\platform\graphics\gl\context.cpp" />
+    <ClCompile Include="src\platform\graphics\gl\index_buffer.cpp" />
+    <ClCompile Include="src\platform\graphics\gl\vertex_array.cpp" />
+    <ClCompile Include="src\platform\graphics\gl\vertex_buffer.cpp" />
+    <ClCompile Include="src\platform\os\windows\windows_imgui_layer.cpp" />
+    <ClCompile Include="src\platform\os\windows\windows_input.cpp" />
+    <ClCompile Include="src\platform\os\windows\windows_window.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="vendor\GLFW\GLFW.vcxproj">
