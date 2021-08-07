@@ -21,8 +21,7 @@
     </ClInclude>
     <ClInclude Include="src\pch.h" />
     <ClInclude Include="src\n\graphics\vertex_array.h" />
-    <ClInclude Include="src\n\graphics\index_buffer.h" />
-    <ClInclude Include="src\n\graphics\vertex_buffer.h" />
+    <ClInclude Include="src\n\graphics\buffer.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\pch.cpp" />

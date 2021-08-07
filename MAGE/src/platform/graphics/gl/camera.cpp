@@ -3,9 +3,9 @@
 
 namespace mage::gfx
 {
-	orthographic_camera* orthographic_camera::create(float left, float right, float bottom, float top, const glm::vec3& pos, s_type rotation)
+	orthographic_camera* orthographic_camera::create(event_handler_container& c, float width, float height, const glm::vec3& pos, s_type rotation, float zoom)
 	{
-		return new mage::gl::orthographic_camera(left, right, bottom, top, pos, rotation);
+		return new mage::gl::orthographic_camera(c, width, height, pos, rotation, zoom);
 	}
 }
 

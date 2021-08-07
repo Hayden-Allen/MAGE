@@ -147,6 +147,7 @@
     <ClInclude Include="src\mage\event\app_event.h" />
     <ClInclude Include="src\mage\event\event.h" />
     <ClInclude Include="src\mage\event\event_handler.h" />
+    <ClInclude Include="src\mage\event\event_handler_container.h" />
     <ClInclude Include="src\mage\event\event_propagator.h" />
     <ClInclude Include="src\mage\event\key_event.h" />
     <ClInclude Include="src\mage\event\mouse_event.h" />

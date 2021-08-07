@@ -7,7 +7,7 @@ namespace n
 	(
 		camera,
 		orthographic_camera,
-		(float left, float right, float bottom, float top, const glm::vec3& pos, float rotation),
-		(left, right, bottom, top, pos, rotation)
+		(mage::event_handler_container& c, float width, float height, const glm::vec3& pos, float rotation, float zoom),
+		(c, width, height, pos, rotation, zoom)
 	);
 }

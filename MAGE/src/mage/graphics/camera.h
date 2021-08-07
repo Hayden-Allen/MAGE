@@ -2,13 +2,16 @@
 #include "pch.h"
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
-#include <glm/gtc/quaternion.hpp>
+#include "mage/event/event_handler_container.h"
+#include "mage/layer/layer.h"
 #include "mage/util/typed.h"
 
 namespace mage::gfx
 {
 	template<typename T>
-	class camera : public typed<T>
+	class camera : 
+		public event_handler,
+		public typed<T>
 	{
 	public:
 		typedef typed<T>::s_type s_type;
@@ -54,12 +57,14 @@ namespace mage::gfx
 		s_type m_rotation;
 
 
-		camera(const glm::mat4& projection, const glm::mat4& view, const glm::vec3& pos, const s_type& rotation) :
+		camera(event_handler_container& c, const glm::mat4& projection, const glm::mat4& view, const glm::vec3& pos, const s_type& rotation) :
 			m_projection(projection),
 			m_view(view),
 			m_pos(pos),
 			m_rotation(rotation)
-		{}
+		{
+			c.add(this);
+		}
 
 
 		virtual void update() = 0;
@@ -67,17 +72,45 @@ namespace mage::gfx
 
 
 
-	class orthographic_camera : public camera<float>
+	class orthographic_camera : public camera<float>, public dimensional<float>
 	{
 	public:
+		typedef camera::s_type s_type;
+
+
 		MAGE_DCM(orthographic_camera);
 		virtual ~orthographic_camera() {}
 
 
-		static orthographic_camera* create(float left, float right, float bottom, float top, const glm::vec3& pos, s_type rotation);
+		static orthographic_camera* create(event_handler_container& c, float width, float height, const glm::vec3& pos, s_type rotation, float zoom);
+		bool on_window_resize(window_resize_event& e) override
+		{
+			m_projection = compute_projection(m_w = e.get_w<float>(), m_h = e.get_h<float>());
+			return true;
+		}
+		float get_zoom() const
+		{
+			return 1.f / m_zoom;
+		}
+		void set_zoom(float zoom)
+		{
+			m_zoom = 1.f / zoom;
+			m_projection = compute_projection(m_w, m_h);
+		}
 	protected:
-		orthographic_camera(float left, float right, float bottom, float top, const glm::vec3& pos, s_type rotation) :
-			camera<float>(glm::ortho(left, right, bottom, top), glm::mat4(1.f), pos, rotation)
+		float m_zoom;
+
+
+		orthographic_camera(event_handler_container& c, float width, float height, const glm::vec3& pos, s_type rotation, float zoom) :
+			camera<float>(c, compute_projection(width, height), glm::mat4(1.f), pos, rotation),
+			dimensional<float>(width, height),
+			m_zoom(zoom)
 		{}
+
+
+		glm::mat4 compute_projection(float width, float height)
+		{
+			return glm::ortho(-m_zoom, m_zoom, -height / width * m_zoom, height / width * m_zoom);
+		}
 	};
 }

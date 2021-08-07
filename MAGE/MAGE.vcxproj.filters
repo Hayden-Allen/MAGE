@@ -191,6 +191,7 @@
     <ClInclude Include="src\platform\os\windows\windows_window.h">
       <Filter>platform\os\windows</Filter>
     </ClInclude>
+    <ClInclude Include="src\mage\event\event_handler_container.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\mage\application.cpp">

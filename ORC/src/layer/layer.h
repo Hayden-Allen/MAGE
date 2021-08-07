@@ -15,7 +15,9 @@ namespace orc
 			m_shader_program(nullptr),
 			m_camera(nullptr),
 			m_rect_color({ 0.f, 0.f, 0.f }),
-			m_camera_pos({ 0.f, 0.f, 0.f })
+			m_camera_pos({ 0.f, 0.f, 0.f }),
+			m_camera_rotation(0.f),
+			m_camera_zoom(1.f)
 		{
 			MAGE_ERROR("CREATE ORC LAYER");
 
@@ -36,7 +38,7 @@ namespace orc
 			m_shader_program = new n::shader_program("res/v.glsl", "res/f.glsl");
 
 
-			m_camera = new n::camera(-1.f, 1.f, -1.f, 1.f, { 0.f, 0.f, 0.f }, 0.f);
+			m_camera = new n::camera(*this, 1.6f, .9f, m_camera_pos, m_camera_rotation, m_camera_zoom);
 		}
 		MAGE_DCM(layer);
 		~layer()
@@ -53,6 +55,8 @@ namespace orc
 		bool on_app_draw(mage::app_draw_event& e) override
 		{
 			m_camera->set_pos(m_camera_pos);
+			m_camera->set_rotation(m_camera_rotation);
+			m_camera->set_zoom(m_camera_zoom);
 
 			m_shader_program->bind();
 			m_shader_program->set_uniform_float3("u_color", m_rect_color);
@@ -69,5 +73,6 @@ namespace orc
 		n::shader_program* m_shader_program;
 		n::camera* m_camera;
 		glm::vec3 m_rect_color, m_camera_pos;
+		float m_camera_rotation, m_camera_zoom;
 	};
 }

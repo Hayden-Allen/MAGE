@@ -134,10 +134,9 @@
     <ClInclude Include="src\n.h" />
     <ClInclude Include="src\n\core.h" />
     <ClInclude Include="src\n\graphics\camera.h" />
-    <ClInclude Include="src\n\graphics\index_buffer.h" />
+    <ClInclude Include="src\n\graphics\buffer.h" />
     <ClInclude Include="src\n\graphics\shader_program.h" />
     <ClInclude Include="src\n\graphics\vertex_array.h" />
-    <ClInclude Include="src\n\graphics\vertex_buffer.h" />
     <ClInclude Include="src\pch.h" />
   </ItemGroup>
   <ItemGroup>

@@ -33,6 +33,10 @@ namespace orc
 					ImGui::ColorPicker3("rect_color", &m_layer->m_rect_color[0]);
 					ImGui::NewLine();
 					ImGui::DragFloat2("camera_pos", &m_layer->m_camera_pos[0], .01f, -2.f, 2.f);
+					ImGui::NewLine();
+					ImGui::DragFloat("camera_rotation", &m_layer->m_camera_rotation, .01f, 0.f, 2 * glm::pi<float>());
+					ImGui::NewLine();
+					ImGui::DragFloat("camera_zoom", &m_layer->m_camera_zoom, .01f, .1f, 10.f);
 				}
 				ImGui::End();
 			}

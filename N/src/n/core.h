@@ -11,8 +11,9 @@
 #define N_BIT(x) (1 << x)
 #define N_CAST(T, x) static_cast<T>(x)
 #define N_PUN(T, x) *(T*)&x
-#define N_WRAP(CLASS, PARENT, SIG, INIT) \
+#define N_WRAP(CLASS, PARENT, SIG, INIT, ...) \
 	class CLASS final : public MAGE_RAN::PARENT { \
 	public: \
 		CLASS SIG : MAGE_RAN::PARENT INIT {} \
-		N_DCM(CLASS); };
+		N_DCM(CLASS); \
+		__VA_ARGS__ };
