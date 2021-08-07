@@ -76,9 +76,6 @@
     <ClInclude Include="src\mage\graphics\context.h">
       <Filter>mage\graphics</Filter>
     </ClInclude>
-    <ClInclude Include="src\mage\graphics\index_buffer.h">
-      <Filter>mage\graphics</Filter>
-    </ClInclude>
     <ClInclude Include="src\mage\graphics\render_object.h">
       <Filter>mage\graphics</Filter>
     </ClInclude>
@@ -95,9 +92,6 @@
       <Filter>mage\graphics</Filter>
     </ClInclude>
     <ClInclude Include="src\mage\graphics\vertex_array_description.h">
-      <Filter>mage\graphics</Filter>
-    </ClInclude>
-    <ClInclude Include="src\mage\graphics\vertex_buffer.h">
       <Filter>mage\graphics</Filter>
     </ClInclude>
     <ClInclude Include="src\mage\graphics\vertex_buffer_element.h">
@@ -185,6 +179,8 @@
     <ClInclude Include="src\mage\graphics\shader.h" />
     <ClInclude Include="src\platform\graphics\gl\shader.h" />
     <ClInclude Include="src\mage\graphics\shader_preprocessor.h" />
+    <ClInclude Include="src\mage\graphics\camera.h" />
+    <ClInclude Include="src\platform\graphics\gl\camera.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\mage\application.cpp">
@@ -231,5 +227,6 @@
       <Filter>platform\os\windows</Filter>
     </ClCompile>
     <ClCompile Include="src\platform\graphics\gl\shader.cpp" />
+    <ClCompile Include="src\platform\graphics\gl\camera.cpp" />
   </ItemGroup>
 </Project>

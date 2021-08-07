@@ -1,6 +1,5 @@
 #pragma once
 #include "pch.h"
-#include "index_buffer.h"
 #include "vertex_array.h"
 #include "util/color.h"
 #include "window.h"

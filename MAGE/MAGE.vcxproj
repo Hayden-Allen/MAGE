@@ -152,8 +152,8 @@
     <ClInclude Include="src\mage\event\mouse_event.h" />
     <ClInclude Include="src\mage\event\window_event.h" />
     <ClInclude Include="src\mage\graphics\buffer.h" />
+    <ClInclude Include="src\mage\graphics\camera.h" />
     <ClInclude Include="src\mage\graphics\context.h" />
-    <ClInclude Include="src\mage\graphics\index_buffer.h" />
     <ClInclude Include="src\mage\graphics\render_object.h" />
     <ClInclude Include="src\mage\graphics\renderer.h" />
     <ClInclude Include="src\mage\graphics\shader.h" />
@@ -162,7 +162,6 @@
     <ClInclude Include="src\mage\graphics\shader_type.h" />
     <ClInclude Include="src\mage\graphics\vertex_array.h" />
     <ClInclude Include="src\mage\graphics\vertex_array_description.h" />
-    <ClInclude Include="src\mage\graphics\vertex_buffer.h" />
     <ClInclude Include="src\mage\graphics\vertex_buffer_element.h" />
     <ClInclude Include="src\mage\imgui\imgui_layer.h" />
     <ClInclude Include="src\mage\input\input.h" />
@@ -180,6 +179,7 @@
     <ClInclude Include="src\mage\window.h" />
     <ClInclude Include="src\pch.h" />
     <ClInclude Include="src\platform\graphics\gl\buffer.h" />
+    <ClInclude Include="src\platform\graphics\gl\camera.h" />
     <ClInclude Include="src\platform\graphics\gl\context.h" />
     <ClInclude Include="src\platform\graphics\gl\index_buffer.h" />
     <ClInclude Include="src\platform\graphics\gl\renderer.h" />
@@ -202,6 +202,7 @@
     <ClCompile Include="src\pch.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="src\platform\graphics\gl\camera.cpp" />
     <ClCompile Include="src\platform\graphics\gl\context.cpp" />
     <ClCompile Include="src\platform\graphics\gl\index_buffer.cpp" />
     <ClCompile Include="src\platform\graphics\gl\renderer.cpp" />

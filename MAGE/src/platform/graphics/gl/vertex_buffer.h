@@ -1,7 +1,6 @@
 #pragma once
 #include "pch.h"
 #include "buffer.h"
-#include "mage/graphics/vertex_buffer.h"
 
 namespace mage::gl
 {

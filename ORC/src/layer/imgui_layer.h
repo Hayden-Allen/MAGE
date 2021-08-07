@@ -28,10 +28,11 @@ namespace orc
 			{
 				if (ImGui::Begin("Test", &open))
 				{
+					ImGui::Text("%.2fms | %.2ffps", e.get_delta_time(), 1000.f / e.get_delta_time());
+					ImGui::NewLine();
 					ImGui::ColorPicker3("rect_color", &m_layer->m_rect_color[0]);
 					ImGui::NewLine();
-					ImGui::NewLine();
-					ImGui::Text("%.2fms | %.2ffps", e.get_delta_time(), 1000.f / e.get_delta_time());
+					ImGui::DragFloat2("camera_pos", &m_layer->m_camera_pos[0], .01f, -2.f, 2.f);
 				}
 				ImGui::End();
 			}

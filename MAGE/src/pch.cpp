@@ -14,8 +14,8 @@
 #include "mage/event/window_event.h"
 
 #include "mage/graphics/buffer.h"
+#include "mage/graphics/camera.h"
 #include "mage/graphics/context.h"
-#include "mage/graphics/index_buffer.h"
 #include "mage/graphics/render_object.h"
 #include "mage/graphics/shader.h"
 #include "mage/graphics/shader_preprocessor.h"
@@ -23,7 +23,6 @@
 #include "mage/graphics/shader_type.h"
 #include "mage/graphics/vertex_array.h"
 #include "mage/graphics/vertex_array_description.h"
-#include "mage/graphics/vertex_buffer.h"
 
 #include "mage/imgui/imgui_layer.h"
 
@@ -48,6 +47,7 @@
 	#include <glad/glad.h>
 	#include <GLFW/glfw3.h>
 	#include "platform/graphics/gl/buffer.h"
+	#include "platform/graphics/gl/camera.h"
 	#include "platform/graphics/gl/context.h"
 	#include "platform/graphics/gl/index_buffer.h"
 	#include "platform/graphics/gl/renderer.h"

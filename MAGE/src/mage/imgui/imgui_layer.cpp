@@ -52,6 +52,7 @@ namespace mage
     }
     bool imgui_layer::on_key_press(key_press_event& e)
     {
+        MAGE_CORE_INFO("p {}", e.get_code());
         on_key_base(e, true);
         return false;
     }
@@ -60,8 +61,9 @@ namespace mage
         on_key_base(e, false);
         return false;
     }
-    bool imgui_layer::on_key_type(key_type_event& e)
+    /*bool imgui_layer::on_key_type(key_type_event& e)
     {
+        MAGE_CORE_INFO("t {}", e.get_code());
         ImGuiIO& io = ImGui::GetIO();
 
         int c = e.get_code();
@@ -69,7 +71,7 @@ namespace mage
             io.AddInputCharacter(c);
 
         return false;
-    }
+    }*/
     bool imgui_layer::on_mouse_press(mouse_press_event& e)
     {
         ImGuiIO& io = ImGui::GetIO();
@@ -118,11 +120,15 @@ namespace mage
     }
     void imgui_layer::on_key_base(key_event& e, bool pressed)
     {
-        ImGuiIO& io = ImGui::GetIO();
+        /*ImGuiIO& io = ImGui::GetIO();
 
         int c = e.get_code();
         if (c >= 0 && c < arrlen(io.KeysDown))
+        {
+            MAGE_CORE_INFO("{} {}", c, pressed);
             io.KeysDown[c] = pressed;
+        }
+
 
         io.KeyCtrl = io.KeysDown[mage::key::left_control] || io.KeysDown[mage::key::right_control];
         io.KeyShift = io.KeysDown[mage::key::left_shift] || io.KeysDown[mage::key::right_shift];
@@ -131,7 +137,7 @@ namespace mage
         io.KeySuper = false;
     #else
         io.KeySuper = io.KeysDown[mage::key::left_super] || io.KeysDown[mage::key::right_super];
-    #endif
+    #endif*/
     }
 
 

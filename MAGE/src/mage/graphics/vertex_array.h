@@ -1,8 +1,8 @@
 #pragma once
 #include "pch.h"
+#include "buffer.h"
 #include "render_object.h"
 #include "vertex_array_description.h"
-#include "vertex_buffer.h"
 #include "mage/util/typed.h"
 
 namespace mage::gfx
