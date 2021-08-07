@@ -1,3 +1,3 @@
 #pragma once
 #include <mage.h>
-#include <n.h>
+#include "n/core.h"

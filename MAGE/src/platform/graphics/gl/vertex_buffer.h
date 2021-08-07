@@ -30,7 +30,7 @@ namespace mage::gl
 
 
 
-	class static_vertex_buffer final : public mage::gl::vertex_buffer<GL_STATIC_DRAW>
+	class static_vertex_buffer : public mage::gl::vertex_buffer<GL_STATIC_DRAW>
 	{
 	public:
 		static_vertex_buffer(s_type* vertices, size_t count) :
@@ -41,7 +41,7 @@ namespace mage::gl
 
 
 
-	class dynamic_vertex_buffer final : public mage::gl::vertex_buffer<GL_DYNAMIC_DRAW>
+	class dynamic_vertex_buffer : public mage::gl::vertex_buffer<GL_DYNAMIC_DRAW>
 	{
 	public:
 		dynamic_vertex_buffer(s_type* vertices, size_t count) :

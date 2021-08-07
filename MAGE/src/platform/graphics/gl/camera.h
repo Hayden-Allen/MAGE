@@ -4,10 +4,10 @@
 
 namespace mage::gl
 {
-	class orthographic_camera final : public mage::gfx::orthographic_camera
+	class orthographic_camera : public mage::gfx::orthographic_camera
 	{
 	public:
-		orthographic_camera(float left, float right, float bottom, float top, const glm::vec3& pos, float rotation) :
+		orthographic_camera(float left, float right, float bottom, float top, const glm::vec3& pos, s_type rotation) :
 			mage::gfx::orthographic_camera(left, right, bottom, top, pos, rotation)
 		{
 			update();

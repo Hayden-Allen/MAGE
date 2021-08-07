@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="n">
+      <UniqueIdentifier>{13B60200-7F74-5900-C879-590034775900}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="n\graphics">
+      <UniqueIdentifier>{D39F6695-BF57-A8E2-285F-813E143643D3}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\n.h" />
+    <ClInclude Include="src\n\core.h">
+      <Filter>n</Filter>
+    </ClInclude>
+    <ClInclude Include="src\n\graphics\camera.h">
+      <Filter>n\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="src\n\graphics\shader_program.h">
+      <Filter>n\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="src\pch.h" />
+    <ClInclude Include="src\n\graphics\vertex_array.h" />
+    <ClInclude Include="src\n\graphics\index_buffer.h" />
+    <ClInclude Include="src\n\graphics\vertex_buffer.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\pch.cpp" />
+  </ItemGroup>
+</Project>

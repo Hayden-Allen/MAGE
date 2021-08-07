@@ -31,7 +31,7 @@ namespace mage::gl
 
 
 
-	class static_index_buffer final : public mage::gl::index_buffer<GL_STATIC_DRAW>
+	class static_index_buffer : public mage::gl::index_buffer<GL_STATIC_DRAW>
 	{
 	public:
 		static_index_buffer(s_type* indices, size_t count) :
@@ -42,7 +42,7 @@ namespace mage::gl
 
 
 
-	class dynamic_index_buffer final : public mage::gl::index_buffer<GL_DYNAMIC_DRAW>
+	class dynamic_index_buffer : public mage::gl::index_buffer<GL_DYNAMIC_DRAW>
 	{
 	public:
 		dynamic_index_buffer(s_type* indices, size_t count) :

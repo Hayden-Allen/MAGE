@@ -3,13 +3,17 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/quaternion.hpp>
+#include "mage/util/typed.h"
 
 namespace mage::gfx
 {
 	template<typename T>
-	class camera
+	class camera : public typed<T>
 	{
 	public:
+		typedef typed<T>::s_type s_type;
+
+
 		MAGE_DCM(camera);
 		virtual ~camera() {}
 
@@ -30,7 +34,7 @@ namespace mage::gfx
 		{
 			return m_pos;
 		}
-		virtual const T& get_rotation() const
+		virtual const s_type& get_rotation() const
 		{
 			return m_rotation;
 		}
@@ -39,7 +43,7 @@ namespace mage::gfx
 			m_pos = pos;
 			update();
 		}
-		virtual void set_rotation(const T& rotation)
+		virtual void set_rotation(const s_type& rotation)
 		{
 			m_rotation = rotation;
 			update();
@@ -47,10 +51,10 @@ namespace mage::gfx
 	protected:
 		glm::mat4 m_projection, m_view, m_view_projection;
 		glm::vec3 m_pos;
-		T m_rotation;
+		s_type m_rotation;
 
 
-		camera(const glm::mat4& projection, const glm::mat4& view, const glm::vec3& pos, const T& rotation) :
+		camera(const glm::mat4& projection, const glm::mat4& view, const glm::vec3& pos, const s_type& rotation) :
 			m_projection(projection),
 			m_view(view),
 			m_pos(pos),
@@ -70,9 +74,9 @@ namespace mage::gfx
 		virtual ~orthographic_camera() {}
 
 
-		static orthographic_camera* create(float left, float right, float bottom, float top, const glm::vec3& pos, float rotation);
+		static orthographic_camera* create(float left, float right, float bottom, float top, const glm::vec3& pos, s_type rotation);
 	protected:
-		orthographic_camera(float left, float right, float bottom, float top, const glm::vec3& pos, float rotation) :
+		orthographic_camera(float left, float right, float bottom, float top, const glm::vec3& pos, s_type rotation) :
 			camera<float>(glm::ortho(left, right, bottom, top), glm::mat4(1.f), pos, rotation)
 		{}
 	};

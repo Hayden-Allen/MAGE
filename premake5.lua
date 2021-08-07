@@ -25,7 +25,7 @@ project "MAGE"
 	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
 
 	pchheader "pch.h"
-	pchsource "MAGE/src/pch.cpp"
+	pchsource "%{prj.name}/src/pch.cpp"
 
 	files
 	{
@@ -62,10 +62,78 @@ project "MAGE"
 		{
 			"MAGE_PLATFORM_WINDOWS",
 			"MAGE_RENDER_API_GL",
+			"MAGE_RAN=mage::gl",
 			"MAGE_BUILD_LIB",
 			"_CRT_SECURE_NO_WARNINGS"
 		}
 
+	filter "configurations:Debug"
+		defines "MAGE_DEBUG"
+		runtime "Debug"
+		symbols "on"
+
+	filter "configurations:Release"
+		defines "MAGE_RELEASE"
+		runtime "Release"
+		optimize "on"
+
+	filter "configurations:Dist"
+		defines "MAGE_DIST"
+		runtime "Release"
+		optimize "on"
+
+
+
+project "N"
+	location "N"
+	kind "StaticLib"
+	language "C++"
+	cppdialect "C++latest"
+	staticruntime "on"
+	
+	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
+	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
+
+	pchheader "pch.h"
+	pchsource "%{prj.name}/src/pch.cpp"
+
+	files
+	{
+		"%{prj.name}/src/**.h",
+		"%{prj.name}/src/**.hpp",
+		"%{prj.name}/src/**.c",
+		"%{prj.name}/src/**.cpp"
+	}
+
+	includedirs
+	{
+		"%{prj.name}/",
+		"%{prj.name}/src/",
+		"MAGE/",
+		"MAGE/src/",
+		"MAGE/vendor/spdlog/include/",
+		"MAGE/vendor/GLFW/include/",
+		"MAGE/vendor/glad/include/",
+		"MAGE/vendor/imgui/",
+		"MAGE/vendor/glm"
+	}
+
+	links 
+	{
+		"MAGE"
+	}
+
+	filter "system:windows"
+		systemversion "latest"
+
+		defines
+		{
+			"MAGE_PLATFORM_WINDOWS",
+			"MAGE_RENDER_API_GL",
+			"MAGE_RAN=mage::gl",
+			"_CRT_SECURE_NO_WARNINGS"
+		}
+		
 	filter "configurations:Debug"
 		defines "MAGE_DEBUG"
 		runtime "Debug"
@@ -94,7 +162,7 @@ project "ORC"
 	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
 
 	pchheader "pch.h"
-	pchsource "ORC/src/pch.cpp"
+	pchsource "%{prj.name}/src/pch.cpp"
 
 	files
 	{
@@ -114,13 +182,15 @@ project "ORC"
 		"MAGE/vendor/GLFW/include/",
 		"MAGE/vendor/glad/include/",
 		"MAGE/vendor/imgui/",
-		"MAGE/vendor/glm"
+		"MAGE/vendor/glm",
+		"N/src/"
 	}
 
 	links
 	{
+		"imgui",
 		"MAGE",
-		"imgui"
+		"N"
 	}
 
 	filter "system:windows"
@@ -130,6 +200,7 @@ project "ORC"
 		{
 			"MAGE_PLATFORM_WINDOWS",
 			"MAGE_RENDER_API_GL",
+			"MAGE_RAN=mage::gl",
 			"_CRT_SECURE_NO_WARNINGS"
 		}
 		

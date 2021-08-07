@@ -15,27 +15,27 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{C90D880B-3517-887C-BE92-9E7C2A9B937C}</ProjectGuid>
+    <ProjectGuid>{F3B50200-5F74-5900-A879-590014775900}</ProjectGuid>
     <IgnoreWarnCompileDuplicatedFilename>true</IgnoreWarnCompileDuplicatedFilename>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>ORC</RootNamespace>
+    <RootNamespace>N</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <CharacterSet>Unicode</CharacterSet>
     <PlatformToolset>v142</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <CharacterSet>Unicode</CharacterSet>
     <PlatformToolset>v142</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Dist|x64'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <CharacterSet>Unicode</CharacterSet>
     <PlatformToolset>v142</PlatformToolset>
@@ -54,25 +54,22 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <LinkIncremental>true</LinkIncremental>
-    <OutDir>..\bin\Debug-x86_64-windows\ORC\</OutDir>
-    <IntDir>..\bin-int\Debug-x86_64-windows\ORC\</IntDir>
-    <TargetName>ORC</TargetName>
-    <TargetExt>.exe</TargetExt>
+    <OutDir>..\bin\Debug-x86_64-windows\N\</OutDir>
+    <IntDir>..\bin-int\Debug-x86_64-windows\N\</IntDir>
+    <TargetName>N</TargetName>
+    <TargetExt>.lib</TargetExt>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <LinkIncremental>false</LinkIncremental>
-    <OutDir>..\bin\Release-x86_64-windows\ORC\</OutDir>
-    <IntDir>..\bin-int\Release-x86_64-windows\ORC\</IntDir>
-    <TargetName>ORC</TargetName>
-    <TargetExt>.exe</TargetExt>
+    <OutDir>..\bin\Release-x86_64-windows\N\</OutDir>
+    <IntDir>..\bin-int\Release-x86_64-windows\N\</IntDir>
+    <TargetName>N</TargetName>
+    <TargetExt>.lib</TargetExt>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Dist|x64'">
-    <LinkIncremental>false</LinkIncremental>
-    <OutDir>..\bin\Dist-x86_64-windows\ORC\</OutDir>
-    <IntDir>..\bin-int\Dist-x86_64-windows\ORC\</IntDir>
-    <TargetName>ORC</TargetName>
-    <TargetExt>.exe</TargetExt>
+    <OutDir>..\bin\Dist-x86_64-windows\N\</OutDir>
+    <IntDir>..\bin-int\Dist-x86_64-windows\N\</IntDir>
+    <TargetName>N</TargetName>
+    <TargetExt>.lib</TargetExt>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -80,14 +77,14 @@
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>MAGE_PLATFORM_WINDOWS;MAGE_RENDER_API_GL;MAGE_RAN=mage::gl;_CRT_SECURE_NO_WARNINGS;MAGE_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>.;src;..\MAGE;..\MAGE\src;..\MAGE\vendor\spdlog\include;..\MAGE\vendor\GLFW\include;..\MAGE\vendor\glad\include;..\MAGE\vendor\imgui;..\MAGE\vendor\glm;..\N\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;src;..\MAGE;..\MAGE\src;..\MAGE\vendor\spdlog\include;..\MAGE\vendor\GLFW\include;..\MAGE\vendor\glad\include;..\MAGE\vendor\imgui;..\MAGE\vendor\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <LanguageStandard>stdcpplatest</LanguageStandard>
     </ClCompile>
     <Link>
-      <SubSystem>Console</SubSystem>
+      <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
@@ -97,7 +94,7 @@
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>MAGE_PLATFORM_WINDOWS;MAGE_RENDER_API_GL;MAGE_RAN=mage::gl;_CRT_SECURE_NO_WARNINGS;MAGE_RELEASE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>.;src;..\MAGE;..\MAGE\src;..\MAGE\vendor\spdlog\include;..\MAGE\vendor\GLFW\include;..\MAGE\vendor\glad\include;..\MAGE\vendor\imgui;..\MAGE\vendor\glm;..\N\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;src;..\MAGE;..\MAGE\src;..\MAGE\vendor\spdlog\include;..\MAGE\vendor\GLFW\include;..\MAGE\vendor\glad\include;..\MAGE\vendor\imgui;..\MAGE\vendor\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
@@ -107,7 +104,7 @@
       <LanguageStandard>stdcpplatest</LanguageStandard>
     </ClCompile>
     <Link>
-      <SubSystem>Console</SubSystem>
+      <SubSystem>Windows</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
@@ -118,7 +115,7 @@
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>MAGE_PLATFORM_WINDOWS;MAGE_RENDER_API_GL;MAGE_RAN=mage::gl;_CRT_SECURE_NO_WARNINGS;MAGE_DIST;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>.;src;..\MAGE;..\MAGE\src;..\MAGE\vendor\spdlog\include;..\MAGE\vendor\GLFW\include;..\MAGE\vendor\glad\include;..\MAGE\vendor\imgui;..\MAGE\vendor\glm;..\N\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;src;..\MAGE;..\MAGE\src;..\MAGE\vendor\spdlog\include;..\MAGE\vendor\GLFW\include;..\MAGE\vendor\glad\include;..\MAGE\vendor\imgui;..\MAGE\vendor\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
@@ -128,31 +125,29 @@
       <LanguageStandard>stdcpplatest</LanguageStandard>
     </ClCompile>
     <Link>
-      <SubSystem>Console</SubSystem>
+      <SubSystem>Windows</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="src\layer\imgui_layer.h" />
-    <ClInclude Include="src\layer\layer.h" />
+    <ClInclude Include="src\n.h" />
+    <ClInclude Include="src\n\core.h" />
+    <ClInclude Include="src\n\graphics\camera.h" />
+    <ClInclude Include="src\n\graphics\index_buffer.h" />
+    <ClInclude Include="src\n\graphics\shader_program.h" />
+    <ClInclude Include="src\n\graphics\vertex_array.h" />
+    <ClInclude Include="src\n\graphics\vertex_buffer.h" />
     <ClInclude Include="src\pch.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\pch.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\MAGE\vendor\imgui\imgui.vcxproj">
-      <Project>{0098A80F-6CAC-D0C0-352E-7420A101CDF1}</Project>
-    </ProjectReference>
     <ProjectReference Include="..\MAGE\MAGE.vcxproj">
       <Project>{9F66887C-8B9D-890D-348A-6F1020A0050F}</Project>
-    </ProjectReference>
-    <ProjectReference Include="..\N\N.vcxproj">
-      <Project>{F3B50200-5F74-5900-A879-590014775900}</Project>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

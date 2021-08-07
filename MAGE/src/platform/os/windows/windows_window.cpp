@@ -25,8 +25,6 @@ namespace mage
 	windows_window::windows_window(const window_constructor& data) :
 		window(data)
 	{
-		MAGE_CORE_INFO("Creating window {} <{}, {}>", m_title, m_w, m_h);
-
 		// initialize GLFW if it hasn't been already
 		if (!s_glfw_init)
 		{

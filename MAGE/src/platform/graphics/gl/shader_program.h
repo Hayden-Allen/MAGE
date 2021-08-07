@@ -5,7 +5,7 @@
 
 namespace mage::gl
 {
-	class shader_program final : public mage::gfx::shader_program
+	class shader_program : public mage::gfx::shader_program
 	{
 	public:
 		shader_program(const std::initializer_list<mage::gfx::shader*>& stages);
