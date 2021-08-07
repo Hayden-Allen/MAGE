@@ -41,7 +41,7 @@ namespace mage
 	void layer_stack::detach_base(s_type const layer)
 	{
 		const auto& it = std::find(begin(), end(), layer);
-		MAGE_CORE_ASSERT(it != m_layers.end(), "Attempted to detach a layer that is not part of the layer_stack");
+		MAGE_CORE_ASSERT(it != m_list.end(), "Attempted to detach a layer that is not part of the layer_stack");
 		m_list.erase(it);
 		layer->on_detach();
 	}

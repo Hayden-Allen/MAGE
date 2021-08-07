@@ -15,6 +15,7 @@
 #include <memory>
 #include <string>
 #include <functional>
+#include <regex>
 // platform
 #ifdef MAGE_BUILD_LIB
 	#ifdef MAGE_PLATFORM_WINDOWS

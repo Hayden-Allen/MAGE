@@ -46,7 +46,7 @@ namespace mage
 		m_window(nullptr),
 		m_renderer(gfx::renderer::create())
 	{
-		MAGE_CORE_ASSERT(s_instance != nullptr, "Cannot create multiple applications");
+		MAGE_CORE_ASSERT(!s_instance, "Cannot create multiple applications");
 		s_instance = this;
 
 		m_window = window::create(data);

@@ -1,79 +1,9 @@
 #include "pch.h"
-#include "imgui.h"
+#include "layer/layer.h"
+#include "layer/imgui_layer.h"
 
 namespace orc
 {
-	class orc_layer final : public mage::layer
-	{
-	public:
-		orc_layer() :
-			mage::layer("ORC"),
-			m_vertex_array(nullptr),
-			m_vertex_buffer(nullptr),
-			m_index_buffer(nullptr)
-		{
-			MAGE_ERROR("CREATE ORC LAYER");
-			uint32_t indices[] = { 0, 1, 2, 0, 2, 3 };
-			m_index_buffer = mage::gfx::index_buffer::create_static(indices, mage::arrlen(indices));
-			float vertices[] =
-			{
-				-.5f, -.5f, 1.f, 0.f, 0.f,
-				 .5f, -.5f,	0.f, 1.f, 0.f,
-				 1.f,  1.f,	0.f, 0.f, 1.f,
-				-.5f,  .5f,	1.f, 1.f, 1.f
-			};
-			m_vertex_buffer = mage::gfx::vertex_buffer::create_static(vertices, mage::arrlen(vertices));
-			m_vertex_array = mage::gfx::vertex_array::create_static(m_vertex_buffer, { mage::gfx::shader_type::float2, mage::gfx::shader_type::float3 });
-		}
-		MAGE_DCM(orc_layer);
-		~orc_layer()
-		{
-			MAGE_ERROR("DELETE ORC LAYER");
-			delete m_vertex_array;
-			delete m_vertex_buffer;
-			delete m_index_buffer;
-		}
-
-
-		bool on_app_draw(mage::app_draw_event& e) override
-		{
-			e.get_renderer()->draw(m_index_buffer, m_vertex_array);
-			return false;
-		}
-	private:
-		mage::gfx::vertex_array* m_vertex_array;
-		mage::gfx::vertex_buffer* m_vertex_buffer;
-		mage::gfx::index_buffer* m_index_buffer;
-	};
-
-	
-
-	class orc_imgui_layer final : public mage::windows_imgui_layer
-	{
-	public:
-		orc_imgui_layer() :
-			mage::windows_imgui_layer("ORC ImGui")
-		{
-			MAGE_ERROR("CREATE ORC IMGUI LAYER");
-		}
-		MAGE_DCM(orc_imgui_layer);
-		~orc_imgui_layer()
-		{
-			MAGE_ERROR("DELETE ORC IMGUI LAYER");
-		}
-
-
-		bool on_app_draw(mage::app_draw_event& e) override
-		{
-			static bool show = true;
-			ImGui::ShowDemoWindow(&show);
-
-			return false;
-		}
-	};
-
-
-
 	class orc_application final : public mage::application
 	{
 	public:
@@ -81,8 +11,9 @@ namespace orc
 			application(c)
 		{
 			MAGE_ERROR("CREATE ORC APP");
-			attach_layer(new orc_layer());
-			attach_layer_top(new orc_imgui_layer());
+			auto l = new layer();
+			attach_layer(l);
+			attach_layer_top(new imgui_layer(l));
 		}
 		MAGE_DCM(orc_application);
 		~orc_application()

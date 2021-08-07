@@ -6,7 +6,7 @@ namespace mage::gfx
 	enum class shader_type
 	{
 		none = 0,
-		boolean,
+		bool1, bool2, bool3, bool4,
 		int1, int2, int3, int4,
 		uint1, uint2, uint3, uint4,
 		float1, float2, float3, float4,
@@ -20,7 +20,7 @@ namespace mage::gfx
 	static size_t shader_type_element_count[] =
 	{
 		0,
-		1,
+		1, 2, 3, 4,
 		1, 2, 3, 4,
 		1, 2, 3, 4,
 		1, 2, 3, 4,
@@ -37,7 +37,7 @@ namespace mage::gfx
 	static size_t shader_type_base_size[] =
 	{
 		0,
-		sizeof(bool),
+		sizeof(bool), sizeof(bool), sizeof(bool), sizeof(bool),
 		sizeof(int), sizeof(int), sizeof(int), sizeof(int),
 		sizeof(unsigned int), sizeof(unsigned int), sizeof(unsigned int), sizeof(unsigned int),
 		sizeof(float), sizeof(float), sizeof(float), sizeof(float),

@@ -18,7 +18,7 @@ namespace mage::gfx
 
 		virtual void bind() const = 0;
 		virtual void unbind() const = 0;
-		renderer_id_t get_id() const
+		virtual renderer_id_t get_id() const
 		{
 			return m_id;
 		}

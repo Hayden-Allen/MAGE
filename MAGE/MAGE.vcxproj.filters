@@ -82,10 +82,25 @@
     <ClInclude Include="src\mage\graphics\render_object.h">
       <Filter>mage\graphics</Filter>
     </ClInclude>
+    <ClInclude Include="src\mage\graphics\renderer.h">
+      <Filter>mage\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="src\mage\graphics\shader_program.h">
+      <Filter>mage\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="src\mage\graphics\shader_type.h">
+      <Filter>mage\graphics</Filter>
+    </ClInclude>
     <ClInclude Include="src\mage\graphics\vertex_array.h">
       <Filter>mage\graphics</Filter>
     </ClInclude>
+    <ClInclude Include="src\mage\graphics\vertex_array_description.h">
+      <Filter>mage\graphics</Filter>
+    </ClInclude>
     <ClInclude Include="src\mage\graphics\vertex_buffer.h">
+      <Filter>mage\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="src\mage\graphics\vertex_buffer_element.h">
       <Filter>mage\graphics</Filter>
     </ClInclude>
     <ClInclude Include="src\mage\imgui\imgui_layer.h">
@@ -118,6 +133,9 @@
     <ClInclude Include="src\mage\util\functions.h">
       <Filter>mage\util</Filter>
     </ClInclude>
+    <ClInclude Include="src\mage\util\iterable.h">
+      <Filter>mage\util</Filter>
+    </ClInclude>
     <ClInclude Include="src\mage\util\positional.h">
       <Filter>mage\util</Filter>
     </ClInclude>
@@ -137,7 +155,19 @@
     <ClInclude Include="src\platform\graphics\gl\index_buffer.h">
       <Filter>platform\graphics\gl</Filter>
     </ClInclude>
+    <ClInclude Include="src\platform\graphics\gl\renderer.h">
+      <Filter>platform\graphics\gl</Filter>
+    </ClInclude>
+    <ClInclude Include="src\platform\graphics\gl\shader_program.h">
+      <Filter>platform\graphics\gl</Filter>
+    </ClInclude>
+    <ClInclude Include="src\platform\graphics\gl\shader_type.h">
+      <Filter>platform\graphics\gl</Filter>
+    </ClInclude>
     <ClInclude Include="src\platform\graphics\gl\vertex_array.h">
+      <Filter>platform\graphics\gl</Filter>
+    </ClInclude>
+    <ClInclude Include="src\platform\graphics\gl\vertex_array_description.h">
       <Filter>platform\graphics\gl</Filter>
     </ClInclude>
     <ClInclude Include="src\platform\graphics\gl\vertex_buffer.h">
@@ -152,14 +182,9 @@
     <ClInclude Include="src\platform\os\windows\windows_window.h">
       <Filter>platform\os\windows</Filter>
     </ClInclude>
-    <ClInclude Include="src\mage\graphics\vertex_array_description.h" />
-    <ClInclude Include="src\platform\graphics\gl\vertex_array_description.h" />
-    <ClInclude Include="src\platform\graphics\gl\shader_type.h" />
-    <ClInclude Include="src\mage\graphics\shader_type.h" />
-    <ClInclude Include="src\mage\graphics\vertex_buffer_element.h" />
-    <ClInclude Include="src\mage\util\iterable.h" />
-    <ClInclude Include="src\mage\graphics\renderer.h" />
-    <ClInclude Include="src\platform\graphics\gl\renderer.h" />
+    <ClInclude Include="src\mage\graphics\shader.h" />
+    <ClInclude Include="src\platform\graphics\gl\shader.h" />
+    <ClInclude Include="src\mage\graphics\shader_preprocessor.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\mage\application.cpp">
@@ -184,6 +209,12 @@
     <ClCompile Include="src\platform\graphics\gl\index_buffer.cpp">
       <Filter>platform\graphics\gl</Filter>
     </ClCompile>
+    <ClCompile Include="src\platform\graphics\gl\renderer.cpp">
+      <Filter>platform\graphics\gl</Filter>
+    </ClCompile>
+    <ClCompile Include="src\platform\graphics\gl\shader_program.cpp">
+      <Filter>platform\graphics\gl</Filter>
+    </ClCompile>
     <ClCompile Include="src\platform\graphics\gl\vertex_array.cpp">
       <Filter>platform\graphics\gl</Filter>
     </ClCompile>
@@ -199,6 +230,6 @@
     <ClCompile Include="src\platform\os\windows\windows_window.cpp">
       <Filter>platform\os\windows</Filter>
     </ClCompile>
-    <ClCompile Include="src\platform\graphics\gl\renderer.cpp" />
+    <ClCompile Include="src\platform\graphics\gl\shader.cpp" />
   </ItemGroup>
 </Project>

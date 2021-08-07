@@ -39,9 +39,9 @@ namespace mage
 
 
 
-#ifdef MAGE_DEBUG
-	#define MAGE_CORE_ASSERT(x, ...) if(!(x)) { MAGE_CORE_FATAL("Assertion failed {}", __VA_ARGS__); __debug_break(); }
-	#define MAGE_ASSERT(x, ...) if(!(x)) { MAGE_FATAL("Assertion failed {}", __VA_ARGS__); __debug_break(); }
+#ifndef MAGE_DIST
+	#define MAGE_CORE_ASSERT(x, ...) if(!(x)) { MAGE_CORE_ERROR(__VA_ARGS__); __debugbreak(); }
+	#define MAGE_ASSERT(x, ...) if(!(x)) { MAGE_ERROR(__VA_ARGS__); __debugbreak(); }
 #else
 	#define MAGE_CORE_ASSERT(x, ...)
 	#define MAGE_ASSERT(x, ...)
