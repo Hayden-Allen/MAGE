@@ -44,6 +44,8 @@ namespace mage
 		// window settings
 		set_vsync(m_vsync);
 		glClearColor(m_clear.r, m_clear.g, m_clear.b, 1.f);
+		glEnable(GL_BLEND);
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
 		// callbacks
 		glfwSetErrorCallback(error_callback);

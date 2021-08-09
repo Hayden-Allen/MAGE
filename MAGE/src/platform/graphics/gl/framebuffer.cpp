@@ -40,7 +40,10 @@ namespace mage::gl
 		bind();
 
 		for (const auto& a : m_attachments)
+		{
+			a->update();
 			glFramebufferTexture2D(GL_FRAMEBUFFER, get_framebuffer_attachment_enum(a->get_type()), GL_TEXTURE_2D, a->get_id(), 0);
+		}
 
 		MAGE_CORE_ASSERT(glCheckFramebufferStatus(GL_FRAMEBUFFER) == GL_FRAMEBUFFER_COMPLETE, "OpenGL framebuffer is incomplete");
 		unbind();

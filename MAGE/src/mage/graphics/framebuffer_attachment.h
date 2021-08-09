@@ -15,7 +15,7 @@ namespace mage::gfx
 
 
 	class framebuffer_attachment :
-		public render_object,
+		public virtual render_object,
 		public virtual dimensional<uint32_t>
 	{
 		friend class framebuffer;
@@ -24,6 +24,7 @@ namespace mage::gfx
 		virtual ~framebuffer_attachment() {}
 
 
+		virtual void bind(uint32_t) const = 0;
 		virtual framebuffer_attachment_type get_type() const = 0;
 		virtual void update() const = 0;
 	protected:

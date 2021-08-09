@@ -196,6 +196,8 @@
     <ClInclude Include="src\mage\graphics\framebuffer_attachment.h" />
     <ClInclude Include="src\platform\graphics\gl\framebuffer.h" />
     <ClInclude Include="src\platform\graphics\gl\framebuffer_attachment.h" />
+    <ClInclude Include="src\mage\graphics\texture.h" />
+    <ClInclude Include="src\platform\graphics\gl\texture.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\mage\application.cpp">
@@ -249,5 +251,6 @@
     </ClCompile>
     <ClCompile Include="src\platform\graphics\gl\framebuffer.cpp" />
     <ClCompile Include="src\platform\graphics\gl\framebuffer_attachment.cpp" />
+    <ClCompile Include="src\platform\graphics\gl\texture.cpp" />
   </ItemGroup>
 </Project>

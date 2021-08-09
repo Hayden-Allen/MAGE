@@ -21,13 +21,13 @@ namespace n
 			m_index_buffer = new n::static_index_buffer(indices, mage::arrlen(indices));
 			float vertices[] =
 			{
-				0.f, 0.f,
-				1.f, 0.f,
-				1.f, 1.f,
-				0.f, 1.f
+				-1.f, -1.f, 0.f, 0.f,
+				 1.f, -1.f,	1.f, 0.f,
+				 1.f,  1.f,	1.f, 1.f,
+				-1.f,  1.f,	0.f, 1.f
 			};
 			m_vertex_buffer = new n::static_vertex_buffer(vertices, mage::arrlen(vertices));
-			m_vertex_array = new n::static_vertex_array(m_vertex_buffer, { mage::gfx::shader_type::float2 });
+			m_vertex_array = new n::static_vertex_array(m_vertex_buffer, { mage::gfx::shader_type::float2, mage::gfx::shader_type::float2 });
 		}
 		N_DCM(framebuffer);
 		~framebuffer()
@@ -41,9 +41,12 @@ namespace n
 
 		void draw(const mage::gfx::renderer& renderer) const
 		{
-			/*m_attachments[0]->bind();
-			glActiveTexture(GL_TEXTURE0);*/
-			renderer.draw(m_shader_program, m_index_buffer, m_vertex_array);
+			unbind();
+			m_shader_program->bind();
+			// m_attachments[0]->bind(0);
+			glActiveTexture(GL_TEXTURE0);
+			glBindTexture(GL_TEXTURE_2D, get_color_attachment_id());
+			renderer.draw(m_index_buffer, m_vertex_array);
 		}
 		mage::gfx::renderer_id_t const get_color_attachment_id() const
 		{

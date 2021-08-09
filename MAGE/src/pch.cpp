@@ -23,6 +23,7 @@
 #include "mage/graphics/shader_preprocessor.h"
 #include "mage/graphics/shader_program.h"
 #include "mage/graphics/shader_type.h"
+#include "mage/graphics/texture.h"
 #include "mage/graphics/vertex_array.h"
 #include "mage/graphics/vertex_array_description.h"
 
@@ -58,6 +59,7 @@
 	#include "platform/graphics/gl/shader.h"
 	#include "platform/graphics/gl/shader_program.h"
 	#include "platform/graphics/gl/shader_type.h"
+	#include "platform/graphics/gl/texture.h"
 	#include "platform/graphics/gl/vertex_array.h"
 	#include "platform/graphics/gl/vertex_array_description.h"
 	#include "platform/graphics/gl/vertex_buffer.h"

@@ -20,6 +20,7 @@ namespace mage::gl
 	template<GLenum INTERNAL, GLenum FORMAT, GLenum TYPE>
 	framebuffer_attachment<INTERNAL, FORMAT, TYPE>::framebuffer_attachment(s_type w, s_type h) :
 		mage::gfx::framebuffer_attachment(w, h),
+		texture2d(w, h, nullptr),
 		dimensional<uint32_t>(w, h)
 	{
 		glGenTextures(1, &m_id);

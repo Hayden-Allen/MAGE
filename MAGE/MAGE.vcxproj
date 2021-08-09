@@ -163,6 +163,7 @@
     <ClInclude Include="src\mage\graphics\shader_preprocessor.h" />
     <ClInclude Include="src\mage\graphics\shader_program.h" />
     <ClInclude Include="src\mage\graphics\shader_type.h" />
+    <ClInclude Include="src\mage\graphics\texture.h" />
     <ClInclude Include="src\mage\graphics\vertex_array.h" />
     <ClInclude Include="src\mage\graphics\vertex_array_description.h" />
     <ClInclude Include="src\mage\graphics\vertex_buffer_element.h" />
@@ -191,6 +192,7 @@
     <ClInclude Include="src\platform\graphics\gl\shader.h" />
     <ClInclude Include="src\platform\graphics\gl\shader_program.h" />
     <ClInclude Include="src\platform\graphics\gl\shader_type.h" />
+    <ClInclude Include="src\platform\graphics\gl\texture.h" />
     <ClInclude Include="src\platform\graphics\gl\vertex_array.h" />
     <ClInclude Include="src\platform\graphics\gl\vertex_array_description.h" />
     <ClInclude Include="src\platform\graphics\gl\vertex_buffer.h" />
@@ -215,6 +217,7 @@
     <ClCompile Include="src\platform\graphics\gl\renderer.cpp" />
     <ClCompile Include="src\platform\graphics\gl\shader.cpp" />
     <ClCompile Include="src\platform\graphics\gl\shader_program.cpp" />
+    <ClCompile Include="src\platform\graphics\gl\texture.cpp" />
     <ClCompile Include="src\platform\graphics\gl\vertex_array.cpp" />
     <ClCompile Include="src\platform\graphics\gl\vertex_buffer.cpp" />
     <ClCompile Include="src\platform\os\windows\windows_imgui_layer.cpp" />
