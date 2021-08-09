@@ -192,6 +192,10 @@
       <Filter>platform\os\windows</Filter>
     </ClInclude>
     <ClInclude Include="src\mage\event\event_handler_container.h" />
+    <ClInclude Include="src\mage\graphics\framebuffer.h" />
+    <ClInclude Include="src\mage\graphics\framebuffer_attachment.h" />
+    <ClInclude Include="src\platform\graphics\gl\framebuffer.h" />
+    <ClInclude Include="src\platform\graphics\gl\framebuffer_attachment.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\mage\application.cpp">
@@ -243,5 +247,7 @@
     <ClCompile Include="src\platform\os\windows\windows_window.cpp">
       <Filter>platform\os\windows</Filter>
     </ClCompile>
+    <ClCompile Include="src\platform\graphics\gl\framebuffer.cpp" />
+    <ClCompile Include="src\platform\graphics\gl\framebuffer_attachment.cpp" />
   </ItemGroup>
 </Project>

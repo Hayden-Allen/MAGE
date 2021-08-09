@@ -25,6 +25,10 @@ namespace mage
 
 
 		void run();
+		static application& get()
+		{
+			return *s_instance;
+		}
 		window& get_window()
 		{
 			return *m_window;
@@ -33,9 +37,9 @@ namespace mage
 		{
 			return *m_window;
 		}
-		static application& get()
+		const gfx::renderer& get_renderer() const
 		{
-			return *s_instance;
+			return *m_renderer;
 		}
 	protected:
 		bool m_running;

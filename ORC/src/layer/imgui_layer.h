@@ -37,6 +37,10 @@ namespace orc
 					ImGui::DragFloat("camera_rotation", &m_layer->m_camera_rotation, .01f, 0.f, 2 * glm::pi<float>());
 					ImGui::NewLine();
 					ImGui::DragFloat("camera_zoom", &m_layer->m_camera_zoom, .01f, .1f, 10.f);
+					ImGui::NewLine();
+
+					const auto& win = mage::application::get().get_window();
+					ImGui::Image((void*)m_layer->m_framebuffer->get_color_attachment_id(), { win.get_w<float>(), win.get_h<float>() });
 				}
 				ImGui::End();
 			}

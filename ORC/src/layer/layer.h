@@ -9,6 +9,7 @@ namespace orc
 	public:
 		layer() :
 			mage::layer("ORC"),
+			m_framebuffer(nullptr),
 			m_vertex_array(nullptr),
 			m_vertex_buffer(nullptr),
 			m_index_buffer(nullptr),
@@ -21,6 +22,7 @@ namespace orc
 		{
 			MAGE_ERROR("CREATE ORC LAYER");
 
+			m_framebuffer = new n::framebuffer(*this, 1280, 720, "res/framebuffer_vertex.glsl", "res/framebuffer_fragment.glsl");
 
 			uint32_t indices[] = { 0, 1, 2, 0, 2, 3 };
 			m_index_buffer = new n::static_index_buffer(indices, mage::arrlen(indices));
@@ -44,6 +46,7 @@ namespace orc
 		~layer()
 		{
 			MAGE_ERROR("DELETE ORC LAYER");
+			delete m_framebuffer;
 			delete m_vertex_array;
 			delete m_vertex_buffer;
 			delete m_index_buffer;
@@ -54,6 +57,10 @@ namespace orc
 
 		bool on_app_draw(mage::app_draw_event& e) override
 		{
+			// draw on to framebuffer
+			m_framebuffer->bind();
+			e.get_renderer().clear();
+
 			m_camera->set_pos(m_camera_pos);
 			m_camera->set_rotation(m_camera_rotation);
 			m_camera->set_zoom(m_camera_zoom);
@@ -62,11 +69,17 @@ namespace orc
 			m_shader_program->set_uniform_float3("u_color", m_rect_color);
 			m_shader_program->set_uniform_mat4("u_view_projection", m_camera->get_view_projection());
 
-			e.get_renderer()->draw(m_index_buffer, m_vertex_array);
+			e.get_renderer().draw(m_index_buffer, m_vertex_array);
+
+			m_framebuffer->unbind();
+
+			// draw framebuffer onto screen
+			m_framebuffer->draw(e.get_renderer());
 
 			return false;
 		}
 	private:
+		n::framebuffer* m_framebuffer;
 		n::static_vertex_array* m_vertex_array;
 		n::static_vertex_buffer* m_vertex_buffer;
 		n::static_index_buffer* m_index_buffer;

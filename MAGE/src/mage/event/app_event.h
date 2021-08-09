@@ -64,9 +64,9 @@ namespace mage
 		MAGE_EVENT_TYPE(event_type::app_draw);
 
 
-		const gfx::renderer* const get_renderer() const
+		const gfx::renderer& get_renderer() const
 		{
-			return m_renderer;
+			return *m_renderer;
 		}
 	protected:
 		const gfx::renderer* const m_renderer;

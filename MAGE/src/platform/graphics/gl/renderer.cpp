@@ -27,6 +27,11 @@ namespace mage::gl
 		vertices->bind();
 		glDrawElements(GL_TRIANGLES, indices->get_count<GLsizei>(), mage::gfx::get_shader_type<mage::gfx::index_buffer::s_type>(), nullptr);
 	}
+	void renderer::draw(const mage::gfx::shader_program* const shader, const mage::gfx::index_buffer* const indices, const mage::gfx::vertex_array* const vertices) const
+	{
+		shader->bind();
+		draw(indices, vertices);
+	}
 	void renderer::render(const window* const window) const
 	{
 		glfwPollEvents();

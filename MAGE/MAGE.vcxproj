@@ -155,6 +155,8 @@
     <ClInclude Include="src\mage\graphics\buffer.h" />
     <ClInclude Include="src\mage\graphics\camera.h" />
     <ClInclude Include="src\mage\graphics\context.h" />
+    <ClInclude Include="src\mage\graphics\framebuffer.h" />
+    <ClInclude Include="src\mage\graphics\framebuffer_attachment.h" />
     <ClInclude Include="src\mage\graphics\render_object.h" />
     <ClInclude Include="src\mage\graphics\renderer.h" />
     <ClInclude Include="src\mage\graphics\shader.h" />
@@ -182,6 +184,8 @@
     <ClInclude Include="src\platform\graphics\gl\buffer.h" />
     <ClInclude Include="src\platform\graphics\gl\camera.h" />
     <ClInclude Include="src\platform\graphics\gl\context.h" />
+    <ClInclude Include="src\platform\graphics\gl\framebuffer.h" />
+    <ClInclude Include="src\platform\graphics\gl\framebuffer_attachment.h" />
     <ClInclude Include="src\platform\graphics\gl\index_buffer.h" />
     <ClInclude Include="src\platform\graphics\gl\renderer.h" />
     <ClInclude Include="src\platform\graphics\gl\shader.h" />
@@ -205,6 +209,8 @@
     </ClCompile>
     <ClCompile Include="src\platform\graphics\gl\camera.cpp" />
     <ClCompile Include="src\platform\graphics\gl\context.cpp" />
+    <ClCompile Include="src\platform\graphics\gl\framebuffer.cpp" />
+    <ClCompile Include="src\platform\graphics\gl\framebuffer_attachment.cpp" />
     <ClCompile Include="src\platform\graphics\gl\index_buffer.cpp" />
     <ClCompile Include="src\platform\graphics\gl\renderer.cpp" />
     <ClCompile Include="src\platform\graphics\gl\shader.cpp" />
