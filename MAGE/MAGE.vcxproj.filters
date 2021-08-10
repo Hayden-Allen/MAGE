@@ -158,9 +158,6 @@
     <ClInclude Include="src\platform\graphics\gl\context.h">
       <Filter>platform\graphics\gl</Filter>
     </ClInclude>
-    <ClInclude Include="src\platform\graphics\gl\index_buffer.h">
-      <Filter>platform\graphics\gl</Filter>
-    </ClInclude>
     <ClInclude Include="src\platform\graphics\gl\renderer.h">
       <Filter>platform\graphics\gl</Filter>
     </ClInclude>
@@ -177,9 +174,6 @@
       <Filter>platform\graphics\gl</Filter>
     </ClInclude>
     <ClInclude Include="src\platform\graphics\gl\vertex_array_description.h">
-      <Filter>platform\graphics\gl</Filter>
-    </ClInclude>
-    <ClInclude Include="src\platform\graphics\gl\vertex_buffer.h">
       <Filter>platform\graphics\gl</Filter>
     </ClInclude>
     <ClInclude Include="src\platform\os\windows\windows_imgui_layer.h">
@@ -224,9 +218,6 @@
     <ClCompile Include="src\platform\graphics\gl\context.cpp">
       <Filter>platform\graphics\gl</Filter>
     </ClCompile>
-    <ClCompile Include="src\platform\graphics\gl\index_buffer.cpp">
-      <Filter>platform\graphics\gl</Filter>
-    </ClCompile>
     <ClCompile Include="src\platform\graphics\gl\renderer.cpp">
       <Filter>platform\graphics\gl</Filter>
     </ClCompile>
@@ -237,9 +228,6 @@
       <Filter>platform\graphics\gl</Filter>
     </ClCompile>
     <ClCompile Include="src\platform\graphics\gl\vertex_array.cpp">
-      <Filter>platform\graphics\gl</Filter>
-    </ClCompile>
-    <ClCompile Include="src\platform\graphics\gl\vertex_buffer.cpp">
       <Filter>platform\graphics\gl</Filter>
     </ClCompile>
     <ClCompile Include="src\platform\os\windows\windows_imgui_layer.cpp">
@@ -254,5 +242,6 @@
     <ClCompile Include="src\platform\graphics\gl\framebuffer.cpp" />
     <ClCompile Include="src\platform\graphics\gl\framebuffer_attachment.cpp" />
     <ClCompile Include="src\platform\graphics\gl\texture.cpp" />
+    <ClCompile Include="src\platform\graphics\gl\buffer.cpp" />
   </ItemGroup>
 </Project>

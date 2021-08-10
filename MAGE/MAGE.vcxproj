@@ -188,7 +188,6 @@
     <ClInclude Include="src\platform\graphics\gl\context.h" />
     <ClInclude Include="src\platform\graphics\gl\framebuffer.h" />
     <ClInclude Include="src\platform\graphics\gl\framebuffer_attachment.h" />
-    <ClInclude Include="src\platform\graphics\gl\index_buffer.h" />
     <ClInclude Include="src\platform\graphics\gl\renderer.h" />
     <ClInclude Include="src\platform\graphics\gl\shader.h" />
     <ClInclude Include="src\platform\graphics\gl\shader_program.h" />
@@ -197,7 +196,6 @@
     <ClInclude Include="src\platform\graphics\gl\texture_options.h" />
     <ClInclude Include="src\platform\graphics\gl\vertex_array.h" />
     <ClInclude Include="src\platform\graphics\gl\vertex_array_description.h" />
-    <ClInclude Include="src\platform\graphics\gl\vertex_buffer.h" />
     <ClInclude Include="src\platform\os\windows\windows_imgui_layer.h" />
     <ClInclude Include="src\platform\os\windows\windows_input.h" />
     <ClInclude Include="src\platform\os\windows\windows_window.h" />
@@ -211,17 +209,16 @@
     <ClCompile Include="src\pch.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="src\platform\graphics\gl\buffer.cpp" />
     <ClCompile Include="src\platform\graphics\gl\camera.cpp" />
     <ClCompile Include="src\platform\graphics\gl\context.cpp" />
     <ClCompile Include="src\platform\graphics\gl\framebuffer.cpp" />
     <ClCompile Include="src\platform\graphics\gl\framebuffer_attachment.cpp" />
-    <ClCompile Include="src\platform\graphics\gl\index_buffer.cpp" />
     <ClCompile Include="src\platform\graphics\gl\renderer.cpp" />
     <ClCompile Include="src\platform\graphics\gl\shader.cpp" />
     <ClCompile Include="src\platform\graphics\gl\shader_program.cpp" />
     <ClCompile Include="src\platform\graphics\gl\texture.cpp" />
     <ClCompile Include="src\platform\graphics\gl\vertex_array.cpp" />
-    <ClCompile Include="src\platform\graphics\gl\vertex_buffer.cpp" />
     <ClCompile Include="src\platform\os\windows\windows_imgui_layer.cpp" />
     <ClCompile Include="src\platform\os\windows\windows_input.cpp" />
     <ClCompile Include="src\platform\os\windows\windows_window.cpp" />

@@ -89,7 +89,6 @@
 	#include "platform/graphics/gl/context.h"
 	#include "platform/graphics/gl/framebuffer.h"
 	#include "platform/graphics/gl/framebuffer_attachment.h"
-	#include "platform/graphics/gl/index_buffer.h"
 	#include "platform/graphics/gl/renderer.h"
 	#include "platform/graphics/gl/shader.h"
 	#include "platform/graphics/gl/shader_program.h"
@@ -97,7 +96,6 @@
 	#include "platform/graphics/gl/texture.h"
 	#include "platform/graphics/gl/vertex_array.h"
 	#include "platform/graphics/gl/vertex_array_description.h"
-	#include "platform/graphics/gl/vertex_buffer.h"
 #endif
 
 

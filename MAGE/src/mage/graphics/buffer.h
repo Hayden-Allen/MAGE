@@ -34,33 +34,17 @@ namespace mage::gfx
 
 
 
-	class vertex_buffer : public buffer<float>
-	{
-	public:
-		virtual ~vertex_buffer() {}
+#define B(NAME, TYPE) \
+	class NAME : public buffer<TYPE> { \
+	public: \
+		virtual ~NAME() {} \
+		static NAME* create_static(s_type* vertices, size_t count); \
+		static NAME* create_dynamic(s_type* vertices, size_t count); \
+	protected: \
+		NAME(size_t count) : buffer<TYPE>(count) {}	};
 
-
-		static vertex_buffer* create_static(s_type* vertices, size_t count);
-		static vertex_buffer* create_dynamic(s_type* vertices, size_t count);
-	protected:
-		vertex_buffer(size_t count) :
-			buffer<s_type>(count)
-		{}
-	};
-
-
-
-	class index_buffer : public buffer<uint32_t>
-	{
-	public:
-		virtual ~index_buffer() {}
-
-
-		static index_buffer* create_static(s_type* indices, size_t count);
-		static index_buffer* create_dynamic(s_type* indices, size_t count);
-	protected:
-		index_buffer(size_t count) :
-			buffer<s_type>(count)
-		{}
-	};
+	B(index_buffer, uint32_t);
+	B(vertex_buffer, float);
+	
+#undef B
 }
