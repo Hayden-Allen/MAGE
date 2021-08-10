@@ -133,15 +133,20 @@
   <ItemGroup>
     <ClInclude Include="src\n.h" />
     <ClInclude Include="src\n\core.h" />
-    <ClInclude Include="src\n\graphics\camera.h" />
-    <ClInclude Include="src\n\graphics\buffer.h" />
-    <ClInclude Include="src\n\graphics\framebuffer.h" />
-    <ClInclude Include="src\n\graphics\shader_program.h" />
-    <ClInclude Include="src\n\graphics\texture.h" />
-    <ClInclude Include="src\n\graphics\vertex_array.h" />
+    <ClInclude Include="src\n\graphics\sprite.h" />
+    <ClInclude Include="src\n\graphics\wrap\camera.h" />
+    <ClInclude Include="src\n\graphics\wrap\buffer.h" />
+    <ClInclude Include="src\n\graphics\wrap\framebuffer.h" />
+    <ClInclude Include="src\n\graphics\wrap\shader_program.h" />
+    <ClInclude Include="src\n\graphics\wrap\texture.h" />
+    <ClInclude Include="src\n\graphics\wrap\vertex_array.h" />
+    <ClInclude Include="src\n\io\file.h" />
     <ClInclude Include="src\pch.h" />
+    <ClInclude Include="src\n\time.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\n\graphics\sprite.cpp" />
+    <ClCompile Include="src\n\io\file.cpp" />
     <ClCompile Include="src\pch.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>
     </ClCompile>

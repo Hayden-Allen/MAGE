@@ -30,6 +30,8 @@ namespace orc
 				{
 					ImGui::Text("%.2fms | %.2ffps", e.get_delta_time(), 1000.f / e.get_delta_time());
 					ImGui::NewLine();
+					ImGui::DragInt("sprite_frame", &m_layer->m_sprite_frame, 1.f, 0, 1);
+					ImGui::NewLine();
 					ImGui::ColorPicker3("rect_color", &m_layer->m_rect_color[0]);
 					ImGui::NewLine();
 					ImGui::DragFloat2("camera_pos", &m_layer->m_camera_pos[0], .01f, -2.f, 2.f);

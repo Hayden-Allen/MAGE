@@ -19,9 +19,9 @@
     <ClCompile Include="src\pch.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="res\texture_v.glsl" />
-    <None Include="res\texture_f.glsl" />
-    <None Include="res\fb_v.glsl" />
-    <None Include="res\fb_f.glsl" />
+    <None Include="res\shader\texture_v.glsl" />
+    <None Include="res\shader\texture_f.glsl" />
+    <None Include="res\shader\fb_v.glsl" />
+    <None Include="res\shader\fb_f.glsl" />
   </ItemGroup>
 </Project>

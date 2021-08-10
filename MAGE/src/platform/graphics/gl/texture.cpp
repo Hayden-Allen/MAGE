@@ -1,5 +1,6 @@
 #include "pch.h"
 #include "texture.h"
+#include "mage/util/functions.h"
 
 namespace mage::gfx
 {
@@ -22,6 +23,8 @@ namespace mage::gl
 		mage::dimensional<s_type>(w, h)
 	{
 		init(options);
+		if(data)
+			arrprint(4 * w * h, (uint8_t*)data, "%u", ", ", 16);
 		glTexImage2D(GL_TEXTURE_2D, 0, get_target_format(options.target_format), w, h, 0, get_source_format(options.source_format), get_source_type(options.source_type), data);
 	}
 
