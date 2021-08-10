@@ -17,3 +17,9 @@
 		CLASS SIG : MAGE_RAN::PARENT INIT {} \
 		N_DCM(CLASS); \
 		__VA_ARGS__ };
+#define N_WRAP_VIRTUAL(CLASS, PARENT, SIG, INIT, ...) \
+	class CLASS final : public MAGE_RAN::PARENT { \
+	public: \
+		CLASS SIG, MAGE_RAN::PARENT INIT {} \
+		N_DCM(CLASS); \
+		__VA_ARGS__ };

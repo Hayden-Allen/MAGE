@@ -50,7 +50,7 @@ namespace orc
 				data[i * 4 + 0] = MAGE_CAST(uint8_t, 255.f * (i % 100) / 100.f);
 				data[i * 4 + 3] = 255;
 			}
-			m_texture = mage::gfx::texture2d::create(100, 100, data);
+			m_texture = new n::texture2d(100, 100, data, { .min_filter = GL_NEAREST, .mag_filter = GL_NEAREST, .wrap_s = GL_CLAMP_TO_BORDER, .wrap_t = GL_CLAMP_TO_BORDER });
 		}
 		MAGE_DCM(layer);
 		~layer()
@@ -89,7 +89,7 @@ namespace orc
 			return false;
 		}
 	private:
-		mage::gfx::texture* m_texture;
+		n::texture2d* m_texture;
 		n::framebuffer* m_framebuffer;
 		n::static_vertex_array* m_vertex_array;
 		n::static_vertex_buffer* m_vertex_buffer;

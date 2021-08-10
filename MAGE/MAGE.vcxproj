@@ -164,6 +164,7 @@
     <ClInclude Include="src\mage\graphics\shader_program.h" />
     <ClInclude Include="src\mage\graphics\shader_type.h" />
     <ClInclude Include="src\mage\graphics\texture.h" />
+    <ClInclude Include="src\mage\graphics\texture_options.h" />
     <ClInclude Include="src\mage\graphics\vertex_array.h" />
     <ClInclude Include="src\mage\graphics\vertex_array_description.h" />
     <ClInclude Include="src\mage\graphics\vertex_buffer_element.h" />
@@ -193,6 +194,7 @@
     <ClInclude Include="src\platform\graphics\gl\shader_program.h" />
     <ClInclude Include="src\platform\graphics\gl\shader_type.h" />
     <ClInclude Include="src\platform\graphics\gl\texture.h" />
+    <ClInclude Include="src\platform\graphics\gl\texture_options.h" />
     <ClInclude Include="src\platform\graphics\gl\vertex_array.h" />
     <ClInclude Include="src\platform\graphics\gl\vertex_array_description.h" />
     <ClInclude Include="src\platform\graphics\gl\vertex_buffer.h" />

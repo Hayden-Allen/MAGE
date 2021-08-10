@@ -1,5 +1,5 @@
 #pragma once
-#include "pch.h"
+#include "log.h"
 #include "render_object.h"
 #include "shader.h"
 #include <glm/glm.hpp>

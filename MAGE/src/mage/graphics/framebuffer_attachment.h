@@ -1,7 +1,6 @@
 #pragma once
 #include "pch.h"
-#include "render_object.h"
-#include "mage/util/dimensional.h"
+#include "texture.h"
 
 namespace mage::gfx
 {
@@ -14,9 +13,7 @@ namespace mage::gfx
 
 
 
-	class framebuffer_attachment :
-		public virtual render_object,
-		public virtual dimensional<uint32_t>
+	class framebuffer_attachment : public texture2d
 	{
 		friend class framebuffer;
 	public:
@@ -24,12 +21,11 @@ namespace mage::gfx
 		virtual ~framebuffer_attachment() {}
 
 
-		virtual void bind(uint32_t) const = 0;
 		virtual framebuffer_attachment_type get_type() const = 0;
 		virtual void update() const = 0;
 	protected:
 		framebuffer_attachment(s_type w, s_type h) :
-			dimensional<uint32_t>(w, h)
+			texture2d(w, h, nullptr)
 		{}
 	};
 

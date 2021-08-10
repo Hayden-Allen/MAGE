@@ -1,5 +1,5 @@
 #pragma once
-#include "pch.h"
+#include "log.h"
 #include "event_handler.h"
 #include "mage/util/iterable.h"
 

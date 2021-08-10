@@ -1,6 +1,7 @@
 #pragma once
 #include "pch.h"
 #include "render_object.h"
+#include "texture_options.h"
 #include "mage/util/dimensional.h"
 
 namespace mage::gfx
@@ -36,7 +37,7 @@ namespace mage::gfx
 		virtual ~texture2d() {}
 
 
-		static texture2d* create(s_type w, s_type h, void* data);
+		static texture2d* create(s_type w, s_type h, void* data, const texture_options& options);
 	protected:
 		texture2d(s_type w, s_type h, void* data) :
 			texture(w, h, data)
@@ -52,7 +53,7 @@ namespace mage::gfx
 		virtual ~texture2d_array() {}
 
 
-		static texture2d_array* create(s_type w, s_type h, s_type f, void* data);
+		static texture2d_array* create(s_type w, s_type h, s_type f, void* data, const texture_options& options);
 		s_type get_frame_count() const
 		{
 			return m_frames;

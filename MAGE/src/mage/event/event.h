@@ -1,5 +1,5 @@
 #pragma once
-#include "pch.h"
+#include "core.h"
 
 // used for convenience when implementing event classes
 #define MAGE_EVENT_TYPE(type) \

@@ -198,6 +198,8 @@
     <ClInclude Include="src\platform\graphics\gl\framebuffer_attachment.h" />
     <ClInclude Include="src\mage\graphics\texture.h" />
     <ClInclude Include="src\platform\graphics\gl\texture.h" />
+    <ClInclude Include="src\mage\graphics\texture_options.h" />
+    <ClInclude Include="src\platform\graphics\gl\texture_options.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\mage\application.cpp">
