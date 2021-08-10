@@ -50,7 +50,7 @@ namespace orc
 				data[i * 4 + 0] = MAGE_CAST(uint8_t, 255.f * (i % 100) / 100.f);
 				data[i * 4 + 3] = 255;
 			}
-			m_texture = new n::texture2d(100, 100, data, { .min_filter = GL_NEAREST, .mag_filter = GL_NEAREST, .wrap_s = GL_CLAMP_TO_BORDER, .wrap_t = GL_CLAMP_TO_BORDER });
+			m_texture = new n::texture2d(100, 100, data, { .min_filter = n::texture_min_filter::nearest, .mag_filter = n::texture_mag_filter::nearest, .wrap_s = n::texture_wrap_s::clamp_border, .wrap_t = n::texture_wrap_t::clamp_border });
 		}
 		MAGE_DCM(layer);
 		~layer()

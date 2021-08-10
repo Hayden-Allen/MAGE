@@ -22,7 +22,7 @@ namespace mage::gl
 		mage::dimensional<s_type>(w, h)
 	{
 		init(options);
-		glTexImage2D(GL_TEXTURE_2D, 0, options.target_format, w, h, 0, options.source_format, options.type, data);
+		glTexImage2D(GL_TEXTURE_2D, 0, get_target_format(options.target_format), w, h, 0, get_source_format(options.source_format), get_source_type(options.source_type), data);
 	}
 
 
@@ -32,6 +32,6 @@ namespace mage::gl
 		mage::dimensional<s_type>(w, h)
 	{
 		init(options);
-		glTexImage3D(GL_TEXTURE_2D_ARRAY, 0, options.target_format, w, h, f, 0, options.source_format, options.type, data);
+		glTexImage3D(GL_TEXTURE_2D_ARRAY, 0, get_target_format(options.target_format), w, h, f, 0, get_source_format(options.source_format), get_source_type(options.source_type), data);
 	}
 }

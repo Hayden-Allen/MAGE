@@ -4,6 +4,10 @@
 namespace n
 {
 	typedef MAGE_RAN::texture_options texture_options;
+	typedef mage::gfx::texture_min_filter texture_min_filter;
+	typedef mage::gfx::texture_mag_filter texture_mag_filter;
+	typedef mage::gfx::texture_wrap_s texture_wrap_s;
+	typedef mage::gfx::texture_wrap_t texture_wrap_t;
 
 
 	N_WRAP_VIRTUAL
