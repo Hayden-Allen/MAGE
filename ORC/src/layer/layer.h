@@ -70,7 +70,7 @@ namespace orc
 		{
 			// draw onto framebuffer
 			m_framebuffer->bind();
-			e.get_renderer().clear();
+			mage::gfx::renderer::clear();
 
 			m_camera->set_pos(m_camera_pos);
 			m_camera->set_rotation(m_camera_rotation);
@@ -81,10 +81,10 @@ namespace orc
 			m_shader_program->set_uniform_mat4("u_view_projection", m_camera->get_view_projection());
 
 			m_texture->bind(0);
-			e.get_renderer().draw(m_index_buffer, m_vertex_array);
+			mage::gfx::renderer::draw(m_index_buffer, m_vertex_array);
 
 			// draw framebuffer onto screen
-			m_framebuffer->draw(e.get_renderer());
+			m_framebuffer->draw();
 
 			return false;
 		}

@@ -25,39 +25,25 @@ namespace mage
 	windows_window::windows_window(const window_constructor& data) :
 		window(data)
 	{
-		// initialize GLFW if it hasn't been already
-		if (!s_glfw_init)
-		{
-			bool success = glfwInit();
-			MAGE_CORE_ASSERT(success, "Failed to initialize GLFW");
-			s_glfw_init = true;
-		}
-
-		// create window and make it the current context
-		m_window = glfwCreateWindow(MAGE_CAST(int, m_w), MAGE_CAST(int, m_h), m_title.c_str(), nullptr, nullptr);
-		glfwSetWindowUserPointer(m_window, this);
-
 		// initialize graphics context
-		m_context = new gl::context(m_window);
-		m_context->init();
+		m_context = mage::gfx::context::create(this, m_w, m_h, m_title);
 
 		// window settings
 		set_vsync(m_vsync);
-		glClearColor(m_clear.r, m_clear.g, m_clear.b, 1.f);
-		glEnable(GL_BLEND);
-		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+		gfx::renderer::set_clear_color(m_clear);
 
+		GLFWwindow* const win = m_context->get_window<GLFWwindow*>();
 		// callbacks
 		glfwSetErrorCallback(error_callback);
-		glfwSetCharCallback(m_window, char_callback);
-		glfwSetKeyCallback(m_window, key_callback);
-		glfwSetMouseButtonCallback(m_window, mouse_button_callback);
-		glfwSetCursorPosCallback(m_window, mouse_move_callback);
-		glfwSetScrollCallback(m_window, mouse_scroll_callback);
-		glfwSetWindowCloseCallback(m_window, window_close_callback);
-		glfwSetWindowFocusCallback(m_window, window_focus_callback);
-		glfwSetWindowPosCallback(m_window, window_move_callback);
-		glfwSetWindowSizeCallback(m_window, window_size_callback);
+		glfwSetCharCallback(win, char_callback);
+		glfwSetKeyCallback(win, key_callback);
+		glfwSetMouseButtonCallback(win, mouse_button_callback);
+		glfwSetCursorPosCallback(win, mouse_move_callback);
+		glfwSetScrollCallback(win, mouse_scroll_callback);
+		glfwSetWindowCloseCallback(win, window_close_callback);
+		glfwSetWindowFocusCallback(win, window_focus_callback);
+		glfwSetWindowPosCallback(win, window_move_callback);
+		glfwSetWindowSizeCallback(win, window_size_callback);
 	}
 
 

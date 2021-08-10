@@ -10,15 +10,11 @@ namespace mage::gfx
 	class renderer
 	{
 	public:
-		MAGE_DCM(renderer);
-		virtual ~renderer() {}
-
-		static renderer* create();
-		virtual void set_clear_color(const color<float>& color) const = 0;
-		virtual void clear() const = 0;
-		virtual void draw(const index_buffer* const indices, const vertex_array* const vertices) const = 0;
-		virtual void draw(const shader_program* const shader, const index_buffer* const indices, const vertex_array* const vertices) const = 0;
-		virtual void render(const window* const window) const = 0;
+		static void set_clear_color(const color<float>& color);
+		static void clear();
+		static void draw(const index_buffer* const indices, const vertex_array* const vertices);
+		static void draw(const shader_program* const shader, const index_buffer* const indices, const vertex_array* const vertices);
+		static void render(const window* const window);
 	protected:
 		renderer() {}
 	};

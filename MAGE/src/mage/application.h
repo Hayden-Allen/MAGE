@@ -20,7 +20,6 @@ namespace mage
 		virtual ~application()
 		{
 			delete m_window;
-			delete m_renderer;
 		}
 
 
@@ -37,16 +36,11 @@ namespace mage
 		{
 			return *m_window;
 		}
-		const gfx::renderer& get_renderer() const
-		{
-			return *m_renderer;
-		}
 	protected:
 		bool m_running;
 		float m_time, m_delta_time;
 		layer_stack m_layer_stack;
 		window* m_window;
-		gfx::renderer* m_renderer;
 
 
 		application(const window_constructor& data);

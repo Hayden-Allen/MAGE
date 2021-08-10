@@ -11,14 +11,10 @@ namespace mage
 	public:
 		windows_window(const window_constructor& data);
 		MAGE_DCM(windows_window);
-		~windows_window()
-		{
-			glfwDestroyWindow(m_window);
-		}
 
 		void* get_native_window() const override
 		{
-			return MAGE_CAST(void*, m_window);
+			return m_context->get_window();
 		}
 		void set_vsync(bool enabled) override
 		{
@@ -26,7 +22,6 @@ namespace mage
 		}
 	private:
 		static bool s_glfw_init;
-		GLFWwindow* m_window;
 
 
 		// GLFW callback functions

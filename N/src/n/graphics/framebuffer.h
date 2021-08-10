@@ -39,14 +39,14 @@ namespace n
 		}
 
 
-		void draw(const mage::gfx::renderer& renderer) const
+		void draw() const
 		{
 			unbind();
 			m_shader_program->bind();
 			// m_attachments[0]->bind(0);
 			glActiveTexture(GL_TEXTURE0);
 			glBindTexture(GL_TEXTURE_2D, get_color_attachment_id());
-			renderer.draw(m_index_buffer, m_vertex_array);
+			mage::gfx::renderer::draw(m_index_buffer, m_vertex_array);
 		}
 		mage::gfx::renderer_id_t const get_color_attachment_id() const
 		{

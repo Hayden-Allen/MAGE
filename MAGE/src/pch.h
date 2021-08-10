@@ -89,7 +89,6 @@
 	#include "platform/graphics/gl/context.h"
 	#include "platform/graphics/gl/framebuffer.h"
 	#include "platform/graphics/gl/framebuffer_attachment.h"
-	#include "platform/graphics/gl/renderer.h"
 	#include "platform/graphics/gl/shader.h"
 	#include "platform/graphics/gl/shader_program.h"
 	#include "platform/graphics/gl/shader_type.h"
@@ -102,9 +101,9 @@
 
 // os
 #ifdef MAGE_PLATFORM_WINDOWS
-#include "platform/os/windows/windows_imgui_layer.h"
-#ifdef MAGE_BUILD_LIB
-#include "platform/os/windows/windows_input.h"
-#include "platform/os/windows/windows_window.h"
-#endif
+	#include "platform/os/windows/windows_imgui_layer.h"
+	#ifdef MAGE_BUILD_LIB
+		#include "platform/os/windows/windows_input.h"
+		#include "platform/os/windows/windows_window.h"
+	#endif
 #endif

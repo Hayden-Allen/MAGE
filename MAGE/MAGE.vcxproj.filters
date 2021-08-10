@@ -158,9 +158,6 @@
     <ClInclude Include="src\platform\graphics\gl\context.h">
       <Filter>platform\graphics\gl</Filter>
     </ClInclude>
-    <ClInclude Include="src\platform\graphics\gl\renderer.h">
-      <Filter>platform\graphics\gl</Filter>
-    </ClInclude>
     <ClInclude Include="src\platform\graphics\gl\shader.h">
       <Filter>platform\graphics\gl</Filter>
     </ClInclude>

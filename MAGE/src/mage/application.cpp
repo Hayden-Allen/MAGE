@@ -16,11 +16,11 @@ namespace mage
 			m_time = time;
 
 			app_tick_event tick(m_time, m_delta_time);
-			app_draw_event draw(m_time, m_delta_time, m_renderer);
+			app_draw_event draw(m_time, m_delta_time);
 			app_render_event render(m_time, m_delta_time);
 
 			// clear screen
-			m_renderer->clear();
+			gfx::renderer::clear();
 
 			// clear layers
 			for (auto layer : m_layer_stack)
@@ -33,7 +33,7 @@ namespace mage
 				layer->on_event(render);
 
 			// render screen
-			m_renderer->render(m_window);
+			gfx::renderer::render(m_window);
 		}
 	}
 
@@ -43,8 +43,7 @@ namespace mage
 		m_running(true),
 		m_time(0.f),
 		m_delta_time(0.f),
-		m_window(nullptr),
-		m_renderer(gfx::renderer::create())
+		m_window(nullptr)
 	{
 		MAGE_CORE_ASSERT(!s_instance, "Cannot create multiple applications");
 		s_instance = this;
