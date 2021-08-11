@@ -9,6 +9,7 @@ namespace orc
 	public:
 		layer() :
 			mage::layer("ORC"),
+			m_atlas(nullptr),
 			m_sprite(nullptr),
 			m_sprite_frame(0),
 			m_framebuffer(nullptr),
@@ -17,7 +18,6 @@ namespace orc
 			m_index_buffer(nullptr),
 			m_shader_program(nullptr),
 			m_camera(nullptr),
-			m_rect_color({ 0.f, 0.f, 0.f }),
 			m_camera_pos({ 0.f, 0.f, 0.f }),
 			m_camera_rotation(0.f),
 			m_camera_zoom(1.f)
@@ -28,15 +28,6 @@ namespace orc
 
 			uint32_t indices[] = { 0, 1, 2, 0, 2, 3 };
 			m_index_buffer = new n::static_index_buffer(indices, mage::arrlen(indices));
-			float vertices[] =
-			{
-				-.5f, -.5f, 0.f, 0.f,
-				 .5f, -.5f, 1.f, 0.f,
-				 .5f,  .5f, 1.f, 1.f,
-				-.5f,  .5f, 0.f, 1.f
-			};
-			m_vertex_buffer = new n::static_vertex_buffer(vertices, mage::arrlen(vertices));
-			m_vertex_array = new n::static_vertex_array(m_vertex_buffer, { mage::gfx::shader_type::float2, mage::gfx::shader_type::float2 });
 		
 
 			m_shader_program = new n::shader_program("res/shader/texture_v.glsl", "res/shader/texture_f.glsl");
@@ -46,12 +37,26 @@ namespace orc
 			m_camera = new n::camera(*this, 1.6f, .9f, m_camera_pos, m_camera_rotation, m_camera_zoom);
 
 
-			m_sprite = new n::sprite("res/sprite/newSprite.sprite");
+			m_atlas = new n::sprite_atlas();
+			m_sprite = new n::sprite(m_atlas, "res/sprite/newSprite.sprite");
+
+
+			const auto& [x, y] = m_sprite->get_coords();
+			float vertices[] =
+			{
+				-.5f, -.5f, x.get_min(), y.get_min(),
+				 .5f, -.5f,	x.get_max(), y.get_min(),
+				 .5f,  .5f,	x.get_max(), y.get_max(),
+				-.5f,  .5f,	x.get_min(), y.get_max()
+			};
+			m_vertex_buffer = new n::static_vertex_buffer(vertices, mage::arrlen(vertices));
+			m_vertex_array = new n::static_vertex_array(m_vertex_buffer, { mage::gfx::shader_type::float2, mage::gfx::shader_type::float2 });
 		}
 		MAGE_DCM(layer);
 		~layer()
 		{
 			MAGE_ERROR("DELETE ORC LAYER");
+			delete m_atlas;
 			delete m_sprite;
 			delete m_framebuffer;
 			delete m_vertex_array;
@@ -73,20 +78,19 @@ namespace orc
 			m_camera->set_zoom(m_camera_zoom);
 
 			m_shader_program->bind();
-			// m_shader_program->set_uniform_float3("u_color", m_rect_color);
-			m_shader_program->set_uniform_int("u_frame", m_sprite_frame);
+			m_sprite->update(n::time());
+			m_shader_program->set_uniform_int("u_frame", m_sprite->get_frame<int>());
 			m_shader_program->set_uniform_mat4("u_view_projection", m_camera->get_view_projection());
 
-			// m_texture->bind(0);
-			m_sprite->get_texture()->bind(0);
+			m_atlas->bind(0);
 			mage::gfx::renderer::draw(m_index_buffer, m_vertex_array);
 
 			// draw framebuffer onto screen
 			m_framebuffer->draw();
-
 			return false;
 		}
 	private:
+		n::sprite_atlas* m_atlas;
 		n::sprite* m_sprite;
 		int m_sprite_frame;
 		n::framebuffer* m_framebuffer;
@@ -95,7 +99,7 @@ namespace orc
 		n::static_index_buffer* m_index_buffer;
 		n::shader_program* m_shader_program;
 		n::camera* m_camera;
-		glm::vec3 m_rect_color, m_camera_pos;
+		glm::vec3 m_camera_pos;
 		float m_camera_rotation, m_camera_zoom;
 	};
 }

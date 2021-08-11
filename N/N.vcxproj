@@ -132,8 +132,10 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="src\n.h" />
+    <ClInclude Include="src\n\constants.h" />
     <ClInclude Include="src\n\core.h" />
     <ClInclude Include="src\n\graphics\sprite.h" />
+    <ClInclude Include="src\n\graphics\sprite_atlas.h" />
     <ClInclude Include="src\n\graphics\wrap\camera.h" />
     <ClInclude Include="src\n\graphics\wrap\buffer.h" />
     <ClInclude Include="src\n\graphics\wrap\framebuffer.h" />
@@ -146,6 +148,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\n\graphics\sprite.cpp" />
+    <ClCompile Include="src\n\graphics\sprite_atlas.cpp" />
     <ClCompile Include="src\n\io\file.cpp" />
     <ClCompile Include="src\pch.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>

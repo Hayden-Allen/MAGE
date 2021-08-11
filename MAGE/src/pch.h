@@ -76,6 +76,7 @@
 #include "mage/util/functions.h"
 #include "mage/util/iterable.h"
 #include "mage/util/positional.h"
+#include "mage/util/range.h"
 #include "mage/util/typed.h"
 
 

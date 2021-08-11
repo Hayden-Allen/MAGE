@@ -17,7 +17,7 @@ namespace mage::gfx
 
 		virtual void bind(uint32_t slot) const = 0;
 	protected:
-		texture(s_type w, s_type h, void* data) :
+		texture(s_type w, s_type h) :
 			dimensional<s_type>(w, h)
 		{}
 
@@ -37,10 +37,11 @@ namespace mage::gfx
 		virtual ~texture2d() {}
 
 
-		static texture2d* create(s_type w, s_type h, void* data, const texture_options& options);
+		static texture2d* create(s_type w, s_type h, const void* const data, const texture_options& options);
+		virtual void update(s_type x, s_type y, s_type w, s_type h, const void* const data) = 0;
 	protected:
-		texture2d(s_type w, s_type h, void* data) :
-			texture(w, h, data)
+		texture2d(s_type w, s_type h, const void* const data) :
+			texture(w, h)
 		{}
 	};
 
@@ -53,7 +54,8 @@ namespace mage::gfx
 		virtual ~texture2d_array() {}
 
 
-		static texture2d_array* create(s_type w, s_type h, s_type f, void* data, const texture_options& options);
+		static texture2d_array* create(s_type w, s_type h, s_type f, const void* const data, const texture_options& options);
+		virtual void update(s_type x, s_type y, s_type z, s_type w, s_type h, s_type d, const void* const data) = 0;
 		s_type get_frame_count() const
 		{
 			return m_frames;
@@ -62,8 +64,8 @@ namespace mage::gfx
 		s_type m_frames;
 
 
-		texture2d_array(s_type w, s_type h, s_type f, void* data) :
-			texture(w, h, data),
+		texture2d_array(s_type w, s_type h, s_type f, const void* const data) :
+			texture(w, h),
 			m_frames(f)
 		{}
 	};

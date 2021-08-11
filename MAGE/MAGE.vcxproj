@@ -180,6 +180,7 @@
     <ClInclude Include="src\mage\util\functions.h" />
     <ClInclude Include="src\mage\util\iterable.h" />
     <ClInclude Include="src\mage\util\positional.h" />
+    <ClInclude Include="src\mage\util\range.h" />
     <ClInclude Include="src\mage\util\typed.h" />
     <ClInclude Include="src\mage\window.h" />
     <ClInclude Include="src\pch.h" />

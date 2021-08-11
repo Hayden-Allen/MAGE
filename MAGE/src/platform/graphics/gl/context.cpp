@@ -8,6 +8,12 @@ namespace mage::gfx
 	{
 		return new mage::gl::context(host, w, h, title);
 	}
+	size_t context::get_max_texture_units()
+	{
+		int i;
+		glGetIntegerv(GL_MAX_TEXTURE_IMAGE_UNITS, &i);
+		return MAGE_CAST(size_t, i);
+	}
 }
 
 

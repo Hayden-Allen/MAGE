@@ -3,12 +3,19 @@
 
 namespace n
 {
-	typedef std::chrono::time_point<std::chrono::steady_clock> time;
-
-
-
-	static time get_time()
+	class time final
 	{
-		return std::chrono::steady_clock::now();
-	}
+	public:
+		time() :
+			m_time(std::chrono::steady_clock::now())
+		{}
+
+
+		float operator-(const time& other) const
+		{
+			return std::chrono::duration<float, std::milli>(m_time - other.m_time).count();
+		}
+	private:
+		std::chrono::time_point<std::chrono::steady_clock> m_time;
+	};
 }

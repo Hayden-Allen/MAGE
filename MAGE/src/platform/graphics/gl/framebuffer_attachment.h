@@ -23,14 +23,14 @@ namespace mage::gl
 	public: \
 		NAME(s_type w, s_type h); \
 		MAGE_DCM(NAME); \
-		~NAME() { glDeleteTextures(1, &m_id); } \
 		mage::gfx::renderer_id_t get_id() const override { return mage::gl::texture2d::get_id(); } \
 		void bind(uint32_t slot) const override { mage::gl::texture2d::bind(slot); } \
 		void unbind() const override { mage::gl::texture2d::unbind(); } \
 		mage::gfx::framebuffer_attachment_type get_type() const override { return mage::gfx::NAME::get_type(); } \
 	protected: \
-		void update() const override { mage::gl::texture2d::bind(0); glTexImage2D(GL_TEXTURE_2D, 0, INTERNAL, m_w, m_h, 0, FORMAT, TYPE, nullptr); } \
-		void init() { glGenTextures(1, &m_id); } };
+		void reset() const override { mage::gl::texture2d::bind(0); glTexImage2D(GL_TEXTURE_2D, 0, INTERNAL, m_w, m_h, 0, FORMAT, TYPE, nullptr); } \
+	private: \
+		void update(s_type x, s_type y, s_type w, s_type h, const void* const data) override { mage::gl::texture2d::update(x, y, w, h, data); } };
 	
 	F(framebuffer_color_attachment, GL_RGBA8, GL_RGBA, GL_UNSIGNED_BYTE);
 	F(framebuffer_depth_attachment, GL_DEPTH24_STENCIL8, GL_DEPTH_STENCIL, GL_UNSIGNED_INT_24_8);

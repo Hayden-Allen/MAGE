@@ -22,7 +22,7 @@ namespace mage::gfx
 
 
 		virtual framebuffer_attachment_type get_type() const = 0;
-		virtual void update() const = 0;
+		virtual void reset() const = 0;
 	protected:
 		framebuffer_attachment(s_type w, s_type h) :
 			texture2d(w, h, nullptr)

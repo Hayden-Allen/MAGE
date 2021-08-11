@@ -30,7 +30,7 @@ namespace mage::gfx
 			{
 				a->m_w = e.get_w();
 				a->m_h = e.get_h();
-				a->update();
+				a->reset();
 			}
 
 			return false;

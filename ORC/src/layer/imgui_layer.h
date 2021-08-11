@@ -30,10 +30,6 @@ namespace orc
 				{
 					ImGui::Text("%.2fms | %.2ffps", e.get_delta_time(), 1000.f / e.get_delta_time());
 					ImGui::NewLine();
-					ImGui::DragInt("sprite_frame", &m_layer->m_sprite_frame, 1.f, 0, 1);
-					ImGui::NewLine();
-					ImGui::ColorPicker3("rect_color", &m_layer->m_rect_color[0]);
-					ImGui::NewLine();
 					ImGui::DragFloat2("camera_pos", &m_layer->m_camera_pos[0], .01f, -2.f, 2.f);
 					ImGui::NewLine();
 					ImGui::DragFloat("camera_rotation", &m_layer->m_camera_rotation, .01f, 0.f, 2 * glm::pi<float>());
@@ -42,7 +38,7 @@ namespace orc
 					ImGui::NewLine();
 
 					const auto& win = mage::application::get().get_window();
-					ImGui::Image((void*)m_layer->m_framebuffer->get_color_attachment_id(), { win.get_w<float>(), win.get_h<float>() });
+					ImGui::Image((void*)m_layer->m_framebuffer->get_color_attachment_id(), { win.get_w<float>(), win.get_h<float>() }, { 0.f, 1.f }, { 1.f, 0.f });
 				}
 				ImGui::End();
 			}

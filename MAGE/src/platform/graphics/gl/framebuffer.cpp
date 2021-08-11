@@ -36,12 +36,13 @@ namespace mage::gl
 	}
 	void framebuffer::update()
 	{
+		glDeleteFramebuffers(1, &m_id);
 		glGenFramebuffers(1, &m_id);
 		bind();
 
 		for (const auto& a : m_attachments)
 		{
-			a->update();
+			a->reset();
 			glFramebufferTexture2D(GL_FRAMEBUFFER, get_framebuffer_attachment_enum(a->get_type()), GL_TEXTURE_2D, a->get_id(), 0);
 		}
 
