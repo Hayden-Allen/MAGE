@@ -63,26 +63,27 @@ namespace mage
 		MAGE_DCM(serializable_bank);
 
 
-		virtual void save(mage::output_file& out) const override
+		void save(mage::output_file& out) const final override
 		{
 			const size_t count = this->get_size();
+			MAGE_CORE_INFO("SAVE BANK {}", count);
 			out.ulong(count);
 			for (size_t i = 0; i < count; i++)
 				this->m_bank[i]->save(out);
 		}
-		virtual void load(mage::input_file& in) override
+		void load(mage::input_file& in) final override
 		{
 			this->m_next = in.ulong();
+			MAGE_CORE_INFO("LOAD BANK {}", this->m_next);
 			for (size_t i = 0; i < this->m_next; i++)
-			{
 				this->m_bank[i] = new T(in);
-				this->m_bank[i]->load(in);
-			}
 		}
 	protected:
 		serializable_bank() {}
 		serializable_bank(input_file& in) :
 			constructable_serializable(in)
-		{}
+		{
+			load(in);
+		}
 	};
 }

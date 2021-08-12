@@ -26,8 +26,9 @@ namespace n
 	(
 		retained_texture2d,
 		retained_texture2d,
-		(s_type w, s_type h, const uint32_t* const data, size_t count, const texture_options& options) : mage::dimensional<s_type>(w, h),
-		(w, h, data, count, options)
+		(s_type w, s_type h, size_t count, const uint32_t* const data, const texture_options& options) : mage::dimensional<s_type>(w, h),
+		(w, h, count, data, options),
+		retained_texture2d(s_type w, s_type h, size_t count, const texture_options& options) : mage::dimensional<s_type>(w, h), MAGE_RAN::retained_texture2d(w, h, count, options) {}
 	);
 
 	N_WRAP_VIRTUAL

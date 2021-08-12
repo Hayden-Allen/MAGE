@@ -41,7 +41,7 @@ namespace mage::gfx
 		static texture2d* create(s_type w, s_type h, const void* const data, const texture_options& options);
 		virtual void update(s_type x, s_type y, s_type w, s_type h, const void* const data) = 0;
 	protected:
-		texture2d(s_type w, s_type h, const void* const data) :
+		texture2d(s_type w, s_type h) :
 			texture(w, h)
 		{}
 	};
@@ -60,24 +60,43 @@ namespace mage::gfx
 		}
 
 
-		static retained_texture2d* create(s_type w, s_type h, const uint32_t* const data, size_t count, const texture_options& options);
+		static retained_texture2d* create(s_type w, s_type h, size_t count, const texture_options& options);
+		static retained_texture2d* create(s_type w, s_type h, size_t count, const uint32_t* const data, const texture_options& options);
+		void update(s_type x, s_type y, s_type w, s_type h, const void* const data) override
+		{
+			MAGE_CORE_ASSERT(x < m_w && y < m_h, "Invalid retained_texture2d update lower bound <{}, {}> (must be < <{}, {}>)", x, y, m_w, m_h);
+			MAGE_CORE_ASSERT(x + w < m_w && y + h < m_h, "Invalid retained_texture2d update upper bound <{}, {}> (must be < <{}, {}>)", x, y, m_w, m_h);
+
+			const uint32_t* const idata = MAGE_CAST(const uint32_t* const, data);
+			for (size_t i = 0; i < h; i++)
+				for (size_t j = 0; j < w; j++)
+					m_data[(y + i) * m_w + (x + j)] = idata[i * w + j];
+		}
 		void save(output_file& out) const override
 		{
+			out.uint(m_w).uint(m_h);
 			out.ulong(m_count);
-			for (size_t i = 0; i < m_count; i++)
-				out.uint(m_data[i]);
+			out.write(reinterpret_cast<char*>(m_data), m_count * sizeof(uint32_t));
 		}
 		void load(input_file& in) override
 		{
-
+			m_w = in.uint();
+			m_h = in.uint();
+			m_count = in.ulong();
+			m_data = new uint32_t[m_count];
+			in.read(reinterpret_cast<char*>(m_data), m_count * sizeof(uint32_t));
 		}
 	protected:
 		size_t m_count;
 		uint32_t* m_data;
 
-
-		retained_texture2d(s_type w, s_type h, const uint32_t* const data, size_t count) :
-			texture2d(w, h, data),
+		retained_texture2d(s_type w, s_type h, size_t count) :
+			texture2d(w, h),
+			m_count(count),
+			m_data(nullptr)
+		{}
+		retained_texture2d(s_type w, s_type h, size_t count, const uint32_t* const data) :
+			texture2d(w, h),
 			m_count(count),
 			m_data(new uint32_t[count])
 		{

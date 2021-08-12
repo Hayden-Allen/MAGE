@@ -79,20 +79,7 @@ namespace n
 		std::vector<frame_handle> m_frame_data;
 
 
-		bool add_to_atlas(sprite_atlas* const atlas, const uint8_t* const color_data, size_t i)
-		{
-			// attempt to add
-			const auto& c = atlas->insert(m_w, m_h, color_data + i * m_w * m_h * c::bytes_per_pixel);
-			// given atlas doesn't have room for this sprite
-			if (c.is_invalid())
-				return false;
-
-			// first frame
-			if (i == 0)
-				m_base_coords = c;
-			// for all frames, store delta between base coords and returned coords
-			m_frame_data.push_back(frame_handle(atlas->get_handle(), c - m_base_coords));
-			return true;
-		}
+		bool add_to_atlas(sprite_atlas* const atlas, const uint8_t* const color_data, size_t i);
 	};
 }
+

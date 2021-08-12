@@ -5,12 +5,12 @@ namespace n
 {
 	class sprite_atlas;
 
-	class sprite_atlas_bank final : public mage::serializable_bank<sprite_atlas, uint8_t, 256>
+	class sprite_atlas_bank final : public mage::serializable_bank<sprite_atlas, uint8_t, c::sprite_atlas_bank_size>
 	{
 	public:
 		sprite_atlas_bank() {}
 		sprite_atlas_bank(mage::input_file& in) :
-			mage::serializable_bank<sprite_atlas, uint8_t, 256>(in)
+			mage::serializable_bank<sprite_atlas, uint8_t, c::sprite_atlas_bank_size>(in)
 		{}
 		N_DCM(sprite_atlas_bank);
 	};

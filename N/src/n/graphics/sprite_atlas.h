@@ -57,6 +57,7 @@ namespace n
 		constexpr static mage::range_contains s_contains = { false, false };
 		constexpr static mage::range_overlaps s_overlaps_inc = { { true, true }, { true, true } };
 		constexpr static mage::range_overlaps s_overlaps_exc = { { false, false }, { false, false } };
+		constexpr static texture_options s_texture_options = { .min_filter = texture_min_filter::nearest, .mag_filter = texture_mag_filter::nearest, .wrap_s = texture_wrap_s::clamp_border, .wrap_t = texture_wrap_t::clamp_border };
 
 
 		sprite_atlas_bank::handle m_handle;

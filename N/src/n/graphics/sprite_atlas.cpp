@@ -9,14 +9,7 @@ namespace n
 		m_handle(bank->add(this)),
 		m_texture(nullptr)
 	{
-		m_texture = new n::retained_texture2d(m_w, m_h, nullptr, m_w * m_h * c::bytes_per_pixel,
-			{
-				.min_filter = texture_min_filter::nearest,
-				.mag_filter = texture_mag_filter::nearest,
-				.wrap_s = texture_wrap_s::clamp_border,
-				.wrap_t = texture_wrap_t::clamp_border
-			}
-		);
+		m_texture = new n::retained_texture2d(m_w, m_h, m_w * m_h * c::bytes_per_pixel, nullptr, s_texture_options);
 		m_x_step.insert(0);
 		m_y_step.insert(0);
 		m_starts.insert({ 0, 0, c::sprite_atlas_size, c::sprite_atlas_size });
@@ -24,7 +17,7 @@ namespace n
 	sprite_atlas::sprite_atlas(mage::input_file& in) :
 		mage::dimensional<uint32_t>(c::sprite_atlas_size, c::sprite_atlas_size),
 		m_handle(0),
-		m_texture(nullptr)
+		m_texture(new retained_texture2d(m_w, m_h, c::bytes_per_pixel * m_w * m_h, s_texture_options))
 	{
 		load(in);
 	}
@@ -64,6 +57,8 @@ namespace n
 		// load rects
 		size_t start_size = in.ulong(), used_size = in.ulong();
 		for (size_t i = 0; i < start_size; i++)
+			m_starts.insert({ { in.uint(), in.uint() }, { in.uint(), in.uint() } });
+		for (size_t i = 0; i < used_size; i++)
 			m_starts.insert({ { in.uint(), in.uint() }, { in.uint(), in.uint() } });
 	}
 	sprite_atlas_coords sprite_atlas::insert(s_type w, s_type h, const uint8_t* const data)

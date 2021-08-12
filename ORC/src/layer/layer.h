@@ -37,9 +37,22 @@ namespace orc
 			m_camera = new n::camera(*this, 1.6f, .9f, m_camera_pos, m_camera_rotation, m_camera_zoom);
 
 
-			m_atlas_bank = new n::sprite_atlas_bank();
-			m_sprite_bank = new n::sprite_bank();
-			m_sprite = m_sprite_bank->add(new n::sprite(m_atlas_bank, "res/sprite/newSprite.sprite"));
+			constexpr bool save = false;
+			if (save)
+			{
+				m_atlas_bank = new n::sprite_atlas_bank();
+				m_sprite_bank = new n::sprite_bank();
+				m_sprite = m_sprite_bank->add(new n::sprite(m_atlas_bank, "res/sprite/newSprite.sprite"));
+				mage::output_file ab("res/ab.mage"), sb("res/sb.mage");
+				m_atlas_bank->save(ab);
+				m_sprite_bank->save(sb);
+			}
+			else
+			{
+				mage::input_file ab("res/ab.mage"), sb("res/sb.mage");
+				m_atlas_bank = new n::sprite_atlas_bank(ab);
+				m_sprite_bank = new n::sprite_bank(sb);
+			}
 
 
 			const auto& [x, y] = m_sprite_bank->get(m_sprite)->get_base_coords();

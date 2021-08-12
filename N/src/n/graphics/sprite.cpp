@@ -30,24 +30,24 @@ namespace n
 
 		// generate color data from palette indices
 		const size_t pixels_per_frame = m_w * m_h;
-		uint8_t* color_data = new uint8_t[c::bytes_per_pixel * pixels_per_frame * m_frame_count];
+		uint8_t* const color_data = new uint8_t[c::bytes_per_pixel * pixels_per_frame * m_frame_count];
 		for (size_t i = 0; i < m_frame_count; i++)
 		{
 			// base address of current frame
-			const size_t off = i * pixels_per_frame * 4;
-			for (size_t j = 0; j < pixels_per_frame * 4; j += 4)
+			const size_t off = i * pixels_per_frame * c::bytes_per_pixel;
+			for (size_t j = 0; j < pixels_per_frame * c::bytes_per_pixel; j += c::bytes_per_pixel)
 			{
 				// coordinates of current pixel
 				// flip y because OpenGL expects data from the bottom up
-				const size_t x = (j / 4) % m_w;
-				const size_t y = (m_h - 1) - (j / 4) / m_w;
-				const size_t index = off + (y * c::pixels_per_side + x) * 4;
+				const size_t x = (j / c::bytes_per_pixel) % m_w;
+				const size_t y = (m_h - 1) - (j / c::bytes_per_pixel) / m_w;
+				const size_t index = off + (y * c::pixels_per_side + x) * c::bytes_per_pixel;
 				// palette index of current pixel. 16 signifies empty
 				const uint8_t color = data.ubyte();
-				color_data[index + 0] = (color == c::pixels_per_side ? 0 : r[color]);
-				color_data[index + 1] = (color == c::pixels_per_side ? 0 : g[color]);
-				color_data[index + 2] = (color == c::pixels_per_side ? 0 : b[color]);
-				color_data[index + 3] = (color == c::pixels_per_side ? 0 : 255);
+				color_data[index + 0] = (color == c::color_count ? 0 : r[color]);
+				color_data[index + 1] = (color == c::color_count ? 0 : g[color]);
+				color_data[index + 2] = (color == c::color_count ? 0 : b[color]);
+				color_data[index + 3] = (color == c::color_count ? 0 : 255);
 			}
 		}
 
@@ -112,5 +112,23 @@ namespace n
 			h.load(in);
 			m_frame_data.push_back(h);
 		}
+	}
+
+
+
+	bool sprite::add_to_atlas(sprite_atlas* const atlas, const uint8_t* const color_data, size_t i)
+	{
+		// attempt to add
+		const auto& c = atlas->insert(m_w, m_h, color_data + i * m_w * m_h * c::bytes_per_pixel);
+		// given atlas doesn't have room for this sprite
+		if (c.is_invalid())
+			return false;
+
+		// first frame
+		if (i == 0)
+			m_base_coords = c;
+		// for all frames, store delta between base coords and returned coords
+		m_frame_data.push_back(frame_handle(atlas->get_handle(), c - m_base_coords));
+		return true;
 	}
 }

@@ -25,7 +25,7 @@ namespace mage::gfx
 		virtual void reset() const = 0;
 	protected:
 		framebuffer_attachment(s_type w, s_type h) :
-			texture2d(w, h, nullptr)
+			texture2d(w, h)
 		{}
 	};
 

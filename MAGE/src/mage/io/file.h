@@ -51,6 +51,10 @@ namespace mage
 		{
 			return (MAGE_CAST(uint64_t, uint()) << 32) | uint();
 		}
+		void read(char* const buf, size_t count)
+		{
+			m_file.read(buf, count);
+		}
 	};
 
 
@@ -66,20 +70,26 @@ namespace mage
 
 		output_file& ubyte(uint8_t b)
 		{
-			return write(MAGE_CAST(uint64_t, b), 1);
+			return put(MAGE_CAST(uint64_t, b), 1);
 		}
 		output_file& ushort(uint16_t s)
 		{
-			return write(MAGE_CAST(uint64_t, s), 2);
+			return put(MAGE_CAST(uint64_t, s), 2);
 		}
 		output_file& uint(uint32_t i)
 		{
-			return write(MAGE_CAST(uint64_t, i), 3);
+			return put(MAGE_CAST(uint64_t, i), 4);
 		}
 		output_file& ulong(uint64_t l)
 		{
-			return write(l, 4);
+			return put(l, 8);
 		}
-		output_file& write(uint64_t data, size_t bytes);
+		output_file& write(const char* const data, size_t count)
+		{
+			m_file.write(data, count);
+			return *this;
+		}
+	private:
+		output_file& put(uint64_t data, size_t bytes);
 	};
 }

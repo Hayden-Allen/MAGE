@@ -80,4 +80,30 @@ namespace mage::gl
 		mage::gfx::texture_source_format source_format = mage::gfx::texture_source_format::rgba;
 		mage::gfx::texture_source_type source_type = mage::gfx::texture_source_type::byte;
 	};
+
+
+
+	/**
+	 * Make these non-member so that texture_options remains an aggregate type
+	 */
+	static void serialize_texture_options(const texture_options& op, output_file& out)
+	{
+		out.ubyte(MAGE_CAST(uint8_t, op.min_filter));
+		out.ubyte(MAGE_CAST(uint8_t, op.mag_filter));
+		out.ubyte(MAGE_CAST(uint8_t, op.wrap_s));
+		out.ubyte(MAGE_CAST(uint8_t, op.wrap_t));
+		out.ubyte(MAGE_CAST(uint8_t, op.target_format));
+		out.ubyte(MAGE_CAST(uint8_t, op.source_format));
+		out.ubyte(MAGE_CAST(uint8_t, op.source_type));
+	}
+	static void deserialize_texture_options(texture_options& op, input_file& in)
+	{
+		op.min_filter = MAGE_CAST(mage::gfx::texture_min_filter, in.ubyte());
+		op.mag_filter = MAGE_CAST(mage::gfx::texture_mag_filter, in.ubyte());
+		op.wrap_s = MAGE_CAST(mage::gfx::texture_wrap_s, in.ubyte());
+		op.wrap_t = MAGE_CAST(mage::gfx::texture_wrap_t, in.ubyte());
+		op.target_format = MAGE_CAST(mage::gfx::texture_target_format, in.ubyte());
+		op.source_format = MAGE_CAST(mage::gfx::texture_source_format, in.ubyte());
+		op.source_type = MAGE_CAST(mage::gfx::texture_source_type, in.ubyte());
+	}
 }
