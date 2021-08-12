@@ -1,6 +1,7 @@
 #pragma once
 #include "pch.h"
 #include "typed.h"
+#include "mage/io/serializable.h"
 
 namespace mage
 {

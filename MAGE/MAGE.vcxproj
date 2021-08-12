@@ -172,6 +172,8 @@
     <ClInclude Include="src\mage\input\input.h" />
     <ClInclude Include="src\mage\input\input_key.h" />
     <ClInclude Include="src\mage\input\input_mouse.h" />
+    <ClInclude Include="src\mage\io\file.h" />
+    <ClInclude Include="src\mage\io\serializable.h" />
     <ClInclude Include="src\mage\layer\layer.h" />
     <ClInclude Include="src\mage\layer\layer_stack.h" />
     <ClInclude Include="src\mage\log.h" />
@@ -207,6 +209,7 @@
     <ClCompile Include="src\mage\application.cpp" />
     <ClCompile Include="src\mage\imgui\build.cpp" />
     <ClCompile Include="src\mage\imgui\imgui_layer.cpp" />
+    <ClCompile Include="src\mage\io\file.cpp" />
     <ClCompile Include="src\mage\layer\layer_stack.cpp" />
     <ClCompile Include="src\mage\log.cpp" />
     <ClCompile Include="src\pch.cpp">

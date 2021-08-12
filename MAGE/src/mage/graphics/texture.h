@@ -2,6 +2,7 @@
 #include "pch.h"
 #include "render_object.h"
 #include "texture_options.h"
+#include "mage/io/serializable.h"
 #include "mage/util/dimensional.h"
 
 namespace mage::gfx
@@ -43,6 +44,46 @@ namespace mage::gfx
 		texture2d(s_type w, s_type h, const void* const data) :
 			texture(w, h)
 		{}
+	};
+
+
+
+	class retained_texture2d :
+		public texture2d,
+		public serializable
+	{
+	public:
+		MAGE_DCM(retained_texture2d);
+		virtual ~retained_texture2d()
+		{
+			delete m_data;
+		}
+
+
+		static retained_texture2d* create(s_type w, s_type h, const uint32_t* const data, size_t count, const texture_options& options);
+		void save(output_file& out) const override
+		{
+			out.ulong(m_count);
+			for (size_t i = 0; i < m_count; i++)
+				out.uint(m_data[i]);
+		}
+		void load(input_file& in) override
+		{
+
+		}
+	protected:
+		size_t m_count;
+		uint32_t* m_data;
+
+
+		retained_texture2d(s_type w, s_type h, const uint32_t* const data, size_t count) :
+			texture2d(w, h, data),
+			m_count(count),
+			m_data(new uint32_t[count])
+		{
+			for (size_t i = 0; i < count; i++)
+				m_data[i] = (data ? data[i] : 0);
+		}
 	};
 
 

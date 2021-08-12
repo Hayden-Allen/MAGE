@@ -17,17 +17,24 @@ namespace n
 	(
 		texture2d,
 		texture2d,
-		(s_type w, s_type h, void* data, const texture_options& options) : mage::dimensional<s_type>(w, h),
+		(s_type w, s_type h, const void* const data, const texture_options& options) : mage::dimensional<s_type>(w, h),
 		(w, h, data, options)
 	);
 
 
+	N_WRAP_VIRTUAL
+	(
+		retained_texture2d,
+		retained_texture2d,
+		(s_type w, s_type h, const uint32_t* const data, size_t count, const texture_options& options) : mage::dimensional<s_type>(w, h),
+		(w, h, data, count, options)
+	);
 
 	N_WRAP_VIRTUAL
 	(
 		texture2d_array,
 		texture2d_array,
-		(s_type w, s_type h, s_type f, void* data, const texture_options& options) : mage::dimensional<s_type>(w, h),
+		(s_type w, s_type h, s_type f, const void* const data, const texture_options& options) : mage::dimensional<s_type>(w, h),
 		(w, h, f, data, options)
 	);
 }

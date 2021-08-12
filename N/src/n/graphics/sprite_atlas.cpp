@@ -9,7 +9,7 @@ namespace n
 		m_handle(bank->add(this)),
 		m_texture(nullptr)
 	{
-		m_texture = new n::texture2d(m_w, m_h, nullptr,
+		m_texture = new n::retained_texture2d(m_w, m_h, nullptr, m_w * m_h * c::bytes_per_pixel,
 			{
 				.min_filter = texture_min_filter::nearest,
 				.mag_filter = texture_mag_filter::nearest,
@@ -24,6 +24,40 @@ namespace n
 
 
 
+	void sprite_atlas::save(mage::output_file& out) const
+	{
+		// save texture
+
+		// save steps
+		out.ulong(m_x_step.size()).ulong(m_y_step.size());
+		for (s_type s : m_x_step)
+			out.uint(s);
+		for (s_type s : m_y_step)
+			out.uint(s);
+
+		// save rects
+		out.ulong(m_starts.size()).ulong(m_used.size());
+		for (const rect& r : m_starts)
+			out.uint(r.min.x).uint(r.min.y).uint(r.max.x).uint(r.max.y);
+		for (const rect& r : m_used)
+			out.uint(r.min.x).uint(r.min.y).uint(r.max.x).uint(r.max.y);
+	}
+	void sprite_atlas::load(mage::input_file& in)
+	{
+		// load texture
+
+		// load steps
+		size_t x_size = in.ulong(), y_size = in.ulong();
+		for (size_t i = 0; i < x_size; i++)
+			m_x_step.insert(in.uint());
+		for (size_t i = 0; i < y_size; i++)
+			m_y_step.insert(in.uint());
+
+		// load rects
+		size_t start_size = in.ulong(), used_size = in.ulong();
+		for (size_t i = 0; i < start_size; i++)
+			m_starts.insert({ { in.uint(), in.uint() }, { in.uint(), in.uint() } });
+	}
 	sprite_atlas_coords sprite_atlas::insert(s_type w, s_type h, const uint8_t* const data)
 	{
 		for (const rect& r : m_starts)

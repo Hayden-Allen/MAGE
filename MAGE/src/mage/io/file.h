@@ -1,13 +1,13 @@
 #pragma once
 #include "pch.h"
 
-namespace n
+namespace mage
 {
 	template<std::ios_base::openmode FLAGS>
 	class file
 	{
 	public:
-		N_DCM(file);
+		MAGE_DCM(file);
 		virtual ~file()
 		{
 			m_file.close();
@@ -32,24 +32,24 @@ namespace n
 		input_file(const std::string& fp) :
 			file<std::ios::binary | std::ios::in>(fp)
 		{}
-		N_DCM(input_file);
+		MAGE_DCM(input_file);
 
 
-		uint8_t get_byte()
+		uint8_t ubyte()
 		{
 			return m_file.get();
 		}
-		uint16_t get_short()
+		uint16_t ushort()
 		{
-			return (N_CAST(uint16_t, get_byte()) << 8) | get_byte();
+			return (MAGE_CAST(uint16_t, ubyte()) << 8) | ubyte();
 		}
-		uint32_t get_int()
+		uint32_t uint()
 		{
-			return (N_CAST(uint32_t, get_short()) << 16) | get_short();
+			return (MAGE_CAST(uint32_t, ushort()) << 16) | ushort();
 		}
-		uint64_t get_long()
+		uint64_t ulong()
 		{
-			return (N_CAST(uint64_t, get_int()) << 32) | get_int();
+			return (MAGE_CAST(uint64_t, uint()) << 32) | uint();
 		}
 	};
 
@@ -61,26 +61,25 @@ namespace n
 		output_file(const std::string& fp) :
 			file<std::ios::binary | std::ios::out>(fp)
 		{}
-		N_DCM(output_file);
+		MAGE_DCM(output_file);
 
 
-		output_file& put_byte(uint8_t b)
+		output_file& ubyte(uint8_t b)
 		{
-			return put(N_CAST(uint64_t, b), 1);
+			return write(MAGE_CAST(uint64_t, b), 1);
 		}
-		output_file& put_short(uint16_t s)
+		output_file& ushort(uint16_t s)
 		{
-			return put(N_CAST(uint64_t, s), 2);
+			return write(MAGE_CAST(uint64_t, s), 2);
 		}
-		output_file& put_int(uint32_t i)
+		output_file& uint(uint32_t i)
 		{
-			return put(N_CAST(uint64_t, i), 3);
+			return write(MAGE_CAST(uint64_t, i), 3);
 		}
-		output_file& put_long(uint64_t l)
+		output_file& ulong(uint64_t l)
 		{
-			return put(l, 4);
+			return write(l, 4);
 		}
-	private:
-		output_file& put(uint64_t data, size_t bytes);
+		output_file& write(uint64_t data, size_t bytes);
 	};
 }

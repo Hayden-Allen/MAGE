@@ -1,49 +1,17 @@
 #pragma once
 #include "pch.h"
 #include "sprite_atlas_bank.h"
+#include "sprite_atlas_coords.h"
 #include "wrap/texture.h"
 
 namespace n
 {
-	struct sprite_atlas_coords final
-	{
-		mage::range<float> x = { -1.f, 0.f }, y = { -1.f, 0.f };
-
-
-		sprite_atlas_coords() {}
-		sprite_atlas_coords(const mage::range<float>& _x, const mage::range<float>& _y)
-		{
-			x = _x;
-			y = _y;
-		}
-		sprite_atlas_coords(const sprite_atlas_coords& other)
-		{
-			operator=(other);
-		}
-
-
-		void operator=(const sprite_atlas_coords& other)
-		{
-			x = other.x;
-			y = other.y;
-		}
-		bool operator==(const sprite_atlas_coords& other) const
-		{
-			return x == other.x && y == other.y;
-		}
-		glm::vec2 operator-(const sprite_atlas_coords& other) const
-		{
-			return { x.get_min() - other.x.get_min(), y.get_min() - other.y.get_min() };
-		}
-		bool is_invalid() const
-		{
-			return x == mage::range<float>(-1.f, 0.f) && y == mage::range<float>(-1.f, 0.f);
-		}
-	};
 
 
 
-	class sprite_atlas final : public mage::dimensional<uint32_t>
+	class sprite_atlas final :
+		public mage::dimensional<uint32_t>,
+		public mage::serializable
 	{
 		using point = mage::point<s_type>;
 		using rect = mage::rect<s_type>;
@@ -73,6 +41,8 @@ namespace n
 		}
 
 
+		void save(mage::output_file& out) const override;
+		void load(mage::input_file& in) override;
 		sprite_atlas_coords insert(s_type w, s_type h, const uint8_t* const data);
 		void bind(uint32_t slot) const
 		{
@@ -89,7 +59,7 @@ namespace n
 
 
 		sprite_atlas_bank::handle m_handle;
-		texture2d* m_texture;
+		retained_texture2d* m_texture;
 		std::set<s_type> m_x_step, m_y_step;
 		std::multiset<rect, rect_area_comparator> m_starts, m_used;
 

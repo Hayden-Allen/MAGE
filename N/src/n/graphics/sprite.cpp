@@ -1,6 +1,5 @@
 #include "pch.h"
 #include "sprite.h"
-#include "n/io/file.h"
 
 namespace n
 {
@@ -11,22 +10,22 @@ namespace n
 		m_frame_time(0),
 		m_base_coords({ 0.f, 1.f }, { 0.f, 1.f })
 	{
-		input_file data(fp);
+		mage::input_file data(fp);
 
 		// info
-		m_w = data.get_byte() * c::pixels_per_side;
-		m_h = data.get_byte() * c::pixels_per_side;
-		m_frame_count = data.get_byte();
+		m_w = data.ubyte() * c::pixels_per_side;
+		m_h = data.ubyte() * c::pixels_per_side;
+		m_frame_count = data.ubyte();
 		MAGE_ASSERT(m_frame_count <= c::max_frame_count, "Sprites cannot have more than {} frames", c::max_frame_count);
-		m_frame_time = data.get_short();
+		m_frame_time = data.ushort();
 
 		// palette
 		uint8_t r[c::color_count], g[c::color_count], b[c::color_count];
 		for (int i = 0; i < c::color_count; i++)
 		{
-			r[i] = data.get_byte();
-			g[i] = data.get_byte();
-			b[i] = data.get_byte();
+			r[i] = data.ubyte();
+			g[i] = data.ubyte();
+			b[i] = data.ubyte();
 		}
 
 		// generate color data from palette indices
@@ -44,7 +43,7 @@ namespace n
 				const size_t y = (m_h - 1) - (j / 4) / m_w;
 				const size_t index = off + (y * c::pixels_per_side + x) * 4;
 				// palette index of current pixel. 16 signifies empty
-				const uint8_t color = data.get_byte();
+				const uint8_t color = data.ubyte();
 				color_data[index + 0] = (color == c::pixels_per_side ? 0 : r[color]);
 				color_data[index + 1] = (color == c::pixels_per_side ? 0 : g[color]);
 				color_data[index + 2] = (color == c::pixels_per_side ? 0 : b[color]);
@@ -61,19 +60,6 @@ namespace n
 			while (!added && handle < bank->get_size())
 			{
 				const auto& atlas = bank->get(handle);
-
-				/*const auto& c = atlas->insert(m_w, m_h, color_data + i * pixels_per_frame * c::bytes_per_pixel);
-				if (c == sprite_atlas::s_invalid)
-				{
-					handle++;
-					continue;
-				}
-
-				if (i == 0)
-					m_base_coords = c;
-				m_frame_data.push_back({ atlas->get_handle(), c - m_base_coords });
-				added = true;
-				break;*/
 				bool result = add_to_atlas(atlas, color_data, i);
 				if (!result)
 				{
@@ -88,9 +74,31 @@ namespace n
 				sprite_atlas* atlas = new sprite_atlas(bank);
 				add_to_atlas(atlas, color_data, i);
 			}
-
-			// MAGE_INFO("<{}, {}> <{}, {}>", m_coords[i].x.get_min(), m_coords[i].x.get_max(), m_coords[i].y.get_min(), m_coords[i].y.get_max());
 		}
 		delete[] color_data;
+	}
+
+
+
+	void sprite::save(mage::output_file& out) const
+	{
+		out.ubyte(m_frame_count).ushort(m_frame_time);
+		m_base_coords.save(out);
+		for (uint8_t i = 0; i < m_frame_count; i++)
+			m_frame_data[i].save(out);
+	}
+	void sprite::load(mage::input_file& in)
+	{
+		m_frame_count = in.ubyte();
+		m_frame_time = in.ushort();
+		m_base_coords.load(in);
+
+		m_frame_data.reserve(m_frame_count);
+		for (uint8_t i = 0; i < m_frame_count; i++)
+		{
+			frame_handle h;
+			h.load(in);
+			m_frame_data.push_back(h);
+		}
 	}
 }

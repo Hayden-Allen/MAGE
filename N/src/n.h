@@ -11,5 +11,3 @@
 #include "n/graphics/wrap/shader_program.h"
 #include "n/graphics/wrap/texture.h"
 #include "n/graphics/wrap/vertex_array.h"
-
-#include "n/io/file.h"

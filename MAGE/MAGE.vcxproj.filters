@@ -195,6 +195,8 @@
     <ClInclude Include="src\mage\util\point.h" />
     <ClInclude Include="src\mage\util\rect.h" />
     <ClInclude Include="src\mage\util\bank.h" />
+    <ClInclude Include="src\mage\io\file.h" />
+    <ClInclude Include="src\mage\io\serializable.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\mage\application.cpp">
@@ -244,5 +246,6 @@
     <ClCompile Include="src\platform\graphics\gl\framebuffer_attachment.cpp" />
     <ClCompile Include="src\platform\graphics\gl\texture.cpp" />
     <ClCompile Include="src\platform\graphics\gl\buffer.cpp" />
+    <ClCompile Include="src\mage\io\file.cpp" />
   </ItemGroup>
 </Project>
