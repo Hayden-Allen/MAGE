@@ -23,7 +23,7 @@ namespace mage
 			m_min(min),
 			m_max(max)
 		{
-			MAGE_CORE_ASSERT(min < max, "Range min must be < than max");
+			MAGE_CORE_ASSERT(min < max, "Range min ({}) must be < than max ({})", min, max);
 		}
 
 
@@ -33,9 +33,19 @@ namespace mage
 			m_max = other.m_max;
 		}
 		template<typename U = T>
+		bool operator==(const range<U>& other) const
+		{
+			return m_min == MAGE_CAST(T, other.m_min) && m_max == MAGE_CAST(T, other.m_max);
+		}
+		template<typename U = T>
 		bool contains(const U& value, const range_contains& params = {}) const
 		{
 			return (params.left ? m_min <= value : m_min < value) && (params.right ? m_max >= value : m_max > value);
+		}
+		template<typename U = T>
+		bool contains(const range<U>& other, const range_overlaps& params = {}) const
+		{
+			return contains(other.m_min, params.min) && contains(other.m_max, params.max);
 		}
 		template<typename U = T>
 		bool overlaps(const range<U>& other, const range_overlaps& params = {}) const

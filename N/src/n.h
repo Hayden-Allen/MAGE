@@ -4,6 +4,7 @@
 
 #include "n/graphics/sprite.h"
 #include "n/graphics/sprite_atlas.h"
+#include "n/graphics/sprite_atlas_bank.h"
 #include "n/graphics/wrap/buffer.h"
 #include "n/graphics/wrap/camera.h"
 #include "n/graphics/wrap/framebuffer.h"

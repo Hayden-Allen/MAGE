@@ -175,12 +175,15 @@
     <ClInclude Include="src\mage\layer\layer.h" />
     <ClInclude Include="src\mage\layer\layer_stack.h" />
     <ClInclude Include="src\mage\log.h" />
+    <ClInclude Include="src\mage\util\bank.h" />
     <ClInclude Include="src\mage\util\color.h" />
     <ClInclude Include="src\mage\util\dimensional.h" />
     <ClInclude Include="src\mage\util\functions.h" />
     <ClInclude Include="src\mage\util\iterable.h" />
+    <ClInclude Include="src\mage\util\point.h" />
     <ClInclude Include="src\mage\util\positional.h" />
     <ClInclude Include="src\mage\util\range.h" />
+    <ClInclude Include="src\mage\util\rect.h" />
     <ClInclude Include="src\mage\util\typed.h" />
     <ClInclude Include="src\mage\window.h" />
     <ClInclude Include="src\pch.h" />

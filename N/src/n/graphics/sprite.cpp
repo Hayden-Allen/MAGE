@@ -4,11 +4,12 @@
 
 namespace n
 {
-	sprite::sprite(sprite_atlas* const atlas, const std::string& fp) :
+	sprite::sprite(sprite_atlas_bank* const bank, const std::string& fp) :
 		mage::dimensional<uint8_t>(0, 0),
 		m_frame(0),
 		m_frame_count(0),
-		m_frame_time(0)
+		m_frame_time(0),
+		m_base_coords({ 0.f, 1.f }, { 0.f, 1.f })
 	{
 		input_file data(fp);
 
@@ -29,7 +30,7 @@ namespace n
 		}
 
 		// generate color data from palette indices
-		const uint32_t pixels_per_frame = m_w * m_h;
+		const size_t pixels_per_frame = m_w * m_h;
 		uint8_t* color_data = new uint8_t[c::bytes_per_pixel * pixels_per_frame * m_frame_count];
 		for (size_t i = 0; i < m_frame_count; i++)
 		{
@@ -51,17 +52,45 @@ namespace n
 			}
 		}
 
-		//// upload color data to GPU
-		//m_texture = new texture2d_array(m_w, m_h, m_frame_count, color_data,
-		//	{
-		//		.min_filter = texture_min_filter::nearest,
-		//		.mag_filter = texture_mag_filter::nearest,
-		//		.wrap_s = texture_wrap_s::clamp_border,
-		//		.wrap_t = texture_wrap_t::clamp_border
-		//	}
-		//);
-		m_coords = atlas->insert(m_w, m_h, m_frame_count, color_data);
-		MAGE_INFO("<{}, {}> <{}, {}>", m_coords.x.get_min(), m_coords.x.get_max(), m_coords.y.get_min(), m_coords.y.get_max());
+		// upload color data to GPU
+		m_frame_data.reserve(m_frame_count);
+		sprite_atlas_bank::handle handle = 0;
+		for (size_t i = 0; i < m_frame_count; i++)
+		{
+			bool added = false;
+			while (!added && handle < bank->get_size())
+			{
+				const auto& atlas = bank->get(handle);
+
+				/*const auto& c = atlas->insert(m_w, m_h, color_data + i * pixels_per_frame * c::bytes_per_pixel);
+				if (c == sprite_atlas::s_invalid)
+				{
+					handle++;
+					continue;
+				}
+
+				if (i == 0)
+					m_base_coords = c;
+				m_frame_data.push_back({ atlas->get_handle(), c - m_base_coords });
+				added = true;
+				break;*/
+				bool result = add_to_atlas(atlas, color_data, i);
+				if (!result)
+				{
+					handle++;
+					continue;
+				}
+				added = true;
+			}
+			// no room in existing atlases, need to make a new one
+			if (!added)
+			{
+				sprite_atlas* atlas = new sprite_atlas(bank);
+				add_to_atlas(atlas, color_data, i);
+			}
+
+			// MAGE_INFO("<{}, {}> <{}, {}>", m_coords[i].x.get_min(), m_coords[i].x.get_max(), m_coords[i].y.get_min(), m_coords[i].y.get_max());
+		}
 		delete[] color_data;
 	}
 }

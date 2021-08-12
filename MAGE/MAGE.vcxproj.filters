@@ -192,6 +192,9 @@
     <ClInclude Include="src\mage\graphics\texture_options.h" />
     <ClInclude Include="src\platform\graphics\gl\texture_options.h" />
     <ClInclude Include="src\mage\util\range.h" />
+    <ClInclude Include="src\mage\util\point.h" />
+    <ClInclude Include="src\mage\util\rect.h" />
+    <ClInclude Include="src\mage\util\bank.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\mage\application.cpp">

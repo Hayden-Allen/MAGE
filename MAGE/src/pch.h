@@ -71,12 +71,15 @@
 #include "mage/layer/layer.h"
 #include "mage/layer/layer_stack.h"
 
+#include "mage/util/bank.h"
 #include "mage/util/color.h"
 #include "mage/util/dimensional.h"
 #include "mage/util/functions.h"
 #include "mage/util/iterable.h"
+#include "mage/util/point.h"
 #include "mage/util/positional.h"
 #include "mage/util/range.h"
+#include "mage/util/rect.h"
 #include "mage/util/typed.h"
 
 
