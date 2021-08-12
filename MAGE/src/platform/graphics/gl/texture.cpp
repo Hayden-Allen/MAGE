@@ -63,6 +63,11 @@ namespace mage::gl
 		mage::gfx::retained_texture2d::save(out);
 		serialize_texture_options(m_options, out);
 	}
+	void retained_texture2d::save(output_file& out, s_type x, s_type y, s_type w, s_type h) const
+	{
+		mage::gfx::retained_texture2d::save(out, x, y, w, h);
+		serialize_texture_options(m_options, out);
+	}
 	void retained_texture2d::load(input_file& in)
 	{
 		mage::gfx::retained_texture2d::load(in);

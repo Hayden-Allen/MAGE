@@ -7,7 +7,9 @@ namespace n
 	sprite_atlas::sprite_atlas(sprite_atlas_bank* const bank) :
 		mage::dimensional<uint32_t>(c::sprite_atlas_size, c::sprite_atlas_size),
 		m_handle(bank->add(this)),
-		m_texture(nullptr)
+		m_texture(nullptr),
+		m_x_max(0),
+		m_y_max(0)
 	{
 		m_texture = new n::retained_texture2d(m_w, m_h, c::bytes_per_pixel * m_w * m_h, nullptr, s_texture_options);
 		// start inserting at the origin
@@ -19,7 +21,9 @@ namespace n
 	sprite_atlas::sprite_atlas(mage::input_file& in) :
 		mage::dimensional<uint32_t>(c::sprite_atlas_size, c::sprite_atlas_size),
 		m_handle(0),
-		m_texture(new retained_texture2d(m_w, m_h, c::bytes_per_pixel * m_w * m_h, s_texture_options))
+		m_texture(new retained_texture2d(m_w, m_h, c::bytes_per_pixel * m_w * m_h, s_texture_options)),
+		m_x_max(0),
+		m_y_max(0)
 	{
 		load(in);
 	}
@@ -32,7 +36,7 @@ namespace n
 		out.ushort(m_handle);
 
 		// save texture
-		m_texture->save(out);
+		m_texture->save(out, 0, 0, m_x_max, m_y_max);
 
 		// save steps
 		out.ulong(m_x_step.size()).ulong(m_y_step.size());
@@ -87,6 +91,8 @@ namespace n
 		// bounds of new rect
 		const s_type x_start = spot.min.x, x_end = spot.min.x + dims.x;
 		const s_type y_start = spot.min.y, y_end = spot.min.y + dims.y;
+		m_x_max = glm::max(m_x_max, x_end);
+		m_y_max = glm::max(m_y_max, y_end);
 		// insert new steps
 		m_x_step.insert(x_end);
 		m_y_step.insert(y_end);

@@ -38,6 +38,7 @@ namespace mage::gl
 
 
 		void save(output_file& out) const override;
+		void save(output_file& out, s_type x, s_type y, s_type w, s_type h) const override;
 		void load(input_file& in) override;
 		void update(s_type x, s_type y, s_type w, s_type h, const void* const data) override;
 		void bind(uint32_t slot) const

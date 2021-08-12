@@ -71,6 +71,7 @@ namespace n
 		sprite_atlas_bank::handle m_handle;
 		// hardware texture
 		retained_texture2d* m_texture;
+		retained_texture2d::s_type m_x_max, m_y_max;
 		// state used when inserting new textures
 		std::set<s_type> m_x_step, m_y_step;
 		std::multiset<rect, rect_area_comparator> m_starts, m_used;

@@ -64,9 +64,7 @@ namespace mage::gfx
 		static retained_texture2d* create(s_type w, s_type h, size_t count, const uint32_t* const data, const texture_options& options);
 		void update(s_type x, s_type y, s_type w, s_type h, const void* const data) override
 		{
-			MAGE_CORE_ASSERT(x < m_w&& y < m_h, "Invalid retained_texture2d update lower bound <{}, {}> (must be < <{}, {}>)", x, y, m_w, m_h);
-			MAGE_CORE_ASSERT(x + w < m_w&& y + h < m_h, "Invalid retained_texture2d update upper bound <{}, {}> (must be < <{}, {}>)", x, y, m_w, m_h);
-
+			check_bounds(x, y, w, h);
 			const uint32_t* const idata = MAGE_CAST(const uint32_t* const, data);
 			for (size_t i = 0; i < h; i++)
 				for (size_t j = 0; j < w; j++)
@@ -74,17 +72,32 @@ namespace mage::gfx
 		}
 		void save(output_file& out) const override
 		{
-			out.uint(m_w).uint(m_h);
-			out.ulong(m_count);
-			out.write(m_data, m_count);
+			save(out, 0, 0, m_w, m_h);
+		}
+		virtual void save(output_file& out, s_type x, s_type y, s_type w, s_type h) const
+		{
+			check_bounds(x, y, w, h);
+
+			// physical size
+			out.uint(m_w).uint(m_h).ulong(m_count);
+
+			// written size
+			out.uint(x).uint(y).uint(w).uint(h);
+			for (size_t i = 0; i < h; i++)
+				out.write(m_data + (y + i) * m_w + x, w);
 		}
 		void load(input_file& in) override
 		{
+			// physical size
 			m_w = in.uint();
 			m_h = in.uint();
 			m_count = in.ulong();
 			m_data = new uint32_t[m_count];
-			in.read(m_data, m_count);
+
+			// written size
+			const uint32_t x = in.uint(), y = in.uint(), w = in.uint(), h = in.uint();
+			for (size_t i = 0; i < h; i++)
+				in.read(m_data + (y + i) * m_w + x, w);
 		}
 	protected:
 		size_t m_count;
@@ -105,6 +118,14 @@ namespace mage::gfx
 		{
 			for (size_t i = 0; i < count; i++)
 				m_data[i] = (data ? data[i] : 0);
+		}
+
+
+		void check_bounds(s_type x, s_type y, s_type w, s_type h) const
+		{
+			MAGE_CORE_ASSERT(x < m_w && y < m_h, "Invalid retained_texture2d lower bound <{}, {}> (must be < <{}, {}>)", x, y, m_w, m_h);
+			// these are inclusive checks because the loops are exclusive (reach at most value - 1)
+			MAGE_CORE_ASSERT(x + w <= m_w && y + h <= m_h, "Invalid retained_texture2d upper bound <{}, {}> (must be < <{}, {}>)", x, y, m_w, m_h);
 		}
 	};
 
