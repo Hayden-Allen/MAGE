@@ -77,11 +77,21 @@ namespace n
 		}
 		delete[] color_data;
 	}
+	sprite::sprite(mage::input_file& in) :
+		mage::dimensional<uint8_t>(0, 0),
+		m_frame(0),
+		m_frame_count(0),
+		m_frame_time(0),
+		m_base_coords({ 0.f, 1.f }, { 0.f, 1.f })
+	{
+		load(in);
+	}
 
 
 
 	void sprite::save(mage::output_file& out) const
 	{
+		out.uint(m_w).uint(m_h);
 		out.ubyte(m_frame_count).ushort(m_frame_time);
 		m_base_coords.save(out);
 		for (uint8_t i = 0; i < m_frame_count; i++)
@@ -89,6 +99,8 @@ namespace n
 	}
 	void sprite::load(mage::input_file& in)
 	{
+		m_w = in.uint();
+		m_h = in.uint();
 		m_frame_count = in.ubyte();
 		m_frame_time = in.ushort();
 		m_base_coords.load(in);

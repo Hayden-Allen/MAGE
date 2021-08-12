@@ -27,6 +27,7 @@ namespace n
 	void sprite_atlas::save(mage::output_file& out) const
 	{
 		// save texture
+		m_texture->save(out);
 
 		// save steps
 		out.ulong(m_x_step.size()).ulong(m_y_step.size());
@@ -45,6 +46,7 @@ namespace n
 	void sprite_atlas::load(mage::input_file& in)
 	{
 		// load texture
+		m_texture->load(in);
 
 		// load steps
 		size_t x_size = in.ulong(), y_size = in.ulong();

@@ -138,6 +138,7 @@
     <ClInclude Include="src\n\graphics\sprite_atlas.h" />
     <ClInclude Include="src\n\graphics\sprite_atlas_bank.h" />
     <ClInclude Include="src\n\graphics\sprite_atlas_coords.h" />
+    <ClInclude Include="src\n\graphics\sprite_bank.h" />
     <ClInclude Include="src\n\graphics\wrap\camera.h" />
     <ClInclude Include="src\n\graphics\wrap\buffer.h" />
     <ClInclude Include="src\n\graphics\wrap\framebuffer.h" />
@@ -151,6 +152,7 @@
     <ClCompile Include="src\n\graphics\sprite.cpp" />
     <ClCompile Include="src\n\graphics\sprite_atlas.cpp" />
     <ClCompile Include="src\n\graphics\sprite_atlas_bank.cpp" />
+    <ClCompile Include="src\n\graphics\sprite_bank.cpp" />
     <ClCompile Include="src\pch.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>
     </ClCompile>

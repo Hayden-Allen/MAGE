@@ -30,11 +30,13 @@
     <ClInclude Include="src\n\constants.h" />
     <ClInclude Include="src\n\graphics\sprite_atlas_bank.h" />
     <ClInclude Include="src\n\graphics\sprite_atlas_coords.h" />
+    <ClInclude Include="src\n\graphics\sprite_bank.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\pch.cpp" />
     <ClCompile Include="src\n\graphics\sprite.cpp" />
     <ClCompile Include="src\n\graphics\sprite_atlas.cpp" />
     <ClCompile Include="src\n\graphics\sprite_atlas_bank.cpp" />
+    <ClCompile Include="src\n\graphics\sprite_bank.cpp" />
   </ItemGroup>
 </Project>

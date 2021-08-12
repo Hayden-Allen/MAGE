@@ -44,6 +44,7 @@ namespace n
 		};
 	public:
 		sprite(sprite_atlas_bank* const bank, const std::string& fp);
+		sprite(mage::input_file& in);
 		N_DCM(sprite);
 
 

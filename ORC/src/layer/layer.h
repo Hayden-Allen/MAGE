@@ -9,9 +9,9 @@ namespace orc
 	public:
 		layer() :
 			mage::layer("ORC"),
+			m_sprite_bank(nullptr),
+			m_sprite(0),
 			m_atlas_bank(nullptr),
-			m_sprite(nullptr),
-			m_sprite_frame(0),
 			m_framebuffer(nullptr),
 			m_vertex_array(nullptr),
 			m_vertex_buffer(nullptr),
@@ -38,10 +38,11 @@ namespace orc
 
 
 			m_atlas_bank = new n::sprite_atlas_bank();
-			m_sprite = new n::sprite(m_atlas_bank, "res/sprite/newSprite.sprite");
+			m_sprite_bank = new n::sprite_bank();
+			m_sprite = m_sprite_bank->add(new n::sprite(m_atlas_bank, "res/sprite/newSprite.sprite"));
 
 
-			const auto& [x, y] = m_sprite->get_base_coords();
+			const auto& [x, y] = m_sprite_bank->get(m_sprite)->get_base_coords();
 			float vertices[] =
 			{
 				-.5f, -.5f, x.get_min(), y.get_min(),
@@ -57,7 +58,6 @@ namespace orc
 		{
 			MAGE_ERROR("DELETE ORC LAYER");
 			delete m_atlas_bank;
-			delete m_sprite;
 			delete m_framebuffer;
 			delete m_vertex_array;
 			delete m_vertex_buffer;
@@ -78,8 +78,8 @@ namespace orc
 			m_camera->set_zoom(m_camera_zoom);
 
 			m_shader_program->bind();
-			m_sprite->update(n::time());
-			m_shader_program->set_uniform_float2("u_offset", m_sprite->get_current_frame().offset);
+			m_sprite_bank->get(m_sprite)->update(n::time());
+			m_shader_program->set_uniform_float2("u_offset", m_sprite_bank->get(m_sprite)->get_current_frame().offset);
 			m_shader_program->set_uniform_mat4("u_view_projection", m_camera->get_view_projection());
 
 			m_atlas_bank->get(0)->bind(0);
@@ -90,9 +90,9 @@ namespace orc
 			return false;
 		}
 	private:
+		n::sprite_bank* m_sprite_bank;
+		n::sprite_bank::handle m_sprite;
 		n::sprite_atlas_bank* m_atlas_bank;
-		n::sprite* m_sprite;
-		int m_sprite_frame;
 		n::framebuffer* m_framebuffer;
 		n::static_vertex_array* m_vertex_array;
 		n::static_vertex_buffer* m_vertex_buffer;
