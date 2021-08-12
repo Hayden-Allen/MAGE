@@ -64,8 +64,8 @@ namespace mage::gfx
 		static retained_texture2d* create(s_type w, s_type h, size_t count, const uint32_t* const data, const texture_options& options);
 		void update(s_type x, s_type y, s_type w, s_type h, const void* const data) override
 		{
-			MAGE_CORE_ASSERT(x < m_w && y < m_h, "Invalid retained_texture2d update lower bound <{}, {}> (must be < <{}, {}>)", x, y, m_w, m_h);
-			MAGE_CORE_ASSERT(x + w < m_w && y + h < m_h, "Invalid retained_texture2d update upper bound <{}, {}> (must be < <{}, {}>)", x, y, m_w, m_h);
+			MAGE_CORE_ASSERT(x < m_w&& y < m_h, "Invalid retained_texture2d update lower bound <{}, {}> (must be < <{}, {}>)", x, y, m_w, m_h);
+			MAGE_CORE_ASSERT(x + w < m_w&& y + h < m_h, "Invalid retained_texture2d update upper bound <{}, {}> (must be < <{}, {}>)", x, y, m_w, m_h);
 
 			const uint32_t* const idata = MAGE_CAST(const uint32_t* const, data);
 			for (size_t i = 0; i < h; i++)
@@ -76,7 +76,7 @@ namespace mage::gfx
 		{
 			out.uint(m_w).uint(m_h);
 			out.ulong(m_count);
-			out.write(reinterpret_cast<char*>(m_data), m_count * sizeof(uint32_t));
+			out.write(m_data, m_count);
 		}
 		void load(input_file& in) override
 		{
@@ -84,17 +84,20 @@ namespace mage::gfx
 			m_h = in.uint();
 			m_count = in.ulong();
 			m_data = new uint32_t[m_count];
-			in.read(reinterpret_cast<char*>(m_data), m_count * sizeof(uint32_t));
+			in.read(m_data, m_count);
 		}
 	protected:
 		size_t m_count;
 		uint32_t* m_data;
 
+
+		// don't allocate space (used when loading from a file)
 		retained_texture2d(s_type w, s_type h, size_t count) :
 			texture2d(w, h),
 			m_count(count),
 			m_data(nullptr)
 		{}
+		// allocate space, fill with 0's if nullptr given
 		retained_texture2d(s_type w, s_type h, size_t count, const uint32_t* const data) :
 			texture2d(w, h),
 			m_count(count),

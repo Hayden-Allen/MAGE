@@ -12,6 +12,9 @@ namespace n
 		public mage::serializable
 	{
 	private:
+		/**
+		 * Structure to hold all necessary info for a given frame. Index of its containing sprite_atlas and the offset between its texture coordinates and the first frame's texture coordinates
+		 */
 		struct frame_handle : public mage::serializable
 		{
 			sprite_atlas_bank::handle bank = 0;
@@ -31,12 +34,12 @@ namespace n
 
 			void save(mage::output_file& out) const override
 			{
-				out.ubyte(bank);
+				out.ushort(bank);
 				out.uint(N_PUN(uint32_t, offset.x)).uint(N_PUN(uint32_t, offset.y));
 			}
 			void load(mage::input_file& in) override
 			{
-				bank = in.ubyte();
+				bank = in.ushort();
 				uint32_t x = in.uint(), y = in.uint();
 				offset.x = N_PUN(float, x);
 				offset.y = N_PUN(float, y);
@@ -50,6 +53,7 @@ namespace n
 
 		void save(mage::output_file& out) const override;
 		void load(mage::input_file& in) override;
+		void update(const time& t);
 		template<typename T = uint8_t>
 		T get_frame() const
 		{
@@ -63,19 +67,16 @@ namespace n
 		{
 			return m_frame_data[m_frame];
 		}
-		void update(const time& t)
-		{
-			if (m_frame_count > 1 && t - m_last_switch >= m_frame_time)
-			{
-				m_frame = (m_frame + 1) % m_frame_count;
-				m_last_switch = t;
-			}
-		}
 	private:
+		// current frame, number of frames
 		uint8_t m_frame, m_frame_count;
+		// time (ms) that each frame should display for
 		uint16_t m_frame_time;
+		// time at which m_frame was last updated
 		time m_last_switch;
+		// texture coords of first frame
 		sprite_atlas_coords m_base_coords;
+		// data for all frames
 		std::vector<frame_handle> m_frame_data;
 
 

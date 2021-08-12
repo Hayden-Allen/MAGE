@@ -66,7 +66,6 @@ namespace mage
 		void save(mage::output_file& out) const final override
 		{
 			const size_t count = this->get_size();
-			MAGE_CORE_INFO("SAVE BANK {}", count);
 			out.ulong(count);
 			for (size_t i = 0; i < count; i++)
 				this->m_bank[i]->save(out);
@@ -74,7 +73,6 @@ namespace mage
 		void load(mage::input_file& in) final override
 		{
 			this->m_next = in.ulong();
-			MAGE_CORE_INFO("LOAD BANK {}", this->m_next);
 			for (size_t i = 0; i < this->m_next; i++)
 				this->m_bank[i] = new T(in);
 		}

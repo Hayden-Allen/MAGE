@@ -51,9 +51,10 @@ namespace mage
 		{
 			return (MAGE_CAST(uint64_t, uint()) << 32) | uint();
 		}
-		void read(char* const buf, size_t count)
+		template<typename T>
+		void read(T* const buf, size_t count)
 		{
-			m_file.read(buf, count);
+			m_file.read(reinterpret_cast<char* const>(buf), count * sizeof(T) / sizeof(char));
 		}
 	};
 
@@ -84,9 +85,10 @@ namespace mage
 		{
 			return put(l, 8);
 		}
-		output_file& write(const char* const data, size_t count)
+		template<typename T>
+		output_file& write(const T* const data, size_t count)
 		{
-			m_file.write(data, count);
+			m_file.write(reinterpret_cast<const char* const>(data), count * sizeof(T) / sizeof(char));
 			return *this;
 		}
 	private:

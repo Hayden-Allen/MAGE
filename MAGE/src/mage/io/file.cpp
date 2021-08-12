@@ -7,7 +7,7 @@ namespace mage
 	{
 		MAGE_ASSERT(bytes <= 8, "Writing more than 8 bytes at a time is unsupported");
 
-		for (int i = bytes - 1; i >= 0; i--)
+		for (int i = MAGE_CAST(int, bytes - 1); i >= 0; i--)
 		{
 			/*const uint64_t off = MAGE_CAST(uint64_t, i) * 8;
 			const uint64_t mask = MAGE_CAST(uint64_t, 0xff) << off;

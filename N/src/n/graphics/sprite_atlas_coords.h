@@ -3,8 +3,12 @@
 
 namespace n
 {
+	/**
+	 * Texture coordinate data within a sprite atlas
+	 */
 	struct sprite_atlas_coords final : public mage::serializable
 	{
+		// initialize to invalid values
 		mage::range<float> x = { -1.f, 0.f }, y = { -1.f, 0.f };
 
 
@@ -43,8 +47,12 @@ namespace n
 		{
 			return x == other.x && y == other.y;
 		}
+		/**
+		 * compute positional difference between two pairs of coords
+		 */
 		glm::vec2 operator-(const sprite_atlas_coords& other) const
 		{
+			MAGE_ASSERT(x.get_span() == other.x.get_span() && y.get_span() == other.y.get_span(), "Cannot subtract sprite_atlas_coords of different dimensions");
 			return { x.get_min() - other.x.get_min(), y.get_min() - other.y.get_min() };
 		}
 		bool is_invalid() const

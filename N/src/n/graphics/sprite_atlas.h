@@ -54,14 +54,24 @@ namespace n
 			return m_handle;
 		}
 	private:
-		constexpr static mage::range_contains s_contains = { false, false };
+		// just to make code cleaner
+		constexpr static mage::range_contains s_contains_exc = { false, false };
 		constexpr static mage::range_overlaps s_overlaps_inc = { { true, true }, { true, true } };
 		constexpr static mage::range_overlaps s_overlaps_exc = { { false, false }, { false, false } };
-		constexpr static texture_options s_texture_options = { .min_filter = texture_min_filter::nearest, .mag_filter = texture_mag_filter::nearest, .wrap_s = texture_wrap_s::clamp_border, .wrap_t = texture_wrap_t::clamp_border };
+		constexpr static texture_options s_texture_options =
+		{
+			.min_filter = texture_min_filter::nearest,
+			.mag_filter = texture_mag_filter::nearest,
+			.wrap_s = texture_wrap_s::clamp_border,
+			.wrap_t = texture_wrap_t::clamp_border
+		};
 
 
+		// index of this atlas in its containing bank
 		sprite_atlas_bank::handle m_handle;
+		// hardware texture
 		retained_texture2d* m_texture;
+		// state used when inserting new textures
 		std::set<s_type> m_x_step, m_y_step;
 		std::multiset<rect, rect_area_comparator> m_starts, m_used;
 

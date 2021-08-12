@@ -9,9 +9,11 @@ namespace n
 		m_handle(bank->add(this)),
 		m_texture(nullptr)
 	{
-		m_texture = new n::retained_texture2d(m_w, m_h, m_w * m_h * c::bytes_per_pixel, nullptr, s_texture_options);
+		m_texture = new n::retained_texture2d(m_w, m_h, c::bytes_per_pixel * m_w * m_h, nullptr, s_texture_options);
+		// start inserting at the origin
 		m_x_step.insert(0);
 		m_y_step.insert(0);
+		// the whole texture is available
 		m_starts.insert({ 0, 0, c::sprite_atlas_size, c::sprite_atlas_size });
 	}
 	sprite_atlas::sprite_atlas(mage::input_file& in) :
@@ -23,8 +25,12 @@ namespace n
 	}
 
 
+
 	void sprite_atlas::save(mage::output_file& out) const
 	{
+		// save index in bank
+		out.ushort(m_handle);
+
 		// save texture
 		m_texture->save(out);
 
@@ -44,6 +50,9 @@ namespace n
 	}
 	void sprite_atlas::load(mage::input_file& in)
 	{
+		// load index in bank
+		m_handle = in.ushort();
+
 		// load texture
 		m_texture->load(in);
 
@@ -117,14 +126,16 @@ namespace n
 	std::vector<sprite_atlas::point> sprite_atlas::gen_points() const
 	{
 		std::vector<point> points;
+		// generate all possible points of interest
 		for (s_type x : m_x_step)
 		{
 			for (s_type y : m_y_step)
 			{
 				point p = { x, y };
+				// if the current point is within an existing rectangle, ignore it
 				bool contained = false;
 				for (const rect& r : m_used)
-					if (contained = r.contains(p, s_contains))
+					if (contained = r.contains(p, s_contains_exc))
 						break;
 				if (!contained)
 					points.push_back(p);
@@ -134,20 +145,25 @@ namespace n
 	}
 	std::vector<sprite_atlas::rect> sprite_atlas::gen_rects(const std::vector<point>& points) const
 	{
+		// given points of interest, generate rects between every pair of points
 		size_t index = 0;
 		std::unordered_set<rect, rect_hash> possible;
 		for (const point& p : points)
 		{
+			// cache the largest rect so far
 			rect cur = { p, p };
 			for (const point& q : points)
 			{
+				// create a rect between p and q (swap things around so that min remains the top-left corner and max remains the bottom-right corner)
 				const point min = { glm::min(p.x, q.x), glm::min(p.y, q.y) };
 				const point max = { glm::max(p.x, q.x), glm::max(p.y, q.y) };
 				rect test = { min, max };
 
-				if (test.get_area() <= cur.get_area())
+				// if p == q or this rect is smaller than the cached one
+				if (test.get_area() == 0 || test.get_area() <= cur.get_area())
 					continue;
 
+				// if this rect intersects any used space, ignore it
 				bool intersects = false;
 				for (const rect& r : m_used)
 				{
@@ -157,6 +173,7 @@ namespace n
 						break;
 				}
 
+				// otherwise, this is the largest rect so far
 				if (!intersects)
 					cur = test;
 			}
@@ -167,6 +184,7 @@ namespace n
 		for (auto& r : possible)
 			MAGE_INFO("[<{}, {}>, <{}, {}>]", r.min.x, r.min.y, r.max.x, r.max.y);*/
 
+		// filter generated rects such that the smallest list of rects that cover the same area remain; remove any rects that are inside other rects
 		std::vector<rect> result;
 		for (const rect& a : possible)
 		{

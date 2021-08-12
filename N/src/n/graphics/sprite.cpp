@@ -51,29 +51,30 @@ namespace n
 			}
 		}
 
-		// upload color data to GPU
+
 		m_frame_data.reserve(m_frame_count);
+		// current atlas index. Because all frames are the same size, we don't need to try inserting every frame into every atlas; if one frame doesn't fit, the rest won't either.
 		sprite_atlas_bank::handle handle = 0;
 		for (size_t i = 0; i < m_frame_count; i++)
 		{
+			// attempt to add current frame to remaining existing atlases
 			bool added = false;
 			while (!added && handle < bank->get_size())
 			{
 				const auto& atlas = bank->get(handle);
 				bool result = add_to_atlas(atlas, color_data, i);
+				// unable to add to current atlas, go to the next one
 				if (!result)
 				{
 					handle++;
 					continue;
 				}
+				// add successful, move to the next frame
 				added = true;
 			}
 			// no room in existing atlases, need to make a new one
 			if (!added)
-			{
-				sprite_atlas* atlas = new sprite_atlas(bank);
-				add_to_atlas(atlas, color_data, i);
-			}
+				add_to_atlas(new sprite_atlas(bank), color_data, i);
 		}
 		delete[] color_data;
 	}
@@ -111,6 +112,15 @@ namespace n
 			frame_handle h;
 			h.load(in);
 			m_frame_data.push_back(h);
+		}
+	}
+	void sprite::update(const time& t)
+	{
+		// if this sprite has multiple frames and enough time has passed, advance the frame
+		if (m_frame_count > 1 && t - m_last_switch >= m_frame_time)
+		{
+			m_frame = (m_frame + 1) % m_frame_count;
+			m_last_switch = t;
 		}
 	}
 
