@@ -15,4 +15,15 @@ namespace mage
 	protected:
 		serializable() {}
 	};
+
+
+
+	class constructable_serializable : public serializable
+	{
+	public:
+		MAGE_DCM(constructable_serializable);
+	protected:
+		constructable_serializable() {}
+		constructable_serializable(input_file& in) {}
+	};
 }

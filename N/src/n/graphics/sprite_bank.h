@@ -4,14 +4,14 @@
 namespace n
 {
 	class sprite;
-	class sprite_atlas_bank;
 
-	class sprite_bank final :
-		public mage::bank<sprite, uint16_t, 65536>,
-		public mage::serializable
+	class sprite_bank final : public mage::serializable_bank<sprite, uint16_t, 65536>
 	{
 	public:
-		void save(mage::output_file& out) const override;
-		void load(mage::input_file& in) override;
+		sprite_bank() {}
+		sprite_bank(mage::input_file& in) :
+			mage::serializable_bank<sprite, uint16_t, 65536>(in)
+		{}
+		N_DCM(sprite_bank);
 	};
 }

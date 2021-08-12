@@ -48,4 +48,41 @@ namespace mage
 			m_bank{ nullptr }
 		{}
 	};
+
+
+
+	/**
+	 * T must implement the constructable_serializable interface
+	 */
+	template<typename T, typename HANDLE, size_t COUNT>
+	class serializable_bank :
+		public bank<T, HANDLE, COUNT>,
+		public constructable_serializable
+	{
+	public:
+		MAGE_DCM(serializable_bank);
+
+
+		virtual void save(mage::output_file& out) const override
+		{
+			const size_t count = this->get_size();
+			out.ulong(count);
+			for (size_t i = 0; i < count; i++)
+				this->m_bank[i]->save(out);
+		}
+		virtual void load(mage::input_file& in) override
+		{
+			this->m_next = in.ulong();
+			for (size_t i = 0; i < this->m_next; i++)
+			{
+				this->m_bank[i] = new T(in);
+				this->m_bank[i]->load(in);
+			}
+		}
+	protected:
+		serializable_bank() {}
+		serializable_bank(input_file& in) :
+			constructable_serializable(in)
+		{}
+	};
 }

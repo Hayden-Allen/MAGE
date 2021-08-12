@@ -21,7 +21,13 @@ namespace n
 		m_y_step.insert(0);
 		m_starts.insert({ 0, 0, c::sprite_atlas_size, c::sprite_atlas_size });
 	}
-
+	sprite_atlas::sprite_atlas(mage::input_file& in) :
+		mage::dimensional<uint32_t>(c::sprite_atlas_size, c::sprite_atlas_size),
+		m_handle(0),
+		m_texture(nullptr)
+	{
+		load(in);
+	}
 
 
 	void sprite_atlas::save(mage::output_file& out) const
