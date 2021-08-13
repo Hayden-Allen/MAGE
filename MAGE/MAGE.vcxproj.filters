@@ -170,9 +170,6 @@
     <ClInclude Include="src\platform\graphics\gl\vertex_array.h">
       <Filter>platform\graphics\gl</Filter>
     </ClInclude>
-    <ClInclude Include="src\platform\graphics\gl\vertex_array_description.h">
-      <Filter>platform\graphics\gl</Filter>
-    </ClInclude>
     <ClInclude Include="src\platform\os\windows\windows_imgui_layer.h">
       <Filter>platform\os\windows</Filter>
     </ClInclude>

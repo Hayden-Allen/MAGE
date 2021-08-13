@@ -41,6 +41,7 @@ namespace mage::gl
 		void set_uniform_float3(const std::string& name, const glm::vec3& v) const override;
 		void set_uniform_float4(const std::string& name, const glm::vec4& v) const override;
 		void set_uniform_float_array(const std::string& name, const float* const f, size_t count) const override;
+		void set_uniform_float2_array(const std::string& name, const glm::vec2* const f, size_t count) const override;
 		void set_uniform_mat3(const std::string& name, const glm::mat3& m) const override;
 		void set_uniform_mat4(const std::string& name, const glm::mat4& m) const override;
 	private:

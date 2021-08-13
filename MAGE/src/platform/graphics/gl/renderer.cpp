@@ -13,8 +13,8 @@ namespace mage::gfx
 	}
 	void renderer::draw(const mage::gfx::index_buffer* const indices, const mage::gfx::vertex_array* const vertices)
 	{
-		indices->bind();
 		vertices->bind();
+		indices->bind();
 		glDrawElements(GL_TRIANGLES, indices->get_count<GLsizei>(), mage::gfx::get_shader_type<mage::gfx::index_buffer::s_type>(), nullptr);
 	}
 	void renderer::draw(const mage::gfx::shader_program* const shader, const mage::gfx::index_buffer* const indices, const mage::gfx::vertex_array* const vertices)

@@ -200,7 +200,6 @@
     <ClInclude Include="src\platform\graphics\gl\texture.h" />
     <ClInclude Include="src\platform\graphics\gl\texture_options.h" />
     <ClInclude Include="src\platform\graphics\gl\vertex_array.h" />
-    <ClInclude Include="src\platform\graphics\gl\vertex_array_description.h" />
     <ClInclude Include="src\platform\os\windows\windows_imgui_layer.h" />
     <ClInclude Include="src\platform\os\windows\windows_input.h" />
     <ClInclude Include="src\platform\os\windows\windows_window.h" />

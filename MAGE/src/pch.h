@@ -101,7 +101,6 @@
 	#include "platform/graphics/gl/shader_type.h"
 	#include "platform/graphics/gl/texture.h"
 	#include "platform/graphics/gl/vertex_array.h"
-	#include "platform/graphics/gl/vertex_array_description.h"
 #endif
 
 

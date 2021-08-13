@@ -27,8 +27,8 @@ namespace n
 	(
 		static_vertex_buffer,
 		static_vertex_buffer,
-		(s_type* indices, size_t count),
-		(indices, count)
+		(s_type* vertices, size_t count),
+		(vertices, count)
 	);
 
 
@@ -37,7 +37,7 @@ namespace n
 	(
 		dynamic_vertex_buffer,
 		dynamic_vertex_buffer,
-		(s_type* indices, size_t count),
-		(indices, count)
+		(s_type* vertices, size_t count),
+		(vertices, count)
 	);
 }

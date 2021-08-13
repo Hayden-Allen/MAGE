@@ -3,8 +3,9 @@
 
 namespace n
 {
-	sprite::sprite(sprite_atlas_bank* const bank, const std::string& fp) :
+	sprite::sprite(sprite_bank* const sb, sprite_atlas_bank* const ab, const std::string& fp) :
 		mage::dimensional<uint8_t>(0, 0),
+		m_handle(sb->add(this)),
 		m_frame(0),
 		m_frame_count(0),
 		m_frame_time(0),
@@ -59,9 +60,9 @@ namespace n
 		{
 			// attempt to add current frame to remaining existing atlases
 			bool added = false;
-			while (!added && handle < bank->get_size())
+			while (!added && handle < ab->get_size())
 			{
-				const auto& atlas = bank->get(handle);
+				const auto& atlas = ab->get(handle);
 				bool result = add_to_atlas(atlas, color_data, i);
 				// unable to add to current atlas, go to the next one
 				if (!result)
@@ -74,7 +75,7 @@ namespace n
 			}
 			// no room in existing atlases, need to make a new one
 			if (!added)
-				add_to_atlas(new sprite_atlas(bank), color_data, i);
+				add_to_atlas(new sprite_atlas(ab), color_data, i);
 		}
 		delete[] color_data;
 	}
@@ -114,7 +115,7 @@ namespace n
 			m_frame_data.push_back(h);
 		}
 	}
-	void sprite::update(const time& t)
+	void sprite::update(const timestep& t)
 	{
 		// if this sprite has multiple frames and enough time has passed, advance the frame
 		if (m_frame_count > 1 && t - m_last_switch >= m_frame_time)
@@ -134,6 +135,7 @@ namespace n
 		if (c.is_invalid())
 			return false;
 
+		m_atlases.insert(atlas->get_handle());
 		// first frame
 		if (i == 0)
 			m_base_coords = c;

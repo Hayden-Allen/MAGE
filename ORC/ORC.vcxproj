@@ -156,6 +156,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="res\shader\chunk_f.glsl" />
+    <None Include="res\shader\chunk_v.glsl" />
     <None Include="res\shader\fb_f.glsl" />
     <None Include="res\shader\fb_v.glsl" />
     <None Include="res\shader\texture_f.glsl" />

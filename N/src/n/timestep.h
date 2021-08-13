@@ -3,15 +3,15 @@
 
 namespace n
 {
-	class time final
+	class timestep final
 	{
 	public:
-		time() :
+		timestep() :
 			m_time(std::chrono::steady_clock::now())
 		{}
 
 
-		float operator-(const time& other) const
+		float operator-(const timestep& other) const
 		{
 			return std::chrono::duration<float, std::milli>(m_time - other.m_time).count();
 		}

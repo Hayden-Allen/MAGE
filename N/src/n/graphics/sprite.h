@@ -2,8 +2,9 @@
 #include "pch.h"
 #include "sprite_atlas.h"
 #include "sprite_atlas_bank.h"
+#include "sprite_bank.h"
 #include "wrap/texture.h"
-#include "n/time.h"
+#include "n/timestep.h"
 
 namespace n
 {
@@ -46,14 +47,14 @@ namespace n
 			}
 		};
 	public:
-		sprite(sprite_atlas_bank* const bank, const std::string& fp);
+		sprite(sprite_bank* const sb, sprite_atlas_bank* const ab, const std::string& fp);
 		sprite(mage::input_file& in);
 		N_DCM(sprite);
 
 
 		void save(mage::output_file& out) const override;
 		void load(mage::input_file& in) override;
-		void update(const time& t);
+		void update(const timestep& t);
 		template<typename T = uint8_t>
 		T get_frame() const
 		{
@@ -67,13 +68,23 @@ namespace n
 		{
 			return m_frame_data[m_frame];
 		}
+		const sprite_bank::handle get_handle() const
+		{
+			return m_handle;
+		}
+		const std::unordered_set<sprite_atlas_bank::handle>& get_atlases() const 
+		{
+			return m_atlases;
+		}
 	private:
+		sprite_bank::handle m_handle;
+		std::unordered_set<sprite_atlas_bank::handle> m_atlases;
 		// current frame, number of frames
 		uint8_t m_frame, m_frame_count;
 		// time (ms) that each frame should display for
 		uint16_t m_frame_time;
 		// time at which m_frame was last updated
-		time m_last_switch;
+		timestep m_last_switch;
 		// texture coords of first frame
 		sprite_atlas_coords m_base_coords;
 		// data for all frames

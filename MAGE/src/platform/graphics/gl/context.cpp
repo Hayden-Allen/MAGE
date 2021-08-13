@@ -20,6 +20,14 @@ namespace mage::gfx
 
 namespace mage::gl
 {
+	static void error_callback(GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei length, const GLchar* msg, const void* user)
+	{
+		if(severity == GL_DEBUG_SEVERITY_HIGH)
+			MAGE_CORE_ERROR("[GL Error {}]: {}", id, msg);
+	}
+
+
+
 	bool context::s_initialized = false;
 
 	
@@ -43,5 +51,7 @@ namespace mage::gl
 		glEnable(GL_BLEND);
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 		glEnable(GL_DEPTH_TEST);
+		glEnable(GL_DEBUG_OUTPUT);
+		glDebugMessageCallback(error_callback, nullptr);
 	}
 }

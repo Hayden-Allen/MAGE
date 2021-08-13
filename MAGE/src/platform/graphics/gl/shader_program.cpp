@@ -122,6 +122,10 @@ namespace mage::gl
 	{
 		set_uniform(glUniform1fv, name, MAGE_CAST(GLsizei, count), f);
 	}
+	void shader_program::set_uniform_float2_array(const std::string& name, const glm::vec2* const f, size_t count) const
+	{
+		set_uniform(glUniform2fv, name, MAGE_CAST(GLsizei, count), (const GLfloat*)f);
+	}
 	void shader_program::set_uniform_mat3(const std::string& name, const glm::mat3& m) const
 	{
 		set_uniform(glUniformMatrix3fv, name, 1, GL_FALSE, &m[0][0]);

@@ -1,7 +1,6 @@
 #include "pch.h"
 #include "shader_type.h"
 #include "vertex_array.h"
-#include "vertex_array_description.h"
 
 namespace mage::gfx
 {
