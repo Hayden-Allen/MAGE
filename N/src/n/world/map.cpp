@@ -21,7 +21,9 @@ namespace n
 
 	void map::draw(const timestep& t, const shader_program& shader)
 	{
-		shader.bind();
+		/**
+		 * TODO bad
+		 */
 		for (chunk* c : m_chunks)
 			c->draw(t, m_sprites, m_atlases, shader);
 	}

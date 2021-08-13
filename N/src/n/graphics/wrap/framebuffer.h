@@ -15,7 +15,7 @@ namespace n
 			m_vertex_array(nullptr),
 			m_vertex_buffer(nullptr),
 			m_index_buffer(nullptr),
-			m_shader_program(new shader_program(vertex, fragment, p))
+			m_shader_program(new shader_program(vertex, fragment, false, p))
 		{
 			uint32_t indices[] = { 0, 1, 2, 0, 2, 3 };
 			m_index_buffer = new n::static_index_buffer(indices, mage::arrlen(indices));

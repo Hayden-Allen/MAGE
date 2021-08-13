@@ -19,7 +19,7 @@ namespace n
 			m_atlases(other.m_atlases),
 			m_tiles(other.m_tiles)
 		{}
-		sprite_batch_constructor(sprite_batch_constructor&& other) :
+		sprite_batch_constructor(sprite_batch_constructor&& other) noexcept :
 			m_atlases(other.m_atlases),
 			m_tiles(other.m_tiles)
 		{}
@@ -45,20 +45,22 @@ namespace n
 	public:
 		sprite_batch(const sprite_batch_constructor& constructor);
 		N_DC(sprite_batch);
-		sprite_batch(sprite_batch&& other) :
+		sprite_batch(sprite_batch&& other) noexcept :
 			m_indices(other.m_indices),
 			m_vertices(other.m_vertices),
 			m_vertex_array(other.m_vertex_array),
+			m_sprite_count(other.m_sprite_count),
 			m_atlases(other.m_atlases),
 			m_sprites(other.m_sprites),
-			m_sprite_atlases(other.m_sprite_atlases),
-			m_offsets(other.m_offsets)
+			m_offsets(other.m_offsets),
+			m_texture_indices(other.m_texture_indices)
 		{
 			other.m_indices = nullptr;
 			other.m_vertices = nullptr;
 			other.m_vertex_array = nullptr;
-			other.m_sprite_atlases = nullptr;
+			other.m_sprites = nullptr;
 			other.m_offsets = nullptr;
+			other.m_texture_indices = nullptr;
 		}
 		~sprite_batch();
 
@@ -68,10 +70,10 @@ namespace n
 		static_index_buffer* m_indices;
 		static_vertex_buffer* m_vertices;
 		static_vertex_array* m_vertex_array;
-		std::vector<sprite_atlas_bank::handle> m_atlases;
-		std::vector<sprite_bank::handle> m_sprites;
-		sprite_atlas_bank::handle* m_sprite_atlases;
+		size_t m_sprite_count;
+		std::unordered_map<sprite_atlas_bank::handle, size_t> m_atlases;
+		sprite_bank::handle* m_sprites;
 		glm::vec2* m_offsets;
-
+		int* m_texture_indices;
 	};
 }

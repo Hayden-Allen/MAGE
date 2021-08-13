@@ -11,7 +11,7 @@ namespace n
 		m_x_max(0),
 		m_y_max(0)
 	{
-		m_texture = new n::retained_texture2d(m_w, m_h, c::bytes_per_pixel * m_w * m_h, nullptr, s_texture_options);
+		m_texture = new n::retained_texture2d(m_w, m_h, c::bytes_per_sprite_pixel * m_w * m_h, nullptr, s_texture_options);
 		// start inserting at the origin
 		m_x_step.insert(0);
 		m_y_step.insert(0);
@@ -21,7 +21,7 @@ namespace n
 	sprite_atlas::sprite_atlas(mage::input_file& in) :
 		mage::dimensional<uint32_t>(c::sprite_atlas_size, c::sprite_atlas_size),
 		m_handle(0),
-		m_texture(new retained_texture2d(m_w, m_h, c::bytes_per_pixel * m_w * m_h, s_texture_options)),
+		m_texture(new retained_texture2d(m_w, m_h, c::bytes_per_sprite_pixel* m_w * m_h, s_texture_options)),
 		m_x_max(0),
 		m_y_max(0)
 	{

@@ -14,15 +14,15 @@ namespace n
 		mage::input_file data(fp);
 
 		// info
-		m_w = data.ubyte() * c::pixels_per_side;
-		m_h = data.ubyte() * c::pixels_per_side;
+		m_w = data.ubyte() * c::pixels_per_sprite_side;
+		m_h = data.ubyte() * c::pixels_per_sprite_side;
 		m_frame_count = data.ubyte();
-		MAGE_ASSERT(m_frame_count <= c::max_frame_count, "Sprites cannot have more than {} frames", c::max_frame_count);
+		MAGE_ASSERT(m_frame_count <= c::max_sprite_frame_count, "Sprites cannot have more than {} frames", c::max_sprite_frame_count);
 		m_frame_time = data.ushort();
 
 		// palette
-		uint8_t r[c::color_count], g[c::color_count], b[c::color_count];
-		for (int i = 0; i < c::color_count; i++)
+		uint8_t r[c::sprite_color_count], g[c::sprite_color_count], b[c::sprite_color_count];
+		for (int i = 0; i < c::sprite_color_count; i++)
 		{
 			r[i] = data.ubyte();
 			g[i] = data.ubyte();
@@ -31,24 +31,24 @@ namespace n
 
 		// generate color data from palette indices
 		const size_t pixels_per_frame = m_w * m_h;
-		uint8_t* const color_data = new uint8_t[c::bytes_per_pixel * pixels_per_frame * m_frame_count];
+		uint8_t* const color_data = new uint8_t[c::bytes_per_sprite_pixel * pixels_per_frame * m_frame_count];
 		for (size_t i = 0; i < m_frame_count; i++)
 		{
 			// base address of current frame
-			const size_t off = i * pixels_per_frame * c::bytes_per_pixel;
-			for (size_t j = 0; j < pixels_per_frame * c::bytes_per_pixel; j += c::bytes_per_pixel)
+			const size_t off = i * pixels_per_frame * c::bytes_per_sprite_pixel;
+			for (size_t j = 0; j < pixels_per_frame * c::bytes_per_sprite_pixel; j += c::bytes_per_sprite_pixel)
 			{
 				// coordinates of current pixel
 				// flip y because OpenGL expects data from the bottom up
-				const size_t x = (j / c::bytes_per_pixel) % m_w;
-				const size_t y = (m_h - 1) - (j / c::bytes_per_pixel) / m_w;
-				const size_t index = off + (y * c::pixels_per_side + x) * c::bytes_per_pixel;
+				const size_t x = (j / c::bytes_per_sprite_pixel) % m_w;
+				const size_t y = (m_h - 1) - (j / c::bytes_per_sprite_pixel) / m_w;
+				const size_t index = off + (y * c::pixels_per_sprite_side + x) * c::bytes_per_sprite_pixel;
 				// palette index of current pixel. 16 signifies empty
 				const uint8_t color = data.ubyte();
-				color_data[index + 0] = (color == c::color_count ? 0 : r[color]);
-				color_data[index + 1] = (color == c::color_count ? 0 : g[color]);
-				color_data[index + 2] = (color == c::color_count ? 0 : b[color]);
-				color_data[index + 3] = (color == c::color_count ? 0 : 255);
+				color_data[index + 0] = (color == c::sprite_color_count ? 0 : r[color]);
+				color_data[index + 1] = (color == c::sprite_color_count ? 0 : g[color]);
+				color_data[index + 2] = (color == c::sprite_color_count ? 0 : b[color]);
+				color_data[index + 3] = (color == c::sprite_color_count ? 0 : 255);
 			}
 		}
 
@@ -130,7 +130,7 @@ namespace n
 	bool sprite::add_to_atlas(sprite_atlas* const atlas, const uint8_t* const color_data, size_t i)
 	{
 		// attempt to add
-		const auto& c = atlas->insert(m_w, m_h, color_data + i * m_w * m_h * c::bytes_per_pixel);
+		const auto& c = atlas->insert(m_w, m_h, color_data + i * m_w * m_h * c::bytes_per_sprite_pixel);
 		// given atlas doesn't have room for this sprite
 		if (c.is_invalid())
 			return false;

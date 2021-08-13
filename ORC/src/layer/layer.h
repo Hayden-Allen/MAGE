@@ -10,13 +10,6 @@ namespace orc
 		layer() :
 			mage::layer("ORC"),
 			m_map(nullptr),
-			/*m_sprite_bank(nullptr),
-			m_sprite(0),
-			m_atlas_bank(nullptr),*/
-			m_framebuffer(nullptr),
-			m_vertex_array(nullptr),
-			m_vertex_buffer(nullptr),
-			m_index_buffer(nullptr),
 			m_shader_program(nullptr),
 			m_camera(nullptr),
 			m_camera_pos({ 0.f, 0.f, 0.f }),
@@ -27,16 +20,7 @@ namespace orc
 
 			m_framebuffer = new n::framebuffer(*this, 1280, 720, "res/shader/fb_v.glsl", "res/shader/fb_f.glsl");
 
-		
-
-			m_shader_program = new n::shader_program("res/shader/chunk_v.glsl", "res/shader/chunk_f.glsl");
-			int samplers[32];
-			for (size_t i = 0; i < 32; i++)
-				samplers[i] = i;
-			m_shader_program->set_uniform_int_array("u_textures", samplers, 32);
-			/*m_shader_program = new n::shader_program("res/shader/texture_v.glsl", "res/shader/texture_f.glsl");
-			m_shader_program->set_uniform_int("u_texture", 0);*/
-
+			m_shader_program = new n::shader_program("res/shader/chunk_v.glsl", "res/shader/chunk_f.glsl", true);
 
 			m_camera = new n::camera(*this, 1.6f, .9f, m_camera_pos, m_camera_rotation, m_camera_zoom);
 
@@ -62,34 +46,16 @@ namespace orc
 			n::sprite_bank* sb = new n::sprite_bank();
 			n::sprite_atlas_bank* ab = new n::sprite_atlas_bank();
 			n::sprite* sprite = new n::sprite(sb, ab, "res/sprite/newSprite.sprite");
-
-			n::chunk* chunk = new n::chunk({ { sprite, { {0.f, 0.f}, {1.f, 1.f} } } });
+			n::chunk* chunk = new n::chunk({ { sprite, { {-.5f, -.5f}, {.5f, .5f} } } });
 			m_map = new n::map(ab, sb, { chunk });
-
-
-			/*uint32_t indices[] = { 0, 1, 2, 0, 2, 3 };
-			m_index_buffer = new n::static_index_buffer(indices, mage::arrlen(indices));
-			const auto& [x, y] = sprite->get_base_coords();
-			float vertices[] =
-			{
-				-.5f, -.5f, x.get_min(), y.get_min(),
-				 .5f, -.5f,	x.get_max(), y.get_min(),
-				 .5f,  .5f,	x.get_max(), y.get_max(),
-				-.5f,  .5f,	x.get_min(), y.get_max()
-			};
-			m_vertex_buffer = new n::static_vertex_buffer(vertices, mage::arrlen(vertices));
-			m_vertex_array = new n::static_vertex_array(m_vertex_buffer, { mage::gfx::shader_type::float2, mage::gfx::shader_type::float2 });*/
+			// TODO save/load map
 		}
 		MAGE_DCM(layer);
 		~layer()
 		{
 			MAGE_ERROR("DELETE ORC LAYER");
 			delete m_map;
-			// delete m_atlas_bank;
 			delete m_framebuffer;
-			delete m_vertex_array;
-			delete m_vertex_buffer;
-			delete m_index_buffer;
 			delete m_shader_program;
 			delete m_camera;
 		}
@@ -101,19 +67,14 @@ namespace orc
 			m_framebuffer->bind();
 			mage::gfx::renderer::clear();
 
+			// update camera values from imgui_layer
 			m_camera->set_pos(m_camera_pos);
 			m_camera->set_rotation(m_camera_rotation);
 			m_camera->set_zoom(m_camera_zoom);
 
-			/*m_shader_program->bind();
-			m_sprite_bank->get(m_sprite)->update(n::timestep());
-			m_shader_program->set_uniform_float2("u_offset", m_sprite_bank->get(m_sprite)->get_current_frame().offset);
-			m_shader_program->set_uniform_mat4("u_view_projection", m_camera->get_view_projection());
-
-			m_atlas_bank->get(0)->bind(0);
-			mage::gfx::renderer::draw(m_index_buffer, m_vertex_array);*/
+			// upload camera and draw map
 			m_shader_program->bind();
-			m_shader_program->set_uniform_mat4("u_view_projection", m_camera->get_view_projection());
+			m_shader_program->set_uniform_mat4(n::c::shader_camera, m_camera->get_view_projection());
 			m_map->draw(n::timestep(), *m_shader_program);
 
 			// draw framebuffer onto screen
@@ -122,13 +83,7 @@ namespace orc
 		}
 	private:
 		n::map* m_map;
-		// n::sprite_bank* m_sprite_bank;
-		// n::sprite_bank::handle m_sprite;
-		// n::sprite_atlas_bank* m_atlas_bank;
 		n::framebuffer* m_framebuffer;
-		n::static_vertex_array* m_vertex_array;
-		n::static_vertex_buffer* m_vertex_buffer;
-		n::static_index_buffer* m_index_buffer;
 		n::shader_program* m_shader_program;
 		n::camera* m_camera;
 		glm::vec3 m_camera_pos;
