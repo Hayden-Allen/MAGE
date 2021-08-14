@@ -28,19 +28,20 @@ namespace orc
 			/*constexpr bool save = false;
 			if (save)
 			{
-				m_atlas_bank = new n::sprite_atlas_bank();
-				m_sprite_bank = new n::sprite_bank();
-				m_sprite = (new n::sprite(m_sprite_bank, m_atlas_bank, "res/sprite/newSprite.sprite"))->get_handle();
-				mage::output_file ab("res/ab.mage"), sb("res/sb.mage");
-				m_atlas_bank->save(ab);
-				m_sprite_bank->save(sb);
+				n::sprite_atlas_bank* sab = new n::sprite_atlas_bank();
+				n::sprite_bank* sb = new n::sprite_bank();
+				n::sprite_bank::handle s = (new n::sprite(sb, sab, "res/sprite/newSprite.sprite"))->get_handle();
+				mage::output_file sabf("res/ab.mage"), sbf("res/sb.mage");
+				sab->save(sabf);
+				sb->save(sbf);
 			}
 			else
 			{
-				mage::input_file ab("res/ab.mage"), sb("res/sb.mage");
-				m_atlas_bank = new n::sprite_atlas_bank(ab);
-				m_sprite_bank = new n::sprite_bank(sb);
-			}*/
+				mage::input_file sabf("res/ab.mage"), sbf("res/sb.mage");
+				n::sprite_atlas_bank* sab = new n::sprite_atlas_bank(sabf);
+				n::sprite_bank* sb = new n::sprite_bank(sbf);
+			}
+			exit(0);*/
 
 
 			n::sprite_bank* sb = new n::sprite_bank();

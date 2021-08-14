@@ -30,7 +30,7 @@ namespace mage::gl
 	}
 
 
-#define VBT mage::gl::vertex_buffer<USAGE>::s_type
+
 	template<GLenum USAGE>
 	vertex_array<USAGE>::vertex_array(mage::gl::vertex_buffer<USAGE>* const buffer, const s_desc& desc) :
 		mage::gfx::vertex_array(buffer, desc.get_stride())
@@ -49,6 +49,6 @@ namespace mage::gl
 		}
 
 		MAGE_CORE_TRACE("Create VA {}", m_id);
+		unbind();
 	}
-#undef VBT
 }

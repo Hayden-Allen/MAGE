@@ -66,6 +66,8 @@ namespace n
 			m_x_step.insert(in.uint());
 		for (size_t i = 0; i < y_size; i++)
 			m_y_step.insert(in.uint());
+		m_x_max = *m_x_step.rbegin();
+		m_y_max = *m_y_step.rbegin();
 
 		// load rects
 		size_t start_size = in.ulong(), used_size = in.ulong();

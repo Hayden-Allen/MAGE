@@ -27,6 +27,7 @@ namespace mage::gl
 		{
 			bind();
 			glBufferSubData(TARGET, offset, count * sizeof(T), data);
+			unbind();
 		}
 	protected:
 		buffer(size_t count) :
@@ -40,6 +41,7 @@ namespace mage::gl
 		{
 			bind();
 			glBufferData(TARGET, count * sizeof(T), data, USAGE);
+			unbind();
 		}
 	};
 

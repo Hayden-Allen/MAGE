@@ -28,7 +28,7 @@ namespace mage::gl
 		void unbind() const override { mage::gl::texture2d::unbind(); } \
 		mage::gfx::framebuffer_attachment_type get_type() const override { return mage::gfx::NAME::get_type(); } \
 	protected: \
-		void reset() const override { mage::gl::texture2d::bind(0); glTexImage2D(GL_TEXTURE_2D, 0, INTERNAL, m_w, m_h, 0, FORMAT, TYPE, nullptr); } \
+		void reset() const override { bind(0); glTexImage2D(GL_TEXTURE_2D, 0, INTERNAL, m_w, m_h, 0, FORMAT, TYPE, nullptr); unbind(); } \
 	private: \
 		void update(s_type x, s_type y, s_type w, s_type h, const void* const data) override { mage::gl::texture2d::update(x, y, w, h, data); } };
 	
