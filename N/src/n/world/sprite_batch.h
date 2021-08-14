@@ -1,49 +1,15 @@
 #pragma once
 #include "pch.h"
 #include "tile.h"
-#include "n/timestep.h"
-#include "n/graphics/sprite_atlas_bank.h"
-#include "n/graphics/sprite_bank.h"
 #include "n/graphics/wrap/buffer.h"
 #include "n/graphics/wrap/shader_program.h"
 #include "n/graphics/wrap/vertex_array.h"
 
 namespace n
 {
-	class sprite_batch_constructor final
-	{
-		friend class sprite_batch;
-	public:
-		sprite_batch_constructor() {}
-		sprite_batch_constructor(const sprite_batch_constructor& other) :
-			m_atlases(other.m_atlases),
-			m_tiles(other.m_tiles)
-		{}
-		sprite_batch_constructor(sprite_batch_constructor&& other) noexcept :
-			m_atlases(other.m_atlases),
-			m_tiles(other.m_tiles)
-		{}
-
-
-		bool can_contain(const tile& t) const;
-		void add(const tile& t);
-	private:
-		std::unordered_set<sprite_atlas_bank::handle> m_atlases;
-		std::unordered_map<sprite*, std::vector<tile>> m_tiles;
-
-
-		static size_t get_max_atlas_count()
-		{
-			return mage::gfx::context::get_max_texture_units();
-		}
-	};
-
-
-
-	class sprite_batch final
+	class sprite_batch
 	{
 	public:
-		sprite_batch(const sprite_batch_constructor& constructor);
 		N_DC(sprite_batch);
 		sprite_batch(sprite_batch&& other) noexcept :
 			m_indices(other.m_indices),
@@ -62,18 +28,29 @@ namespace n
 			other.m_offsets = nullptr;
 			other.m_texture_indices = nullptr;
 		}
-		~sprite_batch();
+		virtual ~sprite_batch();
 
 
-		void draw(const timestep& t, sprite_bank* const sb, const sprite_atlas_bank* const ab, const shader_program& shader);
-	private:
+		void draw(const mage::timestep& t, mage::game::sprite_bank* const sb, const mage::game::sprite_atlas_bank* const ab, const shader_program& shader);
+	protected:
 		static_index_buffer* m_indices;
 		static_vertex_buffer* m_vertices;
 		static_vertex_array* m_vertex_array;
 		size_t m_sprite_count;
-		std::unordered_map<sprite_atlas_bank::handle, size_t> m_atlases;
-		sprite_bank::handle* m_sprites;
+		std::unordered_map<mage::game::sprite_atlas_bank::handle, size_t> m_atlases;
+		mage::game::sprite_bank::handle* m_sprites;
 		glm::vec2* m_offsets;
 		int* m_texture_indices;
+
+
+		sprite_batch() :
+			m_indices(nullptr),
+			m_vertices(nullptr),
+			m_vertex_array(nullptr),
+			m_sprite_count(0),
+			m_sprites(nullptr),
+			m_offsets(nullptr),
+			m_texture_indices(nullptr)
+		{}
 	};
 }

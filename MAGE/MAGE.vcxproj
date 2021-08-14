@@ -152,6 +152,12 @@
     <ClInclude Include="src\mage\event\key_event.h" />
     <ClInclude Include="src\mage\event\mouse_event.h" />
     <ClInclude Include="src\mage\event\window_event.h" />
+    <ClInclude Include="src\mage\game\constants.h" />
+    <ClInclude Include="src\mage\game\sprite.h" />
+    <ClInclude Include="src\mage\game\sprite_atlas.h" />
+    <ClInclude Include="src\mage\game\sprite_atlas_bank.h" />
+    <ClInclude Include="src\mage\game\sprite_atlas_coords.h" />
+    <ClInclude Include="src\mage\game\sprite_bank.h" />
     <ClInclude Include="src\mage\graphics\buffer.h" />
     <ClInclude Include="src\mage\graphics\camera.h" />
     <ClInclude Include="src\mage\graphics\context.h" />
@@ -177,6 +183,7 @@
     <ClInclude Include="src\mage\layer\layer.h" />
     <ClInclude Include="src\mage\layer\layer_stack.h" />
     <ClInclude Include="src\mage\log.h" />
+    <ClInclude Include="src\mage\timestep.h" />
     <ClInclude Include="src\mage\util\bank.h" />
     <ClInclude Include="src\mage\util\color.h" />
     <ClInclude Include="src\mage\util\dimensional.h" />
@@ -186,6 +193,7 @@
     <ClInclude Include="src\mage\util\positional.h" />
     <ClInclude Include="src\mage\util\range.h" />
     <ClInclude Include="src\mage\util\rect.h" />
+    <ClInclude Include="src\mage\util\rect_packer.h" />
     <ClInclude Include="src\mage\util\typed.h" />
     <ClInclude Include="src\mage\window.h" />
     <ClInclude Include="src\pch.h" />
@@ -206,6 +214,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\mage\application.cpp" />
+    <ClCompile Include="src\mage\game\sprite.cpp" />
+    <ClCompile Include="src\mage\game\sprite_atlas.cpp" />
     <ClCompile Include="src\mage\imgui\build.cpp" />
     <ClCompile Include="src\mage\imgui\imgui_layer.cpp" />
     <ClCompile Include="src\mage\io\file.cpp" />

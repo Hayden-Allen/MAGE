@@ -38,6 +38,7 @@
 #include "mage/application.h"
 #include "mage/core.h"
 #include "mage/log.h"
+#include "mage/timestep.h"
 #include "mage/window.h"
 
 #include "mage/event/app_event.h"
@@ -83,6 +84,7 @@
 #include "mage/util/positional.h"
 #include "mage/util/range.h"
 #include "mage/util/rect.h"
+#include "mage/util/rect_packer.h"
 #include "mage/util/typed.h"
 
 
@@ -113,3 +115,12 @@
 		#include "platform/os/windows/windows_window.h"
 	#endif
 #endif
+
+
+// game (include last because they use everything else)
+#include "mage/game/constants.h"
+#include "mage/game/sprite.h"
+#include "mage/game/sprite_atlas.h"
+#include "mage/game/sprite_atlas_bank.h"
+#include "mage/game/sprite_atlas_coords.h"
+#include "mage/game/sprite_bank.h"

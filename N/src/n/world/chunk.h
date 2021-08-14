@@ -5,15 +5,20 @@
 
 namespace n
 {
-	class chunk final
+	class chunk
 	{
 	public:
-		chunk(const std::vector<tile>& tiles);
+		chunk() :
+			m_coords({ 0.f, 0.f })
+		{
+			// TODO
+		}
 		N_DCM(chunk);
 
 
-		void draw(const timestep& t, sprite_bank* const sb, const sprite_atlas_bank* const ab, const shader_program& shader);
-	private:
+		void draw(const mage::timestep& t, mage::game::sprite_bank* const sb, const mage::game::sprite_atlas_bank* const ab, const shader_program& shader);
+	protected:
 		std::vector<sprite_batch> m_batches;
+		glm::vec2 m_coords;
 	};
 }

@@ -4,7 +4,7 @@
 
 namespace n
 {
-	map::map(sprite_atlas_bank* const atlases, sprite_bank* const sprites, const std::vector<chunk*>& chunks) :
+	map::map(mage::game::sprite_atlas_bank* const atlases, mage::game::sprite_bank* const sprites, const std::vector<chunk*>& chunks) :
 		m_atlases(atlases),
 		m_sprites(sprites),
 		m_chunks(chunks)
@@ -19,7 +19,7 @@ namespace n
 
 
 
-	void map::draw(const timestep& t, const shader_program& shader)
+	void map::draw(const mage::timestep& t, const shader_program& shader)
 	{
 		/**
 		 * TODO bad

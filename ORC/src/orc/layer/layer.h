@@ -1,8 +1,12 @@
 #pragma once
 #include "pch.h"
+#include "orc/graphics/sprite.h"
+#include "orc/world/chunk.h"
 
 namespace orc
 {
+	class imgui_layer;
+
 	class layer final : public mage::layer
 	{
 		friend class imgui_layer;
@@ -28,9 +32,9 @@ namespace orc
 			/*constexpr bool save = false;
 			if (save)
 			{
-				n::sprite_atlas_bank* sab = new n::sprite_atlas_bank();
-				n::sprite_bank* sb = new n::sprite_bank();
-				n::sprite_bank::handle s = (new n::sprite(sb, sab, "res/sprite/newSprite.sprite"))->get_handle();
+				mage::game::sprite_atlas_bank* sab = new mage::game::sprite_atlas_bank();
+				mage::game::sprite_bank* sb = new mage::game::sprite_bank();
+				mage::game::sprite_bank::handle s = (new sprite(sb, sab, "res/sprite/newSprite.sprite"))->get_handle();
 				mage::output_file sabf("res/ab.mage"), sbf("res/sb.mage");
 				sab->save(sabf);
 				sb->save(sbf);
@@ -38,17 +42,17 @@ namespace orc
 			else
 			{
 				mage::input_file sabf("res/ab.mage"), sbf("res/sb.mage");
-				n::sprite_atlas_bank* sab = new n::sprite_atlas_bank(sabf);
-				n::sprite_bank* sb = new n::sprite_bank(sbf);
+				mage::game::sprite_atlas_bank* sab = new mage::game::sprite_atlas_bank(sabf);
+				mage::game::sprite_bank* sb = new mage::game::sprite_bank(sbf);
 			}
 			exit(0);*/
 
 
-			n::sprite_bank* sb = new n::sprite_bank();
-			n::sprite_atlas_bank* ab = new n::sprite_atlas_bank();
-			n::sprite* sprite = new n::sprite(sb, ab, "res/sprite/newSprite.sprite");
-			n::chunk* chunk = new n::chunk({ { sprite, { {-.5f, -.5f}, {.5f, .5f} } } });
-			m_map = new n::map(ab, sb, { chunk });
+			game::sprite_bank* sb = new game::sprite_bank();
+			game::sprite_atlas_bank* ab = new game::sprite_atlas_bank();
+			sprite* s = new sprite(sb, ab, "res/sprite/newSprite.sprite");
+			chunk* c = new chunk({ { s, { {-.5f, -.5f}, {.5f, .5f} } } });
+			m_map = new n::map(ab, sb, { c });
 			// TODO save/load map
 		}
 		MAGE_DCM(layer);
@@ -66,7 +70,7 @@ namespace orc
 		{
 			// draw onto framebuffer
 			m_framebuffer->bind();
-			mage::gfx::renderer::clear();
+			gfx::renderer::clear();
 
 			// update camera values from imgui_layer
 			m_camera->set_pos(m_camera_pos);
@@ -75,8 +79,8 @@ namespace orc
 
 			// upload camera and draw map
 			m_shader_program->bind();
-			m_shader_program->set_uniform_mat4(n::c::shader_camera, m_camera->get_view_projection());
-			m_map->draw(n::timestep(), *m_shader_program);
+			m_shader_program->set_uniform_mat4(game::c::shader_camera, m_camera->get_view_projection());
+			m_map->draw(mage::timestep(), *m_shader_program);
 
 			// draw framebuffer onto screen
 			m_framebuffer->draw();

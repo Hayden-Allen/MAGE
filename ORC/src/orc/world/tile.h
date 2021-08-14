@@ -1,11 +1,12 @@
 #pragma once
 #include "pch.h"
+#include "orc/graphics/sprite.h"
 
-namespace n
+namespace orc
 {
 	struct tile
 	{
-		mage::game::sprite* sprite;
+		sprite* sprite;
 		mage::rect<float> pos;
 	};
 }

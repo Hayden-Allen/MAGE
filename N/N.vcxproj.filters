@@ -7,41 +7,60 @@
     <Filter Include="n\graphics">
       <UniqueIdentifier>{D39F6695-BF57-A8E2-285F-813E143643D3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="n\graphics\wrap">
+      <UniqueIdentifier>{5C2E28B9-C8B9-957D-D1CA-18723DD5F17D}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="n\world">
+      <UniqueIdentifier>{2A63908D-9642-0F29-9F5A-9AFF0BB9758A}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\n.h" />
     <ClInclude Include="src\n\core.h">
       <Filter>n</Filter>
     </ClInclude>
+    <ClInclude Include="src\n\graphics\wrap\buffer.h">
+      <Filter>n\graphics\wrap</Filter>
+    </ClInclude>
     <ClInclude Include="src\n\graphics\wrap\camera.h">
-      <Filter>n\graphics</Filter>
+      <Filter>n\graphics\wrap</Filter>
+    </ClInclude>
+    <ClInclude Include="src\n\graphics\wrap\framebuffer.h">
+      <Filter>n\graphics\wrap</Filter>
     </ClInclude>
     <ClInclude Include="src\n\graphics\wrap\shader_program.h">
-      <Filter>n\graphics</Filter>
+      <Filter>n\graphics\wrap</Filter>
+    </ClInclude>
+    <ClInclude Include="src\n\graphics\wrap\texture.h">
+      <Filter>n\graphics\wrap</Filter>
+    </ClInclude>
+    <ClInclude Include="src\n\graphics\wrap\vertex_array.h">
+      <Filter>n\graphics\wrap</Filter>
+    </ClInclude>
+    <ClInclude Include="src\n\world\chunk.h">
+      <Filter>n\world</Filter>
+    </ClInclude>
+    <ClInclude Include="src\n\world\map.h">
+      <Filter>n\world</Filter>
+    </ClInclude>
+    <ClInclude Include="src\n\world\sprite_batch.h">
+      <Filter>n\world</Filter>
+    </ClInclude>
+    <ClInclude Include="src\n\world\tile.h">
+      <Filter>n\world</Filter>
     </ClInclude>
     <ClInclude Include="src\pch.h" />
-    <ClInclude Include="src\n\graphics\wrap\vertex_array.h" />
-    <ClInclude Include="src\n\graphics\wrap\buffer.h" />
-    <ClInclude Include="src\n\graphics\wrap\framebuffer.h" />
-    <ClInclude Include="src\n\graphics\wrap\texture.h" />
-    <ClInclude Include="src\n\graphics\sprite.h" />
-    <ClInclude Include="src\n\timestep.h" />
-    <ClInclude Include="src\n\graphics\sprite_atlas.h" />
-    <ClInclude Include="src\n\constants.h" />
-    <ClInclude Include="src\n\graphics\sprite_atlas_bank.h" />
-    <ClInclude Include="src\n\graphics\sprite_atlas_coords.h" />
-    <ClInclude Include="src\n\graphics\sprite_bank.h" />
-    <ClInclude Include="src\n\world\chunk.h" />
-    <ClInclude Include="src\n\world\sprite_batch.h" />
-    <ClInclude Include="src\n\world\tile.h" />
-    <ClInclude Include="src\n\world\map.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\n\world\chunk.cpp">
+      <Filter>n\world</Filter>
+    </ClCompile>
+    <ClCompile Include="src\n\world\map.cpp">
+      <Filter>n\world</Filter>
+    </ClCompile>
+    <ClCompile Include="src\n\world\sprite_batch.cpp">
+      <Filter>n\world</Filter>
+    </ClCompile>
     <ClCompile Include="src\pch.cpp" />
-    <ClCompile Include="src\n\graphics\sprite.cpp" />
-    <ClCompile Include="src\n\graphics\sprite_atlas.cpp" />
-    <ClCompile Include="src\n\world\chunk.cpp" />
-    <ClCompile Include="src\n\world\sprite_batch.cpp" />
-    <ClCompile Include="src\n\world\map.cpp" />
   </ItemGroup>
 </Project>

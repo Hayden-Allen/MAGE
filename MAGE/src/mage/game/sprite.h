@@ -3,16 +3,15 @@
 #include "sprite_atlas.h"
 #include "sprite_atlas_bank.h"
 #include "sprite_bank.h"
-#include "wrap/texture.h"
-#include "n/timestep.h"
+#include "mage/timestep.h"
 
-namespace n
+namespace mage::game
 {
-	class sprite final :
-		public mage::dimensional<uint8_t>,
-		public mage::serializable
+	class sprite :
+		public dimensional<uint8_t>,
+		public serializable
 	{
-	private:
+	protected:
 		/**
 		 * Structure to hold all necessary info for a given frame. Index of its containing sprite_atlas and the offset between its texture coordinates and the first frame's texture coordinates
 		 */
@@ -36,20 +35,19 @@ namespace n
 			void save(mage::output_file& out) const override
 			{
 				out.ushort(bank);
-				out.uint(N_PUN(uint32_t, offset.x)).uint(N_PUN(uint32_t, offset.y));
+				out.uint(MAGE_PUN(uint32_t, offset.x)).uint(MAGE_PUN(uint32_t, offset.y));
 			}
 			void load(mage::input_file& in) override
 			{
 				bank = in.ushort();
 				uint32_t x = in.uint(), y = in.uint();
-				offset.x = N_PUN(float, x);
-				offset.y = N_PUN(float, y);
+				offset.x = MAGE_PUN(float, x);
+				offset.y = MAGE_PUN(float, y);
 			}
 		};
 	public:
-		sprite(sprite_bank* const sb, sprite_atlas_bank* const ab, const std::string& fp);
 		sprite(mage::input_file& in);
-		N_DCM(sprite);
+		MAGE_DCM(sprite);
 
 
 		void save(mage::output_file& out) const override;
@@ -72,13 +70,8 @@ namespace n
 		{
 			return m_handle;
 		}
-		const std::unordered_set<sprite_atlas_bank::handle>& get_atlases() const 
-		{
-			return m_atlases;
-		}
-	private:
+	protected:
 		sprite_bank::handle m_handle;
-		std::unordered_set<sprite_atlas_bank::handle> m_atlases;
 		// current frame, number of frames
 		uint8_t m_frame, m_frame_count;
 		// time (ms) that each frame should display for
@@ -91,7 +84,14 @@ namespace n
 		std::vector<frame_handle> m_frame_data;
 
 
-		bool add_to_atlas(sprite_atlas* const atlas, const uint8_t* const color_data, size_t i);
+		sprite(sprite_bank* const sb) :
+			mage::dimensional<uint8_t>(0, 0),
+			m_handle(sb->add(this)),
+			m_frame(0),
+			m_frame_count(0),
+			m_frame_time(0),
+			m_base_coords({ 0.f, 1.f }, { 0.f, 1.f })
+		{}
 	};
 }
 

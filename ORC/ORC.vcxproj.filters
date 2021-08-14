@@ -6,24 +6,27 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\layer\imgui_layer.h">
+    <ClInclude Include="src\orc\layer\imgui_layer.h">
       <Filter>layer</Filter>
     </ClInclude>
-    <ClInclude Include="src\layer\layer.h">
+    <ClInclude Include="src\orc\layer\layer.h">
       <Filter>layer</Filter>
     </ClInclude>
     <ClInclude Include="src\pch.h" />
+    <ClInclude Include="src\orc\graphics\sprite_atlas.h" />
+    <ClInclude Include="src\orc\graphics\sprite.h" />
+    <ClInclude Include="src\orc\world\chunk.h" />
+    <ClInclude Include="src\orc\world\sprite_batch_constructor.h" />
+    <ClInclude Include="src\orc\world\tile.h" />
+    <ClInclude Include="src\orc\world\sprite_batch.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\pch.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="res\shader\texture_v.glsl" />
-    <None Include="res\shader\texture_f.glsl" />
-    <None Include="res\shader\fb_v.glsl" />
-    <None Include="res\shader\fb_f.glsl" />
-    <None Include="res\shader\chunk_v.glsl" />
-    <None Include="res\shader\chunk_f.glsl" />
+    <ClCompile Include="src\orc\graphics\sprite_atlas.cpp" />
+    <ClCompile Include="src\orc\graphics\sprite.cpp" />
+    <ClCompile Include="src\orc\world\sprite_batch_constructor.cpp" />
+    <ClCompile Include="src\orc\world\sprite_batch.cpp" />
+    <ClCompile Include="src\orc\world\chunk.cpp" />
   </ItemGroup>
 </Project>

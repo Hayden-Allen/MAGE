@@ -1,8 +1,5 @@
 #pragma once
 #include "pch.h"
-#include "n/timestep.h"
-#include "n/graphics/sprite_atlas_bank.h"
-#include "n/graphics/sprite_bank.h"
 #include "n/graphics/wrap/shader_program.h"
 
 namespace n
@@ -12,15 +9,15 @@ namespace n
 	class map final
 	{
 	public:
-		map(sprite_atlas_bank* const atlases, sprite_bank* const sprites, const std::vector<chunk*>& chunks);
+		map(mage::game::sprite_atlas_bank* const atlases, mage::game::sprite_bank* const sprites, const std::vector<chunk*>& chunks);
 		N_DCM(map);
 		~map();
 
 
-		void draw(const timestep& t, const shader_program& shader);
+		void draw(const mage::timestep& t, const shader_program& shader);
 	private:
-		sprite_atlas_bank* m_atlases;
-		sprite_bank* m_sprites;
+		mage::game::sprite_atlas_bank* m_atlases;
+		mage::game::sprite_bank* m_sprites;
 		std::vector<chunk*> m_chunks;
 	};
 }

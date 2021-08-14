@@ -1,7 +1,7 @@
 #pragma once
 #include "pch.h"
 
-namespace n
+namespace mage
 {
 	class timestep final
 	{

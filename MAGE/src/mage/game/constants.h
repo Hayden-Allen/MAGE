@@ -1,7 +1,7 @@
 #pragma once
 #include "pch.h"
 
-namespace n::c
+namespace mage::game::c
 {
 	// colors in a sprite's palette
 	constexpr static size_t sprite_color_count = 16;
@@ -44,5 +44,8 @@ namespace n::c
 
 
 	// 3 foreground 3 background
-	constexpr static size_t chunk_layer_count = 6;
+	constexpr static size_t layers_per_chunk = 6;
+	constexpr static size_t tiles_per_chunk_side = 16;
+	constexpr static size_t tiles_per_chunk_layer = tiles_per_chunk_side * tiles_per_chunk_side;
+	constexpr static size_t tiles_per_chunk = tiles_per_chunk_layer * layers_per_chunk;
 }

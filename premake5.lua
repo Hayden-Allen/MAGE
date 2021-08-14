@@ -189,7 +189,6 @@ project "ORC"
 	links
 	{
 		"imgui",
-		"MAGE",
 		"N"
 	}
 

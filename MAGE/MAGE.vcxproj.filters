@@ -7,6 +7,9 @@
     <Filter Include="mage\event">
       <UniqueIdentifier>{D0AB93F3-BC63-D540-256B-AE9C11427031}</UniqueIdentifier>
     </Filter>
+    <Filter Include="mage\game">
+      <UniqueIdentifier>{4870DEF7-B4DA-926E-FD18-441469C270C3}</UniqueIdentifier>
+    </Filter>
     <Filter Include="mage\graphics">
       <UniqueIdentifier>{5F564FA8-CB16-CBDE-9451-145C00D10FBB}</UniqueIdentifier>
     </Filter>
@@ -15,6 +18,9 @@
     </Filter>
     <Filter Include="mage\input">
       <UniqueIdentifier>{7EDAD7F3-6A92-1941-D399-F29CBF70B431}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="mage\io">
+      <UniqueIdentifier>{A6F40FB4-12D4-8E4F-1BEC-1926874AF5B0}</UniqueIdentifier>
     </Filter>
     <Filter Include="mage\layer">
       <UniqueIdentifier>{4B2707F4-37DF-4841-A0E6-219D8CBDE331}</UniqueIdentifier>
@@ -58,6 +64,9 @@
     <ClInclude Include="src\mage\event\event_handler.h">
       <Filter>mage\event</Filter>
     </ClInclude>
+    <ClInclude Include="src\mage\event\event_handler_container.h">
+      <Filter>mage\event</Filter>
+    </ClInclude>
     <ClInclude Include="src\mage\event\event_propagator.h">
       <Filter>mage\event</Filter>
     </ClInclude>
@@ -70,6 +79,24 @@
     <ClInclude Include="src\mage\event\window_event.h">
       <Filter>mage\event</Filter>
     </ClInclude>
+    <ClInclude Include="src\mage\game\constants.h">
+      <Filter>mage\game</Filter>
+    </ClInclude>
+    <ClInclude Include="src\mage\game\sprite.h">
+      <Filter>mage\game</Filter>
+    </ClInclude>
+    <ClInclude Include="src\mage\game\sprite_atlas.h">
+      <Filter>mage\game</Filter>
+    </ClInclude>
+    <ClInclude Include="src\mage\game\sprite_atlas_bank.h">
+      <Filter>mage\game</Filter>
+    </ClInclude>
+    <ClInclude Include="src\mage\game\sprite_atlas_coords.h">
+      <Filter>mage\game</Filter>
+    </ClInclude>
+    <ClInclude Include="src\mage\game\sprite_bank.h">
+      <Filter>mage\game</Filter>
+    </ClInclude>
     <ClInclude Include="src\mage\graphics\buffer.h">
       <Filter>mage\graphics</Filter>
     </ClInclude>
@@ -77,6 +104,12 @@
       <Filter>mage\graphics</Filter>
     </ClInclude>
     <ClInclude Include="src\mage\graphics\context.h">
+      <Filter>mage\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="src\mage\graphics\framebuffer.h">
+      <Filter>mage\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="src\mage\graphics\framebuffer_attachment.h">
       <Filter>mage\graphics</Filter>
     </ClInclude>
     <ClInclude Include="src\mage\graphics\render_object.h">
@@ -95,6 +128,12 @@
       <Filter>mage\graphics</Filter>
     </ClInclude>
     <ClInclude Include="src\mage\graphics\shader_type.h">
+      <Filter>mage\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="src\mage\graphics\texture.h">
+      <Filter>mage\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="src\mage\graphics\texture_options.h">
       <Filter>mage\graphics</Filter>
     </ClInclude>
     <ClInclude Include="src\mage\graphics\vertex_array.h">
@@ -118,6 +157,12 @@
     <ClInclude Include="src\mage\input\input_mouse.h">
       <Filter>mage\input</Filter>
     </ClInclude>
+    <ClInclude Include="src\mage\io\file.h">
+      <Filter>mage\io</Filter>
+    </ClInclude>
+    <ClInclude Include="src\mage\io\serializable.h">
+      <Filter>mage\io</Filter>
+    </ClInclude>
     <ClInclude Include="src\mage\layer\layer.h">
       <Filter>mage\layer</Filter>
     </ClInclude>
@@ -126,6 +171,12 @@
     </ClInclude>
     <ClInclude Include="src\mage\log.h">
       <Filter>mage</Filter>
+    </ClInclude>
+    <ClInclude Include="src\mage\timestep.h">
+      <Filter>mage</Filter>
+    </ClInclude>
+    <ClInclude Include="src\mage\util\bank.h">
+      <Filter>mage\util</Filter>
     </ClInclude>
     <ClInclude Include="src\mage\util\color.h">
       <Filter>mage\util</Filter>
@@ -139,7 +190,19 @@
     <ClInclude Include="src\mage\util\iterable.h">
       <Filter>mage\util</Filter>
     </ClInclude>
+    <ClInclude Include="src\mage\util\point.h">
+      <Filter>mage\util</Filter>
+    </ClInclude>
     <ClInclude Include="src\mage\util\positional.h">
+      <Filter>mage\util</Filter>
+    </ClInclude>
+    <ClInclude Include="src\mage\util\range.h">
+      <Filter>mage\util</Filter>
+    </ClInclude>
+    <ClInclude Include="src\mage\util\rect.h">
+      <Filter>mage\util</Filter>
+    </ClInclude>
+    <ClInclude Include="src\mage\util\rect_packer.h">
       <Filter>mage\util</Filter>
     </ClInclude>
     <ClInclude Include="src\mage\util\typed.h">
@@ -158,6 +221,12 @@
     <ClInclude Include="src\platform\graphics\gl\context.h">
       <Filter>platform\graphics\gl</Filter>
     </ClInclude>
+    <ClInclude Include="src\platform\graphics\gl\framebuffer.h">
+      <Filter>platform\graphics\gl</Filter>
+    </ClInclude>
+    <ClInclude Include="src\platform\graphics\gl\framebuffer_attachment.h">
+      <Filter>platform\graphics\gl</Filter>
+    </ClInclude>
     <ClInclude Include="src\platform\graphics\gl\shader.h">
       <Filter>platform\graphics\gl</Filter>
     </ClInclude>
@@ -165,6 +234,12 @@
       <Filter>platform\graphics\gl</Filter>
     </ClInclude>
     <ClInclude Include="src\platform\graphics\gl\shader_type.h">
+      <Filter>platform\graphics\gl</Filter>
+    </ClInclude>
+    <ClInclude Include="src\platform\graphics\gl\texture.h">
+      <Filter>platform\graphics\gl</Filter>
+    </ClInclude>
+    <ClInclude Include="src\platform\graphics\gl\texture_options.h">
       <Filter>platform\graphics\gl</Filter>
     </ClInclude>
     <ClInclude Include="src\platform\graphics\gl\vertex_array.h">
@@ -179,31 +254,25 @@
     <ClInclude Include="src\platform\os\windows\windows_window.h">
       <Filter>platform\os\windows</Filter>
     </ClInclude>
-    <ClInclude Include="src\mage\event\event_handler_container.h" />
-    <ClInclude Include="src\mage\graphics\framebuffer.h" />
-    <ClInclude Include="src\mage\graphics\framebuffer_attachment.h" />
-    <ClInclude Include="src\platform\graphics\gl\framebuffer.h" />
-    <ClInclude Include="src\platform\graphics\gl\framebuffer_attachment.h" />
-    <ClInclude Include="src\mage\graphics\texture.h" />
-    <ClInclude Include="src\platform\graphics\gl\texture.h" />
-    <ClInclude Include="src\mage\graphics\texture_options.h" />
-    <ClInclude Include="src\platform\graphics\gl\texture_options.h" />
-    <ClInclude Include="src\mage\util\range.h" />
-    <ClInclude Include="src\mage\util\point.h" />
-    <ClInclude Include="src\mage\util\rect.h" />
-    <ClInclude Include="src\mage\util\bank.h" />
-    <ClInclude Include="src\mage\io\file.h" />
-    <ClInclude Include="src\mage\io\serializable.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\mage\application.cpp">
       <Filter>mage</Filter>
+    </ClCompile>
+    <ClCompile Include="src\mage\game\sprite.cpp">
+      <Filter>mage\game</Filter>
+    </ClCompile>
+    <ClCompile Include="src\mage\game\sprite_atlas.cpp">
+      <Filter>mage\game</Filter>
     </ClCompile>
     <ClCompile Include="src\mage\imgui\build.cpp">
       <Filter>mage\imgui</Filter>
     </ClCompile>
     <ClCompile Include="src\mage\imgui\imgui_layer.cpp">
       <Filter>mage\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="src\mage\io\file.cpp">
+      <Filter>mage\io</Filter>
     </ClCompile>
     <ClCompile Include="src\mage\layer\layer_stack.cpp">
       <Filter>mage\layer</Filter>
@@ -212,10 +281,19 @@
       <Filter>mage</Filter>
     </ClCompile>
     <ClCompile Include="src\pch.cpp" />
+    <ClCompile Include="src\platform\graphics\gl\buffer.cpp">
+      <Filter>platform\graphics\gl</Filter>
+    </ClCompile>
     <ClCompile Include="src\platform\graphics\gl\camera.cpp">
       <Filter>platform\graphics\gl</Filter>
     </ClCompile>
     <ClCompile Include="src\platform\graphics\gl\context.cpp">
+      <Filter>platform\graphics\gl</Filter>
+    </ClCompile>
+    <ClCompile Include="src\platform\graphics\gl\framebuffer.cpp">
+      <Filter>platform\graphics\gl</Filter>
+    </ClCompile>
+    <ClCompile Include="src\platform\graphics\gl\framebuffer_attachment.cpp">
       <Filter>platform\graphics\gl</Filter>
     </ClCompile>
     <ClCompile Include="src\platform\graphics\gl\renderer.cpp">
@@ -225,6 +303,9 @@
       <Filter>platform\graphics\gl</Filter>
     </ClCompile>
     <ClCompile Include="src\platform\graphics\gl\shader_program.cpp">
+      <Filter>platform\graphics\gl</Filter>
+    </ClCompile>
+    <ClCompile Include="src\platform\graphics\gl\texture.cpp">
       <Filter>platform\graphics\gl</Filter>
     </ClCompile>
     <ClCompile Include="src\platform\graphics\gl\vertex_array.cpp">
@@ -239,10 +320,5 @@
     <ClCompile Include="src\platform\os\windows\windows_window.cpp">
       <Filter>platform\os\windows</Filter>
     </ClCompile>
-    <ClCompile Include="src\platform\graphics\gl\framebuffer.cpp" />
-    <ClCompile Include="src\platform\graphics\gl\framebuffer_attachment.cpp" />
-    <ClCompile Include="src\platform\graphics\gl\texture.cpp" />
-    <ClCompile Include="src\platform\graphics\gl\buffer.cpp" />
-    <ClCompile Include="src\mage\io\file.cpp" />
   </ItemGroup>
 </Project>

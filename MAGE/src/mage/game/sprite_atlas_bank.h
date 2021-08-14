@@ -1,7 +1,8 @@
 #pragma once
 #include "pch.h"
+#include "mage/util/bank.h"
 
-namespace n
+namespace mage::game
 {
 	class sprite_atlas;
 
@@ -9,9 +10,9 @@ namespace n
 	{
 	public:
 		sprite_atlas_bank() {}
-		sprite_atlas_bank(mage::input_file& in) :
-			mage::serializable_bank<sprite_atlas, uint16_t, c::sprite_atlas_bank_size>(in)
+		sprite_atlas_bank(input_file& in) :
+			serializable_bank<sprite_atlas, uint16_t, c::sprite_atlas_bank_size>(in)
 		{}
-		N_DCM(sprite_atlas_bank);
+		MAGE_DCM(sprite_atlas_bank);
 	};
 }
