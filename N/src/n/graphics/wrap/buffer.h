@@ -16,6 +16,9 @@ namespace n
 
 
 
+	/**
+	 * Index
+	 */
 	N_WRAP
 	(
 		static_index_buffer,
@@ -23,7 +26,6 @@ namespace n
 		(s_type* indices, size_t tiles),
 		(indices, tiles * c::indices_per_tile)
 	);
-
 	N_WRAP
 	(
 		dynamic_index_buffer,
@@ -40,7 +42,6 @@ namespace n
 		retained_static_index_buffer(const retained_static_index_buffer& other, size_t count) : MAGE_RAN::retained_static_index_buffer(other, count) {}
 		retained_static_index_buffer(mage::input_file& in) : MAGE_RAN::retained_static_index_buffer(in) {}
 	);
-
 	N_WRAP
 	(
 		retained_dynamic_index_buffer,
@@ -53,6 +54,9 @@ namespace n
 
 
 
+	/**
+	 * Vertex
+	 */
 	N_WRAP
 	(
 		static_vertex_buffer,
@@ -60,7 +64,6 @@ namespace n
 		(s_type* vertices, size_t count),
 		(vertices, count)
 	);
-
 	N_WRAP
 	(
 		dynamic_vertex_buffer,
@@ -77,7 +80,6 @@ namespace n
 		retained_static_vertex_buffer(const retained_static_vertex_buffer& other, size_t count) : MAGE_RAN::retained_static_vertex_buffer(other, count) {}
 		retained_static_vertex_buffer(mage::input_file& in) : MAGE_RAN::retained_static_vertex_buffer(in) {}
 	);
-
 	N_WRAP
 	(
 		retained_dynamic_vertex_buffer,

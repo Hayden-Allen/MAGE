@@ -55,6 +55,8 @@
 #include "mage/graphics/framebuffer.h"
 #include "mage/graphics/framebuffer_attachment.h"
 #include "mage/graphics/render_object.h"
+#include "mage/graphics/renderer.h"
+#include "mage/graphics/retained_buffer.h"
 #include "mage/graphics/shader.h"
 #include "mage/graphics/shader_preprocessor.h"
 #include "mage/graphics/shader_program.h"
@@ -98,11 +100,16 @@
 	#include "platform/graphics/gl/context.h"
 	#include "platform/graphics/gl/framebuffer.h"
 	#include "platform/graphics/gl/framebuffer_attachment.h"
+	#include "platform/graphics/gl/index_buffer.h"
+	#include "platform/graphics/gl/retained_buffer.h"
+	#include "platform/graphics/gl/retained_index_buffer.h"
+	#include "platform/graphics/gl/retained_vertex_buffer.h"
 	#include "platform/graphics/gl/shader.h"
 	#include "platform/graphics/gl/shader_program.h"
 	#include "platform/graphics/gl/shader_type.h"
 	#include "platform/graphics/gl/texture.h"
 	#include "platform/graphics/gl/vertex_array.h"
+	#include "platform/graphics/gl/vertex_buffer.h"
 #endif
 
 

@@ -236,6 +236,12 @@
     <ClInclude Include="src\platform\os\windows\windows_window.h">
       <Filter>platform\os\windows</Filter>
     </ClInclude>
+    <ClInclude Include="src\mage\graphics\retained_buffer.h" />
+    <ClInclude Include="src\platform\graphics\gl\retained_buffer.h" />
+    <ClInclude Include="src\platform\graphics\gl\index_buffer.h" />
+    <ClInclude Include="src\platform\graphics\gl\vertex_buffer.h" />
+    <ClInclude Include="src\platform\graphics\gl\retained_index_buffer.h" />
+    <ClInclude Include="src\platform\graphics\gl\retained_vertex_buffer.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\mage\application.cpp">
@@ -257,9 +263,6 @@
       <Filter>mage</Filter>
     </ClCompile>
     <ClCompile Include="src\pch.cpp" />
-    <ClCompile Include="src\platform\graphics\gl\buffer.cpp">
-      <Filter>platform\graphics\gl</Filter>
-    </ClCompile>
     <ClCompile Include="src\platform\graphics\gl\camera.cpp">
       <Filter>platform\graphics\gl</Filter>
     </ClCompile>
@@ -296,5 +299,7 @@
     <ClCompile Include="src\platform\os\windows\windows_window.cpp">
       <Filter>platform\os\windows</Filter>
     </ClCompile>
+    <ClCompile Include="src\platform\graphics\gl\index_buffer.cpp" />
+    <ClCompile Include="src\platform\graphics\gl\vertex_buffer.cpp" />
   </ItemGroup>
 </Project>
