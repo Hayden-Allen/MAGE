@@ -5,26 +5,18 @@
 namespace mage::gl
 {
 	template<GLenum USAGE>
-	class vertex_buffer :
-		public mage::gl::buffer<mage::gfx::vertex_buffer::s_type, GL_ARRAY_BUFFER, USAGE>,
-		public mage::gfx::vertex_buffer
+	class vertex_buffer : public mage::gl::buffer<GL_ARRAY_BUFFER, USAGE, mage::gfx::vertex_buffer>
 	{
+	protected:
+		using s_type = mage::gl::buffer<GL_ARRAY_BUFFER, USAGE, mage::gfx::vertex_buffer>::s_type;
 	public:
 		MAGE_DCM(vertex_buffer);
-		~vertex_buffer()
+		virtual ~vertex_buffer()
 		{
-			MAGE_CORE_TRACE("Delete VB {}", m_id);
+			MAGE_CORE_TRACE("Delete VB {}", this->m_id);
 		}
-
-
-		void bind() const override;
-		void unbind() const override;
-		void update(s_type* vertices, size_t count, size_t offset) const override;
 	protected:
 		vertex_buffer(s_type* vertices, size_t count);
-
-
-		void write(s_type* vertices, size_t count) const override;
 	};
 
 

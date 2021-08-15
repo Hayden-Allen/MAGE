@@ -7,11 +7,21 @@
 
 namespace n
 {
+	typedef MAGE_RAN::framebuffer_color_attachment framebuffer_color_attachment;
+	typedef MAGE_RAN::framebuffer_depth_attachment framebuffer_depth_attachment;
+
+
+
 	class framebuffer final : public MAGE_RAN::framebuffer
 	{
 	public:
 		framebuffer(mage::event_handler_container& c, s_type w, s_type h, const std::string& vertex, const std::string& fragment, const mage::gfx::shader_preprocessor& p = mage::gfx::shader_preprocessor()) :
-			MAGE_RAN::framebuffer(c, w, h, { mage::gfx::framebuffer_color_attachment::create(w, h), mage::gfx::framebuffer_depth_attachment::create(w, h) }),
+			MAGE_RAN::framebuffer(c, w, h,
+				{
+					new n::framebuffer_color_attachment(w, h),
+					new n::framebuffer_depth_attachment(w, h)
+				}
+			),
 			m_vertex_array(nullptr),
 			m_vertex_buffer(nullptr),
 			m_index_buffer(nullptr),

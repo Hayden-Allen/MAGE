@@ -11,23 +11,23 @@ namespace mage::gl
 		MAGE_DM(retained_index_buffer);
 		virtual ~retained_index_buffer()
 		{
-			MAGE_CORE_TRACE("Delete IB {}", this->m_id);
+			MAGE_CORE_TRACE("Delete RIB {}", this->m_id);
 		}
 	protected:
 		retained_index_buffer(mage::gfx::retained_index_buffer::s_type* data, size_t count) :
 			mage::gl::retained_buffer<GL_ELEMENT_ARRAY_BUFFER, USAGE, mage::gfx::retained_index_buffer>(data, count)
 		{
-			MAGE_CORE_TRACE("Create IB {}", this->m_id);
+			MAGE_CORE_TRACE("Create RIB {}", this->m_id);
 		}
 		retained_index_buffer(const retained_index_buffer& other, size_t count) :
 			mage::gl::retained_buffer<GL_ELEMENT_ARRAY_BUFFER, USAGE, mage::gfx::retained_index_buffer>(other, count)
 		{
-			MAGE_CORE_TRACE("Create IB {}", this->m_id);
+			MAGE_CORE_TRACE("Create RIB {}", this->m_id);
 		}
 		retained_index_buffer(input_file& in) :
 			mage::gl::retained_buffer<GL_ELEMENT_ARRAY_BUFFER, USAGE, mage::gfx::retained_index_buffer>(in)
 		{
-			MAGE_CORE_TRACE("Create IB {}", this->m_id);
+			MAGE_CORE_TRACE("Create RIB {}", this->m_id);
 		}
 	};
 

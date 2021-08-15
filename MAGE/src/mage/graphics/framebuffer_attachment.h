@@ -10,12 +10,15 @@ namespace mage::gfx
 		color, depth
 	};
 
+	template<typename T, typename ... ARGS>
+	class framebuffer;
 
-
-
-	class framebuffer_attachment : public texture2d
+	template<typename T, typename ... ARGS>
+	class framebuffer_attachment : public T
 	{
-		friend class framebuffer;
+	protected:
+		friend class framebuffer<T, ARGS...>;
+		using s_type = T::s_type;
 	public:
 		MAGE_DCM(framebuffer_attachment);
 		virtual ~framebuffer_attachment() {}
@@ -24,25 +27,50 @@ namespace mage::gfx
 		virtual framebuffer_attachment_type get_type() const = 0;
 		virtual void reset() const = 0;
 	protected:
-		framebuffer_attachment(s_type w, s_type h) :
-			texture2d(w, h)
+		framebuffer_attachment(s_type w, s_type h, const ARGS& ... args) :
+			T(w, h, args...),
+			dimensional<s_type>(w, h)
+		{}
+	};
+
+
+	template<typename T, typename ... ARGS>
+	class framebuffer_color_attachment : public framebuffer_attachment<T, ARGS...> {
+	protected:
+		using s_type = framebuffer_attachment<T, ARGS...>::s_type;
+	public:
+		MAGE_DCM(framebuffer_color_attachment);
+		virtual ~framebuffer_color_attachment() {}
+
+
+		framebuffer_attachment_type get_type() const final override
+		{
+			return framebuffer_attachment_type::color;
+		}
+	protected:
+		framebuffer_color_attachment(s_type w, s_type h, const ARGS& ... args) :
+			framebuffer_attachment<T, ARGS...>(w, h, args...)
 		{}
 	};
 
 
 
-#define F(NAME, TYPE) \
-	class NAME : public framebuffer_attachment { \
-	public: \
-		MAGE_DCM(NAME); \
-		virtual ~NAME() {} \
-		static NAME* create(s_type w, s_type h); \
-		framebuffer_attachment_type get_type() const override { return framebuffer_attachment_type::TYPE; } \
-	protected: \
-		NAME(s_type w, s_type h) : framebuffer_attachment(w, h) {} };
+	template<typename T, typename ... ARGS>
+	class framebuffer_depth_attachment : public framebuffer_attachment<T, ARGS...>{
+	protected:
+		using s_type = framebuffer_attachment<T, ARGS...>::s_type;
+	public:
+		MAGE_DCM(framebuffer_depth_attachment);
+		virtual ~framebuffer_depth_attachment() {}
 
-	F(framebuffer_color_attachment, color);
-	F(framebuffer_depth_attachment, depth);
 
-#undef F
+		framebuffer_attachment_type get_type() const final override
+		{
+			return framebuffer_attachment_type::depth;
+		}
+	protected:
+		framebuffer_depth_attachment(s_type w, s_type h, const ARGS& ... args) :
+			framebuffer_attachment<T, ARGS...>(w, h, args...)
+		{}
+	};
 }

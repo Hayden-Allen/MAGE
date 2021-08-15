@@ -119,9 +119,9 @@ namespace orc
 	private:
 		map* m_map;
 		sprite_atlas_bank* m_sab;
-		n::static_index_buffer* m_ib;
+		/*n::static_index_buffer* m_ib;
 		n::static_vertex_buffer* m_vb;
-		n::static_vertex_array* m_va;
+		n::static_vertex_array* m_va;*/
 		n::framebuffer* m_framebuffer;
 		n::shader_program* m_shader_program;
 		n::camera* m_camera;

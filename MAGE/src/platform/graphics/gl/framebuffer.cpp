@@ -2,38 +2,17 @@
 #include "framebuffer.h"
 #include "framebuffer_attachment.h"
 
-namespace mage::gfx
-{
-	framebuffer* framebuffer::create(event_handler_container& c, s_type w, s_type h, const std::initializer_list<framebuffer_attachment*>& attachments)
-	{
-		return new mage::gl::framebuffer(c, w, h, attachments);
-	}
-}
-
-
-
 namespace mage::gl
 {
-	framebuffer::framebuffer(event_handler_container& c, s_type w, s_type h, const std::initializer_list<mage::gfx::framebuffer_attachment*>& attachments) :
-		mage::gfx::framebuffer(c, w, h, attachments)
+	framebuffer::framebuffer(event_handler_container& c, s_type w, s_type h, const std::initializer_list<mage::gfx::framebuffer_attachment<mage::gl::texture2d, const void* const, const texture_options&>*>& attachments) :
+		mage::gfx::framebuffer<mage::gl::texture2d, const void* const, const texture_options&>(c, w, h, attachments)
 	{
+		MAGE_CORE_TRACE("Create FB {}", m_id);
 		update();
 	}
-	framebuffer::~framebuffer()
-	{
-		glDeleteFramebuffers(1, &m_id);
-	}
 
 
 
-	void framebuffer::bind() const
-	{
-		glBindFramebuffer(GL_FRAMEBUFFER, m_id);
-	}
-	void framebuffer::unbind() const
-	{
-		glBindFramebuffer(GL_FRAMEBUFFER, 0);
-	}
 	void framebuffer::update()
 	{
 		glDeleteFramebuffers(1, &m_id);

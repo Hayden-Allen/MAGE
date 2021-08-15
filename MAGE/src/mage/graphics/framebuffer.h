@@ -8,6 +8,7 @@
 
 namespace mage::gfx
 {
+	template<typename T, typename ... ARGS>
 	class framebuffer :
 		public render_object,
 		public event_handler,
@@ -18,7 +19,6 @@ namespace mage::gfx
 		virtual ~framebuffer() {}
 
 
-		static framebuffer* create(event_handler_container& c, s_type w, s_type h, const std::initializer_list<framebuffer_attachment*>& attachments);
 		virtual void update() = 0;
 		bool on_window_resize(window_resize_event& e) override
 		{
@@ -26,7 +26,7 @@ namespace mage::gfx
 			m_h = e.get_h();
 			update();
 
-			for (framebuffer_attachment* const a : m_attachments)
+			for (framebuffer_attachment<T, ARGS...>* const a : m_attachments)
 			{
 				a->m_w = e.get_w();
 				a->m_h = e.get_h();
@@ -36,10 +36,10 @@ namespace mage::gfx
 			return false;
 		}
 	protected:
-		std::vector<framebuffer_attachment*> m_attachments;
+		std::vector<framebuffer_attachment<T, ARGS...>*> m_attachments;
 
 
-		framebuffer(event_handler_container& c, s_type w, s_type h, const std::initializer_list<framebuffer_attachment*>& attachments) :
+		framebuffer(event_handler_container& c, s_type w, s_type h, const std::initializer_list<framebuffer_attachment<T, ARGS...>*>& attachments) :
 			dimensional<s_type>(w, h),
 			m_attachments(attachments)
 		{

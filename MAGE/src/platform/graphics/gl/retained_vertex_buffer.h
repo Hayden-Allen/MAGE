@@ -11,23 +11,23 @@ namespace mage::gl
 		MAGE_DM(retained_vertex_buffer);
 		virtual ~retained_vertex_buffer()
 		{
-			MAGE_CORE_TRACE("Delete VB {}", this->m_id);
+			MAGE_CORE_TRACE("Delete RVB {}", this->m_id);
 		}
 	protected:
 		retained_vertex_buffer(mage::gfx::retained_vertex_buffer::s_type* data, size_t count) :
 			mage::gl::retained_buffer<GL_ARRAY_BUFFER, USAGE, mage::gfx::retained_vertex_buffer>(data, count)
 		{
-			MAGE_CORE_TRACE("Create VB {}", this->m_id);
+			MAGE_CORE_TRACE("Create RVB {}", this->m_id);
 		}
 		retained_vertex_buffer(const retained_vertex_buffer& other, size_t count) :
 			mage::gl::retained_buffer<GL_ARRAY_BUFFER, USAGE, mage::gfx::retained_vertex_buffer>(other, count)
 		{
-			MAGE_CORE_TRACE("Create VB {}", this->m_id);
+			MAGE_CORE_TRACE("Create RVB {}", this->m_id);
 		}
 		retained_vertex_buffer(input_file& in) :
 			mage::gl::retained_buffer<GL_ARRAY_BUFFER, USAGE, mage::gfx::retained_vertex_buffer>(in)
 		{
-			MAGE_CORE_TRACE("Create VB {}", this->m_id);
+			MAGE_CORE_TRACE("Create RVB {}", this->m_id);
 		}
 	};
 

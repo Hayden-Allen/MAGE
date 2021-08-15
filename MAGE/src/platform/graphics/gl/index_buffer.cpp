@@ -18,30 +18,9 @@ namespace mage::gl
 {
 	template<GLenum USAGE>
 	index_buffer<USAGE>::index_buffer(s_type* data, size_t count) :
-		mage::gl::buffer<s_type, GL_ELEMENT_ARRAY_BUFFER, USAGE>(count),
-		mage::gfx::index_buffer(count)
+		mage::gl::buffer<GL_ELEMENT_ARRAY_BUFFER, USAGE, mage::gfx::index_buffer>(count)
 	{
-		write(data, count);
-		MAGE_CORE_TRACE("Create IB {}", m_id);
-	}
-	template<GLenum USAGE> 
-	void index_buffer<USAGE>::bind() const
-	{
-		mage::gl::buffer<s_type, GL_ELEMENT_ARRAY_BUFFER, USAGE>::bind();
-	}
-	template<GLenum USAGE>
-	void index_buffer<USAGE>::unbind() const
-	{
-		mage::gl::buffer<s_type, GL_ELEMENT_ARRAY_BUFFER, USAGE>::unbind();
-	}
-	template<GLenum USAGE>
-	void index_buffer<USAGE>::update(s_type* data, size_t count, size_t offset) const
-	{
-		mage::gl::buffer<s_type, GL_ELEMENT_ARRAY_BUFFER, USAGE>::update(data, count, offset);
-	}
-	template<GLenum USAGE>
-	void index_buffer<USAGE>::write(s_type* data, size_t count) const
-	{
-		mage::gl::buffer<s_type, GL_ELEMENT_ARRAY_BUFFER, USAGE>::write(data, count);
+		mage::gl::buffer<GL_ELEMENT_ARRAY_BUFFER, USAGE, mage::gfx::index_buffer>::write(data, count);
+		MAGE_CORE_TRACE("Create IB {}", this->m_id);
 	}
 }

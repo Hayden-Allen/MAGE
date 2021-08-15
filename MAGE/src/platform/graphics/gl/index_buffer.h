@@ -5,26 +5,18 @@
 namespace mage::gl
 {
 	template<GLenum USAGE>
-	class index_buffer :
-		public mage::gl::buffer<mage::gfx::index_buffer::s_type, GL_ELEMENT_ARRAY_BUFFER, USAGE>,
-		public mage::gfx::index_buffer
+	class index_buffer : public mage::gl::buffer<GL_ELEMENT_ARRAY_BUFFER, USAGE, mage::gfx::index_buffer>
 	{
+	protected:
+		using s_type = mage::gl::buffer<GL_ELEMENT_ARRAY_BUFFER, USAGE, mage::gfx::index_buffer>::s_type;
 	public:
 		MAGE_DCM(index_buffer);
-		~index_buffer()
+		virtual ~index_buffer()
 		{
-			MAGE_CORE_TRACE("Delete IB {}", m_id);
+			MAGE_CORE_TRACE("Delete IB {}", this->m_id);
 		}
-
-
-		void bind() const override;
-		void unbind() const override;
-		void update(s_type* indices, size_t count, size_t offset) const override;
 	protected:
 		index_buffer(s_type* indices, size_t count);
-
-
-		void write(s_type* indices, size_t count) const override;
 	};
 
 
