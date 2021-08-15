@@ -5,20 +5,24 @@
 
 namespace n
 {
-	class chunk
+	class chunk : public mage::serializable
 	{
 	public:
+		chunk(mage::input_file& in) { load(in); }
+		N_DCM(chunk);
+		virtual ~chunk();
+
+
+		virtual void save(mage::output_file& out) const override;
+		virtual void load(mage::input_file& in) override;
+		virtual void draw(const mage::timestep& t, sprite_bank* const sb, const sprite_atlas_bank* const ab, const shader_program& shader);
+	protected:
+		std::vector<sprite_batch_base*> m_batches;
+		glm::vec2 m_coords;
+
+
 		chunk() :
 			m_coords({ 0.f, 0.f })
-		{
-			// TODO
-		}
-		N_DCM(chunk);
-
-
-		void draw(const mage::timestep& t, sprite_bank* const sb, const sprite_atlas_bank* const ab, const shader_program& shader);
-	protected:
-		std::vector<sprite_batch> m_batches;
-		glm::vec2 m_coords;
+		{}
 	};
 }

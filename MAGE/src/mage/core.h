@@ -11,3 +11,4 @@
 #define MAGE_BIT(x) (1 << x)
 #define MAGE_CAST(T, x) static_cast<T>(x)
 #define MAGE_PUN(T, x) *(T*)&x
+#define MAGE_MTU ::mage::gfx::context::get_max_texture_units()

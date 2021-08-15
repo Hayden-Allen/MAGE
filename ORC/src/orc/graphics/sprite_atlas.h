@@ -3,14 +3,14 @@
 
 namespace orc
 {
+	class sprite_atlas_bank;
+
 	class sprite_atlas final :
 		public n::sprite_atlas,
 		public mage::rect_packer<uint32_t, n::sprite_atlas_coords, uint8_t>
 	{
-		using n::sprite_atlas::m_w;
-		using n::sprite_atlas::m_h;
 	public:
-		sprite_atlas(n::sprite_atlas_bank* const bank);
+		sprite_atlas(sprite_atlas_bank* const bank);
 		sprite_atlas(mage::input_file& in);
 		MAGE_DCM(sprite_atlas);
 

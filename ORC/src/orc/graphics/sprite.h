@@ -4,11 +4,12 @@
 namespace orc
 {
 	class sprite_atlas;
+	class sprite_atlas_bank;
 
 	class sprite final : public n::sprite
 	{
 	public:
-		sprite(n::sprite_bank* const sb, n::sprite_atlas_bank* const ab, const std::string& fp);
+		sprite(n::sprite_bank* const sb, sprite_atlas_bank* const ab, const std::string& fp);
 		sprite(mage::input_file& in);
 		MAGE_DCM(sprite);
 

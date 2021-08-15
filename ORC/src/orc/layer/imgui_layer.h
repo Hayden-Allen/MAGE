@@ -29,7 +29,7 @@ namespace orc
 				{
 					ImGui::Text("%.2fms | %.2ffps", e.get_delta_time(), 1000.f / e.get_delta_time());
 					ImGui::NewLine();
-					ImGui::DragFloat2("camera_pos", &m_layer->m_camera_pos[0], .01f, -2.f, 2.f);
+					ImGui::DragFloat2("camera_pos", &m_layer->m_camera_pos[0], .01f, -20.f, 20.f);
 					ImGui::NewLine();
 					ImGui::DragFloat("camera_rotation", &m_layer->m_camera_rotation, .01f, 0.f, 2 * glm::pi<float>());
 					ImGui::NewLine();

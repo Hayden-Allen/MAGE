@@ -7,6 +7,6 @@ namespace orc
 	struct tile
 	{
 		sprite* sprite;
-		mage::rect<float> pos;
+		mage::rect<uint8_t> pos;
 	};
 }

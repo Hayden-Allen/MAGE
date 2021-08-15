@@ -40,9 +40,6 @@
     <ClInclude Include="src\n\world\chunk.h">
       <Filter>n\world</Filter>
     </ClInclude>
-    <ClInclude Include="src\n\world\map.h">
-      <Filter>n\world</Filter>
-    </ClInclude>
     <ClInclude Include="src\n\world\sprite_batch.h">
       <Filter>n\world</Filter>
     </ClInclude>
@@ -59,9 +56,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\n\world\chunk.cpp">
-      <Filter>n\world</Filter>
-    </ClCompile>
-    <ClCompile Include="src\n\world\map.cpp">
       <Filter>n\world</Filter>
     </ClCompile>
     <ClCompile Include="src\n\world\sprite_batch.cpp">

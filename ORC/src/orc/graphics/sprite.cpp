@@ -1,10 +1,11 @@
 #include "pch.h"
 #include "sprite.h"
 #include "sprite_atlas.h"
+#include "sprite_atlas_bank.h"
 
 namespace orc
 {
-	sprite::sprite(n::sprite_bank* const sb, n::sprite_atlas_bank* const ab, const std::string& fp) :
+	sprite::sprite(n::sprite_bank* const sb, sprite_atlas_bank* const ab, const std::string& fp) :
 		n::sprite(sb)
 	{
 		mage::input_file data(fp);

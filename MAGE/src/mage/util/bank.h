@@ -52,12 +52,12 @@ namespace mage
 
 
 	/**
-	 * T must implement the constructable_serializable interface
+	 * T must also implement the serializable interface
 	 */
 	template<typename T, typename HANDLE, size_t COUNT>
 	class serializable_bank :
 		public bank<T, HANDLE, COUNT>,
-		public constructable_serializable
+		public serializable
 	{
 	public:
 		MAGE_DCM(serializable_bank);
@@ -78,8 +78,7 @@ namespace mage
 		}
 	protected:
 		serializable_bank() {}
-		serializable_bank(input_file& in) :
-			constructable_serializable(in)
+		serializable_bank(input_file& in)
 		{
 			load(in);
 		}

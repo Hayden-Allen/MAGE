@@ -34,4 +34,26 @@ namespace mage
 	{
 		arrprint(N, arr, fmt, sep, wrap);
 	}
+	template<typename T>
+	static void arrset(size_t count, T* const arr, const T& value, size_t offset = 0)
+	{
+		for (size_t i = 0; i < count; i++)
+			arr[i + offset] = value;
+	}
+	template<typename T, size_t N>
+	static void arrset(T(&arr)[N], const T& value, size_t offset = 0)
+	{
+		arrset(N, arr, value, offset);
+	}
+	template<typename T>
+	static void arrcopy(size_t count, T* src, T* dst)
+	{
+		for (size_t i = 0; i < count; i++)
+			dst[i] = src[i];
+	}
+	template<typename T, size_t N>
+	static void arrcopy(T(&src)[N], T* dst)
+	{
+		return arrcopy(N, src, dst);
+	}
 }

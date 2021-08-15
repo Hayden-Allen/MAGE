@@ -20,6 +20,7 @@ namespace n
 		out.uint(m_w).uint(m_h);
 		out.ubyte(m_frame_count).ushort(m_frame_time);
 		m_base_coords.save(out);
+
 		for (uint8_t i = 0; i < m_frame_count; i++)
 			m_frame_data[i].save(out);
 	}

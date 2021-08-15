@@ -19,6 +19,8 @@
     <ClInclude Include="src\orc\world\sprite_batch_constructor.h" />
     <ClInclude Include="src\orc\world\tile.h" />
     <ClInclude Include="src\orc\world\sprite_batch.h" />
+    <ClInclude Include="src\orc\graphics\sprite_atlas_bank.h" />
+    <ClInclude Include="src\orc\world\map.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp" />
@@ -28,5 +30,6 @@
     <ClCompile Include="src\orc\world\sprite_batch_constructor.cpp" />
     <ClCompile Include="src\orc\world\sprite_batch.cpp" />
     <ClCompile Include="src\orc\world\chunk.cpp" />
+    <ClCompile Include="src\orc\world\map.cpp" />
   </ItemGroup>
 </Project>

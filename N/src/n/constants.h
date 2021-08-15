@@ -35,6 +35,7 @@ namespace n::c
 	constexpr static size_t vertices_per_tile = 4;
 	// (x, y), (s, t) (base), (i) (local sprite_batch index)
 	constexpr static size_t floats_per_tile_vertex = 5;
+	constexpr static size_t floats_per_tile = vertices_per_tile * floats_per_tile_vertex;
 	// 0, 1, 2, 0, 2, 3
 	constexpr static size_t indices_per_tile = 6;
 
@@ -48,4 +49,8 @@ namespace n::c
 	constexpr static size_t tiles_per_chunk_side = 16;
 	constexpr static size_t tiles_per_chunk_layer = tiles_per_chunk_side * tiles_per_chunk_side;
 	constexpr static size_t tiles_per_chunk = tiles_per_chunk_layer * layers_per_chunk;
+
+
+	constexpr static size_t sprite_batch_base_size = tiles_per_chunk_layer;
+	constexpr static size_t sprite_batch_max_size = tiles_per_chunk;
 }

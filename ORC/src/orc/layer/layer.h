@@ -2,6 +2,7 @@
 #include "pch.h"
 #include "orc/graphics/sprite.h"
 #include "orc/world/chunk.h"
+#include "orc/world/map.h"
 
 namespace orc
 {
@@ -29,37 +30,64 @@ namespace orc
 			m_camera = new n::camera(*this, 1.6f, .9f, m_camera_pos, m_camera_rotation, m_camera_zoom);
 
 
+			/*uint32_t indices[] = { 0, 1, 2, 0, 2, 3 };
+			m_ib = new n::static_index_buffer(indices, 1);
+			float vertices[] =
+			{
+				0.f, 0.f, 0.f, 0.f, 0.f,
+				1.f, 0.f, 0.05f, 0.f, 0.f,
+				1.f, 1.f, 0.05f, 0.05f, 0.f,
+				0.f, 1.f, 0.f, 0.05f, 0.f
+			};
+			m_vb = new n::static_vertex_buffer(vertices, 20);
+			m_va = new n::static_vertex_array(m_vb, { mage::gfx::shader_type::float2, mage::gfx::shader_type::float2, mage::gfx::shader_type::float1 });*/
+
+
 			/*constexpr bool save = false;
 			if (save)
 			{
-				mage::game::sprite_atlas_bank* sab = new mage::game::sprite_atlas_bank();
-				mage::game::sprite_bank* sb = new mage::game::sprite_bank();
-				mage::game::sprite_bank::handle s = (new sprite(sb, sab, "res/sprite/newSprite.sprite"))->get_handle();
+				m_sab = new sprite_atlas_bank();
+				n::sprite_bank* sb = new n::sprite_bank();
+				n::sprite_bank::handle s = (new sprite(sb, m_sab, "res/sprite/newSprite.sprite"))->get_handle();
 				mage::output_file sabf("res/ab.mage"), sbf("res/sb.mage");
-				sab->save(sabf);
+				m_sab->save(sabf);
 				sb->save(sbf);
 			}
 			else
 			{
 				mage::input_file sabf("res/ab.mage"), sbf("res/sb.mage");
-				mage::game::sprite_atlas_bank* sab = new mage::game::sprite_atlas_bank(sabf);
-				mage::game::sprite_bank* sb = new mage::game::sprite_bank(sbf);
+				m_sab = new sprite_atlas_bank(sabf);
+				n::sprite_bank* sb = new n::sprite_bank(sbf);
+			}*/
+
+
+			constexpr bool save = false;
+			if (save)
+			{
+				n::sprite_bank* sb = new n::sprite_bank();
+				sprite_atlas_bank* ab = new sprite_atlas_bank();
+				sprite* s = new sprite(sb, ab, "res/sprite/newSprite.sprite");
+				chunk* c = new chunk();
+				c->set_tile_at({ 0, 0 }, 0, s);
+				m_map = new map(ab, sb, { c });
+				mage::output_file out("res/map.orc");
+				m_map->save(out);
 			}
-			exit(0);*/
-
-
-			n::sprite_bank* sb = new n::sprite_bank();
-			n::sprite_atlas_bank* ab = new n::sprite_atlas_bank();
-			sprite* s = new sprite(sb, ab, "res/sprite/newSprite.sprite");
-			chunk* c = new chunk({ { s, { {-.5f, -.5f}, {.5f, .5f} } } });
-			m_map = new n::map(ab, sb, { c });
-			// TODO save/load map
+			else
+			{
+				mage::input_file in("res/map.orc");
+				m_map = new map(in);
+			}
 		}
 		MAGE_DCM(layer);
 		~layer()
 		{
 			MAGE_ERROR("DELETE ORC LAYER");
 			delete m_map;
+			/*delete m_sab;
+			delete m_ib;
+			delete m_vb;
+			delete m_va;*/
 			delete m_framebuffer;
 			delete m_shader_program;
 			delete m_camera;
@@ -81,13 +109,19 @@ namespace orc
 			m_shader_program->bind();
 			m_shader_program->set_uniform_mat4(n::c::shader_camera, m_camera->get_view_projection());
 			m_map->draw(mage::timestep(), *m_shader_program);
+			/*m_sab->get(0)->bind(0);
+			mage::gfx::renderer::draw(m_ib, m_va);*/
 
 			// draw framebuffer onto screen
 			m_framebuffer->draw();
 			return false;
 		}
 	private:
-		n::map* m_map;
+		map* m_map;
+		sprite_atlas_bank* m_sab;
+		n::static_index_buffer* m_ib;
+		n::static_vertex_buffer* m_vb;
+		n::static_vertex_array* m_va;
 		n::framebuffer* m_framebuffer;
 		n::shader_program* m_shader_program;
 		n::camera* m_camera;

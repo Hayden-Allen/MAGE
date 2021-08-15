@@ -45,5 +45,12 @@ namespace n
 		sprite_atlas_bank::handle m_handle;
 		// hardware texture
 		mage::gfx::retained_texture2d* m_texture;
+
+
+		sprite_atlas(s_type w, s_type h) :
+			mage::dimensional<mage::gfx::retained_texture2d::s_type>(w, h),
+			m_handle(0),
+			m_texture(nullptr)
+		{}
 	};
 }

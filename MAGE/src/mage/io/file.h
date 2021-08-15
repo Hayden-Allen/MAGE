@@ -12,7 +12,6 @@ namespace mage
 		{
 			m_file.close();
 		}
-
 	protected:
 		std::fstream m_file;
 
@@ -35,6 +34,10 @@ namespace mage
 		MAGE_DCM(input_file);
 
 
+		bool is_eof() const
+		{
+			return m_file.eof();
+		}
 		uint8_t ubyte()
 		{
 			return m_file.get();
