@@ -15,13 +15,13 @@ namespace n
 
 
 
-	void sprite_batch::draw(const mage::timestep& t, mage::game::sprite_bank* const sb, const mage::game::sprite_atlas_bank* const ab, const shader_program& shader)
+	void sprite_batch::draw(const mage::timestep& t, sprite_bank* const sb, const sprite_atlas_bank* const ab, const shader_program& shader)
 	{
 		// for each sprite in this batch
 		for (size_t i = 0; i < m_sprite_count; i++)
 		{
 			// update the current sprite
-			mage::game::sprite* const s = sb->get(m_sprites[i]);
+			sprite* const s = sb->get(m_sprites[i]);
 			s->update(t);
 
 			const auto& state = s->get_current_frame();
@@ -35,8 +35,8 @@ namespace n
 			ab->get(pair.first)->bind(MAGE_CAST(uint32_t, pair.second));
 
 		// upload current arrays
-		shader.set_uniform_int_array(mage::game::c::shader_sprite_to_texture_indices, m_texture_indices, m_sprite_count);
-		shader.set_uniform_float2_array(mage::game::c::shader_sprite_offsets, m_offsets, m_sprite_count);
+		shader.set_uniform_int_array(c::shader_sprite_to_texture_indices, m_texture_indices, m_sprite_count);
+		shader.set_uniform_float2_array(c::shader_sprite_offsets, m_offsets, m_sprite_count);
 		
 		// draw all tiles
 		mage::gfx::renderer::draw(m_indices, m_vertex_array);

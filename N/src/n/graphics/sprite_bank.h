@@ -2,15 +2,15 @@
 #include "pch.h"
 #include "mage/util/bank.h"
 
-namespace mage::game
+namespace n
 {
 	class sprite;
 
-	class sprite_bank final : public serializable_bank<sprite, uint16_t, c::sprite_bank_size>
+	class sprite_bank final : public mage::serializable_bank<sprite, uint16_t, c::sprite_bank_size>
 	{
 	public:
 		sprite_bank() {}
-		sprite_bank(input_file& in) :
+		sprite_bank(mage::input_file& in) :
 			serializable_bank<sprite, uint16_t, c::sprite_bank_size>(in)
 		{}
 		MAGE_DCM(sprite_bank);

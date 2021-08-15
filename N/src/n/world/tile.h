@@ -1,11 +1,12 @@
 #pragma once
 #include "pch.h"
+#include "n/graphics/sprite.h"
 
 namespace n
 {
 	struct tile
 	{
-		mage::game::sprite* sprite;
+		n::sprite* sprite;
 		mage::rect<float> pos;
 	};
 }

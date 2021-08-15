@@ -48,8 +48,8 @@ namespace orc
 			exit(0);*/
 
 
-			game::sprite_bank* sb = new game::sprite_bank();
-			game::sprite_atlas_bank* ab = new game::sprite_atlas_bank();
+			n::sprite_bank* sb = new n::sprite_bank();
+			n::sprite_atlas_bank* ab = new n::sprite_atlas_bank();
 			sprite* s = new sprite(sb, ab, "res/sprite/newSprite.sprite");
 			chunk* c = new chunk({ { s, { {-.5f, -.5f}, {.5f, .5f} } } });
 			m_map = new n::map(ab, sb, { c });
@@ -70,7 +70,7 @@ namespace orc
 		{
 			// draw onto framebuffer
 			m_framebuffer->bind();
-			gfx::renderer::clear();
+			mage::gfx::renderer::clear();
 
 			// update camera values from imgui_layer
 			m_camera->set_pos(m_camera_pos);
@@ -79,7 +79,7 @@ namespace orc
 
 			// upload camera and draw map
 			m_shader_program->bind();
-			m_shader_program->set_uniform_mat4(game::c::shader_camera, m_camera->get_view_projection());
+			m_shader_program->set_uniform_mat4(n::c::shader_camera, m_camera->get_view_projection());
 			m_map->draw(mage::timestep(), *m_shader_program);
 
 			// draw framebuffer onto screen

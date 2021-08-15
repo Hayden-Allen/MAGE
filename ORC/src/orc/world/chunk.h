@@ -16,7 +16,7 @@ namespace orc
 			return m_tile_count == 0;
 		}
 	private:
-		mage::game::sprite_bank::handle m_grid[mage::game::c::tiles_per_chunk];
+		n::sprite_bank::handle m_grid[n::c::tiles_per_chunk];
 		size_t m_tile_count;
 	};
 }

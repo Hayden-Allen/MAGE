@@ -6,7 +6,7 @@ namespace orc
 	sprite_batch::sprite_batch(const sprite_batch_constructor& constructor)
 	{
 		m_sprite_count = constructor.m_tiles.size();
-		m_sprites = new mage::game::sprite_bank::handle[m_sprite_count];
+		m_sprites = new n::sprite_bank::handle[m_sprite_count];
 		m_offsets = new glm::vec2[m_sprite_count];
 		m_texture_indices = new int[m_sprite_count];
 
@@ -17,7 +17,7 @@ namespace orc
 
 
 		// map sprite pointer to its local index
-		std::unordered_map<mage::game::sprite*, size_t> sprite_indices;
+		std::unordered_map<n::sprite*, size_t> sprite_indices;
 		// total number of tiles, number of sprites added
 		size_t tile_count = 0, sprite_index = 0;
 		for (const auto& group : constructor.m_tiles)
@@ -40,7 +40,7 @@ namespace orc
 		 * TODO generate only midpoints and use geometry shader?
 		 */
 		 // total number of floats needed for all vertices
-		const size_t float_count = tile_count * mage::game::c::vertices_per_tile * mage::game::c::floats_per_tile_vertex;
+		const size_t float_count = tile_count * n::c::vertices_per_tile * n::c::floats_per_tile_vertex;
 		float* vertices = new float[float_count];
 		// base index of the current vertex
 		size_t index = 0;
@@ -54,20 +54,20 @@ namespace orc
 			for (const tile& t : group.second)
 			{
 				// (x, y) offsets
-				const float x[mage::game::c::vertices_per_tile] = { t.pos.min.x, t.pos.max.x, t.pos.max.x, t.pos.min.x };
-				const float y[mage::game::c::vertices_per_tile] = { t.pos.min.y, t.pos.min.y, t.pos.max.y, t.pos.max.y };
+				const float x[n::c::vertices_per_tile] = { t.pos.min.x, t.pos.max.x, t.pos.max.x, t.pos.min.x };
+				const float y[n::c::vertices_per_tile] = { t.pos.min.y, t.pos.min.y, t.pos.max.y, t.pos.max.y };
 				// (s, t) offsets
-				const float tx[mage::game::c::vertices_per_tile] = { base_coords.x.get_min(), base_coords.x.get_max(), base_coords.x.get_max(), base_coords.x.get_min() };
-				const float ty[mage::game::c::vertices_per_tile] = { base_coords.y.get_min(), base_coords.y.get_min(), base_coords.y.get_max(), base_coords.y.get_max() };
+				const float tx[n::c::vertices_per_tile] = { base_coords.x.get_min(), base_coords.x.get_max(), base_coords.x.get_max(), base_coords.x.get_min() };
+				const float ty[n::c::vertices_per_tile] = { base_coords.y.get_min(), base_coords.y.get_min(), base_coords.y.get_max(), base_coords.y.get_max() };
 
 				// 4 vertices of (x, y), (s, t), (i) 
-				for (size_t i = 0; i < mage::game::c::vertices_per_tile; i++)
+				for (size_t i = 0; i < n::c::vertices_per_tile; i++)
 				{
-					vertices[index * mage::game::c::floats_per_tile_vertex + 0] = x[i];
-					vertices[index * mage::game::c::floats_per_tile_vertex + 1] = y[i];
-					vertices[index * mage::game::c::floats_per_tile_vertex + 2] = tx[i];
-					vertices[index * mage::game::c::floats_per_tile_vertex + 3] = ty[i];
-					vertices[index * mage::game::c::floats_per_tile_vertex + 4] = local_index;
+					vertices[index * n::c::floats_per_tile_vertex + 0] = x[i];
+					vertices[index * n::c::floats_per_tile_vertex + 1] = y[i];
+					vertices[index * n::c::floats_per_tile_vertex + 2] = tx[i];
+					vertices[index * n::c::floats_per_tile_vertex + 3] = ty[i];
+					vertices[index * n::c::floats_per_tile_vertex + 4] = local_index;
 					index++;
 				}
 			}

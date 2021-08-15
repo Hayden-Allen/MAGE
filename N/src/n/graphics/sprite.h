@@ -5,11 +5,11 @@
 #include "sprite_bank.h"
 #include "mage/timestep.h"
 
-namespace mage::game
+namespace n
 {
 	class sprite :
-		public dimensional<uint8_t>,
-		public serializable
+		public mage::dimensional<uint8_t>,
+		public mage::serializable
 	{
 	protected:
 		/**
@@ -52,7 +52,7 @@ namespace mage::game
 
 		void save(mage::output_file& out) const override;
 		void load(mage::input_file& in) override;
-		void update(const timestep& t);
+		void update(const mage::timestep& t);
 		template<typename T = uint8_t>
 		T get_frame() const
 		{
@@ -77,7 +77,7 @@ namespace mage::game
 		// time (ms) that each frame should display for
 		uint16_t m_frame_time;
 		// time at which m_frame was last updated
-		timestep m_last_switch;
+		mage::timestep m_last_switch;
 		// texture coords of first frame
 		sprite_atlas_coords m_base_coords;
 		// data for all frames

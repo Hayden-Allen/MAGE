@@ -79,24 +79,6 @@
     <ClInclude Include="src\mage\event\window_event.h">
       <Filter>mage\event</Filter>
     </ClInclude>
-    <ClInclude Include="src\mage\game\constants.h">
-      <Filter>mage\game</Filter>
-    </ClInclude>
-    <ClInclude Include="src\mage\game\sprite.h">
-      <Filter>mage\game</Filter>
-    </ClInclude>
-    <ClInclude Include="src\mage\game\sprite_atlas.h">
-      <Filter>mage\game</Filter>
-    </ClInclude>
-    <ClInclude Include="src\mage\game\sprite_atlas_bank.h">
-      <Filter>mage\game</Filter>
-    </ClInclude>
-    <ClInclude Include="src\mage\game\sprite_atlas_coords.h">
-      <Filter>mage\game</Filter>
-    </ClInclude>
-    <ClInclude Include="src\mage\game\sprite_bank.h">
-      <Filter>mage\game</Filter>
-    </ClInclude>
     <ClInclude Include="src\mage\graphics\buffer.h">
       <Filter>mage\graphics</Filter>
     </ClInclude>
@@ -258,12 +240,6 @@
   <ItemGroup>
     <ClCompile Include="src\mage\application.cpp">
       <Filter>mage</Filter>
-    </ClCompile>
-    <ClCompile Include="src\mage\game\sprite.cpp">
-      <Filter>mage\game</Filter>
-    </ClCompile>
-    <ClCompile Include="src\mage\game\sprite_atlas.cpp">
-      <Filter>mage\game</Filter>
     </ClCompile>
     <ClCompile Include="src\mage\imgui\build.cpp">
       <Filter>mage\imgui</Filter>

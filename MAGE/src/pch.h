@@ -115,12 +115,3 @@
 		#include "platform/os/windows/windows_window.h"
 	#endif
 #endif
-
-
-// game (include last because they use everything else)
-#include "mage/game/constants.h"
-#include "mage/game/sprite.h"
-#include "mage/game/sprite_atlas.h"
-#include "mage/game/sprite_atlas_bank.h"
-#include "mage/game/sprite_atlas_coords.h"
-#include "mage/game/sprite_bank.h"

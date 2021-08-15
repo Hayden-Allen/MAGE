@@ -2,7 +2,7 @@
 #include "pch.h"
 #include "mage/util/bank.h"
 
-namespace mage::game
+namespace n
 {
 	class sprite_atlas;
 
@@ -10,7 +10,7 @@ namespace mage::game
 	{
 	public:
 		sprite_atlas_bank() {}
-		sprite_atlas_bank(input_file& in) :
+		sprite_atlas_bank(mage::input_file& in) :
 			serializable_bank<sprite_atlas, uint16_t, c::sprite_atlas_bank_size>(in)
 		{}
 		MAGE_DCM(sprite_atlas_bank);

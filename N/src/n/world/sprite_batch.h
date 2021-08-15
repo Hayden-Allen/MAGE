@@ -31,14 +31,14 @@ namespace n
 		virtual ~sprite_batch();
 
 
-		void draw(const mage::timestep& t, mage::game::sprite_bank* const sb, const mage::game::sprite_atlas_bank* const ab, const shader_program& shader);
+		void draw(const mage::timestep& t, sprite_bank* const sb, const sprite_atlas_bank* const ab, const shader_program& shader);
 	protected:
 		static_index_buffer* m_indices;
 		static_vertex_buffer* m_vertices;
 		static_vertex_array* m_vertex_array;
 		size_t m_sprite_count;
-		std::unordered_map<mage::game::sprite_atlas_bank::handle, size_t> m_atlases;
-		mage::game::sprite_bank::handle* m_sprites;
+		std::unordered_map<sprite_atlas_bank::handle, size_t> m_atlases;
+		sprite_bank::handle* m_sprites;
 		glm::vec2* m_offsets;
 		int* m_texture_indices;
 

@@ -15,7 +15,7 @@ namespace n
 				int* samplers = new int[count];
 				for (size_t i = 0; i < count; i++)
 					samplers[i] = MAGE_CAST(int, i);
-				set_uniform_int_array(mage::game::c::shader_textures, samplers, count);
+				set_uniform_int_array(c::shader_textures, samplers, count);
 				delete[] samplers;
 			}
 		}

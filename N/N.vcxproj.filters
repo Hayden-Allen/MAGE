@@ -50,6 +50,12 @@
       <Filter>n\world</Filter>
     </ClInclude>
     <ClInclude Include="src\pch.h" />
+    <ClInclude Include="src\n\constants.h" />
+    <ClInclude Include="src\n\graphics\sprite.h" />
+    <ClInclude Include="src\n\graphics\sprite_atlas.h" />
+    <ClInclude Include="src\n\graphics\sprite_atlas_bank.h" />
+    <ClInclude Include="src\n\graphics\sprite_atlas_coords.h" />
+    <ClInclude Include="src\n\graphics\sprite_bank.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\n\world\chunk.cpp">
@@ -62,5 +68,7 @@
       <Filter>n\world</Filter>
     </ClCompile>
     <ClCompile Include="src\pch.cpp" />
+    <ClCompile Include="src\n\graphics\sprite.cpp" />
+    <ClCompile Include="src\n\graphics\sprite_atlas.cpp" />
   </ItemGroup>
 </Project>

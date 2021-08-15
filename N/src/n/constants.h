@@ -1,7 +1,7 @@
 #pragma once
 #include "pch.h"
 
-namespace mage::game::c
+namespace n::c
 {
 	// colors in a sprite's palette
 	constexpr static size_t sprite_color_count = 16;

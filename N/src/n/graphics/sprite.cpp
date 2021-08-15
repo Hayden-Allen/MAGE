@@ -1,7 +1,7 @@
 #include "pch.h"
 #include "sprite.h"
 
-namespace mage::game
+namespace n
 {
 	sprite::sprite(mage::input_file& in) :
 		mage::dimensional<uint8_t>(0, 0),
@@ -39,7 +39,7 @@ namespace mage::game
 			m_frame_data.push_back(h);
 		}
 	}
-	void sprite::update(const timestep& t)
+	void sprite::update(const mage::timestep& t)
 	{
 		// if this sprite has multiple frames and enough time has passed, advance the frame
 		if (m_frame_count > 1 && t - m_last_switch >= m_frame_time)

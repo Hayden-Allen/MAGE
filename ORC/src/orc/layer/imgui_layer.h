@@ -4,11 +4,11 @@
 
 namespace orc
 {
-	class imgui_layer final : public windows_imgui_layer
+	class imgui_layer final : public mage::windows_imgui_layer
 	{
 	public:
 		imgui_layer(orc::layer* const layer) :
-			windows_imgui_layer("ORC ImGui"),
+			mage::windows_imgui_layer("ORC ImGui"),
 			m_layer(layer)
 		{
 			MAGE_ERROR("CREATE ORC IMGUI LAYER");
@@ -36,7 +36,7 @@ namespace orc
 					ImGui::DragFloat("camera_zoom", &m_layer->m_camera_zoom, .01f, .1f, 10.f);
 					ImGui::NewLine();
 
-					const auto& win = application::get().get_window();
+					const auto& win = mage::application::get().get_window();
 					ImGui::Image((void*)m_layer->m_framebuffer->get_color_attachment_id(), { win.get_w<float>(), win.get_h<float>() }, { 0.f, 1.f }, { 1.f, 0.f });
 				}
 				ImGui::End();

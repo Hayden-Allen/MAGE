@@ -152,12 +152,6 @@
     <ClInclude Include="src\mage\event\key_event.h" />
     <ClInclude Include="src\mage\event\mouse_event.h" />
     <ClInclude Include="src\mage\event\window_event.h" />
-    <ClInclude Include="src\mage\game\constants.h" />
-    <ClInclude Include="src\mage\game\sprite.h" />
-    <ClInclude Include="src\mage\game\sprite_atlas.h" />
-    <ClInclude Include="src\mage\game\sprite_atlas_bank.h" />
-    <ClInclude Include="src\mage\game\sprite_atlas_coords.h" />
-    <ClInclude Include="src\mage\game\sprite_bank.h" />
     <ClInclude Include="src\mage\graphics\buffer.h" />
     <ClInclude Include="src\mage\graphics\camera.h" />
     <ClInclude Include="src\mage\graphics\context.h" />
@@ -214,8 +208,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\mage\application.cpp" />
-    <ClCompile Include="src\mage\game\sprite.cpp" />
-    <ClCompile Include="src\mage\game\sprite_atlas.cpp" />
     <ClCompile Include="src\mage\imgui\build.cpp" />
     <ClCompile Include="src\mage\imgui\imgui_layer.cpp" />
     <ClCompile Include="src\mage\io\file.cpp" />

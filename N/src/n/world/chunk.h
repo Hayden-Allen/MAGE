@@ -16,7 +16,7 @@ namespace n
 		N_DCM(chunk);
 
 
-		void draw(const mage::timestep& t, mage::game::sprite_bank* const sb, const mage::game::sprite_atlas_bank* const ab, const shader_program& shader);
+		void draw(const mage::timestep& t, sprite_bank* const sb, const sprite_atlas_bank* const ab, const shader_program& shader);
 	protected:
 		std::vector<sprite_batch> m_batches;
 		glm::vec2 m_coords;

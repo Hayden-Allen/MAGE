@@ -24,7 +24,7 @@ namespace orc
 		bool can_contain(const orc::tile& t) const;
 		void add(const orc::tile& t);
 	private:
-		std::unordered_set<mage::game::sprite_atlas_bank::handle> m_atlases;
+		std::unordered_set<n::sprite_atlas_bank::handle> m_atlases;
 		std::unordered_map<sprite*, std::vector<orc::tile>> m_tiles;
 
 
