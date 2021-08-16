@@ -7,8 +7,8 @@ namespace mage::gl
 	framebuffer::framebuffer(event_handler_container& c, s_type w, s_type h, const std::initializer_list<mage::gfx::framebuffer_attachment<mage::gl::texture2d, const void* const, const texture_options&>*>& attachments) :
 		mage::gfx::framebuffer<mage::gl::texture2d, const void* const, const texture_options&>(c, w, h, attachments)
 	{
-		MAGE_CORE_TRACE("Create FB {}", m_id);
 		update();
+		MAGE_CORE_TRACE("Create FB {}", m_id);
 	}
 
 

@@ -28,8 +28,7 @@ namespace mage::gfx
 		virtual void reset() const = 0;
 	protected:
 		framebuffer_attachment(s_type w, s_type h, const ARGS& ... args) :
-			T(w, h, args...),
-			dimensional<s_type>(w, h)
+			T(w, h, args...)
 		{}
 	};
 

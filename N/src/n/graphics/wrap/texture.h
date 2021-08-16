@@ -13,29 +13,29 @@ namespace n
 	typedef mage::gfx::texture_source_type texture_source_type;
 
 
-	N_WRAP_VIRTUAL
+	N_WRAP
 	(
 		texture2d,
 		texture2d,
-		(s_type w, s_type h, const void* const data, const texture_options& options) : mage::dimensional<s_type>(w, h),
+		(s_type w, s_type h, const void* const data, const texture_options& options),
 		(w, h, data, options)
 	);
 
 
-	N_WRAP_VIRTUAL
+	N_WRAP
 	(
 		retained_texture2d,
 		retained_texture2d,
-		(s_type w, s_type h, size_t count, const uint32_t* const data, const texture_options& options) : mage::dimensional<s_type>(w, h),
+		(s_type w, s_type h, size_t count, const uint32_t* const data, const texture_options& options),
 		(w, h, count, data, options),
-		retained_texture2d(s_type w, s_type h, size_t count, const texture_options& options) : mage::dimensional<s_type>(w, h), MAGE_RAN::retained_texture2d(w, h, count, options) {}
+		retained_texture2d(s_type w, s_type h, size_t count, const texture_options& options) : MAGE_RAN::retained_texture2d(w, h, count, options) {}
 	);
 
-	N_WRAP_VIRTUAL
+	N_WRAP
 	(
 		texture2d_array,
 		texture2d_array,
-		(s_type w, s_type h, s_type f, const void* const data, const texture_options& options) : mage::dimensional<s_type>(w, h),
+		(s_type w, s_type h, s_type f, const void* const data, const texture_options& options),
 		(w, h, f, data, options)
 	);
 }

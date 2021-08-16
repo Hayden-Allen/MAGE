@@ -9,7 +9,7 @@ namespace orc
 		rect_packer<uint32_t, n::sprite_atlas_coords, uint8_t>(n::c::sprite_atlas_size, n::c::sprite_atlas_size)
 	{
 		m_handle = bank->add(this);
-		m_texture = mage::gfx::retained_texture2d::create(n::sprite_atlas::m_w, n::sprite_atlas::m_h, n::c::bytes_per_sprite_pixel * n::sprite_atlas::m_w * n::sprite_atlas::m_h, nullptr, s_texture_options);
+		m_texture = new n::retained_texture2d(n::sprite_atlas::m_w, n::sprite_atlas::m_h, n::c::bytes_per_sprite_pixel * n::sprite_atlas::m_w * n::sprite_atlas::m_h, nullptr, s_texture_options);
 	}
 	sprite_atlas::sprite_atlas(mage::input_file& in) :
 		n::sprite_atlas(in),
