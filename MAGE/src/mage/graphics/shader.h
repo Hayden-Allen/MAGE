@@ -11,13 +11,14 @@ namespace mage::gfx
 	static mage::gfx::shader_priority_t get_static_priority() { return x; } \
 	virtual mage::gfx::shader_priority_t get_priority() const override { return x; }
 
+
+
 	class shader : public render_object
 	{
 	public:
 		MAGE_DCM(shader);
 		virtual ~shader() {}
-
-		
+	public:
 		virtual shader_priority_t get_priority() const = 0;
 	protected:
 		shader(const std::string& s, const shader_preprocessor& p = shader_preprocessor()) {}

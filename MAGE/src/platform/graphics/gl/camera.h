@@ -13,8 +13,7 @@ namespace mage::gl
 			update();
 		}
 		MAGE_DCM(orthographic_camera);
-
-
+	public:
 		void set_pos(const glm::vec3& pos) override;
 	protected:
 		void update() override;

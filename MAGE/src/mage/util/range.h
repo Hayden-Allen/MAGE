@@ -26,8 +26,7 @@ namespace mage
 		{
 			MAGE_CORE_ASSERT(min < max, "Range min ({}) must be < than max ({})", min, max);
 		}
-
-
+	public:
 		void operator=(const range<T>& other)
 		{
 			m_min = other.m_min;

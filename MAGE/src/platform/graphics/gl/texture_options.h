@@ -1,6 +1,7 @@
 #pragma once
 #include "pch.h"
 #include "mage/graphics/texture_options.h"
+#include "mage/io/file.h"
 
 namespace mage::gl
 {

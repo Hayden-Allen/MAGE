@@ -1,9 +1,9 @@
 #include "pch.h"
 #include "windows_window.h"
-#include "event/key_event.h"
-#include "event/mouse_event.h"
-#include "event/window_event.h"
-#include "log.h"
+#include "mage/event/key_event.h"
+#include "mage/event/mouse_event.h"
+#include "mage/event/window_event.h"
+#include "mage/graphics/renderer.h"
 #include "platform/graphics/gl/context.h"
 
 namespace mage

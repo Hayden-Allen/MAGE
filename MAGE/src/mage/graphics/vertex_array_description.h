@@ -21,8 +21,7 @@ namespace mage::gfx
 			}
 		}
 		MAGE_DCM(vertex_array_description);
-
-
+	public:
 		template<typename T = size_t>
 		T get_stride() const
 		{

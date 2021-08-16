@@ -17,9 +17,7 @@ namespace mage
 	{
 	public:
 		MAGE_DCM(event_handler);
-		
-
-
+	public:
 		// app
 		virtual bool on_app_tick(app_tick_event& e) { return false; }
 		virtual bool on_app_draw(app_draw_event& e) { return false; }

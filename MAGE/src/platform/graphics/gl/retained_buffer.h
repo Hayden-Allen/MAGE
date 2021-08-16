@@ -14,8 +14,7 @@ namespace mage::gl
 		{
 			glDeleteBuffers(1, &this->m_id);
 		}
-		
-		
+	public:
 		void bind() const override
 		{
 			glBindBuffer(TARGET, this->m_id);
@@ -58,8 +57,7 @@ namespace mage::gl
 			glGenBuffers(1, &this->m_id);
 			load(in);
 		}
-
-
+	protected:
 		void write(T::s_type* data, size_t count) const override
 		{
 			bind();

@@ -14,15 +14,13 @@ namespace mage::gfx
 	public:
 		MAGE_DCM(texture);
 		virtual ~texture() {}
-
-
+	public:
 		virtual void bind(uint32_t slot) const = 0;
 	protected:
 		texture(s_type w, s_type h) :
 			dimensional<s_type>(w, h)
 		{}
-
-
+	protected:
 		void bind() const override
 		{
 			bind(0);
@@ -36,8 +34,7 @@ namespace mage::gfx
 	public:
 		MAGE_DCM(texture2d);
 		virtual ~texture2d() {}
-
-
+	public:
 		virtual void update(s_type x, s_type y, s_type w, s_type h, const void* const data) = 0;
 	protected:
 		texture2d(s_type w, s_type h) :
@@ -57,8 +54,7 @@ namespace mage::gfx
 		{
 			delete m_data;
 		}
-
-
+	public:
 		void update(s_type x, s_type y, s_type w, s_type h, const void* const data) override
 		{
 			check_bounds(x, y, w, h);
@@ -99,8 +95,7 @@ namespace mage::gfx
 	protected:
 		size_t m_count;
 		uint32_t* m_data;
-
-
+	protected:
 		// don't allocate space (used when loading from a file)
 		retained_texture2d(s_type w, s_type h, size_t count) :
 			texture2d(w, h),
@@ -116,8 +111,7 @@ namespace mage::gfx
 			for (size_t i = 0; i < count; i++)
 				m_data[i] = (data ? data[i] : 0);
 		}
-
-
+	protected:
 		void check_bounds(s_type x, s_type y, s_type w, s_type h) const
 		{
 			MAGE_CORE_ASSERT(x < m_w && y < m_h, "Invalid retained_texture2d lower bound <{}, {}> (must be < <{}, {}>)", x, y, m_w, m_h);
@@ -133,8 +127,7 @@ namespace mage::gfx
 	public:
 		MAGE_DCM(texture2d_array);
 		virtual ~texture2d_array() {}
-
-
+	public:
 		virtual void update(s_type x, s_type y, s_type z, s_type w, s_type h, s_type d, const void* const data) = 0;
 		s_type get_frame_count() const
 		{
@@ -142,8 +135,7 @@ namespace mage::gfx
 		}
 	protected:
 		s_type m_frames;
-
-
+	protected:
 		texture2d_array(s_type w, s_type h, s_type f) :
 			texture(w, h),
 			m_frames(f)

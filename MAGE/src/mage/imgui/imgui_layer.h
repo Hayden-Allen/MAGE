@@ -12,8 +12,7 @@ namespace mage
 	public:
 		MAGE_DCM(imgui_layer);
 		virtual ~imgui_layer();
-
-
+	public:
 		bool on_app_tick(app_tick_event& e) final override;
 		bool on_app_render(app_render_event& e) final override;
 		virtual bool on_key_press(key_press_event& e) override;
@@ -29,22 +28,19 @@ namespace mage
 	protected:
 		static uint32_t s_instance_count;
 		uint32_t m_instance_id;
-
-
+	protected:
 	#ifndef MAGE_DIST
 		imgui_layer(const std::string& name = "imgui");
 	#else
 		imgui_layer();
 	#endif
-
-
+	protected:
 		virtual void app_tick(app_tick_event& e) const = 0;
 		virtual void app_render(app_render_event& e) const = 0;
 	private:
 		static int s_imgui_min_charcode;
 		static int s_imgui_max_charcode;
-
-
+	private:
 		static void init();
 		static void end();
 	};

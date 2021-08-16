@@ -11,8 +11,7 @@ namespace mage
 	{
 	public:
 		MAGE_DCM(key_event);
-
-
+	public:
 		MAGE_EVENT_CATEGORIES(event_category::input | event_category::keyboard);
 		int get_code() const
 		{
@@ -26,8 +25,7 @@ namespace mage
 		}
 	protected:
 		int m_code;
-
-
+	protected:
 		key_event(int code) :
 			m_code(code)
 		{}
@@ -46,8 +44,7 @@ namespace mage
 			m_repeat(repeat)
 		{}
 		MAGE_DCM(key_press_event);
-
-
+	public:
 		MAGE_EVENT_TYPE(event_type::key_press);
 		bool is_repeat() const
 		{
@@ -62,6 +59,9 @@ namespace mage
 	private:
 		bool m_repeat;
 	};
+
+
+
 	class key_release_event final : public key_event
 	{
 	public:
@@ -71,6 +71,9 @@ namespace mage
 		MAGE_DCM(key_release_event);
 		MAGE_EVENT_TYPE(event_type::key_release);
 	};
+
+
+
 	class key_type_event final : public key_event
 	{
 	public:

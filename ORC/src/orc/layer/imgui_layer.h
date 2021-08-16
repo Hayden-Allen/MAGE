@@ -18,8 +18,7 @@ namespace orc
 		{
 			MAGE_ERROR("DELETE ORC IMGUI LAYER");
 		}
-
-
+	public:
 		bool on_app_draw(mage::app_draw_event& e) override
 		{
 			static bool open = true;

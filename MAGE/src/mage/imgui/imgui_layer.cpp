@@ -12,11 +12,13 @@ namespace mage
     uint32_t imgui_layer::s_instance_count = 0;
 
 
+
     imgui_layer::~imgui_layer()
     {
         if (s_instance_count == 0)
             end();
     }
+
 
 
     bool imgui_layer::on_app_tick(app_tick_event& e)

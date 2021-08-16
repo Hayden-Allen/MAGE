@@ -16,6 +16,9 @@ namespace mage
 	protected:
 		mouse_event() {}
 	};
+
+
+
 	class mouse_vector_event : public mouse_event, public positional<float>
 	{
 	public:
@@ -30,12 +33,14 @@ namespace mage
 			positional<float>(x, y)
 		{}
 	};
+
+
+
 	class mouse_button_event : public mouse_event
 	{
 	public:
 		MAGE_DCM(mouse_button_event);
-
-
+	public:
 		MAGE_EVENT_CATEGORIES(event_category::input | event_category::mouse | event_category::mouse_button);
 		int get_button() const
 		{
@@ -49,8 +54,7 @@ namespace mage
 		}
 	protected:
 		int m_button;
-
-
+	protected:
 		mouse_button_event(int button) :
 			m_button(button)
 		{}
@@ -70,6 +74,9 @@ namespace mage
 		MAGE_DCM(mouse_move_event);
 		MAGE_EVENT_TYPE(event_type::mouse_move);
 	};
+
+
+
 	class mouse_scroll_event final : public mouse_vector_event
 	{
 	public:
@@ -79,6 +86,9 @@ namespace mage
 		MAGE_DCM(mouse_scroll_event);
 		MAGE_EVENT_TYPE(event_type::mouse_scroll);
 	};
+
+
+
 	class mouse_press_event final : public mouse_button_event
 	{
 	public:
@@ -88,6 +98,9 @@ namespace mage
 		MAGE_DCM(mouse_press_event);
 		MAGE_EVENT_TYPE(event_type::mouse_press);
 	};
+
+
+
 	class mouse_release_event final : public mouse_button_event
 	{
 	public:

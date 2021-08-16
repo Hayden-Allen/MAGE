@@ -16,8 +16,7 @@ namespace orc
 		}
 		N_DCM(map);
 		~map();
-
-
+	public:
 		void save(mage::output_file& out) const override;
 		void load(mage::input_file& in) override;
 		void draw(const mage::timestep& t, const n::shader_program& shader);

@@ -15,12 +15,10 @@ namespace mage::gfx
 	{
 	public:
 		typedef typed<T>::s_type s_type;
-
-
+	public:
 		MAGE_DCM(camera);
 		virtual ~camera() {}
-
-
+	public:
 		virtual const glm::mat4& get_projection() const
 		{
 			return m_projection;
@@ -55,8 +53,7 @@ namespace mage::gfx
 		glm::mat4 m_projection, m_view, m_view_projection;
 		glm::vec3 m_pos;
 		s_type m_rotation;
-
-
+	protected:
 		camera(event_handler_container& c, const glm::mat4& projection, const glm::mat4& view, const glm::vec3& pos, const s_type& rotation) :
 			m_projection(projection),
 			m_view(view),
@@ -65,8 +62,7 @@ namespace mage::gfx
 		{
 			c.add(this);
 		}
-
-
+	protected:
 		virtual void update() = 0;
 	};
 
@@ -76,12 +72,10 @@ namespace mage::gfx
 	{
 	public:
 		typedef camera::s_type s_type;
-
-
+	public:
 		MAGE_DCM(orthographic_camera);
 		virtual ~orthographic_camera() {}
-
-
+	public:
 		static orthographic_camera* create(event_handler_container& c, float width, float height, const glm::vec3& pos, s_type rotation, float zoom);
 		bool on_window_resize(window_resize_event& e) override
 		{
@@ -99,15 +93,13 @@ namespace mage::gfx
 		}
 	protected:
 		float m_zoom;
-
-
+	protected:
 		orthographic_camera(event_handler_container& c, float width, float height, const glm::vec3& pos, s_type rotation, float zoom) :
 			camera<float>(c, compute_projection(width, height), glm::mat4(1.f), pos, rotation),
 			dimensional<float>(width, height),
 			m_zoom(zoom)
 		{}
-
-
+	protected:
 		glm::mat4 compute_projection(float width, float height)
 		{
 			return glm::ortho(-m_zoom, m_zoom, -height / width * m_zoom, height / width * m_zoom);

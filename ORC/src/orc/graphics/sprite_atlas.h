@@ -13,8 +13,7 @@ namespace orc
 		sprite_atlas(sprite_atlas_bank* const bank);
 		sprite_atlas(mage::input_file& in);
 		MAGE_DCM(sprite_atlas);
-
-
+	public:
 		n::sprite_atlas_coords insert(uint32_t w, uint32_t h, const uint8_t* const data)
 		{
 			return mage::rect_packer<uint32_t, n::sprite_atlas_coords, uint8_t>::insert(w, h, data);

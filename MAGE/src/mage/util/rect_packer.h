@@ -15,8 +15,7 @@ namespace mage
 	protected:
 		using rect = rect<COORD>;
 		using point = point<COORD>;
-
-
+	protected:
 		// hopefully this is good enough
 		struct rect_hash
 		{
@@ -36,8 +35,7 @@ namespace mage
 	public:
 		MAGE_DCM(rect_packer);
 		virtual ~rect_packer() {}
-
-
+	public:
 		virtual void save(output_file& out) const override
 		{
 			// save steps
@@ -85,13 +83,11 @@ namespace mage
 		constexpr static range_contains s_contains_exc = { false, false };
 		constexpr static range_overlaps s_overlaps_inc = { { true, true }, { true, true } };
 		constexpr static range_overlaps s_overlaps_exc = { { false, false }, { false, false } };
-
-
+	protected:
 		COORD m_x_max, m_y_max;
 		std::set<COORD> m_x_steps, m_y_steps;
 		std::multiset<rect, rect_area_comparator> m_starts, m_used;
-
-
+	protected:
 		rect_packer(COORD w, COORD h) :
 			dimensional<COORD>(w, h),
 			m_x_max(MAGE_CAST(COORD, 0)),
@@ -110,8 +106,7 @@ namespace mage
 		{
 			load(in);
 		}
-
-
+	protected:
 		virtual RETURN insert(const point& dims, const rect& spot, const DATA* const data)
 		{
 			// bounds of new rect
@@ -218,7 +213,7 @@ namespace mage
 				MAGE_INFO("[<{}, {}>, <{}, {}>]", r.min.x, r.min.y, r.max.x, r.max.y);*/
 
 
-				// filter generated rects such that the smallest list of rects that cover the same area remain; remove any rects that are inside other rects
+			// filter generated rects such that the smallest list of rects that cover the same area remain; remove any rects that are inside other rects
 			std::vector<rect> result;
 			for (const rect& a : possible)
 			{

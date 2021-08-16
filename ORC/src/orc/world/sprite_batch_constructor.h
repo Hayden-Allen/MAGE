@@ -19,15 +19,13 @@ namespace orc
 			m_atlases(other.m_atlases),
 			m_tiles(other.m_tiles)
 		{}
-
-
+	public:
 		bool can_contain(const orc::tile& t) const;
 		void add(const orc::tile& t);
 	private:
 		std::unordered_set<n::sprite_atlas_bank::handle> m_atlases;
 		std::unordered_map<sprite*, std::vector<orc::tile>> m_tiles;
-
-
+	private:
 		static size_t get_max_atlas_count()
 		{
 			return mage::gfx::context::get_max_texture_units();

@@ -5,8 +5,6 @@ namespace mage::gfx
 {
 	typedef uint32_t renderer_id_t;
 
-
-
 	class render_object
 	{
 	public:
@@ -14,8 +12,7 @@ namespace mage::gfx
 			m_id(0)
 		{}
 		MAGE_DCM(render_object);
-
-
+	public:
 		virtual void bind() const = 0;
 		virtual void unbind() const = 0;
 		virtual renderer_id_t get_id() const

@@ -34,8 +34,7 @@ namespace mage
 		{
 			delete m_context;
 		}
-
-
+	public:
 		virtual void set_vsync(bool enabled) = 0;
 		virtual void* get_native_window() const = 0;
 		static window* create(const window_constructor& c);
@@ -52,8 +51,7 @@ namespace mage
 		bool m_vsync;
 		color<float> m_clear;
 		gfx::context* m_context;
-
-
+	protected:
 		window(const window_constructor& c) :
 			positional<uint32_t>(0, 0),
 			dimensional<uint32_t>(c.w, c.h),

@@ -47,8 +47,7 @@ namespace n
 			delete m_index_buffer;
 			delete m_shader_program;
 		}
-
-
+	public:
 		void draw() const
 		{
 			unbind();

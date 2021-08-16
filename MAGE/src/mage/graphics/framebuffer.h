@@ -17,8 +17,7 @@ namespace mage::gfx
 	public:
 		MAGE_DCM(framebuffer);
 		virtual ~framebuffer() {}
-
-
+	public:
 		virtual void update() = 0;
 		bool on_window_resize(window_resize_event& e) override
 		{
@@ -37,8 +36,7 @@ namespace mage::gfx
 		}
 	protected:
 		std::vector<framebuffer_attachment<T, ARGS...>*> m_attachments;
-
-
+	protected:
 		framebuffer(event_handler_container& c, s_type w, s_type h, const std::initializer_list<framebuffer_attachment<T, ARGS...>*>& attachments) :
 			dimensional<s_type>(w, h),
 			m_attachments(attachments)

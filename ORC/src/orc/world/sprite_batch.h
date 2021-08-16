@@ -17,11 +17,7 @@ namespace orc
 		sprite_batch(sprite_batch&& other) noexcept :
 			n::sprite_batch_base(std::move(other))
 		{}
-
-
-		// TODO
-		/*void add(const tile& t);
-		void remove(const tile& t);*/
+	public:
 		void save(mage::output_file& out) const override;
 		void load(mage::input_file& in) override;
 		bool can_contain(const n::sprite* const s) const override;
@@ -30,11 +26,12 @@ namespace orc
 		{
 			draw_base(t, sb, ab, shader);
 		}
+		// TODO
+		//void remove(const tile& t);
 	private:
 		size_t m_max_tile_count, m_tile_count;
 		std::unordered_map<n::sprite_bank::handle, size_t> m_sprite_indices;
-
-
+	private:
 		void resize();
 		void create_indices();
 		void create_array();

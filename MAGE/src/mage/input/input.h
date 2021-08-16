@@ -11,8 +11,7 @@ namespace mage
 	{
 	public:
 		MAGE_DCM(input);
-
-
+	public:
 		bool is_key_pressed(int key) const { return key_pressed(key); }
 		bool is_mouse_pressed(int button) const { return mouse_pressed(button); }
 		float get_mouse_x() const { return mouse_x(); }
@@ -24,8 +23,7 @@ namespace mage
 			MAGE_CORE_ASSERT(s_instance != nullptr, "Cannot create multiple inputs");
 			s_instance = this;
 		}
-
-
+	protected:
 		virtual bool key_pressed(int key) const = 0;
 		virtual bool mouse_pressed(int button) const = 0;
 		virtual float mouse_x() const = 0;

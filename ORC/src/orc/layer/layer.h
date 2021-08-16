@@ -92,8 +92,7 @@ namespace orc
 			delete m_shader_program;
 			delete m_camera;
 		}
-
-
+	public:
 		bool on_app_draw(mage::app_draw_event& e) override
 		{
 			// draw onto framebuffer

@@ -23,8 +23,7 @@ namespace mage
 		}
 	protected:
 		T m_w, m_h;
-
-
+	protected:
 		dimensional(T w, T h) :
 			m_w(w),
 			m_h(h)
@@ -47,8 +46,7 @@ namespace mage
 		}
 	protected:
 		T m_d;
-
-
+	protected:
 		dimensional3(T w, T h, T d) :
 			dimensional<T>(w, h),
 			m_d(d)

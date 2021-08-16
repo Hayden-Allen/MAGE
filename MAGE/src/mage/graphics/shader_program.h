@@ -15,8 +15,7 @@ namespace mage::gfx
 			for (const shader* const s : m_stages)
 				delete s;
 		}
-
-
+	public:
 		static shader_program* create(const std::initializer_list<shader*>& stages);
 		virtual void set_uniform_bool(const std::string& name, bool b) const = 0;
 		virtual void set_uniform_bool2(const std::string& name, const glm::bvec2& v) const = 0;
@@ -44,8 +43,7 @@ namespace mage::gfx
 	protected:
 		std::vector<shader*> m_stages;
 		mutable std::unordered_map<std::string, int> m_cache;
-
-
+	protected:
 		shader_program(const std::initializer_list<shader*>& stages) :
 			m_stages(stages)
 		{

@@ -15,8 +15,7 @@ namespace mage
 	public:
 		MAGE_DCM(layer);
 		virtual ~layer() {}
-
-
+	public:
 		virtual void on_attach() {}
 		virtual void on_detach() {}
 		void on_event(event& e) override

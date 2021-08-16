@@ -12,8 +12,7 @@ namespace mage::gfx
 	{
 	public:
 		MAGE_DCM(buffer);
-
-
+	public:
 		virtual void update(T* data, size_t count, size_t offset) const = 0;
 		template<typename U = size_t>
 		U get_count() const
@@ -22,13 +21,11 @@ namespace mage::gfx
 		}
 	protected:
 		size_t m_count;
-
-
+	protected:
 		buffer(size_t count) :
 			m_count(count)
 		{}
-
-
+	protected:
 		virtual void write(T* data, size_t count) const = 0;
 	};
 

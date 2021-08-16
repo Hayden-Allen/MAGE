@@ -19,8 +19,7 @@ namespace n
 		{
 			delete m_texture;
 		}
-
-
+	public:
 		virtual void save(mage::output_file& out) const override;
 		virtual void load(mage::input_file& in) override;
 		void bind(uint32_t slot) const
@@ -39,14 +38,12 @@ namespace n
 			.wrap_s = mage::gfx::texture_wrap_s::clamp_border,
 			.wrap_t = mage::gfx::texture_wrap_t::clamp_border
 		};
-
-
+	protected:
 		// index of this atlas in its containing bank
 		sprite_atlas_bank::handle m_handle;
 		// hardware texture
 		mage::gfx::retained_texture2d* m_texture;
-
-
+	protected:
 		sprite_atlas(s_type w, s_type h) :
 			mage::dimensional<mage::gfx::retained_texture2d::s_type>(w, h),
 			m_handle(0),

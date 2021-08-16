@@ -10,8 +10,7 @@ namespace mage
 	public:
 		MAGE_DCM(event_handler_container);
 		virtual ~event_handler_container() {}
-
-
+	public:
 		void dispatch(event& e)
 		{
 			for (event_handler* const eh : m_list)

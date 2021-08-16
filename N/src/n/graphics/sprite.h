@@ -48,8 +48,7 @@ namespace n
 	public:
 		sprite(mage::input_file& in);
 		MAGE_DCM(sprite);
-
-
+	public:
 		void save(mage::output_file& out) const override;
 		void load(mage::input_file& in) override;
 		void update(const mage::timestep& t);
@@ -82,8 +81,7 @@ namespace n
 		sprite_atlas_coords m_base_coords;
 		// data for all frames
 		std::vector<frame_handle> m_frame_data;
-
-
+	protected:
 		sprite(sprite_bank* const sb) :
 			mage::dimensional<uint8_t>(0, 0),
 			m_handle(sb->add(this)),

@@ -25,8 +25,7 @@ namespace n
 			other.m_vertex_array = nullptr;
 		}
 		virtual ~sprite_batch_base();
-
-
+	public:
 		virtual void save(mage::output_file& out) const override;
 		virtual void load(mage::input_file& in) override;
 		virtual void draw(const mage::timestep& t, sprite_bank* const sb, const sprite_atlas_bank* const ab, const shader_program& shader)
@@ -43,15 +42,13 @@ namespace n
 		std::vector<sprite_bank::handle> m_sprites;
 		std::vector<glm::vec2> m_offsets;
 		std::vector<int> m_texture_indices;
-
-
+	protected:
 		sprite_batch_base() :
 			m_indices(nullptr),
 			m_vertices(nullptr),
 			m_vertex_array(nullptr)
 		{}
-
-
+	protected:
 		void add_sprite(sprite_bank::handle sprite);
 		template<typename SAB>
 		void draw_base(const mage::timestep& t, sprite_bank* const sb, const SAB* const ab, const shader_program& shader)
@@ -93,8 +90,7 @@ namespace n
 		sprite_batch(sprite_batch&& other) noexcept :
 			sprite_batch_base(std::move(other))
 		{}
-
-
+	public:
 		bool can_contain(const sprite* const s) const override
 		{
 			MAGE_ASSERT(false, "Cannot update an n::sprite_batch");

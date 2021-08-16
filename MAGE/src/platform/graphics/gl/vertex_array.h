@@ -14,23 +14,54 @@ namespace mage::gl
 		{
 			MAGE_CORE_TRACE("Delete VA {}", m_id);
 		}
-
-		void bind() const override;
-		void unbind() const override;
+	public:
+		void bind() const override
+		{
+			glBindVertexArray(this->m_id);
+		}
+		void unbind() const override
+		{
+			glBindVertexArray(0);
+		}
 	protected:
-		vertex_array(mage::gl::vertex_buffer<USAGE>* const buffer, const s_desc& desc);
+		vertex_array(mage::gl::vertex_buffer<USAGE>* const buffer, const s_desc& desc) :
+			mage::gfx::vertex_array(buffer, desc.get_stride())
+		{
+			glGenVertexArrays(1, &this->m_id);
+
+			bind();
+			this->m_buffer->bind();
+
+			uint32_t i = 0;
+			for (auto& element : desc)
+			{
+				glEnableVertexAttribArray(i);
+				glVertexAttribPointer(i, element.get_count<GLint>(), get_shader_type_base(element.get_type()), GL_FALSE, desc.get_stride<GLsizei>(), (const void*)element.get_offset());
+				i++;
+			}
+
+			MAGE_CORE_TRACE("Create VA {}", m_id);
+			unbind();
+		}
 	};
 
 
 
-#define V(NAME, BUFFER, USAGE) \
-	class NAME : public mage::gl::vertex_array<USAGE> { \
-	public: \
-		NAME(mage::gl::BUFFER* const buffer, const s_desc& desc) : mage::gl::vertex_array<USAGE>(buffer, desc) {} \
-		MAGE_DCM(NAME);	};
+	class static_vertex_array : public mage::gl::vertex_array<GL_STATIC_DRAW>
+	{
+	public:
+		static_vertex_array(mage::gl::static_vertex_buffer* const buffer, const s_desc& desc) : mage::gl::vertex_array<GL_STATIC_DRAW>(buffer, desc)
+		{}
+		MAGE_DCM(static_vertex_array);
+	};
 
-	V(static_vertex_array, static_vertex_buffer, GL_STATIC_DRAW);
-	V(dynamic_vertex_array, dynamic_vertex_buffer, GL_DYNAMIC_DRAW);
 
-#undef V
+
+	class dynamic_vertex_array : public mage::gl::vertex_array<GL_DYNAMIC_DRAW>
+	{
+	public:
+		dynamic_vertex_array(mage::gl::dynamic_vertex_buffer* const buffer, const s_desc& desc) : mage::gl::vertex_array<GL_DYNAMIC_DRAW>(buffer, desc)
+		{}
+		MAGE_DCM(dynamic_vertex_array);
+	};
 }

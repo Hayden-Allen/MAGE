@@ -287,9 +287,6 @@
     <ClCompile Include="src\platform\graphics\gl\texture.cpp">
       <Filter>platform\graphics\gl</Filter>
     </ClCompile>
-    <ClCompile Include="src\platform\graphics\gl\vertex_array.cpp">
-      <Filter>platform\graphics\gl</Filter>
-    </ClCompile>
     <ClCompile Include="src\platform\os\windows\windows_imgui_layer.cpp">
       <Filter>platform\os\windows</Filter>
     </ClCompile>

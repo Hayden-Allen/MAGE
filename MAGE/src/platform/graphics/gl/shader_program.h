@@ -11,8 +11,7 @@ namespace mage::gl
 		shader_program(const std::initializer_list<mage::gfx::shader*>& stages);
 		MAGE_DCM(shader_program);
 		~shader_program();
-
-
+	public:
 		void bind() const override
 		{
 			glUseProgram(m_id);

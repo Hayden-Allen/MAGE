@@ -22,8 +22,7 @@ namespace mage::gfx
 	public:
 		MAGE_DCM(framebuffer_attachment);
 		virtual ~framebuffer_attachment() {}
-
-
+	public:
 		virtual framebuffer_attachment_type get_type() const = 0;
 		virtual void reset() const = 0;
 	protected:
@@ -40,8 +39,7 @@ namespace mage::gfx
 	public:
 		MAGE_DCM(framebuffer_color_attachment);
 		virtual ~framebuffer_color_attachment() {}
-
-
+	public:
 		framebuffer_attachment_type get_type() const final override
 		{
 			return framebuffer_attachment_type::color;
@@ -61,8 +59,7 @@ namespace mage::gfx
 	public:
 		MAGE_DCM(framebuffer_depth_attachment);
 		virtual ~framebuffer_depth_attachment() {}
-
-
+	public:
 		framebuffer_attachment_type get_type() const final override
 		{
 			return framebuffer_attachment_type::depth;

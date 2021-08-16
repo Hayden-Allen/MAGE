@@ -11,7 +11,7 @@ namespace mage
 	public:
 		windows_window(const window_constructor& data);
 		MAGE_DCM(windows_window);
-
+	public:
 		void* get_native_window() const override
 		{
 			return m_context->get_window();
@@ -22,8 +22,7 @@ namespace mage
 		}
 	private:
 		static bool s_glfw_init;
-
-
+	private:
 		// GLFW callback functions
 		static void error_callback(int code, const char* desc);
 		static void char_callback(GLFWwindow* window, uint32_t code);

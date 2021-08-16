@@ -21,8 +21,7 @@ namespace mage::gfx
 			m_offset(other.m_offset)
 		{}
 		MAGE_DM(vertex_buffer_element);
-
-
+	public:
 		shader_type get_type() const
 		{
 			return m_type;

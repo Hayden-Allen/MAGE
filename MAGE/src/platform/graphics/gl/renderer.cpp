@@ -1,4 +1,5 @@
 #include "pch.h"
+#include "shader_type.h"
 #include "mage/graphics/renderer.h"
 
 namespace mage::gfx

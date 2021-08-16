@@ -14,9 +14,7 @@ namespace mage::gfx
 	public:
 		MAGE_DCM(vertex_array);
 		virtual ~vertex_array() {}
-
-		static vertex_array* create_static(vertex_buffer* const buffer, const vertex_array_description& desc);
-		static vertex_array* create_dynamic(vertex_buffer* const buffer, const vertex_array_description& desc);
+	public:
 		size_t get_vertex_count() const
 		{
 			return m_buffer->get_count() / m_vertex_size;
@@ -27,12 +25,10 @@ namespace mage::gfx
 		}
 	protected:
 		typedef vertex_array_description s_desc;
-
-
+	protected:
 		vertex_buffer* m_buffer;
 		size_t m_vertex_size;
-
-
+	protected:
 		vertex_array(vertex_buffer* const buffer, size_t vertex_size) :
 			m_buffer(buffer),
 			m_vertex_size(vertex_size)

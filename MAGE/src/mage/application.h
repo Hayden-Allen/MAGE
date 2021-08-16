@@ -21,8 +21,7 @@ namespace mage
 		{
 			delete m_window;
 		}
-
-
+	public:
 		void run();
 		static application& get()
 		{
@@ -41,11 +40,9 @@ namespace mage
 		float m_time, m_delta_time;
 		layer_stack m_layer_stack;
 		window* m_window;
-
-
+	protected:
 		application(const window_constructor& data);
-
-
+	protected:
 		/**
 		 * Simple wrappers for the layer_stack
 		 */

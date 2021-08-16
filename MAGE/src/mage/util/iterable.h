@@ -9,8 +9,7 @@ namespace mage
 	{
 	public:
 		MAGE_DCM(iterable);
-
-
+	public:
 		T::iterator begin()
 		{
 			return m_list.begin();
@@ -29,9 +28,9 @@ namespace mage
 		}
 	protected:
 		typedef T s_list;
+	protected:
 		T m_list;
-
-
+	protected:
 		iterable() {}
 		iterable(const T& list) :
 			m_list(list)

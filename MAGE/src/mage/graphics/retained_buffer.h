@@ -16,8 +16,7 @@ namespace mage::gfx
 		}
 	protected:
 		T* m_data;
-
-
+	protected:
 		retained_buffer(T* const data) :
 			m_data(data)
 		{}

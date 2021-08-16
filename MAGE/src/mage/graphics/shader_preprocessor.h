@@ -9,8 +9,7 @@ namespace mage::gfx
 		shader_preprocessor() {}
 		MAGE_DCM(shader_preprocessor);
 		virtual ~shader_preprocessor() {}
-
-
+	public:
 		virtual std::string operator()(std::string& line) const
 		{
 			return line;

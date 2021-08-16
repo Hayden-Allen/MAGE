@@ -14,8 +14,7 @@ namespace mage
 		}
 	protected:
 		std::fstream m_file;
-
-
+	protected:
 		file(const std::string& fp) :
 			m_file(fp, FLAGS)
 		{
@@ -32,8 +31,7 @@ namespace mage
 			file<std::ios::binary | std::ios::in>(fp)
 		{}
 		MAGE_DCM(input_file);
-
-
+	public:
 		bool is_eof() const
 		{
 			return m_file.eof();
@@ -70,8 +68,7 @@ namespace mage
 			file<std::ios::binary | std::ios::out>(fp)
 		{}
 		MAGE_DCM(output_file);
-
-
+	public:
 		output_file& ubyte(uint8_t b)
 		{
 			return put(MAGE_CAST(uint64_t, b), 1);

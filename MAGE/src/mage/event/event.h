@@ -42,8 +42,7 @@ namespace mage
 		using dispatch_fn = std::function<bool(T&)>;
 	public:
 		MAGE_DCM(event);
-
-
+	public:
 		virtual event_type get_type() const = 0;
 		virtual uint32_t get_categories() const = 0;
 		// these will only be used to print debug messages
@@ -76,8 +75,7 @@ namespace mage
 		}
 	protected:
 		bool m_handled;
-
-
+	protected:
 		event() : m_handled(false) {}
 	};
 }

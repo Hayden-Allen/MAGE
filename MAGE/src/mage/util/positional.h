@@ -23,7 +23,7 @@ namespace mage
 		}
 	protected:
 		T m_x, m_y;
-
+	protected:
 		positional(T x, T y) :
 			m_x(x),
 			m_y(y)

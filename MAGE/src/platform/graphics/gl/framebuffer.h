@@ -15,8 +15,7 @@ namespace mage::gl
 			MAGE_CORE_TRACE("Delete FB {}", m_id);
 			glDeleteFramebuffers(1, &m_id);
 		}
-
-
+	public:
 		void update() override;
 		void bind() const override
 		{

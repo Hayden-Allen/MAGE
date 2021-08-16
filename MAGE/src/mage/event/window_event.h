@@ -30,6 +30,9 @@ namespace mage
 		MAGE_DCM(window_close_event);
 		MAGE_EVENT_TYPE(event_type::window_close);
 	};
+
+
+
 	class window_focus_event final : public window_event
 	{
 	public:
@@ -37,6 +40,9 @@ namespace mage
 		MAGE_DCM(window_focus_event);
 		MAGE_EVENT_TYPE(event_type::window_focus);
 	};
+
+
+
 	class window_unfocus_event final : public window_event
 	{
 	public:
@@ -44,6 +50,9 @@ namespace mage
 		MAGE_DCM(window_unfocus_event);
 		MAGE_EVENT_TYPE(event_type::window_unfocus);
 	};
+
+
+
 	class window_resize_event final : public window_event, public dimensional<int>
 	{
 	public:
@@ -51,8 +60,7 @@ namespace mage
 			dimensional<int>(x, y)
 		{}
 		MAGE_DCM(window_resize_event);
-
-
+	public:
 		MAGE_EVENT_TYPE(event_type::window_resize);
 		std::string to_string() const override
 		{
@@ -61,6 +69,9 @@ namespace mage
 			return ss.str();
 		}
 	};
+
+
+
 	class window_move_event final : public window_event, public positional<int>
 	{
 	public:
@@ -68,8 +79,7 @@ namespace mage
 			positional<int>(x, y)
 		{}
 		MAGE_DCM(window_move_event);
-
-
+	public:
 		MAGE_EVENT_TYPE(event_type::window_move);
 		std::string to_string() const override
 		{

@@ -10,8 +10,7 @@ namespace mage::gl
 	public:
 		MAGE_DCM(shader);
 		~shader();
-
-
+	public:
 		void bind() const override
 		{
 			MAGE_CORE_ASSERT(false, "OpenGL shaders cannot be bound");
@@ -22,8 +21,7 @@ namespace mage::gl
 		}
 	protected:
 		shader(const std::string& s, const mage::gfx::shader_preprocessor& p = mage::gfx::shader_preprocessor());
-
-
+	protected:
 		int get_status(GLenum status) const;
 		std::string parse(const std::string& s, const mage::gfx::shader_preprocessor& p) const;
 		void compile(const std::string& src);

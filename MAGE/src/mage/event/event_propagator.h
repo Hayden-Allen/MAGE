@@ -15,8 +15,7 @@ namespace mage
 	{
 	public:
 		MAGE_DCM(event_propagator);
-
-
+	public:
 		void invoke(event& e)
 		{
 			m_callback(e);
@@ -27,8 +26,7 @@ namespace mage
 		}
 	protected:
 		event_callback_t m_callback;
-
-
+	protected:
 		event_propagator() {}
 	};
 }

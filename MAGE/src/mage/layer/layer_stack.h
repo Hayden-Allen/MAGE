@@ -16,16 +16,14 @@ namespace mage
 		{}
 		MAGE_DCM(layer_stack);
 		~layer_stack();
-
-
+	public:
 		void attach(s_type const layer);
 		void detach(s_type const layer);
 		void attach_top(s_type const layer);
 		void detach_top(s_type const layer);
 	private:
 		size_t m_insert;
-
-
+	private:
 		void detach_base(s_type const layer);
 	};
 }

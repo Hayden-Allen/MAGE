@@ -9,16 +9,14 @@ namespace mage
 	{
 	public:
 		typedef HANDLE handle;
-
-
+	public:
 		MAGE_DCM(bank);
 		virtual ~bank()
 		{
 			for (size_t i = 0; i < COUNT; i++)
 				delete m_bank[i];
 		}
-
-
+	public:
 		handle add(T* t)
 		{
 			MAGE_CORE_ASSERT(m_next < COUNT, "Bank is full ({}/{})", COUNT, COUNT);
@@ -41,8 +39,7 @@ namespace mage
 	protected:
 		size_t m_next;
 		T* m_bank[COUNT];
-
-
+	protected:
 		bank() :
 			m_next(0),
 			m_bank{ nullptr }
@@ -61,8 +58,7 @@ namespace mage
 	{
 	public:
 		MAGE_DCM(serializable_bank);
-
-
+	public:
 		void save(mage::output_file& out) const final override
 		{
 			const size_t count = this->get_size();
