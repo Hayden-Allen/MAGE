@@ -1,12 +1,12 @@
 #include "pch.h"
-#include "windows_imgui_layer.h"
+#include "windows_layer.h"
 #include "mage/application.h"
 
-namespace mage
+namespace mage::imgui
 {
 	#ifndef MAGE_DIST
-	windows_imgui_layer::windows_imgui_layer(const std::string& name) :
-		imgui_layer(name)
+	windows_layer::windows_layer(const std::string& name) :
+		mage::imgui::layer(name)
 	{
 		if(s_instance_count == 0)
 		{
@@ -16,7 +16,7 @@ namespace mage
 		s_instance_count++;
 	}
 	#else
-	windows_imgui_layer::windows_imgui_layer()
+	windows_layer::windows_layer()
 	{
 		if (s_instance_count == 0)
 		{
@@ -26,7 +26,7 @@ namespace mage
 		s_instance_count++;
 	}
 	#endif
-	windows_imgui_layer::~windows_imgui_layer()
+	windows_layer::~windows_layer()
 	{
 		s_instance_count--;
 		if (s_instance_count == 0)
@@ -38,12 +38,12 @@ namespace mage
 
 
 
-	void windows_imgui_layer::app_tick(app_tick_event& e) const
+	void windows_layer::app_tick(app_tick_event& e) const
 	{
 		ImGui_ImplOpenGL3_NewFrame();
 		ImGui_ImplGlfw_NewFrame();
 	}
-	void windows_imgui_layer::app_render(app_render_event& e) const
+	void windows_layer::app_render(app_render_event& e) const
 	{
 		ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 

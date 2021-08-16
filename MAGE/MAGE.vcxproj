@@ -169,7 +169,9 @@
     <ClInclude Include="src\mage\graphics\vertex_array.h" />
     <ClInclude Include="src\mage\graphics\vertex_array_description.h" />
     <ClInclude Include="src\mage\graphics\vertex_buffer_element.h" />
-    <ClInclude Include="src\mage\imgui\imgui_layer.h" />
+    <ClInclude Include="src\mage\imgui\dockspace.h" />
+    <ClInclude Include="src\mage\imgui\layer.h" />
+    <ClInclude Include="src\mage\imgui\window.h" />
     <ClInclude Include="src\mage\input\input.h" />
     <ClInclude Include="src\mage\input\input_key.h" />
     <ClInclude Include="src\mage\input\input_mouse.h" />
@@ -208,14 +210,14 @@
     <ClInclude Include="src\platform\graphics\gl\texture_options.h" />
     <ClInclude Include="src\platform\graphics\gl\vertex_array.h" />
     <ClInclude Include="src\platform\graphics\gl\vertex_buffer.h" />
-    <ClInclude Include="src\platform\os\windows\windows_imgui_layer.h" />
+    <ClInclude Include="src\platform\os\windows\windows_layer.h" />
     <ClInclude Include="src\platform\os\windows\windows_input.h" />
     <ClInclude Include="src\platform\os\windows\windows_window.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\mage\application.cpp" />
     <ClCompile Include="src\mage\imgui\build.cpp" />
-    <ClCompile Include="src\mage\imgui\imgui_layer.cpp" />
+    <ClCompile Include="src\mage\imgui\layer.cpp" />
     <ClCompile Include="src\mage\io\file.cpp" />
     <ClCompile Include="src\mage\layer\layer_stack.cpp" />
     <ClCompile Include="src\mage\log.cpp" />
@@ -232,7 +234,7 @@
     <ClCompile Include="src\platform\graphics\gl\shader_program.cpp" />
     <ClCompile Include="src\platform\graphics\gl\texture.cpp" />
     <ClCompile Include="src\platform\graphics\gl\vertex_buffer.cpp" />
-    <ClCompile Include="src\platform\os\windows\windows_imgui_layer.cpp" />
+    <ClCompile Include="src\platform\os\windows\windows_layer.cpp" />
     <ClCompile Include="src\platform\os\windows\windows_input.cpp" />
     <ClCompile Include="src\platform\os\windows\windows_window.cpp" />
   </ItemGroup>

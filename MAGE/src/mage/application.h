@@ -35,6 +35,10 @@ namespace mage
 		{
 			return *m_window;
 		}
+		void close()
+		{
+			m_running = false;
+		}
 	protected:
 		bool m_running;
 		float m_time, m_delta_time;

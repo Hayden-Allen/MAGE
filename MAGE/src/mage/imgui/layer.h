@@ -2,16 +2,16 @@
 #include "pch.h"
 #include "mage/layer/layer.h"
 
-namespace mage
+namespace mage::imgui
 {
 	/**
 	 * Interface for platform-specific imgui implementations
 	 */
-	class imgui_layer : public layer
+	class layer : public mage::layer
 	{
 	public:
-		MAGE_DCM(imgui_layer);
-		virtual ~imgui_layer();
+		MAGE_DCM(layer);
+		virtual ~layer();
 	public:
 		bool on_app_tick(app_tick_event& e) final override;
 		bool on_app_render(app_render_event& e) final override;
@@ -30,9 +30,9 @@ namespace mage
 		uint32_t m_instance_id;
 	protected:
 	#ifndef MAGE_DIST
-		imgui_layer(const std::string& name = "imgui");
+		layer(const std::string& name = "imgui");
 	#else
-		imgui_layer();
+		layer();
 	#endif
 	protected:
 		virtual void app_tick(app_tick_event& e) const = 0;

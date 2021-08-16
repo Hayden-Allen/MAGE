@@ -1,35 +1,76 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="layer">
-      <UniqueIdentifier>{8297D80F-EEAB-00C1-B72D-A4202301FDF1}</UniqueIdentifier>
+    <Filter Include="orc">
+      <UniqueIdentifier>{299A880B-95A3-887C-1E1F-9F7C8A27947C}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="orc\graphics">
+      <UniqueIdentifier>{A97CB528-95DF-44CD-3E65-7D832AA71050}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="orc\layer">
+      <UniqueIdentifier>{D5E1A3E3-414C-585A-8A8A-0900F63336AF}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="orc\world">
+      <UniqueIdentifier>{C07F72E4-2CEA-265B-7528-D800E1D104B0}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\orc\graphics\sprite.h">
+      <Filter>orc\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="src\orc\graphics\sprite_atlas.h">
+      <Filter>orc\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="src\orc\graphics\sprite_atlas_bank.h">
+      <Filter>orc\graphics</Filter>
+    </ClInclude>
     <ClInclude Include="src\orc\layer\imgui_layer.h">
-      <Filter>layer</Filter>
+      <Filter>orc\layer</Filter>
     </ClInclude>
     <ClInclude Include="src\orc\layer\layer.h">
-      <Filter>layer</Filter>
+      <Filter>orc\layer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\orc\world\chunk.h">
+      <Filter>orc\world</Filter>
+    </ClInclude>
+    <ClInclude Include="src\orc\world\map.h">
+      <Filter>orc\world</Filter>
+    </ClInclude>
+    <ClInclude Include="src\orc\world\sprite_batch.h">
+      <Filter>orc\world</Filter>
+    </ClInclude>
+    <ClInclude Include="src\orc\world\sprite_batch_constructor.h">
+      <Filter>orc\world</Filter>
+    </ClInclude>
+    <ClInclude Include="src\orc\world\tile.h">
+      <Filter>orc\world</Filter>
     </ClInclude>
     <ClInclude Include="src\pch.h" />
-    <ClInclude Include="src\orc\graphics\sprite_atlas.h" />
-    <ClInclude Include="src\orc\graphics\sprite.h" />
-    <ClInclude Include="src\orc\world\chunk.h" />
-    <ClInclude Include="src\orc\world\sprite_batch_constructor.h" />
-    <ClInclude Include="src\orc\world\tile.h" />
-    <ClInclude Include="src\orc\world\sprite_batch.h" />
-    <ClInclude Include="src\orc\graphics\sprite_atlas_bank.h" />
-    <ClInclude Include="src\orc\world\map.h" />
+    <ClInclude Include="src\orc\layer\test_window.h" />
+    <ClInclude Include="src\orc\layer\test_dockspace.h" />
+    <ClInclude Include="src\orc\constants.h" />
+    <ClInclude Include="src\orc\layer\game_window.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\orc\graphics\sprite.cpp">
+      <Filter>orc\graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="src\orc\graphics\sprite_atlas.cpp">
+      <Filter>orc\graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="src\orc\world\chunk.cpp">
+      <Filter>orc\world</Filter>
+    </ClCompile>
+    <ClCompile Include="src\orc\world\map.cpp">
+      <Filter>orc\world</Filter>
+    </ClCompile>
+    <ClCompile Include="src\orc\world\sprite_batch.cpp">
+      <Filter>orc\world</Filter>
+    </ClCompile>
+    <ClCompile Include="src\orc\world\sprite_batch_constructor.cpp">
+      <Filter>orc\world</Filter>
+    </ClCompile>
     <ClCompile Include="src\pch.cpp" />
-    <ClCompile Include="src\orc\graphics\sprite_atlas.cpp" />
-    <ClCompile Include="src\orc\graphics\sprite.cpp" />
-    <ClCompile Include="src\orc\world\sprite_batch_constructor.cpp" />
-    <ClCompile Include="src\orc\world\sprite_batch.cpp" />
-    <ClCompile Include="src\orc\world\chunk.cpp" />
-    <ClCompile Include="src\orc\world\map.cpp" />
   </ItemGroup>
 </Project>

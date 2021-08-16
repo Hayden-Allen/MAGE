@@ -1,15 +1,15 @@
 #pragma once
 #include "pch.h"
-#include "layer.h"
+#include "test_dockspace.h"
 
 namespace orc
 {
-	class imgui_layer final : public mage::windows_imgui_layer
+	class imgui_layer final : public mage::imgui::windows_layer
 	{
 	public:
 		imgui_layer(orc::layer* const layer) :
-			mage::windows_imgui_layer("ORC ImGui"),
-			m_layer(layer)
+			mage::imgui::windows_layer("ORC ImGui"),
+			m_test_dockspace(layer)
 		{
 			MAGE_ERROR("CREATE ORC IMGUI LAYER");
 		}
@@ -21,29 +21,10 @@ namespace orc
 	public:
 		bool on_app_draw(mage::app_draw_event& e) override
 		{
-			static bool open = true;
-			if (open)
-			{
-				if (ImGui::Begin("Test", &open))
-				{
-					ImGui::Text("%.2fms | %.2ffps", e.get_delta_time(), 1000.f / e.get_delta_time());
-					ImGui::NewLine();
-					ImGui::DragFloat2("camera_pos", &m_layer->m_camera_pos[0], .01f, -20.f, 20.f);
-					ImGui::NewLine();
-					ImGui::DragFloat("camera_rotation", &m_layer->m_camera_rotation, .01f, 0.f, 2 * glm::pi<float>());
-					ImGui::NewLine();
-					ImGui::DragFloat("camera_zoom", &m_layer->m_camera_zoom, .01f, .1f, 10.f);
-					ImGui::NewLine();
-
-					const auto& win = mage::application::get().get_window();
-					ImGui::Image((void*)m_layer->m_framebuffer->get_color_attachment_id(), { win.get_w<float>(), win.get_h<float>() }, { 0.f, 1.f }, { 1.f, 0.f });
-				}
-				ImGui::End();
-			}
-
+			m_test_dockspace.render(e);
 			return false;
 		}
 	private:
-		orc::layer* const m_layer;
+		test_dockspace m_test_dockspace;
 	};
 }

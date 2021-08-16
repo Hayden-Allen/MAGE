@@ -10,7 +10,8 @@ namespace orc
 
 	class layer final : public mage::layer
 	{
-		friend class imgui_layer;
+		friend class game_window;
+		friend class test_window;
 	public:
 		layer() :
 			mage::layer("ORC"),

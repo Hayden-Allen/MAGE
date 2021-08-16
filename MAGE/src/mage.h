@@ -32,7 +32,9 @@
 #include "mage/graphics/vertex_array.h"
 #include "mage/graphics/vertex_array_description.h"
 
-#include "mage/imgui/imgui_layer.h"
+#include "mage/imgui/dockspace.h"
+#include "mage/imgui/layer.h"
+#include "mage/imgui/window.h"
 
 #include "mage/input/input.h"
 #include "mage/input/input_key.h"
@@ -83,7 +85,7 @@
 
 // os
 #ifdef MAGE_PLATFORM_WINDOWS
-	#include "platform/os/windows/windows_imgui_layer.h"
+	#include "platform/os/windows/windows_layer.h"
 	#ifdef MAGE_BUILD_LIB
 		#include "platform/os/windows/windows_input.h"
 		#include "platform/os/windows/windows_window.h"

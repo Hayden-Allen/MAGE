@@ -7,9 +7,6 @@
     <Filter Include="mage\event">
       <UniqueIdentifier>{D0AB93F3-BC63-D540-256B-AE9C11427031}</UniqueIdentifier>
     </Filter>
-    <Filter Include="mage\game">
-      <UniqueIdentifier>{4870DEF7-B4DA-926E-FD18-441469C270C3}</UniqueIdentifier>
-    </Filter>
     <Filter Include="mage\graphics">
       <UniqueIdentifier>{5F564FA8-CB16-CBDE-9451-145C00D10FBB}</UniqueIdentifier>
     </Filter>
@@ -100,6 +97,9 @@
     <ClInclude Include="src\mage\graphics\renderer.h">
       <Filter>mage\graphics</Filter>
     </ClInclude>
+    <ClInclude Include="src\mage\graphics\retained_buffer.h">
+      <Filter>mage\graphics</Filter>
+    </ClInclude>
     <ClInclude Include="src\mage\graphics\shader.h">
       <Filter>mage\graphics</Filter>
     </ClInclude>
@@ -127,7 +127,7 @@
     <ClInclude Include="src\mage\graphics\vertex_buffer_element.h">
       <Filter>mage\graphics</Filter>
     </ClInclude>
-    <ClInclude Include="src\mage\imgui\imgui_layer.h">
+    <ClInclude Include="src\mage\imgui\layer.h">
       <Filter>mage\imgui</Filter>
     </ClInclude>
     <ClInclude Include="src\mage\input\input.h">
@@ -209,6 +209,18 @@
     <ClInclude Include="src\platform\graphics\gl\framebuffer_attachment.h">
       <Filter>platform\graphics\gl</Filter>
     </ClInclude>
+    <ClInclude Include="src\platform\graphics\gl\index_buffer.h">
+      <Filter>platform\graphics\gl</Filter>
+    </ClInclude>
+    <ClInclude Include="src\platform\graphics\gl\retained_buffer.h">
+      <Filter>platform\graphics\gl</Filter>
+    </ClInclude>
+    <ClInclude Include="src\platform\graphics\gl\retained_index_buffer.h">
+      <Filter>platform\graphics\gl</Filter>
+    </ClInclude>
+    <ClInclude Include="src\platform\graphics\gl\retained_vertex_buffer.h">
+      <Filter>platform\graphics\gl</Filter>
+    </ClInclude>
     <ClInclude Include="src\platform\graphics\gl\shader.h">
       <Filter>platform\graphics\gl</Filter>
     </ClInclude>
@@ -227,7 +239,10 @@
     <ClInclude Include="src\platform\graphics\gl\vertex_array.h">
       <Filter>platform\graphics\gl</Filter>
     </ClInclude>
-    <ClInclude Include="src\platform\os\windows\windows_imgui_layer.h">
+    <ClInclude Include="src\platform\graphics\gl\vertex_buffer.h">
+      <Filter>platform\graphics\gl</Filter>
+    </ClInclude>
+    <ClInclude Include="src\platform\os\windows\windows_layer.h">
       <Filter>platform\os\windows</Filter>
     </ClInclude>
     <ClInclude Include="src\platform\os\windows\windows_input.h">
@@ -236,12 +251,8 @@
     <ClInclude Include="src\platform\os\windows\windows_window.h">
       <Filter>platform\os\windows</Filter>
     </ClInclude>
-    <ClInclude Include="src\mage\graphics\retained_buffer.h" />
-    <ClInclude Include="src\platform\graphics\gl\retained_buffer.h" />
-    <ClInclude Include="src\platform\graphics\gl\index_buffer.h" />
-    <ClInclude Include="src\platform\graphics\gl\vertex_buffer.h" />
-    <ClInclude Include="src\platform\graphics\gl\retained_index_buffer.h" />
-    <ClInclude Include="src\platform\graphics\gl\retained_vertex_buffer.h" />
+    <ClInclude Include="src\mage\imgui\window.h" />
+    <ClInclude Include="src\mage\imgui\dockspace.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\mage\application.cpp">
@@ -250,7 +261,7 @@
     <ClCompile Include="src\mage\imgui\build.cpp">
       <Filter>mage\imgui</Filter>
     </ClCompile>
-    <ClCompile Include="src\mage\imgui\imgui_layer.cpp">
+    <ClCompile Include="src\mage\imgui\layer.cpp">
       <Filter>mage\imgui</Filter>
     </ClCompile>
     <ClCompile Include="src\mage\io\file.cpp">
@@ -275,6 +286,9 @@
     <ClCompile Include="src\platform\graphics\gl\framebuffer_attachment.cpp">
       <Filter>platform\graphics\gl</Filter>
     </ClCompile>
+    <ClCompile Include="src\platform\graphics\gl\index_buffer.cpp">
+      <Filter>platform\graphics\gl</Filter>
+    </ClCompile>
     <ClCompile Include="src\platform\graphics\gl\renderer.cpp">
       <Filter>platform\graphics\gl</Filter>
     </ClCompile>
@@ -287,7 +301,10 @@
     <ClCompile Include="src\platform\graphics\gl\texture.cpp">
       <Filter>platform\graphics\gl</Filter>
     </ClCompile>
-    <ClCompile Include="src\platform\os\windows\windows_imgui_layer.cpp">
+    <ClCompile Include="src\platform\graphics\gl\vertex_buffer.cpp">
+      <Filter>platform\graphics\gl</Filter>
+    </ClCompile>
+    <ClCompile Include="src\platform\os\windows\windows_layer.cpp">
       <Filter>platform\os\windows</Filter>
     </ClCompile>
     <ClCompile Include="src\platform\os\windows\windows_input.cpp">
@@ -296,7 +313,5 @@
     <ClCompile Include="src\platform\os\windows\windows_window.cpp">
       <Filter>platform\os\windows</Filter>
     </ClCompile>
-    <ClCompile Include="src\platform\graphics\gl\index_buffer.cpp" />
-    <ClCompile Include="src\platform\graphics\gl\vertex_buffer.cpp" />
   </ItemGroup>
 </Project>
