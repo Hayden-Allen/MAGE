@@ -37,11 +37,13 @@ namespace orc
 	//	for (const auto& batch : batches)
 	//		m_batches.push_back(sprite_batch(batch));
 	//}
-	chunk::chunk() :
+	chunk::chunk(const glm::uvec2& pos) :
+		n::chunk(pos),
 		m_tile_count(0),
 		m_grid{ 0 }
 	{}
 	chunk::chunk(mage::input_file& in) :
+		n::chunk({ 0, 0 }),
 		m_tile_count(0),
 		m_grid{ 0 }
 	{
@@ -110,7 +112,7 @@ namespace orc
 		// no room in existing batches, make a new batch
 		if (!added)
 		{
-			sprite_batch* batch = new sprite_batch();
+			sprite_batch* batch = new sprite_batch(m_coords);
 			MAGE_ASSERT(batch->can_contain(t.sprite), "Invalid tile");
 			batch->add_tile(t);
 			m_batches.push_back(batch);

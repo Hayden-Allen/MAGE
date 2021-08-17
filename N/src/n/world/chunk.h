@@ -23,8 +23,8 @@ namespace n
 		std::vector<sprite_batch_base*> m_batches;
 		glm::uvec2 m_coords;
 	protected:
-		chunk() :
-			m_coords({ 0.f, 0.f })
+		chunk(const glm::uvec2& pos) :
+			m_coords(pos)
 		{}
 	};
 }

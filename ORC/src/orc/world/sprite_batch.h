@@ -10,9 +10,12 @@ namespace orc
 	class sprite_batch final : public n::sprite_batch_base
 	{
 	public:
-		// sprite_batch(const sprite_batch_constructor& constructor);
-		sprite_batch();
-		sprite_batch(mage::input_file& in) { load(in); }
+		sprite_batch(const glm::uvec2& base);
+		sprite_batch(mage::input_file& in) :
+			n::sprite_batch_base({ 0, 0 })
+		{
+			load(in);
+		}
 		N_DC(sprite_batch);
 		sprite_batch(sprite_batch&& other) noexcept :
 			n::sprite_batch_base(std::move(other))

@@ -12,7 +12,7 @@ namespace n
 
 
 
-	static void gen_tile_vertices(float* const buf, const tile& t, size_t index)
+	static void gen_tile_vertices(float* const buf, const tile& t, size_t index, const glm::vec2& offset = { 0.f, 0.f })
 	{
 		// (x, y) offsets
 		const float x[n::c::vertices_per_tile] = { t.pos.min.x, t.pos.max.x, t.pos.max.x, t.pos.min.x };
@@ -25,8 +25,8 @@ namespace n
 		// 4 vertices of (x, y), (s, t), (i) 
 		for (size_t i = 0; i < n::c::vertices_per_tile; i++)
 		{
-			buf[i * n::c::floats_per_tile_vertex + 0] = x[i];
-			buf[i * n::c::floats_per_tile_vertex + 1] = y[i];
+			buf[i * n::c::floats_per_tile_vertex + 0] = x[i] + offset.x;
+			buf[i * n::c::floats_per_tile_vertex + 1] = y[i] + offset.y;
 			buf[i * n::c::floats_per_tile_vertex + 2] = tx[i];
 			buf[i * n::c::floats_per_tile_vertex + 3] = ty[i];
 			buf[i * n::c::floats_per_tile_vertex + 4] = MAGE_CAST(float, index);

@@ -4,7 +4,8 @@
 
 namespace orc
 {
-	sprite_batch::sprite_batch() :
+	sprite_batch::sprite_batch(const glm::uvec2& base) :
+		n::sprite_batch_base(base),
 		m_max_tile_count(n::c::sprite_batch_base_size),
 		m_tile_count(0)
 	{
@@ -74,7 +75,7 @@ namespace orc
 		const size_t index = m_sprite_indices[handle];
 		const size_t offset = m_tile_count * n::c::floats_per_tile;
 		float vertices[n::c::floats_per_tile];
-		n::gen_tile_vertices(vertices, t, index);
+		n::gen_tile_vertices(vertices, t, index, m_base_coords);
 		m_vertices->update(vertices, n::c::floats_per_tile, offset);
 
 		m_tile_count++;

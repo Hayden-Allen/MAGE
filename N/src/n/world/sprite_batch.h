@@ -42,11 +42,13 @@ namespace n
 		std::vector<sprite_bank::handle> m_sprites;
 		std::vector<glm::vec2> m_offsets;
 		std::vector<int> m_texture_indices;
+		glm::uvec2 m_base_coords;
 	protected:
-		sprite_batch_base() :
+		sprite_batch_base(const glm::uvec2& base) :
 			m_indices(nullptr),
 			m_vertices(nullptr),
-			m_vertex_array(nullptr)
+			m_vertex_array(nullptr),
+			m_base_coords(base)
 		{}
 	protected:
 		void add_sprite(sprite_bank::handle sprite);
@@ -84,7 +86,11 @@ namespace n
 	{
 	public:
 		// static gl stuff
-		sprite_batch(mage::input_file& in) { load(in); }
+		sprite_batch(mage::input_file& in) :
+			sprite_batch_base({ 0, 0 })
+		{
+			load(in);
+		}
 		N_DC(sprite_batch);
 		sprite_batch(sprite_batch&& other) noexcept :
 			sprite_batch_base(std::move(other))

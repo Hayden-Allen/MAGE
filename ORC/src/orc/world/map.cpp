@@ -7,7 +7,8 @@ namespace orc
 	map::map(sprite_atlas_bank* const atlases, n::sprite_bank* const sprites, const grid& chunks) :
 		m_atlases(atlases),
 		m_sprites(sprites),
-		m_chunks(chunks)
+		m_chunks(chunks),
+		m_chunk_count(0)
 	{}
 	map::~map()
 	{
@@ -25,7 +26,7 @@ namespace orc
 		m_sprites->save(out);
 		m_atlases->save(out);
 
-		out.ulong(m_chunks.size());
+		out.ulong(m_chunk_count);
 		for (auto& row : m_chunks)
 			for (auto& pair : row.second)
 				pair.second->save(out);
@@ -60,11 +61,23 @@ namespace orc
 	}
 	void map::set_tile_at(const glm::uvec2& pos, size_t layer, sprite* const sprite)
 	{
-		const glm::uvec2 chunk = pos / N_CAST(glm::uint, n::c::tiles_per_chunk_side), chunk_pos = pos % N_CAST(glm::uint, n::c::tiles_per_chunk_side);
+		const glm::uvec2 map_pos = pos / N_CAST(glm::uint, n::c::tiles_per_chunk_side), chunk_pos = pos % N_CAST(glm::uint, n::c::tiles_per_chunk_side);
 
-		if (!m_chunks.contains(chunk.y) || !m_chunks[chunk.y].contains(chunk.x))
-			MAGE_ASSERT(false, "Invalid chunk coords <{}, {}>", chunk.x, chunk.y);
+		/*if (!m_chunks.contains(chunk.y) || !m_chunks[chunk.y].contains(chunk.x))
+			MAGE_ASSERT(false, "Invalid chunk coords <{}, {}>", chunk.x, chunk.y);*/
+		MAGE_INFO("<{}, {}> => <{}, {}>", pos.x, pos.y, map_pos.x, map_pos.y);
+		if (!m_chunks.contains(map_pos.y))
+		{
+			MAGE_WARN("NEW ROW {}", map_pos.y);
+			m_chunks.insert({ map_pos.y, {} });
+		}
+		if (!m_chunks[map_pos.y].contains(map_pos.x))
+		{
+			MAGE_WARN("NEW CHUNK <{}, {}>", map_pos.x, map_pos.y);
+			m_chunks[map_pos.y].insert({ map_pos.x, new chunk(N_CAST(glm::uint, n::c::tiles_per_chunk_side) * map_pos) });
+			m_chunk_count++;
+		}
 
-		m_chunks[chunk.y][chunk.x]->set_tile_at(chunk_pos, layer, sprite);
+		m_chunks[map_pos.y][map_pos.x]->set_tile_at(chunk_pos, layer, sprite);
 	}
 }

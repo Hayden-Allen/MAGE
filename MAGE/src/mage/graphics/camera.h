@@ -77,19 +77,18 @@ namespace mage::gfx
 		virtual ~orthographic_camera() {}
 	public:
 		static orthographic_camera* create(event_handler_container& c, float width, float height, const glm::vec3& pos, s_type rotation, float zoom);
-		bool on_window_resize(window_resize_event& e) override
-		{
-			m_projection = compute_projection(m_w = e.get_w<float>(), m_h = e.get_h<float>());
-			return true;
-		}
 		float get_zoom() const
 		{
-			return 1.f / m_zoom;
+			return m_zoom;
 		}
 		void set_zoom(float zoom)
 		{
-			m_zoom = 1.f / zoom;
+			m_zoom = zoom;
 			m_projection = compute_projection(m_w, m_h);
+		}
+		void set_size(float w, float h)
+		{
+			m_projection = compute_projection(m_w = w, m_h = h);
 		}
 	protected:
 		float m_zoom;
@@ -102,7 +101,8 @@ namespace mage::gfx
 	protected:
 		glm::mat4 compute_projection(float width, float height)
 		{
-			return glm::ortho(-m_zoom, m_zoom, -height / width * m_zoom, height / width * m_zoom);
+			const float z = 1.f / m_zoom;
+			return glm::ortho(-z, z, -height / width * z, height / width * z);
 		}
 	};
 }

@@ -27,5 +27,6 @@ namespace orc
 		sprite_atlas_bank* m_atlases;
 		n::sprite_bank* m_sprites;
 		grid m_chunks;
+		size_t m_chunk_count;
 	};
 }

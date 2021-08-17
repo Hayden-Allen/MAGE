@@ -3,6 +3,9 @@
 
 namespace n::c
 {
+	constexpr static size_t simulated_pixel_size = 5;
+
+
 	// colors in a sprite's palette
 	constexpr static size_t sprite_color_count = 16;
 	// pixels per side of a single tile of a sprite
@@ -29,6 +32,7 @@ namespace n::c
 	constexpr static char shader_sprite_to_texture_indices[] = "u_tex_indices";
 	// array of vec2s mapping "local" sprite indices (within a sprite_batch) to the difference between the current frames texture coordinates and that sprite's base texture coordinates
 	constexpr static char shader_sprite_offsets[] = "u_offsets";
+	constexpr static char shader_scale[] = "u_scale";
 
 
 	// each tile is a single sprite (quad)

@@ -10,7 +10,7 @@ namespace orc
 	{
 	public:
 		// chunk(const std::vector<tile>& tiles);
-		chunk();
+		chunk(const glm::uvec2& pos);
 		chunk(mage::input_file& in);
 		N_DCM(chunk);
 	public:

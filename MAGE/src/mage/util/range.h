@@ -53,9 +53,25 @@ namespace mage
 			return contains(other.m_min, params.min) || contains(other.m_max, params.max);
 		}
 		template<typename U = T, typename R = T>
-		U map(const U& value, const range<R>& other) const
+		U map_to(const U& value, const range<R>& target) const
 		{
-			return MAGE_CAST(U, value / get_span<U>() * other.get_span<U>());
+			float slope = 1.f * target.get_span() / get_span();
+			return target.m_min + slope * (value - m_min);
+		}
+		template<typename U = T, typename R = T>
+		U map_from(const U& value, const range<R>& source) const
+		{
+			return source.map_to(value, *this);
+		}
+		template<typename X = T, typename Y = T>
+		glm::vec2 map_to(const glm::vec2& value, const range<X>& x, const range<Y>& y = x) const
+		{
+			return { map_to(value.x, x), map_to(value.y, y) };
+		}
+		template<typename X = T, typename Y = T>
+		glm::vec2 map_from(const glm::vec2& value, const range<X>& x, const range<Y>& y = x) const
+		{
+			return { map_from(value.x, x), map_from(value.y, y) };
 		}
 		template<typename U = T>
 		U get_min() const
