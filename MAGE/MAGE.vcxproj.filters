@@ -130,13 +130,13 @@
     <ClInclude Include="src\mage\imgui\layer.h">
       <Filter>mage\imgui</Filter>
     </ClInclude>
-    <ClInclude Include="src\mage\input\input.h">
+    <ClInclude Include="src\mage\io\input.h">
       <Filter>mage\input</Filter>
     </ClInclude>
-    <ClInclude Include="src\mage\input\input_key.h">
+    <ClInclude Include="src\mage\io\input_key.h">
       <Filter>mage\input</Filter>
     </ClInclude>
-    <ClInclude Include="src\mage\input\input_mouse.h">
+    <ClInclude Include="src\mage\io\input_mouse.h">
       <Filter>mage\input</Filter>
     </ClInclude>
     <ClInclude Include="src\mage\io\file.h">

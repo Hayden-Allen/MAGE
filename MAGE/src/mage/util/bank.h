@@ -10,6 +10,8 @@ namespace mage
 	public:
 		typedef HANDLE handle;
 	public:
+		constexpr static size_t s_invalid = 0, s_first = 1;
+	public:
 		MAGE_DCM(bank);
 		virtual ~bank()
 		{
@@ -34,6 +36,11 @@ namespace mage
 		}
 		const size_t get_size() const
 		{
+			// account for invalid
+			return m_next - 1;
+		}
+		const size_t get_last() const
+		{
 			return m_next;
 		}
 	protected:
@@ -41,7 +48,7 @@ namespace mage
 		T* m_bank[COUNT];
 	protected:
 		bank() :
-			m_next(0),
+			m_next(1),
 			m_bank{ nullptr }
 		{}
 	};
@@ -61,15 +68,15 @@ namespace mage
 	public:
 		void save(mage::output_file& out) const final override
 		{
-			const size_t count = this->get_size();
-			out.ulong(count);
-			for (size_t i = 0; i < count; i++)
+			const size_t last = this->get_last();
+			out.ulong(last);
+			for (size_t i = this->s_first; i < last; i++)
 				this->m_bank[i]->save(out);
 		}
 		void load(mage::input_file& in) final override
 		{
 			this->m_next = in.ulong();
-			for (size_t i = 0; i < this->m_next; i++)
+			for (size_t i = this->s_first; i < this->m_next; i++)
 				this->m_bank[i] = new T(in);
 		}
 	protected:

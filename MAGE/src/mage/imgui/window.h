@@ -39,10 +39,20 @@ namespace mage::imgui
 	protected:
 		virtual void run(app_draw_event& e) = 0;
 		virtual void window_setup() {}
+		ImVec2 get_pos() const
+		{
+			ImVec2 view = ImGui::GetCursorPos();
+			ImVec2 min = ImGui::GetWindowPos();
+			return { min.x + view.x, min.y + view.y };
+		}
 		ImVec2 get_size() const
 		{
-			const ImVec2 max = ImGui::GetWindowContentRegionMax(), min = ImGui::GetWindowContentRegionMin();
-			return ImVec2(max.x - min.x, max.y - min.y);
+			return ImGui::GetContentRegionAvail();
+		}
+		glm::vec2 get_mouse_pos() const
+		{
+			ImVec2 w = get_pos(), m = ImGui::GetMousePos();
+			return { m.x - w.x, w.y - m.y };
 		}
 	};
 }

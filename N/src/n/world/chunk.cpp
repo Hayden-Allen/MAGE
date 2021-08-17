@@ -13,16 +13,15 @@ namespace n
 
 	void chunk::save(mage::output_file& out) const
 	{
-		out.uint(N_PUN(uint32_t, m_coords.x)).uint(N_PUN(uint32_t, m_coords.y));
+		out.uint(m_coords.x).uint(m_coords.y);
 		out.ulong(m_batches.size());
 		for (const auto& batch : m_batches)
 			batch->save(out);
 	}
 	void chunk::load(mage::input_file& in)
 	{
-		const uint32_t x = in.uint(), y = in.uint();
-		m_coords.x = N_PUN(float, x);
-		m_coords.y = N_PUN(float, y);
+		m_coords.x = in.uint();
+		m_coords.y = in.uint();
 
 		const size_t batch_count = in.ulong();
 		m_batches.reserve(batch_count);

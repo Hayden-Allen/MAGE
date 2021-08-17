@@ -1,6 +1,6 @@
 #pragma once
 #include "pch.h"
-#include "mage/input/input.h"
+#include "mage/io/input.h"
 
 namespace mage
 {

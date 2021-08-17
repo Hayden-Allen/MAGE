@@ -52,12 +52,12 @@ namespace orc
 
 		m_frame_data.reserve(m_frame_count);
 		// current atlas index. Because all frames are the same size, we don't need to try inserting every frame into every atlas; if one frame doesn't fit, the rest won't either.
-		n::sprite_atlas_bank::handle handle = 0;
+		n::sprite_atlas_bank::handle handle = n::sprite_atlas_bank::s_first;
 		for (size_t i = 0; i < m_frame_count; i++)
 		{
 			// attempt to add current frame to remaining existing atlases
 			bool added = false;
-			while (!added && handle < ab->get_size())
+			while (!added && handle < ab->get_last())
 			{
 				const auto& atlas = ab->get(handle);
 				// TODO

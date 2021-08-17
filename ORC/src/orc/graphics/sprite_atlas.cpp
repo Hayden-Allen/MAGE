@@ -17,6 +17,7 @@ namespace orc
 	{}
 
 
+
 	void sprite_atlas::save(mage::output_file& out) const
 	{
 		out.ushort(m_handle);

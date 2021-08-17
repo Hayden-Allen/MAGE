@@ -1,6 +1,7 @@
 #pragma once
 #include "pch.h"
 #include "mage/log.h"
+#include <glm/glm.hpp>
 
 namespace mage
 {
@@ -16,11 +17,11 @@ namespace mage
 		bool is_mouse_pressed(int button) const { return mouse_pressed(button); }
 		float get_mouse_x() const { return mouse_x(); }
 		float get_mouse_y() const { return mouse_y(); }
-		static input* const get() { return s_instance; }
+		glm::vec2 get_mouse() const { return { mouse_x(), mouse_y() }; }
+		static const input& get() { return *s_instance; }
 	protected:
 		input()
 		{
-			MAGE_CORE_ASSERT(s_instance != nullptr, "Cannot create multiple inputs");
 			s_instance = this;
 		}
 	protected:

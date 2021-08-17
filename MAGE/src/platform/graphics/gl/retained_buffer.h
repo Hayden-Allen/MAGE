@@ -26,7 +26,7 @@ namespace mage::gl
 		void update(T::s_type* data, size_t count, size_t offset) const override
 		{
 			bind();
-			glBufferSubData(TARGET, offset, count * sizeof(T::s_type), data);
+			glBufferSubData(TARGET, offset * sizeof(T::s_type), count * sizeof(T::s_type), data);
 			unbind();
 			arrcopy(count, data, this->m_data + offset);
 		}

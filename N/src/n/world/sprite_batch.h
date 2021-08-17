@@ -63,15 +63,14 @@ namespace n
 				const auto& state = s->get_current_frame();
 				// get texture coord offsets for current frame
 				m_offsets[i] = state.offset;
-				// get atlas index for current frame. This is used by the shader as an index into m_texture_indices, which in turn yields the actual texture slot that this bank is bound to
-				m_texture_indices[i] = state.bank;
+				m_texture_indices[i] = N_CAST(int, m_atlases.at(state.bank));
 			}
 			// bind all atlases to their pre-determined indices
 			for (const auto& pair : m_atlases)
 				ab->get(pair.first)->bind(MAGE_CAST(uint32_t, pair.second));
 
 			// upload current arrays
-			// shader.set_uniform_int_array(c::shader_sprite_to_texture_indices, m_texture_indices.data(), m_texture_indices.size());
+			shader.set_uniform_int_array(c::shader_sprite_to_texture_indices, m_texture_indices.data(), m_texture_indices.size());
 			shader.set_uniform_float2_array(c::shader_sprite_offsets, m_offsets.data(), m_offsets.size());
 
 			// draw all tiles

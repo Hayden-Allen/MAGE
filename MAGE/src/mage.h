@@ -36,11 +36,10 @@
 #include "mage/imgui/layer.h"
 #include "mage/imgui/window.h"
 
-#include "mage/input/input.h"
-#include "mage/input/input_key.h"
-#include "mage/input/input_mouse.h"
-
 #include "mage/io/file.h"
+#include "mage/io/input.h"
+#include "mage/io/input_key.h"
+#include "mage/io/input_mouse.h"
 #include "mage/io/serializable.h"
 
 #include "mage/layer/layer.h"

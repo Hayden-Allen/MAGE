@@ -15,9 +15,13 @@ namespace n
 		virtual void save(mage::output_file& out) const override;
 		virtual void load(mage::input_file& in) override;
 		virtual void draw(const mage::timestep& t, sprite_bank* const sb, const sprite_atlas_bank* const ab, const shader_program& shader);
+		glm::uvec2 get_pos() const
+		{
+			return m_coords;
+		}
 	protected:
 		std::vector<sprite_batch_base*> m_batches;
-		glm::vec2 m_coords;
+		glm::uvec2 m_coords;
 	protected:
 		chunk() :
 			m_coords({ 0.f, 0.f })

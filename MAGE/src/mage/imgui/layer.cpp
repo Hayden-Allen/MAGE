@@ -1,9 +1,9 @@
 #include "pch.h"
 #include "layer.h"
-#include "input/input_key.h"
-#include "util/functions.h"
-#include "application.h"
-#include "log.h"
+#include "mage/io/input_key.h"
+#include "mage/util/functions.h"
+#include "mage/application.h"
+#include "mage/log.h"
 
 namespace mage::imgui
 {

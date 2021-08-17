@@ -4,7 +4,7 @@
 
 namespace orc
 {
-	map::map(sprite_atlas_bank* const atlases, n::sprite_bank* const sprites, const std::vector<chunk*>& chunks) :
+	map::map(sprite_atlas_bank* const atlases, n::sprite_bank* const sprites, const grid& chunks) :
 		m_atlases(atlases),
 		m_sprites(sprites),
 		m_chunks(chunks)
@@ -13,8 +13,9 @@ namespace orc
 	{
 		delete m_atlases;
 		delete m_sprites;
-		for (chunk* c : m_chunks)
-			delete c;
+		for (auto& row : m_chunks)
+			for (auto& pair : row.second)
+				delete pair.second;
 	}
 
 
@@ -25,8 +26,9 @@ namespace orc
 		m_atlases->save(out);
 
 		out.ulong(m_chunks.size());
-		for (const chunk* const c : m_chunks)
-			c->save(out);
+		for (auto& row : m_chunks)
+			for (auto& pair : row.second)
+				pair.second->save(out);
 	}
 	void map::load(mage::input_file& in)
 	{
@@ -34,16 +36,35 @@ namespace orc
 		m_atlases = new sprite_atlas_bank(in);
 
 		const size_t chunk_count = in.ulong();
-		m_chunks.reserve(chunk_count);
 		for (size_t i = 0; i < chunk_count; i++)
-			m_chunks.push_back(new chunk(in));
+		{
+			chunk* c = new chunk(in);
+
+			const auto& pos = c->get_pos();
+			if (!m_chunks.contains(pos.y))
+				m_chunks.insert({ pos.y, {} });
+			if (m_chunks[pos.y].contains(pos.x))
+				MAGE_ASSERT(false, "Overlapping chunks at <{}, {}>", pos.x, pos.y);
+
+			m_chunks[pos.y][pos.x] = c;
+		}
 	}
 	void map::draw(const mage::timestep& t, const n::shader_program& shader)
 	{
 		/**
 		 * TODO bad
 		 */
-		for (chunk* c : m_chunks)
-			c->draw(t, m_sprites, m_atlases, shader);
+		for (auto& row : m_chunks)
+			for (auto& pair : row.second)
+				pair.second->draw(t, m_sprites, m_atlases, shader);
+	}
+	void map::set_tile_at(const glm::uvec2& pos, size_t layer, sprite* const sprite)
+	{
+		const glm::uvec2 chunk = pos / N_CAST(glm::uint, n::c::tiles_per_chunk_side), chunk_pos = pos % N_CAST(glm::uint, n::c::tiles_per_chunk_side);
+
+		if (!m_chunks.contains(chunk.y) || !m_chunks[chunk.y].contains(chunk.x))
+			MAGE_ASSERT(false, "Invalid chunk coords <{}, {}>", chunk.x, chunk.y);
+
+		m_chunks[chunk.y][chunk.x]->set_tile_at(chunk_pos, layer, sprite);
 	}
 }

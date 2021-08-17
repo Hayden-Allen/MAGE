@@ -25,6 +25,11 @@ namespace orc
 			ImGui::NewLine();
 			ImGui::DragFloat("camera_zoom", &m_layer->m_camera_zoom, .01f, .1f, 10.f);
 			ImGui::NewLine();
+			if (ImGui::Button("SAVE"))
+			{
+				mage::output_file out("res/map.orc");
+				m_layer->m_map->save(out);
+			}
 		}
 	};
 }

@@ -16,6 +16,7 @@ namespace orc
 		layer() :
 			mage::layer("ORC"),
 			m_map(nullptr),
+			m_sprite(nullptr),
 			m_shader_program(nullptr),
 			m_camera(nullptr),
 			m_camera_pos({ 0.f, 0.f, 0.f }),
@@ -62,15 +63,17 @@ namespace orc
 			}*/
 
 
+			n::sprite_bank* sb = new n::sprite_bank();
+			sprite_atlas_bank* ab = new sprite_atlas_bank();
+			m_sprite = new sprite(sb, ab, "res/sprite/newSprite.sprite");
 			constexpr bool save = false;
 			if (save)
 			{
-				n::sprite_bank* sb = new n::sprite_bank();
-				sprite_atlas_bank* ab = new sprite_atlas_bank();
-				sprite* s = new sprite(sb, ab, "res/sprite/newSprite.sprite");
 				chunk* c = new chunk();
-				c->set_tile_at({ 0, 0 }, 0, s);
-				m_map = new map(ab, sb, { c });
+				c->set_tile_at({ 0, 0 }, 0, m_sprite);
+				std::unordered_map<size_t, chunk*> row = { {0, c} };
+				std::unordered_map<size_t, std::unordered_map<size_t, chunk*>> chunks = { {0, row} };
+				m_map = new map(ab, sb, chunks);
 				mage::output_file out("res/map.orc");
 				m_map->save(out);
 			}
@@ -118,6 +121,7 @@ namespace orc
 		}
 	private:
 		map* m_map;
+		sprite* m_sprite;
 		sprite_atlas_bank* m_sab;
 		/*n::static_index_buffer* m_ib;
 		n::static_vertex_buffer* m_vb;

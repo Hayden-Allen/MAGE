@@ -172,9 +172,9 @@
     <ClInclude Include="src\mage\imgui\dockspace.h" />
     <ClInclude Include="src\mage\imgui\layer.h" />
     <ClInclude Include="src\mage\imgui\window.h" />
-    <ClInclude Include="src\mage\input\input.h" />
-    <ClInclude Include="src\mage\input\input_key.h" />
-    <ClInclude Include="src\mage\input\input_mouse.h" />
+    <ClInclude Include="src\mage\io\input.h" />
+    <ClInclude Include="src\mage\io\input_key.h" />
+    <ClInclude Include="src\mage\io\input_mouse.h" />
     <ClInclude Include="src\mage\io\file.h" />
     <ClInclude Include="src\mage\io\serializable.h" />
     <ClInclude Include="src\mage\layer\layer.h" />

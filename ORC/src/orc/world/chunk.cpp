@@ -58,11 +58,10 @@ namespace orc
 	}
 	void chunk::load(mage::input_file& in)
 	{
-		// n::chunk::load(in);
-
-		const uint32_t x = in.uint(), y = in.uint();
-		m_coords.x = N_PUN(float, x);
-		m_coords.y = N_PUN(float, y);
+		// TODO cleanup
+		// this has to be rewritten here because n::chunk::load instantiates n::sprite_batches, but orc::chunk::load needs to instantiate orc::sprite_batches
+		m_coords.x = in.uint();
+		m_coords.y = in.uint();
 
 		const size_t batch_count = in.ulong();
 		m_batches.reserve(batch_count);
@@ -78,7 +77,11 @@ namespace orc
 		MAGE_ASSERT(layer < n::c::layers_per_chunk, "Invalid chunk layer {}", layer);
 
 
-		m_grid[(layer * n::c::tiles_per_chunk_layer) + (pos.y * n::c::tiles_per_chunk_side) + pos.x] = sprite->get_handle();
+		const size_t index = (layer * n::c::tiles_per_chunk_layer) + (pos.y * n::c::tiles_per_chunk_side) + pos.x;
+		if (m_grid[index] == sprite->get_handle())
+			return;
+
+		m_grid[index] = sprite->get_handle();
 		m_tile_count++;
 
 
