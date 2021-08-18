@@ -56,17 +56,12 @@ namespace orc
 	}
 	void chunk::set_tile_at(const glm::uvec2& pos, size_t layer, sprite* const sprite)
 	{
-		MAGE_ASSERT(pos.x < n::c::tiles_per_chunk_side&& pos.y < n::c::tiles_per_chunk_side, "Invalid chunk coordinates <{}, {}>", pos.x, pos.y);
-		MAGE_ASSERT(layer < n::c::layers_per_chunk, "Invalid chunk layer {}", layer);
-
-
-		const size_t index = (layer * n::c::tiles_per_chunk_layer) + (pos.y * n::c::tiles_per_chunk_side) + pos.x;
+		const size_t index = get_index(pos, layer);
 		if (m_grid[index] == sprite->get_handle())
 			return;
 
 		m_grid[index] = sprite->get_handle();
 		m_tile_count++;
-
 
 		n::sprite_batch_base* added_to = nullptr;
 		size_t offset = 0;
@@ -100,7 +95,6 @@ namespace orc
 			MAGE_ASSERT(added_to->can_contain(t.sprite), "Invalid tile");
 			offset = added_to->add_tile(t);
 			m_batches.push_back(added_to);
-			MAGE_INFO("CREATE SB");
 		}
 
 		// store new tile's index in the batch's VBO
@@ -112,25 +106,19 @@ namespace orc
 	}
 	void chunk::delete_tile_at(const glm::uvec2& pos, size_t layer)
 	{
-		// TODO abstract into base method
-		MAGE_ASSERT(pos.x < n::c::tiles_per_chunk_side&& pos.y < n::c::tiles_per_chunk_side, "Invalid chunk coordinates <{}, {}>", pos.x, pos.y);
-		MAGE_ASSERT(layer < n::c::layers_per_chunk, "Invalid chunk layer {}", layer);
-
-
-		const size_t index = (layer * n::c::tiles_per_chunk_layer) + (pos.y * n::c::tiles_per_chunk_side) + pos.x;
+		const size_t index = get_index(pos, layer);
 		if (m_grid[index] == n::sprite_bank::s_invalid)
 			return;
 
+		// delete given tile from the batch that contains it
 		m_grid[index] = n::sprite_bank::s_invalid;
 		const auto& pair = m_tile_offsets[pos.y][pos.x];
 		pair.first->delete_tile(pair.second);
 		// TODO properly
 		if (((sprite_batch*)pair.first)->is_empty())
-		{
 			m_batches.erase(std::find(m_batches.begin(), m_batches.end(), pair.first));
-			MAGE_INFO("DELETE SB");
-		}
 
+		// remove given tile's record, because it no longer exists
 		m_tile_offsets[pos.y].erase(pos.x);
 		if (m_tile_offsets[pos.y].size() == 0)
 			m_tile_offsets.erase(pos.y);

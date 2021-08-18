@@ -72,20 +72,21 @@ namespace orc
 		}
 
 		// generate vertex data for new tile
-		const size_t index = m_sprite_indices[handle];
-		const size_t offset = m_tile_count * n::c::floats_per_tile;
+		const size_t index = get_next();
+		const size_t offset = index * n::c::floats_per_tile;
 		float vertices[n::c::floats_per_tile];
-		n::gen_tile_vertices(vertices, t, index, m_base_coords);
+		n::gen_tile_vertices(vertices, t, m_sprite_indices[handle], m_base_coords);
 		m_vertices->update(vertices, n::c::floats_per_tile, offset);
 
-		m_tile_count++;
+		// only increment count if the new tile was added to a non-opening
+		m_tile_count += (index == m_tile_count);
 		return offset;
 	}
 	void sprite_batch::delete_tile(size_t offset)
 	{
 		float vertices[n::c::floats_per_tile] = { 0.f };
 		m_vertices->update(vertices, n::c::floats_per_tile, offset);
-		m_tile_count--;
+		m_openings.push_back(offset / n::c::floats_per_tile);
 	}
 
 

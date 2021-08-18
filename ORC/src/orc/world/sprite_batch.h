@@ -21,7 +21,8 @@ namespace orc
 			n::sprite_batch_base(std::move(other)),
 			m_max_tile_count(other.m_max_tile_count),
 			m_tile_count(other.m_tile_count),
-			m_sprite_indices(std::move(other.m_sprite_indices))
+			m_sprite_indices(std::move(other.m_sprite_indices)),
+			m_openings(std::move(other.m_openings))
 		{}
 	public:
 		void save(mage::output_file& out) const override;
@@ -35,13 +36,14 @@ namespace orc
 		}
 		bool is_empty() const
 		{
-			return m_tile_count == 0;
+			return m_tile_count == m_openings.size();
 		}
 		// TODO
 		//void remove(const tile& t);
 	private:
 		size_t m_max_tile_count, m_tile_count;
 		std::unordered_map<n::sprite_bank::handle, size_t> m_sprite_indices;
+		mutable std::vector<size_t> m_openings;
 	private:
 		void resize();
 		void create_indices();
@@ -49,6 +51,16 @@ namespace orc
 		void draw(const mage::timestep& t, n::sprite_bank* const sb, const n::sprite_atlas_bank* const ab, const n::shader_program& shader) override
 		{
 			MAGE_ASSERT(false, "Cannot draw an orc::sprite_batch with an n::sprite_atlas_bank");
+		}
+		size_t get_next() const
+		{
+			size_t i = m_tile_count;
+			if (!m_openings.empty())
+			{
+				i = m_openings.back();
+				m_openings.pop_back();
+			}
+			return i;
 		}
 	};
 }

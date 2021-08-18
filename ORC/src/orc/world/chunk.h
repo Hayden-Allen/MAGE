@@ -36,5 +36,12 @@ namespace orc
 		{
 			MAGE_ASSERT(false, "Cannot draw an orc::chunk with an n::sprite_atlas_bank");
 		}
+		size_t get_index(const glm::uvec2& pos, size_t layer) const
+		{
+			MAGE_ASSERT(pos.x < n::c::tiles_per_chunk_side&& pos.y < n::c::tiles_per_chunk_side, "Invalid chunk coordinates <{}, {}>", pos.x, pos.y);
+			MAGE_ASSERT(layer < n::c::layers_per_chunk, "Invalid chunk layer {}", layer);
+
+			return (layer * n::c::tiles_per_chunk_layer) + (pos.y * n::c::tiles_per_chunk_side) + pos.x;
+		}
 	};
 }
