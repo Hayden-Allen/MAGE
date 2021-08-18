@@ -34,8 +34,13 @@ namespace orc
 				const glm::ivec4 world_mouse = cam * glm::vec4(mouse, 0.f, 1.f);
 
 				// MAGE_TRACE("<{}, {}>", world_mouse.x, world_mouse.y);
-				if(mage::input::get().is_mouse_pressed(0) && world_mouse.x >= 0 && world_mouse.y >= 0)
-					m_layer->m_map->set_tile_at(world_mouse, 0, m_layer->m_sprite);
+				if (world_mouse.x >= 0 && world_mouse.y >= 0)
+				{
+					if (mage::input::get().is_mouse_pressed(0))
+						m_layer->m_map->set_tile_at(world_mouse, 0, m_layer->m_sprite);
+					else if (mage::input::get().is_mouse_pressed(mage::mouse::button::right))
+						m_layer->m_map->delete_tile_at(world_mouse, 0);
+				}
 			}
 		}
 	};

@@ -63,21 +63,24 @@ namespace orc
 	{
 		const glm::uvec2 map_pos = pos / N_CAST(glm::uint, n::c::tiles_per_chunk_side), chunk_pos = pos % N_CAST(glm::uint, n::c::tiles_per_chunk_side);
 
-		/*if (!m_chunks.contains(chunk.y) || !m_chunks[chunk.y].contains(chunk.x))
-			MAGE_ASSERT(false, "Invalid chunk coords <{}, {}>", chunk.x, chunk.y);*/
-		MAGE_INFO("<{}, {}> => <{}, {}>", pos.x, pos.y, map_pos.x, map_pos.y);
 		if (!m_chunks.contains(map_pos.y))
-		{
-			MAGE_WARN("NEW ROW {}", map_pos.y);
 			m_chunks.insert({ map_pos.y, {} });
-		}
 		if (!m_chunks[map_pos.y].contains(map_pos.x))
 		{
-			MAGE_WARN("NEW CHUNK <{}, {}>", map_pos.x, map_pos.y);
 			m_chunks[map_pos.y].insert({ map_pos.x, new chunk(N_CAST(glm::uint, n::c::tiles_per_chunk_side) * map_pos) });
 			m_chunk_count++;
 		}
 
 		m_chunks[map_pos.y][map_pos.x]->set_tile_at(chunk_pos, layer, sprite);
+	}
+	void map::delete_tile_at(const glm::uvec2& pos, size_t layer)
+	{
+		const glm::uvec2 map_pos = pos / N_CAST(glm::uint, n::c::tiles_per_chunk_side), chunk_pos = pos % N_CAST(glm::uint, n::c::tiles_per_chunk_side);
+
+		// the given tile doesn't exist
+		if (!m_chunks.contains(map_pos.y) || !m_chunks[map_pos.y].contains(map_pos.x))
+			return;
+
+		m_chunks[map_pos.y][map_pos.x]->delete_tile_at(chunk_pos, layer);
 	}
 }

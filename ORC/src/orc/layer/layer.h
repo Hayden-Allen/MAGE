@@ -69,11 +69,7 @@ namespace orc
 			constexpr bool save = false;
 			if (save)
 			{
-				chunk* c = new chunk({ 0, 0 });
-				c->set_tile_at({ 0, 0 }, 0, m_sprite);
-				std::unordered_map<size_t, chunk*> row = { {0, c} };
-				std::unordered_map<size_t, std::unordered_map<size_t, chunk*>> chunks = { {0, row} };
-				m_map = new map(ab, sb, chunks);
+				m_map = new map(ab, sb, {});
 				mage::output_file out("res/map.orc");
 				m_map->save(out);
 			}

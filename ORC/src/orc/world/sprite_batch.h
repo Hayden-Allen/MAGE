@@ -18,16 +18,24 @@ namespace orc
 		}
 		N_DC(sprite_batch);
 		sprite_batch(sprite_batch&& other) noexcept :
-			n::sprite_batch_base(std::move(other))
+			n::sprite_batch_base(std::move(other)),
+			m_max_tile_count(other.m_max_tile_count),
+			m_tile_count(other.m_tile_count),
+			m_sprite_indices(std::move(other.m_sprite_indices))
 		{}
 	public:
 		void save(mage::output_file& out) const override;
 		void load(mage::input_file& in) override;
 		bool can_contain(const n::sprite* const s) const override;
-		void add_tile(const n::tile& t) override;
+		size_t add_tile(const n::tile& t) override;
+		void delete_tile(size_t offset) override;
 		void draw(const mage::timestep& t, n::sprite_bank* const sb, const sprite_atlas_bank* const ab, const n::shader_program& shader)
 		{
 			draw_base(t, sb, ab, shader);
+		}
+		bool is_empty() const
+		{
+			return m_tile_count == 0;
 		}
 		// TODO
 		//void remove(const tile& t);

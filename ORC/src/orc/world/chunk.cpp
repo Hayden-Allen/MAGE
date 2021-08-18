@@ -5,38 +5,6 @@
 
 namespace orc
 {
-	//chunk::chunk(const std::vector<tile>& tiles) :
-	//	m_grid{ 0 },
-	//	m_tile_count(0)
-	//{
-	//	std::vector<sprite_batch_constructor> batches;
-	//	// for each given tile
-	//	for (const tile& t : tiles)
-	//	{
-	//		bool added = false;
-	//		// check if any existing batches have room for current tile
-	//		for (auto& batch : batches)
-	//		{
-	//			// current batch has room, add current tile to it
-	//			if (added = batch.can_contain(t))
-	//			{
-	//				batch.add(t);
-	//				break;
-	//			}
-	//		}
-	//		// no existing batch has room, make a new one
-	//		if (!added)
-	//		{
-	//			sprite_batch_constructor batch;
-	//			batch.add(t);
-	//			batches.push_back(batch);
-	//		}
-	//	}
-
-	//	// create batches from computed constructors
-	//	for (const auto& batch : batches)
-	//		m_batches.push_back(sprite_batch(batch));
-	//}
 	chunk::chunk(const glm::uvec2& pos) :
 		n::chunk(pos),
 		m_tile_count(0),
@@ -57,6 +25,19 @@ namespace orc
 		n::chunk::save(out);
 		out.ulong(m_tile_count);
 		out.write(m_grid, n::c::tiles_per_chunk);
+
+		// TODO need sprite_batch_bank so this can be serialized
+		/*const size_t row_count = m_tile_offsets.size();
+		out.ulong(row_count);
+		for (const auto& row : m_tile_offsets)
+		{
+			const size_t tile_count = row.second.size();
+			out.ulong(tile_count);
+			for (const auto& pair : row.second)
+			{
+				out.ulong(pair.)
+			}
+		}*/
 	}
 	void chunk::load(mage::input_file& in)
 	{
@@ -87,6 +68,8 @@ namespace orc
 		m_tile_count++;
 
 
+		n::sprite_batch_base* added_to = nullptr;
+		size_t offset = 0;
 		n::tile t =
 		{
 			sprite,
@@ -104,7 +87,8 @@ namespace orc
 			// TODO
 			if (added = batch->can_contain(sprite))
 			{
-				batch->add_tile(t);
+				offset = batch->add_tile(t);
+				added_to = batch;
 				break;
 			}
 		}
@@ -112,10 +96,43 @@ namespace orc
 		// no room in existing batches, make a new batch
 		if (!added)
 		{
-			sprite_batch* batch = new sprite_batch(m_coords);
-			MAGE_ASSERT(batch->can_contain(t.sprite), "Invalid tile");
-			batch->add_tile(t);
-			m_batches.push_back(batch);
+			added_to = new sprite_batch(m_coords);
+			MAGE_ASSERT(added_to->can_contain(t.sprite), "Invalid tile");
+			offset = added_to->add_tile(t);
+			m_batches.push_back(added_to);
+			MAGE_INFO("CREATE SB");
 		}
+
+		// store new tile's index in the batch's VBO
+		if (!m_tile_offsets.contains(pos.y))
+			m_tile_offsets.insert({ pos.y, {} });
+		if (!m_tile_offsets[pos.y].contains(pos.x))
+			m_tile_offsets[pos.y].insert({ pos.x, { nullptr, 0 } });
+		m_tile_offsets[pos.y][pos.x] = { added_to, offset };
+	}
+	void chunk::delete_tile_at(const glm::uvec2& pos, size_t layer)
+	{
+		// TODO abstract into base method
+		MAGE_ASSERT(pos.x < n::c::tiles_per_chunk_side&& pos.y < n::c::tiles_per_chunk_side, "Invalid chunk coordinates <{}, {}>", pos.x, pos.y);
+		MAGE_ASSERT(layer < n::c::layers_per_chunk, "Invalid chunk layer {}", layer);
+
+
+		const size_t index = (layer * n::c::tiles_per_chunk_layer) + (pos.y * n::c::tiles_per_chunk_side) + pos.x;
+		if (m_grid[index] == n::sprite_bank::s_invalid)
+			return;
+
+		m_grid[index] = n::sprite_bank::s_invalid;
+		const auto& pair = m_tile_offsets[pos.y][pos.x];
+		pair.first->delete_tile(pair.second);
+		// TODO properly
+		if (((sprite_batch*)pair.first)->is_empty())
+		{
+			m_batches.erase(std::find(m_batches.begin(), m_batches.end(), pair.first));
+			MAGE_INFO("DELETE SB");
+		}
+
+		m_tile_offsets[pos.y].erase(pos.x);
+		if (m_tile_offsets[pos.y].size() == 0)
+			m_tile_offsets.erase(pos.y);
 	}
 }

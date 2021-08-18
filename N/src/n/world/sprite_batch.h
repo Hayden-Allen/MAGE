@@ -33,7 +33,8 @@ namespace n
 			draw_base(t, sb, ab, shader);
 		}
 		virtual bool can_contain(const sprite* const s) const = 0;
-		virtual void add_tile(const tile& t) = 0;
+		virtual size_t add_tile(const tile& t) = 0;
+		virtual void delete_tile(size_t offset) = 0;
 	protected:
 		mage::gfx::index_buffer* m_indices;
 		mage::gfx::vertex_buffer* m_vertices;
@@ -101,7 +102,12 @@ namespace n
 			MAGE_ASSERT(false, "Cannot update an n::sprite_batch");
 			return false;
 		}
-		void add_tile(const tile& t) override
+		size_t add_tile(const tile& t) override
+		{
+			MAGE_ASSERT(false, "Cannot update an n::sprite_batch");
+			return 0;
+		}
+		void delete_tile(size_t offset)
 		{
 			MAGE_ASSERT(false, "Cannot update an n::sprite_batch");
 		}

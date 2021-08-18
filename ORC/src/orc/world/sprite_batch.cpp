@@ -47,7 +47,7 @@ namespace orc
 			additional += !m_atlases.contains(a);
 		return (m_atlases.size() + additional) <= MAGE_MTU;
 	}
-	void sprite_batch::add_tile(const n::tile& t)
+	size_t sprite_batch::add_tile(const n::tile& t)
 	{
 		// increase storage if this batch is already full
 		if (m_tile_count == m_max_tile_count)
@@ -79,6 +79,13 @@ namespace orc
 		m_vertices->update(vertices, n::c::floats_per_tile, offset);
 
 		m_tile_count++;
+		return offset;
+	}
+	void sprite_batch::delete_tile(size_t offset)
+	{
+		float vertices[n::c::floats_per_tile] = { 0.f };
+		m_vertices->update(vertices, n::c::floats_per_tile, offset);
+		m_tile_count--;
 	}
 
 

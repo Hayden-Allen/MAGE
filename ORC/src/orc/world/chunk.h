@@ -17,6 +17,7 @@ namespace orc
 		void save(mage::output_file& out) const override;
 		void load(mage::input_file& in) override;
 		void set_tile_at(const glm::uvec2& pos, size_t layer, sprite* const sprite);
+		void delete_tile_at(const glm::uvec2& pos, size_t layer);
 		bool is_empty() const
 		{
 			return m_tile_count == 0;
@@ -29,6 +30,7 @@ namespace orc
 	private:
 		size_t m_tile_count;
 		n::sprite_bank::handle m_grid[n::c::tiles_per_chunk];
+		std::unordered_map<size_t, std::unordered_map<size_t, std::pair<n::sprite_batch_base*, size_t>>> m_tile_offsets;
 	private:
 		void draw(const mage::timestep& t, n::sprite_bank* const sb, const n::sprite_atlas_bank* const ab, const n::shader_program& shader) override
 		{

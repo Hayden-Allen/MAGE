@@ -23,6 +23,7 @@ namespace orc
 		void load(mage::input_file& in) override;
 		void draw(const mage::timestep& t, const n::shader_program& shader);
 		void set_tile_at(const glm::uvec2& pos, size_t layer, sprite* const sprite);
+		void delete_tile_at(const glm::uvec2& pos, size_t layer);
 	private:
 		sprite_atlas_bank* m_atlases;
 		n::sprite_bank* m_sprites;
