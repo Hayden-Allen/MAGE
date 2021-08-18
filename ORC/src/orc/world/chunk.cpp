@@ -2,6 +2,7 @@
 #include "chunk.h"
 #include "sprite_batch.h"
 #include "sprite_batch_constructor.h"
+#include "orc/graphics/sprite.h"
 
 namespace orc
 {
@@ -46,7 +47,7 @@ namespace orc
 		m_tile_count = in.ulong();
 		in.read(m_grid, n::c::tiles_per_chunk);
 	}
-	void chunk::set_tile_at(const glm::uvec2& pos, size_t layer, sprite* const sprite)
+	void chunk::set_tile_at(const sprite_bank& sb, const glm::uvec2& pos, size_t layer, sprite* const sprite)
 	{
 		const size_t index = get_index(pos, layer);
 		if (m_grid[index] == sprite->get_handle())
@@ -59,7 +60,7 @@ namespace orc
 		size_t offset = 0;
 		n::tile t =
 		{
-			sprite,
+			sprite->get_handle(),
 			{
 				{ 1.f * pos.x, 1.f * pos.y },
 				{
@@ -73,7 +74,7 @@ namespace orc
 		{
 			if (added = batch->can_contain(sprite))
 			{
-				offset = batch->add_tile(t);
+				offset = batch->add_tile(sb, t);
 				added_to = batch;
 				break;
 			}
@@ -83,8 +84,8 @@ namespace orc
 		if (!added)
 		{
 			added_to = new sprite_batch(m_coords);
-			MAGE_ASSERT(added_to->can_contain(t.sprite), "Invalid tile");
-			offset = added_to->add_tile(t);
+			MAGE_ASSERT(added_to->can_contain(sprite), "Invalid tile");
+			offset = added_to->add_tile(sb, t);
 			m_batches.push_back(added_to);
 		}
 

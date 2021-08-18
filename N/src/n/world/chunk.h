@@ -37,8 +37,8 @@ namespace n
 			for (size_t i = 0; i < batch_count; i++)
 				m_batches.push_back(new T(in));
 		}
-		template<typename SAB>
-		void draw(const mage::timestep& t, sprite_bank* const sb, const SAB* const ab, const shader_program& shader)
+		template<typename SB, typename SAB>
+		void draw(const mage::timestep& t, SB* const sb, const SAB* const ab, const shader_program& shader)
 		{
 			// draw all tiles in this chunk
 			for (auto& batch : m_batches)

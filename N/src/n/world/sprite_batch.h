@@ -7,6 +7,7 @@
 
 namespace n
 {
+	template<typename IB, typename VB, typename VA, typename SPRITE, typename BANK>
 	class sprite_batch_base : public mage::serializable
 	{
 	public:
@@ -25,12 +26,41 @@ namespace n
 			other.m_vertices = nullptr;
 			other.m_vertex_array = nullptr;
 		}
-		virtual ~sprite_batch_base();
+		virtual ~sprite_batch_base()
+		{
+			delete m_indices;
+			delete m_vertices;
+			delete m_vertex_array;
+		}
 	public:
-		virtual void save(mage::output_file& out) const override;
-		virtual void load(mage::input_file& in) override;
+		virtual bool can_contain(const SPRITE* const s) const = 0;
+		virtual size_t add_tile(const BANK& sb, const tile& t) = 0;
+		virtual void delete_tile(size_t offset) = 0;
+		virtual void save(mage::output_file& out) const override
+		{
+			const size_t atlas_count = m_atlases.size();
+			out.ulong(atlas_count);
+			for (const auto& pair : m_atlases)
+				out.ushort(pair.first).ulong(pair.second);
+
+			out.ulong(m_sprites.size());
+			for (const auto& s : m_sprites)
+				out.ushort(s);
+		}
+		virtual void load(mage::input_file& in) override
+		{
+			const size_t atlas_count = in.ulong();
+			m_atlases.reserve(atlas_count);
+			for (size_t i = 0; i < atlas_count; i++)
+				m_atlases.insert({ in.ushort(), in.ulong() });
+
+			const size_t sprite_count = in.ulong();
+			m_sprites.reserve(sprite_count);
+			for (size_t i = 0; i < sprite_count; i++)
+				add_sprite(in.ushort());
+		}
 		template<typename SAB>
-		void draw(const mage::timestep& t, sprite_bank* const sb, const SAB* const ab, const shader_program& shader)
+		void draw(const mage::timestep& t, BANK* const sb, const SAB* const ab, const shader_program& shader)
 		{
 			// for each sprite in this batch
 			for (size_t i = 0; i < m_sprites.size(); i++)
@@ -55,13 +85,10 @@ namespace n
 			// draw all tiles
 			mage::gfx::renderer::draw(m_indices, m_vertex_array);
 		}
-		virtual bool can_contain(const sprite* const s) const = 0;
-		virtual size_t add_tile(const tile& t) = 0;
-		virtual void delete_tile(size_t offset) = 0;
 	protected:
-		mage::gfx::index_buffer* m_indices;
-		mage::gfx::vertex_buffer* m_vertices;
-		mage::gfx::vertex_array* m_vertex_array;
+		IB* m_indices;
+		VB* m_vertices;
+		VA* m_vertex_array;
 		std::unordered_map<sprite_atlas_bank::handle, size_t> m_atlases;
 		std::vector<sprite_bank::handle> m_sprites;
 		std::vector<glm::vec2> m_offsets;
@@ -75,12 +102,17 @@ namespace n
 			m_base_coords(base)
 		{}
 	protected:
-		void add_sprite(sprite_bank::handle sprite);
+		void add_sprite(sprite_bank::handle sprite)
+		{
+			m_sprites.push_back(sprite);
+			m_offsets.push_back({ 0.f, 0.f });
+			m_texture_indices.push_back(0);
+		}
 	};
 
 
 
-	class sprite_batch final : public sprite_batch_base
+	class sprite_batch final : public sprite_batch_base<static_index_buffer, static_vertex_buffer, static_vertex_array, sprite, sprite_bank>
 	{
 	public:
 		// static gl stuff
@@ -99,7 +131,7 @@ namespace n
 			MAGE_ASSERT(false, "Cannot update an n::sprite_batch");
 			return false;
 		}
-		size_t add_tile(const tile& t) override
+		size_t add_tile(const n::sprite_bank& sb, const tile& t) override
 		{
 			MAGE_ASSERT(false, "Cannot update an n::sprite_batch");
 			return 0;

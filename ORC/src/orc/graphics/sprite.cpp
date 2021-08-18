@@ -2,11 +2,12 @@
 #include "sprite.h"
 #include "sprite_atlas.h"
 #include "sprite_atlas_bank.h"
+#include "sprite_bank.h"
 
 namespace orc
 {
-	sprite::sprite(n::sprite_bank* const sb, sprite_atlas_bank* const ab, const std::string& fp) :
-		n::sprite(sb)
+	sprite::sprite(sprite_bank* const sb, sprite_atlas_bank* const ab, const std::string& fp) :
+		n::sprite(sb->add(this))
 	{
 		mage::input_file data(fp);
 
@@ -60,8 +61,7 @@ namespace orc
 			while (!added && handle < ab->get_last())
 			{
 				const auto& atlas = ab->get(handle);
-				// TODO
-				bool result = add_to_atlas((sprite_atlas* const)atlas, color_data, i);
+				bool result = add_to_atlas(atlas, color_data, i);
 				// unable to add to current atlas, go to the next one
 				if (!result)
 				{

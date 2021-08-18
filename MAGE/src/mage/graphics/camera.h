@@ -57,6 +57,7 @@ namespace mage::gfx
 		camera(event_handler_container& c, const glm::mat4& projection, const glm::mat4& view, const glm::vec3& pos, const s_type& rotation) :
 			m_projection(projection),
 			m_view(view),
+			m_view_projection(view * projection),
 			m_pos(pos),
 			m_rotation(rotation)
 		{

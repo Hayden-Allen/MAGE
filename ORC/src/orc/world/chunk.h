@@ -1,6 +1,5 @@
 #pragma once
 #include "pch.h"
-#include "tile.h"
 #include "sprite_batch.h"
 #include "orc/graphics/sprite_atlas_bank.h"
 
@@ -16,13 +15,13 @@ namespace orc
 	public:
 		void save(mage::output_file& out) const override;
 		void load(mage::input_file& in) override;
-		void set_tile_at(const glm::uvec2& pos, size_t layer, sprite* const sprite);
+		void set_tile_at(const sprite_bank& sb, const glm::uvec2& pos, size_t layer, sprite* const sprite);
 		void delete_tile_at(const glm::uvec2& pos, size_t layer);
 		bool is_empty() const
 		{
 			return m_tile_count == 0;
 		}
-		void draw(const mage::timestep& t, n::sprite_bank* const sb, const sprite_atlas_bank* const ab, const n::shader_program& shader)
+		void draw(const mage::timestep& t, sprite_bank* const sb, const sprite_atlas_bank* const ab, const n::shader_program& shader)
 		{
 			n::chunk_base<sprite_batch>::draw(t, sb, ab, shader);
 		}

@@ -7,13 +7,15 @@
 namespace mage::gfx
 {
 	template<typename T>
-	class retained_buffer : public serializable
+	class retained_buffer :	public serializable
 	{
 	public:
 		virtual ~retained_buffer()
 		{
 			delete m_data;
 		}
+	public:
+		virtual void resize(size_t count) = 0;
 	protected:
 		T* m_data;
 	protected:
@@ -39,6 +41,26 @@ namespace mage::gfx
 			m_count = in.ulong();
 			m_data = new s_type[m_count];
 			in.read(m_data, m_count);
+		}
+		virtual void resize(size_t count) override
+		{
+			if (count > this->m_count)
+			{
+				s_type* data = new s_type[count];
+				arrcopy(m_count, m_data, data);
+				arrset(count - m_count, data, MAGE_CAST(s_type, 0), m_count);
+				delete m_data;
+				m_data = data;
+			}
+			if (count < this->m_count)
+			{
+				s_type* data = new s_type[count];
+				arrcopy(count, m_data, data);
+				delete m_data;
+				m_data = data;
+			}
+
+			m_count = count;
 		}
 	protected:
 		retained_index_buffer(size_t count) :
@@ -75,6 +97,26 @@ namespace mage::gfx
 			m_count = in.ulong();
 			m_data = new s_type[m_count];
 			in.read(m_data, m_count);
+		}
+		virtual void resize(size_t count) override
+		{
+			if (count > this->m_count)
+			{
+				s_type* data = new s_type[count];
+				arrcopy(m_count, m_data, data);
+				arrset(count - m_count, data, MAGE_CAST(s_type, 0), m_count);
+				delete m_data;
+				m_data = data;
+			}
+			if (count < this->m_count)
+			{
+				s_type* data = new s_type[count];
+				arrcopy(count, m_data, data);
+				delete m_data;
+				m_data = data;
+			}
+
+			m_count = count;
 		}
 	protected:
 		retained_vertex_buffer(size_t count) :

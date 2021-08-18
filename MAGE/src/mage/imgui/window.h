@@ -27,12 +27,13 @@ namespace mage::imgui
 			ImGui::PopStyleVar(2);
 		}
 	protected:
-		bool m_active, m_closeable;
 		std::string m_title;
+		bool m_active, m_closeable;
 		ImGuiWindowFlags m_flags;
 	protected:
 		window(std::string title, bool closeable = false, ImGuiWindowFlags flags = ImGuiWindowFlags_None) :
 			m_title(title),
+			m_active(true),
 			m_closeable(closeable),
 			m_flags(flags)
 		{}

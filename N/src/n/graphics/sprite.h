@@ -82,9 +82,9 @@ namespace n
 		// data for all frames
 		std::vector<frame_handle> m_frame_data;
 	protected:
-		sprite(sprite_bank* const sb) :
+		sprite(sprite_bank::handle handle) :
 			mage::dimensional<uint8_t>(0, 0),
-			m_handle(sb->add(this)),
+			m_handle(handle),
 			m_frame(0),
 			m_frame_count(0),
 			m_frame_time(0),

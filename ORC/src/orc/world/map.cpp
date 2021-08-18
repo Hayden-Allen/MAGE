@@ -4,7 +4,7 @@
 
 namespace orc
 {
-	map::map(sprite_atlas_bank* const atlases, n::sprite_bank* const sprites, const grid& chunks) :
+	map::map(sprite_atlas_bank* const atlases, sprite_bank* const sprites, const grid& chunks) :
 		m_atlases(atlases),
 		m_sprites(sprites),
 		m_chunks(chunks),
@@ -33,7 +33,7 @@ namespace orc
 	}
 	void map::load(mage::input_file& in)
 	{
-		m_sprites = new n::sprite_bank(in);
+		m_sprites = new sprite_bank(in);
 		m_atlases = new sprite_atlas_bank(in);
 
 		const size_t chunk_count = in.ulong();
@@ -71,7 +71,7 @@ namespace orc
 			m_chunk_count++;
 		}
 
-		m_chunks[map_pos.y][map_pos.x]->set_tile_at(chunk_pos, layer, sprite);
+		m_chunks[map_pos.y][map_pos.x]->set_tile_at(*m_sprites, chunk_pos, layer, sprite);
 	}
 	void map::delete_tile_at(const glm::uvec2& pos, size_t layer)
 	{

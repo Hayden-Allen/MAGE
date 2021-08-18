@@ -50,17 +50,17 @@ namespace mage::gl
 
 
 
-	class retained_dynamic_vertex_buffer : public mage::gl::retained_vertex_buffer<GL_STATIC_DRAW>
+	class retained_dynamic_vertex_buffer : public mage::gl::retained_vertex_buffer<GL_DYNAMIC_DRAW>
 	{
 	public:
 		retained_dynamic_vertex_buffer(s_type* vertices, size_t count) :
-			retained_vertex_buffer<GL_STATIC_DRAW>(vertices, count)
+			retained_vertex_buffer<GL_DYNAMIC_DRAW>(vertices, count)
 		{}
 		retained_dynamic_vertex_buffer(const retained_dynamic_vertex_buffer& other, size_t count) :
-			retained_vertex_buffer<GL_STATIC_DRAW>(other, count)
+			retained_vertex_buffer<GL_DYNAMIC_DRAW>(other, count)
 		{}
 		retained_dynamic_vertex_buffer(input_file& in) :
-			retained_vertex_buffer<GL_STATIC_DRAW>(in)
+			retained_vertex_buffer<GL_DYNAMIC_DRAW>(in)
 		{}
 		MAGE_DCM(retained_dynamic_vertex_buffer);
 	};

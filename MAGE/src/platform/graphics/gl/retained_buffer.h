@@ -1,7 +1,8 @@
 #pragma once
 #include "pch.h"
-#include "mage/graphics/retained_buffer.h"
 #include "buffer.h"
+#include "mage/graphics/retained_buffer.h"
+#include "mage/util/functions.h"
 
 namespace mage::gl
 {
@@ -25,6 +26,7 @@ namespace mage::gl
 		}
 		void update(T::s_type* data, size_t count, size_t offset) const override
 		{
+			MAGE_CORE_ASSERT((offset + count) <= this->m_count, "Retained buffer overflow, consider resizing");
 			bind();
 			glBufferSubData(TARGET, offset * sizeof(T::s_type), count * sizeof(T::s_type), data);
 			unbind();
@@ -38,6 +40,18 @@ namespace mage::gl
 		{
 			T::load(in);
 			write(this->m_data, this->m_count);
+		}
+		void resize(size_t count) override
+		{
+			bind();
+
+			// create new data store and upload as much of existing data as possible
+			glBufferData(TARGET, count * sizeof(T::s_type), nullptr, USAGE);
+			glBufferSubData(TARGET, 0, glm::min(this->m_count, count) * sizeof(T::s_type), this->m_data);
+
+			T::resize(count);
+
+			unbind();
 		}
 	protected:
 		retained_buffer(T::s_type* data, size_t count) :

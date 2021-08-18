@@ -42,14 +42,12 @@
     <ClInclude Include="src\orc\world\sprite_batch_constructor.h">
       <Filter>orc\world</Filter>
     </ClInclude>
-    <ClInclude Include="src\orc\world\tile.h">
-      <Filter>orc\world</Filter>
-    </ClInclude>
     <ClInclude Include="src\pch.h" />
     <ClInclude Include="src\orc\layer\test_window.h" />
     <ClInclude Include="src\orc\layer\test_dockspace.h" />
     <ClInclude Include="src\orc\constants.h" />
     <ClInclude Include="src\orc\layer\game_window.h" />
+    <ClInclude Include="src\orc\graphics\sprite_bank.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp" />

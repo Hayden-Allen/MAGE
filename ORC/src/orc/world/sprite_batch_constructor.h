@@ -1,6 +1,6 @@
 #pragma once
 #include "pch.h"
-#include "tile.h"
+#include "orc/graphics/sprite_bank.h"
 
 namespace orc
 {
@@ -20,11 +20,11 @@ namespace orc
 			m_tiles(other.m_tiles)
 		{}
 	public:
-		bool can_contain(const orc::tile& t) const;
-		void add(const orc::tile& t);
+		bool can_contain(const sprite_bank& sb, const n::tile& t) const;
+		void add(const sprite_bank& sb, const n::tile& t);
 	private:
 		std::unordered_set<n::sprite_atlas_bank::handle> m_atlases;
-		std::unordered_map<sprite*, std::vector<orc::tile>> m_tiles;
+		std::unordered_map<const sprite*, std::vector<n::tile>> m_tiles;
 	private:
 		static size_t get_max_atlas_count()
 		{

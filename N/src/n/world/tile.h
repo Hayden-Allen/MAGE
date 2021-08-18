@@ -6,19 +6,33 @@ namespace n
 {
 	struct tile
 	{
-		sprite* sprite;
-		mage::rect<float> pos;
+		sprite_bank::handle sprite;
+		mage::rect<uint8_t> pos;
 	};
 
 
 
-	static void gen_tile_vertices(float* const buf, const tile& t, size_t index, const glm::vec2& offset = { 0.f, 0.f })
+
+	template<typename SB>
+	static void gen_tile_vertices(const SB& sb, const tile& t, float* const buf, size_t index, const glm::vec2& offset = { 0.f, 0.f })
 	{
 		// (x, y) offsets
-		const float x[n::c::vertices_per_tile] = { t.pos.min.x, t.pos.max.x, t.pos.max.x, t.pos.min.x };
-		const float y[n::c::vertices_per_tile] = { t.pos.min.y, t.pos.min.y, t.pos.max.y, t.pos.max.y };
+		const float x[n::c::vertices_per_tile] = 
+		{
+			1.f * t.pos.min.x,
+			1.f * t.pos.max.x,
+			1.f * t.pos.max.x,
+			1.f * t.pos.min.x
+		};
+		const float y[n::c::vertices_per_tile] =
+		{
+			1.f * t.pos.min.y,
+			1.f * t.pos.min.y,
+			1.f * t.pos.max.y,
+			1.f * t.pos.max.y
+		};
 		// (s, t) offsets
-		n::sprite_atlas_coords bc = t.sprite->get_base_coords();
+		n::sprite_atlas_coords bc = sb.get(t.sprite)->get_base_coords();
 		const float tx[n::c::vertices_per_tile] = { bc.x.get_min(), bc.x.get_max(), bc.x.get_max(), bc.x.get_min() };
 		const float ty[n::c::vertices_per_tile] = { bc.y.get_min(), bc.y.get_min(), bc.y.get_max(), bc.y.get_max() };
 

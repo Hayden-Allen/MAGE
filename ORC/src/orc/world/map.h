@@ -1,6 +1,7 @@
 #pragma once
 #include "pch.h"
 #include "orc/graphics/sprite_atlas_bank.h"
+#include "orc/graphics/sprite_bank.h"
 
 namespace orc
 {
@@ -11,7 +12,7 @@ namespace orc
 	{
 		typedef std::unordered_map<size_t, std::unordered_map<size_t, chunk*>> grid;
 	public:
-		map(sprite_atlas_bank* const atlases, n::sprite_bank* const sprites, const grid& chunks);
+		map(sprite_atlas_bank* const atlases, sprite_bank* const sprites, const grid& chunks);
 		map(mage::input_file& in)
 		{
 			load(in);
@@ -26,7 +27,7 @@ namespace orc
 		void delete_tile_at(const glm::uvec2& pos, size_t layer);
 	private:
 		sprite_atlas_bank* m_atlases;
-		n::sprite_bank* m_sprites;
+		sprite_bank* m_sprites;
 		grid m_chunks;
 		size_t m_chunk_count;
 	};
