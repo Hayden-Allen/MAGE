@@ -6,12 +6,12 @@
 namespace orc
 {
 	chunk::chunk(const glm::uvec2& pos) :
-		n::chunk(pos),
+		n::chunk_base<sprite_batch>(pos),
 		m_tile_count(0),
 		m_grid{ 0 }
 	{}
 	chunk::chunk(mage::input_file& in) :
-		n::chunk({ 0, 0 }),
+		n::chunk_base<sprite_batch>({ 0, 0 }),
 		m_tile_count(0),
 		m_grid{ 0 }
 	{
@@ -22,7 +22,7 @@ namespace orc
 
 	void chunk::save(mage::output_file& out) const
 	{
-		n::chunk::save(out);
+		n::chunk_base<sprite_batch>::save(out);
 		out.ulong(m_tile_count);
 		out.write(m_grid, n::c::tiles_per_chunk);
 
@@ -41,15 +41,7 @@ namespace orc
 	}
 	void chunk::load(mage::input_file& in)
 	{
-		// TODO cleanup
-		// this has to be rewritten here because n::chunk::load instantiates n::sprite_batches, but orc::chunk::load needs to instantiate orc::sprite_batches
-		m_coords.x = in.uint();
-		m_coords.y = in.uint();
-
-		const size_t batch_count = in.ulong();
-		m_batches.reserve(batch_count);
-		for (size_t i = 0; i < batch_count; i++)
-			m_batches.push_back(new sprite_batch(in));
+		n::chunk_base<sprite_batch>::load(in);
 
 		m_tile_count = in.ulong();
 		in.read(m_grid, n::c::tiles_per_chunk);
@@ -63,7 +55,7 @@ namespace orc
 		m_grid[index] = sprite->get_handle();
 		m_tile_count++;
 
-		n::sprite_batch_base* added_to = nullptr;
+		sprite_batch* added_to = nullptr;
 		size_t offset = 0;
 		n::tile t =
 		{
@@ -79,7 +71,6 @@ namespace orc
 		bool added = false;
 		for (auto& batch : m_batches)
 		{
-			// TODO
 			if (added = batch->can_contain(sprite))
 			{
 				offset = batch->add_tile(t);
@@ -114,8 +105,7 @@ namespace orc
 		m_grid[index] = n::sprite_bank::s_invalid;
 		const auto& pair = m_tile_offsets[pos.y][pos.x];
 		pair.first->delete_tile(pair.second);
-		// TODO properly
-		if (((sprite_batch*)pair.first)->is_empty())
+		if (pair.first->is_empty())
 			m_batches.erase(std::find(m_batches.begin(), m_batches.end(), pair.first));
 
 		// remove given tile's record, because it no longer exists

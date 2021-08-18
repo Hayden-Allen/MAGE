@@ -73,9 +73,6 @@
     <ClCompile Include="src\n\graphics\sprite_atlas.cpp">
       <Filter>n\graphics</Filter>
     </ClCompile>
-    <ClCompile Include="src\n\world\chunk.cpp">
-      <Filter>n\world</Filter>
-    </ClCompile>
     <ClCompile Include="src\n\world\sprite_batch.cpp">
       <Filter>n\world</Filter>
     </ClCompile>

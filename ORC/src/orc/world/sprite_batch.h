@@ -32,7 +32,7 @@ namespace orc
 		void delete_tile(size_t offset) override;
 		void draw(const mage::timestep& t, n::sprite_bank* const sb, const sprite_atlas_bank* const ab, const n::shader_program& shader)
 		{
-			draw_base(t, sb, ab, shader);
+			n::sprite_batch_base::draw(t, sb, ab, shader);
 		}
 		bool is_empty() const
 		{
@@ -48,10 +48,6 @@ namespace orc
 		void resize();
 		void create_indices();
 		void create_array();
-		void draw(const mage::timestep& t, n::sprite_bank* const sb, const n::sprite_atlas_bank* const ab, const n::shader_program& shader) override
-		{
-			MAGE_ASSERT(false, "Cannot draw an orc::sprite_batch with an n::sprite_atlas_bank");
-		}
 		size_t get_next() const
 		{
 			size_t i = m_tile_count;

@@ -6,7 +6,7 @@
 
 namespace orc
 {
-	class chunk final : public n::chunk
+	class chunk final : public n::chunk_base<sprite_batch>
 	{
 	public:
 		// chunk(const std::vector<tile>& tiles);
@@ -24,18 +24,13 @@ namespace orc
 		}
 		void draw(const mage::timestep& t, n::sprite_bank* const sb, const sprite_atlas_bank* const ab, const n::shader_program& shader)
 		{
-			for (auto& batch : m_batches)
-				((sprite_batch*)batch)->draw(t, sb, ab, shader);
+			n::chunk_base<sprite_batch>::draw(t, sb, ab, shader);
 		}
 	private:
 		size_t m_tile_count;
 		n::sprite_bank::handle m_grid[n::c::tiles_per_chunk];
-		std::unordered_map<size_t, std::unordered_map<size_t, std::pair<n::sprite_batch_base*, size_t>>> m_tile_offsets;
+		std::unordered_map<size_t, std::unordered_map<size_t, std::pair<sprite_batch*, size_t>>> m_tile_offsets;
 	private:
-		void draw(const mage::timestep& t, n::sprite_bank* const sb, const n::sprite_atlas_bank* const ab, const n::shader_program& shader) override
-		{
-			MAGE_ASSERT(false, "Cannot draw an orc::chunk with an n::sprite_atlas_bank");
-		}
 		size_t get_index(const glm::uvec2& pos, size_t layer) const
 		{
 			MAGE_ASSERT(pos.x < n::c::tiles_per_chunk_side&& pos.y < n::c::tiles_per_chunk_side, "Invalid chunk coordinates <{}, {}>", pos.x, pos.y);

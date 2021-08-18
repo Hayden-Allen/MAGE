@@ -18,7 +18,8 @@ namespace n
 			m_atlases(other.m_atlases),
 			m_sprites(other.m_sprites),
 			m_offsets(other.m_offsets),
-			m_texture_indices(other.m_texture_indices)
+			m_texture_indices(other.m_texture_indices),
+			m_base_coords(other.m_base_coords)
 		{
 			other.m_indices = nullptr;
 			other.m_vertices = nullptr;
@@ -28,33 +29,8 @@ namespace n
 	public:
 		virtual void save(mage::output_file& out) const override;
 		virtual void load(mage::input_file& in) override;
-		virtual void draw(const mage::timestep& t, sprite_bank* const sb, const sprite_atlas_bank* const ab, const shader_program& shader)
-		{
-			draw_base(t, sb, ab, shader);
-		}
-		virtual bool can_contain(const sprite* const s) const = 0;
-		virtual size_t add_tile(const tile& t) = 0;
-		virtual void delete_tile(size_t offset) = 0;
-	protected:
-		mage::gfx::index_buffer* m_indices;
-		mage::gfx::vertex_buffer* m_vertices;
-		mage::gfx::vertex_array* m_vertex_array;
-		std::unordered_map<sprite_atlas_bank::handle, size_t> m_atlases;
-		std::vector<sprite_bank::handle> m_sprites;
-		std::vector<glm::vec2> m_offsets;
-		std::vector<int> m_texture_indices;
-		glm::uvec2 m_base_coords;
-	protected:
-		sprite_batch_base(const glm::uvec2& base) :
-			m_indices(nullptr),
-			m_vertices(nullptr),
-			m_vertex_array(nullptr),
-			m_base_coords(base)
-		{}
-	protected:
-		void add_sprite(sprite_bank::handle sprite);
 		template<typename SAB>
-		void draw_base(const mage::timestep& t, sprite_bank* const sb, const SAB* const ab, const shader_program& shader)
+		void draw(const mage::timestep& t, sprite_bank* const sb, const SAB* const ab, const shader_program& shader)
 		{
 			// for each sprite in this batch
 			for (size_t i = 0; i < m_sprites.size(); i++)
@@ -79,6 +55,27 @@ namespace n
 			// draw all tiles
 			mage::gfx::renderer::draw(m_indices, m_vertex_array);
 		}
+		virtual bool can_contain(const sprite* const s) const = 0;
+		virtual size_t add_tile(const tile& t) = 0;
+		virtual void delete_tile(size_t offset) = 0;
+	protected:
+		mage::gfx::index_buffer* m_indices;
+		mage::gfx::vertex_buffer* m_vertices;
+		mage::gfx::vertex_array* m_vertex_array;
+		std::unordered_map<sprite_atlas_bank::handle, size_t> m_atlases;
+		std::vector<sprite_bank::handle> m_sprites;
+		std::vector<glm::vec2> m_offsets;
+		std::vector<int> m_texture_indices;
+		glm::uvec2 m_base_coords;
+	protected:
+		sprite_batch_base(const glm::uvec2& base) :
+			m_indices(nullptr),
+			m_vertices(nullptr),
+			m_vertex_array(nullptr),
+			m_base_coords(base)
+		{}
+	protected:
+		void add_sprite(sprite_bank::handle sprite);
 	};
 
 

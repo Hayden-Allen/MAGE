@@ -66,7 +66,7 @@ namespace orc
 			n::sprite_bank* sb = new n::sprite_bank();
 			sprite_atlas_bank* ab = new sprite_atlas_bank();
 			m_sprite = new sprite(sb, ab, "res/sprite/newSprite2.sprite");
-			constexpr bool save = true;
+			constexpr bool save = false;
 			if (save)
 			{
 				m_map = new map(ab, sb, {});

@@ -153,7 +153,6 @@
   <ItemGroup>
     <ClCompile Include="src\n\graphics\sprite.cpp" />
     <ClCompile Include="src\n\graphics\sprite_atlas.cpp" />
-    <ClCompile Include="src\n\world\chunk.cpp" />
     <ClCompile Include="src\n\world\sprite_batch.cpp" />
     <ClCompile Include="src\pch.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>
