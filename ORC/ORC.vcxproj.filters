@@ -48,6 +48,7 @@
     <ClInclude Include="src\orc\constants.h" />
     <ClInclude Include="src\orc\layer\game_window.h" />
     <ClInclude Include="src\orc\graphics\sprite_bank.h" />
+    <ClInclude Include="src\orc\world\sprite_batch_bank.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp" />

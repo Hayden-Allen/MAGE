@@ -1,6 +1,7 @@
 #pragma once
 #include "pch.h"
 #include "sprite_batch.h"
+#include "sprite_batch_bank.h"
 #include "orc/graphics/sprite_atlas_bank.h"
 
 namespace orc
@@ -10,13 +11,13 @@ namespace orc
 	public:
 		// chunk(const std::vector<tile>& tiles);
 		chunk(const glm::uvec2& pos);
-		chunk(mage::input_file& in);
+		chunk(sprite_batch_bank& sbb, mage::input_file& in);
 		N_DCM(chunk);
 	public:
 		void save(mage::output_file& out) const override;
-		void load(mage::input_file& in) override;
-		void set_tile_at(const sprite_bank& sb, const glm::uvec2& pos, size_t layer, sprite* const sprite);
-		void delete_tile_at(const glm::uvec2& pos, size_t layer);
+		void load(sprite_batch_bank& sbb, mage::input_file& in);
+		void set_tile_at(sprite_batch_bank& sbb, const sprite_bank& sb, const glm::uvec2& pos, size_t layer, sprite* const sprite);
+		void delete_tile_at(sprite_batch_bank& sbb, const sprite_bank& sb, const glm::uvec2& pos, size_t layer);
 		bool is_empty() const
 		{
 			return m_tile_count == 0;
@@ -28,8 +29,12 @@ namespace orc
 	private:
 		size_t m_tile_count;
 		n::sprite_bank::handle m_grid[n::c::tiles_per_chunk];
-		std::unordered_map<size_t, std::unordered_map<size_t, std::pair<sprite_batch*, size_t>>> m_tile_offsets;
+		std::unordered_map<size_t, std::unordered_map<size_t, std::pair<sprite_batch_bank::handle, size_t>>> m_tile_offsets;
 	private:
+		void load(mage::input_file& in) override
+		{
+			n::chunk_base<sprite_batch>::load(in);
+		}
 		size_t get_index(const glm::uvec2& pos, size_t layer) const
 		{
 			MAGE_ASSERT(pos.x < n::c::tiles_per_chunk_side&& pos.y < n::c::tiles_per_chunk_side, "Invalid chunk coordinates <{}, {}>", pos.x, pos.y);

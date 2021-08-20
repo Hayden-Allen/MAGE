@@ -4,10 +4,11 @@
 
 namespace orc
 {
-	sprite_batch::sprite_batch(const glm::uvec2& base) :
+	sprite_batch::sprite_batch(sprite_batch_bank& bank, const glm::uvec2& base) :
 		n::sprite_batch_base<n::static_index_buffer, n::retained_dynamic_vertex_buffer, n::dynamic_vertex_array, sprite, sprite_bank>(base),
+		m_handle(bank.add(this)),
 		m_max_tile_count(n::c::sprite_batch_base_size),
-		m_tile_count(0)
+		m_next_tile(0)
 	{
 		resize();
 	}
@@ -17,19 +18,21 @@ namespace orc
 	void sprite_batch::save(mage::output_file& out) const
 	{
 		n::sprite_batch_base<n::static_index_buffer, n::retained_dynamic_vertex_buffer, n::dynamic_vertex_array, sprite, sprite_bank>::save(out);
-		out.ulong(m_max_tile_count).ulong(m_tile_count);
+		out.ulong(m_max_tile_count).ulong(m_next_tile);
 
 		out.ulong(m_sprite_indices.size());
 		for (const auto& pair : m_sprite_indices)
 			out.ushort(pair.first).ulong(pair.second);
 
 		m_vertices->save(out);
+
+		out.uint(m_handle);
 	}
 	void sprite_batch::load(mage::input_file& in)
 	{
 		n::sprite_batch_base<n::static_index_buffer, n::retained_dynamic_vertex_buffer, n::dynamic_vertex_array, sprite, sprite_bank>::load(in);
 		m_max_tile_count = in.ulong();
-		m_tile_count = in.ulong();
+		m_next_tile = in.ulong();
 
 		const size_t sprite_count = in.ulong();
 		m_sprite_indices.reserve(sprite_count);
@@ -39,6 +42,8 @@ namespace orc
 		create_indices();
 		m_vertices = new n::retained_dynamic_vertex_buffer(in);
 		create_array();
+
+		m_handle = in.uint();
 	}
 	bool sprite_batch::can_contain(const sprite* const s) const
 	{
@@ -50,26 +55,22 @@ namespace orc
 	size_t sprite_batch::add_tile(const sprite_bank& sb, const n::tile& t)
 	{
 		// increase storage if this batch is already full
-		if (m_tile_count == m_max_tile_count)
+		if (is_full())
 		{
 			m_max_tile_count *= 2;
 			MAGE_ASSERT(m_max_tile_count < n::c::sprite_batch_max_size, "Chunk is full");
 			resize();
 		}
 
-		// insert new atlases if necessary
-		for (const auto& a : sb.get(t.sprite)->get_atlases())
-		{
-			if(!m_atlases.contains(a))
-				m_atlases.insert({ a, m_atlases.size() });
-		}
+		const auto& s = sb.get(t.sprite);
+		// insert new atlases if necessary and increment counter
+		for (const auto& a : s->get_atlases())
+			add_atlas(a);
 		// insert new sprite + sprite index if necessary
 		const auto& handle = t.sprite;
+		add_sprite(handle);
 		if (!m_sprite_indices.contains(handle))
-		{
-			add_sprite(handle);
 			m_sprite_indices.insert({ handle, m_sprite_indices.size() });
-		}
 
 		// generate vertex data for new tile
 		const size_t index = get_next();
@@ -79,14 +80,31 @@ namespace orc
 		m_vertices->update(vertices, n::c::floats_per_tile, offset);
 
 		// only increment count if the new tile was added to a non-opening
-		m_tile_count += (index == m_tile_count);
+		m_next_tile += (index == m_next_tile);
 		return offset;
 	}
-	void sprite_batch::delete_tile(size_t offset)
+	void sprite_batch::delete_tile(const sprite* const s, size_t offset)
 	{
-		float vertices[n::c::floats_per_tile] = { 0.f };
-		m_vertices->update(vertices, n::c::floats_per_tile, offset);
-		m_openings.push_back(offset / n::c::floats_per_tile);
+		delete_tile(offset);
+
+		// TODO
+		//// remove now-unused atlases
+		//for (const auto& a : s->get_atlases())
+		//{
+		//	auto& ref = m_atlas_counts[a];
+		//	ref--;
+		//	if (ref == 0)
+		//	{
+		//		m_atlas_counts.erase(ref);
+		//		m_atlases.erase(a);
+		//	}
+		//}
+
+		//// remove now-unused sprite
+		//auto& ref = m_sprite_counts[s->get_handle()];
+		//ref--;
+		//if (ref == 0)
+		//	m_sprite_counts.erase(ref);
 	}
 
 

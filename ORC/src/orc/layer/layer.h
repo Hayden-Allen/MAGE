@@ -69,9 +69,7 @@ namespace orc
 			constexpr bool save = false;
 			if (save)
 			{
-				m_map = new map(ab, sb, {});
-				mage::output_file out("res/map.orc");
-				m_map->save(out);
+				m_map = new map(ab, sb);
 			}
 			else
 			{

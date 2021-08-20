@@ -147,6 +147,7 @@
     <ClInclude Include="src\orc\world\chunk.h" />
     <ClInclude Include="src\orc\world\map.h" />
     <ClInclude Include="src\orc\world\sprite_batch.h" />
+    <ClInclude Include="src\orc\world\sprite_batch_bank.h" />
     <ClInclude Include="src\orc\world\sprite_batch_constructor.h" />
     <ClInclude Include="src\pch.h" />
   </ItemGroup>

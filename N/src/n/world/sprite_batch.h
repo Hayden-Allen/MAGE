@@ -46,6 +46,9 @@ namespace n
 			out.ulong(m_sprites.size());
 			for (const auto& s : m_sprites)
 				out.ushort(s);
+
+			out.ulong(m_offsets.size());
+			out.ulong(m_texture_indices.size());
 		}
 		virtual void load(mage::input_file& in) override
 		{
@@ -58,6 +61,9 @@ namespace n
 			m_sprites.reserve(sprite_count);
 			for (size_t i = 0; i < sprite_count; i++)
 				add_sprite(in.ushort());
+
+			m_offsets = std::vector<glm::vec2>(in.ulong());
+			m_texture_indices = std::vector<int>(in.ulong());
 		}
 		template<typename SAB>
 		void draw(const mage::timestep& t, BANK* const sb, const SAB* const ab, const shader_program& shader)
@@ -90,6 +96,7 @@ namespace n
 		VB* m_vertices;
 		VA* m_vertex_array;
 		std::unordered_map<sprite_atlas_bank::handle, size_t> m_atlases;
+		// TODO condense into a map
 		std::vector<sprite_bank::handle> m_sprites;
 		std::vector<glm::vec2> m_offsets;
 		std::vector<int> m_texture_indices;
@@ -102,11 +109,29 @@ namespace n
 			m_base_coords(base)
 		{}
 	protected:
-		void add_sprite(sprite_bank::handle sprite)
+		virtual void add_sprite(sprite_bank::handle sprite)
 		{
-			m_sprites.push_back(sprite);
-			m_offsets.push_back({ 0.f, 0.f });
-			m_texture_indices.push_back(0);
+			// TODO properly
+			// only insert if new
+			if (std::find(m_sprites.begin(), m_sprites.end(), sprite) == m_sprites.end())
+			{
+				m_sprites.push_back(sprite);
+				m_offsets.push_back({ 0.f, 0.f });
+				m_texture_indices.push_back(0);
+			}
+		}
+		virtual void remove_sprite(sprite_bank::handle sprite)
+		{
+			// TODO properly
+			const size_t index = std::find(m_sprites.begin(), m_sprites.end(), sprite) - m_sprites.begin();
+			m_sprites.erase(m_sprites.begin() + index);
+			m_offsets.erase(m_offsets.begin() + index);
+			m_texture_indices.erase(m_texture_indices.begin() + index);
+		}
+		virtual void add_atlas(sprite_atlas_bank::handle atlas)
+		{
+			if(!m_atlases.contains(atlas))
+				m_atlases.insert({ atlas, m_atlases.size() });
 		}
 	};
 

@@ -13,10 +13,14 @@ namespace orc
 	public:
 		sprite(sprite_bank* const sb, sprite_atlas_bank* const ab, const std::string& fp);
 		sprite(mage::input_file& in) :
-			n::sprite(in)
-		{}
+			n::sprite(0)
+		{
+			load(in);
+		}
 		MAGE_DCM(sprite);
 	public:
+		void save(mage::output_file& out) const override;
+		void load(mage::input_file& in) override;
 		const std::unordered_set<sprite_atlas_bank::handle>& get_atlases() const
 		{
 			return m_atlases;

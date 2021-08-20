@@ -17,6 +17,7 @@ namespace n
 
 	void sprite::save(mage::output_file& out) const
 	{
+		out.ushort(m_handle);
 		out.uint(m_w).uint(m_h);
 		out.ubyte(m_frame_count).ushort(m_frame_time);
 		m_base_coords.save(out);
@@ -26,6 +27,7 @@ namespace n
 	}
 	void sprite::load(mage::input_file& in)
 	{
+		m_handle = in.ushort();
 		m_w = in.uint();
 		m_h = in.uint();
 		m_frame_count = in.ubyte();

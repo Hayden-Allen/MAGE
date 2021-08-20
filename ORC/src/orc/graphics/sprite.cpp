@@ -80,6 +80,26 @@ namespace orc
 
 
 
+	void sprite::save(mage::output_file& out) const
+	{
+		n::sprite::save(out);
+
+		out.ulong(m_atlases.size());
+		for (const auto& a : m_atlases)
+			out.ushort(a);
+	}
+	void sprite::load(mage::input_file& in)
+	{
+		n::sprite::load(in);
+
+		const size_t atlas_count = in.ulong();
+		m_atlases.reserve(atlas_count);
+		for (size_t i = 0; i < atlas_count; i++)
+			m_atlases.insert(in.ushort());
+	}
+
+
+
 	bool sprite::add_to_atlas(sprite_atlas* const atlas, const uint8_t* const color_data, size_t i)
 	{
 		// attempt to add

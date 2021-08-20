@@ -4,14 +4,15 @@
 
 namespace orc
 {
-	map::map(sprite_atlas_bank* const atlases, sprite_bank* const sprites, const grid& chunks) :
+	map::map(sprite_atlas_bank* const atlases, sprite_bank* const sprites) :
+		m_batches(new sprite_batch_bank()),
 		m_atlases(atlases),
 		m_sprites(sprites),
-		m_chunks(chunks),
 		m_chunk_count(0)
 	{}
 	map::~map()
 	{
+		delete m_batches;
 		delete m_atlases;
 		delete m_sprites;
 		for (auto& row : m_chunks)
@@ -23,6 +24,7 @@ namespace orc
 
 	void map::save(mage::output_file& out) const
 	{
+		m_batches->save(out);
 		m_sprites->save(out);
 		m_atlases->save(out);
 
@@ -33,13 +35,14 @@ namespace orc
 	}
 	void map::load(mage::input_file& in)
 	{
+		m_batches = new sprite_batch_bank(in);
 		m_sprites = new sprite_bank(in);
 		m_atlases = new sprite_atlas_bank(in);
 
-		const size_t chunk_count = in.ulong();
-		for (size_t i = 0; i < chunk_count; i++)
+		m_chunk_count = in.ulong();
+		for (size_t i = 0; i < m_chunk_count; i++)
 		{
-			chunk* c = new chunk(in);
+			chunk* c = new chunk(*m_batches, in);
 
 			const auto& pos = c->get_pos();
 			if (!m_chunks.contains(pos.y))
@@ -71,7 +74,7 @@ namespace orc
 			m_chunk_count++;
 		}
 
-		m_chunks[map_pos.y][map_pos.x]->set_tile_at(*m_sprites, chunk_pos, layer, sprite);
+		m_chunks[map_pos.y][map_pos.x]->set_tile_at(*m_batches, *m_sprites, chunk_pos, layer, sprite);
 	}
 	void map::delete_tile_at(const glm::uvec2& pos, size_t layer)
 	{
@@ -81,6 +84,6 @@ namespace orc
 		if (!m_chunks.contains(map_pos.y) || !m_chunks[map_pos.y].contains(map_pos.x))
 			return;
 
-		m_chunks[map_pos.y][map_pos.x]->delete_tile_at(chunk_pos, layer);
+		m_chunks[map_pos.y][map_pos.x]->delete_tile_at(*m_batches, *m_sprites, chunk_pos, layer);
 	}
 }

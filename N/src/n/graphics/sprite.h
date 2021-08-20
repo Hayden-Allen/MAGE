@@ -49,8 +49,8 @@ namespace n
 		sprite(mage::input_file& in);
 		MAGE_DCM(sprite);
 	public:
-		void save(mage::output_file& out) const override;
-		void load(mage::input_file& in) override;
+		virtual void save(mage::output_file& out) const override;
+		virtual void load(mage::input_file& in) override;
 		void update(const mage::timestep& t);
 		template<typename T = uint8_t>
 		T get_frame() const
