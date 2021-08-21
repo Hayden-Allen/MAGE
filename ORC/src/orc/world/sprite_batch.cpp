@@ -148,4 +148,44 @@ namespace orc
 			}
 		);
 	}
+	size_t sprite_batch::get_next() const
+	{
+		size_t i = m_next_tile;
+		if (!m_openings.empty())
+		{
+			i = m_openings.back();
+			m_openings.pop_back();
+		}
+		return i;
+	}
+	void sprite_batch::add_sprite(sprite_bank::handle s)
+	{
+		n::sprite_batch_base<n::static_index_buffer, n::retained_dynamic_vertex_buffer, n::dynamic_vertex_array, sprite, sprite_bank>::add_sprite(s);
+		if (!m_sprite_counts.contains(s))
+			m_sprite_counts.insert({ s, 0 });
+		m_sprite_counts[s]++;
+	}
+	void sprite_batch::remove_sprite(sprite_bank::handle s)
+	{
+		n::sprite_batch_base<n::static_index_buffer, n::retained_dynamic_vertex_buffer, n::dynamic_vertex_array, sprite, sprite_bank>::remove_sprite(s);
+
+		auto& ref = m_sprite_counts[s];
+		ref--;
+		if (ref == 0)
+			m_sprite_counts.erase(s);
+	}
+	void sprite_batch::add_atlas(sprite_atlas_bank::handle atlas)
+	{
+		n::sprite_batch_base<n::static_index_buffer, n::retained_dynamic_vertex_buffer, n::dynamic_vertex_array, sprite, sprite_bank>::add_atlas(atlas);
+
+		if (!m_atlas_counts.contains(atlas))
+			m_atlas_counts.insert({ atlas, 0 });
+		m_atlas_counts[atlas]++;
+	}
+	void sprite_batch::delete_tile(size_t offset)
+	{
+		float vertices[n::c::floats_per_tile] = { 0.f };
+		m_vertices->update(vertices, n::c::floats_per_tile, offset);
+		m_openings.push_back(offset / n::c::floats_per_tile);
+	}
 }

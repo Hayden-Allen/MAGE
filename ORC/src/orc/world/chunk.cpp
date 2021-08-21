@@ -97,7 +97,7 @@ namespace orc
 		{
 			sprite->get_handle(),
 			{
-				{ pos.x, pos.y },
+				{ N_CAST(uint8_t, pos.x), N_CAST(uint8_t, pos.y) },
 				{
 					N_CAST(uint8_t, pos.x + sprite->get_w() / n::c::pixels_per_sprite_side),
 					N_CAST(uint8_t, pos.y + sprite->get_h() / n::c::pixels_per_sprite_side)

@@ -20,7 +20,7 @@ namespace orc
 			m_layer->m_camera->set_size(size.x, size.y);
 
 			const auto& win = mage::application::get().get_window();
-			ImGui::Image((void*)m_layer->m_framebuffer->get_color_attachment_id(), size, { 0.f, 1.f }, { 1.f, 0.f });
+			ImGui::Image(ImTextureID(m_layer->m_framebuffer->get_color_attachment_id()), size, { 0.f, 1.f }, { 1.f, 0.f });
 
 			if (ImGui::IsWindowHovered())
 			{

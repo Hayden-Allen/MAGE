@@ -20,6 +20,7 @@ namespace n
 			m_sprites(other.m_sprites),
 			m_offsets(other.m_offsets),
 			m_texture_indices(other.m_texture_indices),
+			m_sprite_indices(other.m_sprite_indices),
 			m_base_coords(other.m_base_coords)
 		{
 			other.m_indices = nullptr;
@@ -96,10 +97,10 @@ namespace n
 		VB* m_vertices;
 		VA* m_vertex_array;
 		std::unordered_map<sprite_atlas_bank::handle, size_t> m_atlases;
-		// TODO condense into a map
 		std::vector<sprite_bank::handle> m_sprites;
 		std::vector<glm::vec2> m_offsets;
 		std::vector<int> m_texture_indices;
+		std::unordered_map<sprite_bank::handle, size_t> m_sprite_indices;
 		glm::uvec2 m_base_coords;
 	protected:
 		sprite_batch_base(const glm::uvec2& base) :
@@ -111,9 +112,8 @@ namespace n
 	protected:
 		virtual void add_sprite(sprite_bank::handle sprite)
 		{
-			// TODO properly
 			// only insert if new
-			if (std::find(m_sprites.begin(), m_sprites.end(), sprite) == m_sprites.end())
+			if (!m_sprite_indices.contains(sprite))
 			{
 				m_sprites.push_back(sprite);
 				m_offsets.push_back({ 0.f, 0.f });
@@ -122,8 +122,10 @@ namespace n
 		}
 		virtual void remove_sprite(sprite_bank::handle sprite)
 		{
-			// TODO properly
-			const size_t index = std::find(m_sprites.begin(), m_sprites.end(), sprite) - m_sprites.begin();
+			const auto& it = m_sprite_indices.find(sprite);
+			MAGE_ASSERT(it != m_sprite_indices.end(), "Cannot remove a sprite that doesn't exist");
+			const size_t index = it->second;
+			// erase only takes iterators. The index is guaranteed to be the same for all three arrays because of the way add_sprite works
 			m_sprites.erase(m_sprites.begin() + index);
 			m_offsets.erase(m_offsets.begin() + index);
 			m_texture_indices.erase(m_texture_indices.begin() + index);
