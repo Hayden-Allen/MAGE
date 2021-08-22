@@ -10,7 +10,7 @@ namespace mage
 	public:
 		typedef HANDLE handle;
 	public:
-		constexpr static size_t s_invalid = 0, s_first = 1;
+		constexpr static size_t s_invalid = 0, s_placeholder = 1, s_first = 2;
 	public:
 		MAGE_DCM(bank);
 		virtual ~bank()
@@ -48,7 +48,7 @@ namespace mage
 		T* m_bank[COUNT];
 	protected:
 		bank() :
-			m_next(1),
+			m_next(s_first),
 			m_bank{ nullptr }
 		{}
 	};
