@@ -25,6 +25,14 @@ namespace orc
 		{
 			return m_atlases;
 		}
+		s_type get_tile_w() const
+		{
+			return m_w / n::c::pixels_per_sprite_side;
+		}
+		s_type get_tile_h() const
+		{
+			return m_h / n::c::pixels_per_sprite_side;
+		}
 	private:
 		std::unordered_set<sprite_atlas_bank::handle> m_atlases;
 	private:

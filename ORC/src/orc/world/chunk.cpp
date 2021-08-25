@@ -84,11 +84,10 @@ namespace orc
 	}
 	void chunk::set_tile_at(sprite_batch_bank& sbb, const sprite_bank& sb, const glm::uvec2& pos, size_t layer, sprite* const sprite)
 	{
-		const size_t index = get_index(pos, layer);
-		if (m_grid[index] == sprite->get_handle())
-			return;
-
-		m_grid[index] = sprite->get_handle();
+		// done by map::set_tile_at
+		// set_grid(pos, layer, sprite, true);
+		// only the root tile should have this index (others should be placeholders)
+		m_grid[get_index(pos, layer)] = sprite->get_handle();
 		m_tile_count++;
 
 		sprite_batch* added_to = nullptr;
@@ -99,11 +98,13 @@ namespace orc
 			{
 				{ N_CAST(uint8_t, pos.x), N_CAST(uint8_t, pos.y) },
 				{
-					N_CAST(uint8_t, pos.x + sprite->get_w() / n::c::pixels_per_sprite_side),
-					N_CAST(uint8_t, pos.y + sprite->get_h() / n::c::pixels_per_sprite_side)
+					N_CAST(uint8_t, pos.x) + sprite->get_tile_w(),
+					N_CAST(uint8_t, pos.y) + sprite->get_tile_h()
 				}
 			}
 		};
+
+		// attempt to add to an existing batch
 		bool added = false;
 		for (auto& batch : m_batches)
 		{
@@ -124,7 +125,7 @@ namespace orc
 			m_batches.push_back(added_to);
 		}
 
-		// store new tile's index in the batch's VBO
+		// store new tile's index in the batch's VBO (necessary for deletion)
 		if (!m_tile_offsets.contains(pos.y))
 			m_tile_offsets.insert({ pos.y, {} });
 		if (!m_tile_offsets[pos.y].contains(pos.x))
@@ -133,13 +134,11 @@ namespace orc
 	}
 	void chunk::delete_tile_at(sprite_batch_bank& sbb, const sprite_bank& sb, const glm::uvec2& pos, size_t layer)
 	{
-		const size_t index = get_index(pos, layer);
-		if (m_grid[index] == sprite_bank::s_invalid)
-			return;
-
-		const sprite_bank::handle old = m_grid[index];
+		const sprite_bank::handle old = m_grid[get_index(pos, layer)];
+		// done by map::delete_tile_at
 		// delete given tile from the batch that contains it
-		m_grid[index] = sprite_bank::s_invalid;
+		// m_grid[index] = sprite_bank::s_invalid;
+		// set_grid(pos, layer, sb.get(old), false);
 		const auto& pair = m_tile_offsets[pos.y][pos.x];
 		const auto& batch = sbb.get(pair.first);
 		batch->delete_tile(sb.get(old), pair.second);
@@ -152,4 +151,43 @@ namespace orc
 		if (m_tile_offsets[pos.y].size() == 0)
 			m_tile_offsets.erase(pos.y);
 	}
+	sprite_bank::handle chunk::get_tile_at(const glm::uvec2& pos, size_t layer) const
+	{
+		return m_grid[get_index(pos, layer)];
+	}
+
+
+
+	size_t chunk::get_index(const glm::uvec2& pos, size_t layer)
+	{
+		MAGE_ASSERT(pos.x < n::c::tiles_per_chunk_side && pos.y < n::c::tiles_per_chunk_side, "Invalid chunk coordinates <{}, {}>", pos.x, pos.y);
+		MAGE_ASSERT(layer < n::c::layers_per_chunk, "Invalid chunk layer {}", layer);
+
+		return (layer * n::c::tiles_per_chunk_layer) + (pos.y * n::c::tiles_per_chunk_side) + pos.x;
+	}
+	//void chunk::set_grid(const glm::uvec2& pos, size_t layer, const sprite* const s, bool add)
+	//{
+	//	for (size_t i = pos.y; i < N_CAST(size_t, pos.y) + s->get_tile_h(); i++)
+	//	{
+	//		for (size_t j = pos.x; j < N_CAST(size_t, pos.x) + s->get_tile_w(); j++)
+	//		{
+	//			// other chunks must handle this themselves
+	//			if (i >= n::c::tiles_per_chunk_side || j >= n::c::tiles_per_chunk_side)
+	//				continue;
+	//			// If adding, set only the root tile to the sprite's index and make the rest placeholders. If deleting, set all to invalid.
+	//			const sprite_bank::handle index = (add ? ((i == pos.y && j == pos.x) ? s->get_handle() : sprite_bank::s_placeholder) : sprite_bank::s_invalid);
+	//			m_grid[get_index({ j, i }, layer)] = index;
+	//			MAGE_TRACE("<{}, {}> => {}", j, i, index);
+	//		}
+	//	}
+	//}
+	/*void chunk::fill_grid(const glm::uvec2& pos, const glm::uvec2& dim, size_t layer, sprite_bank::handle h)
+	{
+		for (size_t i = pos.y; i < N_CAST(size_t, pos.y) + dim.y; i++)
+			for (size_t j = pos.x; j < N_CAST(size_t, pos.x) + dim.x; j++)
+			{
+				MAGE_ASSERT(j < n::c::tiles_per_chunk_side&& i < n::c::tiles_per_chunk_side, "Invalid dims");
+				m_grid[get_index({ j, i }, layer)] = h;
+			}
+	}*/
 }

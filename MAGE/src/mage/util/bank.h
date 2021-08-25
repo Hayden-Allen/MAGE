@@ -19,6 +19,10 @@ namespace mage
 				delete m_bank[i];
 		}
 	public:
+		static bool is_valid(HANDLE h)
+		{
+			return h != s_invalid && h != s_placeholder;
+		}
 		handle add(T* t)
 		{
 			MAGE_CORE_ASSERT(m_next < COUNT, "Bank is full ({}/{})", COUNT, COUNT);

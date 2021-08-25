@@ -32,5 +32,14 @@ namespace orc
 		sprite_bank* m_sprites;
 		grid m_chunks;
 		size_t m_chunk_count;
+	private:
+		std::pair<glm::uvec2, glm::uvec2> find_root(const glm::uvec2& pos, size_t layer) const;
+		void fill_grids(const glm::uvec2& pos, const glm::uvec2& dims, size_t layer, sprite_bank::handle h);
+		bool can_set(const glm::uvec2& pos, size_t layer, const sprite* const sprite) const;
+		chunk* const try_create_chunk(const glm::uvec2& pos);
+		bool has_chunk(const glm::uvec2& pos) const
+		{
+			return m_chunks.contains(pos.y) && m_chunks.at(pos.y).contains(pos.x);
+		}
 	};
 }

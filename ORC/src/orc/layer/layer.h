@@ -65,8 +65,8 @@ namespace orc
 
 			sprite_bank* sb = new sprite_bank();
 			sprite_atlas_bank* ab = new sprite_atlas_bank();
-			m_sprite = new sprite(sb, ab, "res/sprite/newSprite2.sprite");
-			constexpr bool save = false;
+			// m_sprite = new sprite(sb, ab, "res/sprite/newSprite2.sprite");
+			constexpr bool save = true;
 			if (save)
 			{
 				m_map = new map(ab, sb);
@@ -76,6 +76,7 @@ namespace orc
 				mage::input_file in("res/map.orc");
 				m_map = new map(in);
 			}
+			m_sprite = new sprite(sb, ab, "res/sprite/big.sprite");
 		}
 		MAGE_DCM(layer);
 		~layer()
