@@ -28,7 +28,7 @@ namespace orc
 		}
 
 		// generate color data from palette indices
-		const size_t pixels_per_frame = m_w * m_h;
+		const size_t pixels_per_frame = N_CAST(size_t, m_w) * m_h;
 		uint8_t* const color_data = new uint8_t[n::c::bytes_per_sprite_pixel * pixels_per_frame * m_frame_count];
 		for (size_t i = 0; i < m_frame_count; i++)
 		{
@@ -37,10 +37,10 @@ namespace orc
 			for (size_t j = 0; j < pixels_per_frame * n::c::bytes_per_sprite_pixel; j += n::c::bytes_per_sprite_pixel)
 			{
 				// coordinates of current pixel
-				// flip y because OpenGL expects data from the bottom up
 				const size_t x = (j / n::c::bytes_per_sprite_pixel) % m_w;
+				// flip y because OpenGL expects data from the bottom up
 				const size_t y = (m_h - 1) - (j / n::c::bytes_per_sprite_pixel) / m_w;
-				const size_t index = off + (y * n::c::pixels_per_sprite_side + x) * n::c::bytes_per_sprite_pixel;
+				const size_t index = off + (y * m_w + x) * n::c::bytes_per_sprite_pixel;
 				// palette index of current pixel. 16 signifies empty
 				const uint8_t color = data.ubyte();
 				color_data[index + 0] = (color == n::c::sprite_color_count ? 0 : r[color]);

@@ -31,7 +31,8 @@ namespace orc
 	private:
 		size_t m_tile_count;
 		n::sprite_bank::handle m_grid[n::c::tiles_per_chunk];
-		std::unordered_map<size_t, std::unordered_map<size_t, std::pair<sprite_batch_bank::handle, size_t>>> m_tile_offsets;
+		// layer, y, x, <handle, offset>
+		std::unordered_map<size_t, std::unordered_map<size_t, std::unordered_map<size_t, std::pair<sprite_batch_bank::handle, size_t>>>> m_tile_offsets;
 	private:
 		static size_t get_index(const glm::uvec2& pos, size_t layer);
 		// void fill_grid(const glm::uvec2& pos, const glm::uvec2& dim, size_t layer, sprite_bank::handle h);

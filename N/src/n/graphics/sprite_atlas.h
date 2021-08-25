@@ -2,6 +2,7 @@
 #include "pch.h"
 #include "sprite_atlas_bank.h"
 #include "sprite_atlas_coords.h"
+#include "n/graphics/wrap/texture.h"
 #include "mage/io/serializable.h"
 #include "mage/util/dimensional.h"
 
@@ -42,7 +43,7 @@ namespace n
 		// index of this atlas in its containing bank
 		sprite_atlas_bank::handle m_handle;
 		// hardware texture
-		mage::gfx::retained_texture2d* m_texture;
+		n::retained_texture2d* m_texture;
 	protected:
 		sprite_atlas(s_type w, s_type h) :
 			mage::dimensional<mage::gfx::retained_texture2d::s_type>(w, h),

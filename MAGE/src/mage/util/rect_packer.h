@@ -21,8 +21,7 @@ namespace mage
 		{
 			size_t operator()(const rect& r) const
 			{
-				const auto temp = std::hash<COORD>();
-				return temp(r.min.x) ^ temp(r.max.x) ^ (r.min.y) ^ (r.max.y);
+				return (MAGE_CAST(size_t, r.min.x) << 48) | (MAGE_CAST(size_t, r.min.y) << 32) | (MAGE_CAST(size_t, r.max.x) << 16) | r.max.y;
 			}
 		};
 		struct rect_area_comparator

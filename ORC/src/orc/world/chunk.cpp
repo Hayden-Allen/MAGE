@@ -32,23 +32,30 @@ namespace orc
 		out.ulong(m_tile_count);
 		out.write(m_grid, n::c::tiles_per_chunk);
 
-		const size_t row_count = m_tile_offsets.size();
-		// number of y coords
-		out.ulong(row_count);
-		for (const auto& row : m_tile_offsets)
+		const size_t layer_count = m_tile_offsets.size();
+		out.ulong(layer_count);
+		for(const auto& layer : m_tile_offsets)
 		{
-			// y coord
-			out.ulong(row.first);
-			// number of x coords in current row
-			out.ulong(row.second.size());
-			for (const auto& col : row.second)
+			// layer index
+			out.ulong(layer.first);
+			const size_t row_count = layer.second.size();
+			// number of y coords
+			out.ulong(row_count);
+			for (const auto& row : layer.second)
 			{
-				// x coord
-				out.ulong(col.first);
-				// sprite_batch handle
-				out.uint(col.second.first);
-				// offset in VBO
-				out.ulong(col.second.second);
+				// y coord
+				out.ulong(row.first);
+				// number of x coords in current row
+				out.ulong(row.second.size());
+				for (const auto& col : row.second)
+				{
+					// x coord
+					out.ulong(col.first);
+					// sprite_batch handle
+					out.uint(col.second.first);
+					// offset in VBO
+					out.ulong(col.second.second);
+				}
 			}
 		}
 	}
@@ -64,22 +71,30 @@ namespace orc
 		m_tile_count = in.ulong();
 		in.read(m_grid, n::c::tiles_per_chunk);
 
-		const size_t row_count = in.ulong();
-		m_tile_offsets.reserve(row_count);
-		for (size_t i = 0; i < row_count; i++)
+		const size_t layer_count = in.ulong();
+		m_tile_offsets.reserve(layer_count);
+		for(size_t i = 0; i < layer_count; i++)
 		{
-			const size_t y = in.ulong();
-			const size_t col_count = in.ulong();
-			std::unordered_map<size_t, std::pair<sprite_batch_bank::handle, size_t>> col;
-			col.reserve(col_count);
-			for (size_t j = 0; j < col_count; j++)
+			const size_t layer = in.ulong();
+			const size_t row_count = in.ulong();
+			std::unordered_map<size_t, std::unordered_map<size_t, std::pair<sprite_batch_bank::handle, size_t>>> row;
+			row.reserve(row_count);
+			for (size_t j = 0; j < row_count; j++)
 			{
-				const size_t x = in.ulong();
-				const sprite_batch_bank::handle h = in.uint();
-				const size_t off = in.ulong();
-				col.insert({ x, { h, off } });
+				const size_t y = in.ulong();
+				const size_t col_count = in.ulong();
+				std::unordered_map<size_t, std::pair<sprite_batch_bank::handle, size_t>> col;
+				col.reserve(col_count);
+				for (size_t k = 0; k < col_count; k++)
+				{
+					const size_t x = in.ulong();
+					const sprite_batch_bank::handle h = in.uint();
+					const size_t off = in.ulong();
+					col.insert({ x, { h, off } });
+				}
+				row.insert({ y, col });
 			}
-			m_tile_offsets.insert({ y, col });
+			m_tile_offsets.insert({ layer, row });
 		}
 	}
 	void chunk::set_tile_at(sprite_batch_bank& sbb, const sprite_bank& sb, const glm::uvec2& pos, size_t layer, sprite* const sprite)
@@ -126,30 +141,36 @@ namespace orc
 		}
 
 		// store new tile's index in the batch's VBO (necessary for deletion)
-		if (!m_tile_offsets.contains(pos.y))
-			m_tile_offsets.insert({ pos.y, {} });
-		if (!m_tile_offsets[pos.y].contains(pos.x))
-			m_tile_offsets[pos.y].insert({ pos.x, { 0, 0 } });
-		m_tile_offsets[pos.y][pos.x] = { added_to->get_handle(), offset };
+		if (!m_tile_offsets[layer].contains(pos.y))
+			m_tile_offsets[layer].insert({ pos.y, {} });
+		if (!m_tile_offsets[layer][pos.y].contains(pos.x))
+			m_tile_offsets[layer][pos.y].insert({ pos.x, { 0, 0 } });
+		// account for NxN tiles
+		for(size_t i = pos.y; i < pos.y + sprite->get_tile_h(); i++)
+			for(size_t j = pos.x; j < pos.x + sprite->get_tile_w(); j++)
+				m_tile_offsets[layer][i][j] = { added_to->get_handle(), offset };
 	}
 	void chunk::delete_tile_at(sprite_batch_bank& sbb, const sprite_bank& sb, const glm::uvec2& pos, size_t layer)
 	{
 		const sprite_bank::handle old = m_grid[get_index(pos, layer)];
-		// done by map::delete_tile_at
-		// delete given tile from the batch that contains it
-		// m_grid[index] = sprite_bank::s_invalid;
-		// set_grid(pos, layer, sb.get(old), false);
-		const auto& pair = m_tile_offsets[pos.y][pos.x];
+		const auto& pair = m_tile_offsets[layer][pos.y][pos.x];
 		const auto& batch = sbb.get(pair.first);
-		batch->delete_tile(sb.get(old), pair.second);
+		const sprite* const sprite = sb.get(old);
+		batch->delete_tile(sprite, pair.second);
 		// TODO properly
 		if (batch->is_empty())
 			m_batches.erase(std::find(m_batches.begin(), m_batches.end(), batch));
 
-		// remove given tile's record, because it no longer exists
-		m_tile_offsets[pos.y].erase(pos.x);
-		if (m_tile_offsets[pos.y].size() == 0)
-			m_tile_offsets.erase(pos.y);
+		// account for NxN tiles
+		for (size_t i = pos.y; i < pos.y + sprite->get_tile_h(); i++)
+		{
+			for (size_t j = pos.x; j < pos.x + sprite->get_tile_w(); j++)
+				m_tile_offsets[layer][i].erase(j);
+			if (m_tile_offsets[layer][i].empty())
+				m_tile_offsets[layer].erase(i);
+		}
+		if (m_tile_offsets[layer].empty())
+			m_tile_offsets.erase(layer);
 	}
 	sprite_bank::handle chunk::get_tile_at(const glm::uvec2& pos, size_t layer) const
 	{

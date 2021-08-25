@@ -71,7 +71,7 @@ namespace orc
 
 		if (can_set(pos, layer, sprite))
 		{
-			fill_grids(pos, { sprite->get_tile_w(), sprite->get_tile_h() }, layer, sprite->get_handle());
+			fill_grids(pos, { sprite->get_tile_w(), sprite->get_tile_h() }, layer, sprite_bank::s_placeholder);
 			m_chunks[map_pos.y][map_pos.x]->set_tile_at(*m_batches, *m_sprites, chunk_pos, layer, sprite);
 		}
 	}
@@ -87,10 +87,10 @@ namespace orc
 		const auto& [m, c] = find_root(pos, layer);
 		chunk* const chunk = m_chunks[m.y][m.x];
 		// get root tile
-		const sprite* const existing = m_sprites->get(chunk->get_tile_at(c, layer));
-		// clear the area covered by root tile
-		fill_grids(m * N_CAST(glm::uint, s) + c, { existing->get_tile_w(), existing->get_tile_h() }, layer, sprite_bank::s_invalid);
 		chunk->delete_tile_at(*m_batches, *m_sprites, c, layer);
+		// clear the area covered by root tile. This must be done after chunk::delete_tile_at because that method relies on the sprite handle in the grid
+		const sprite* const existing = m_sprites->get(chunk->get_tile_at(c, layer));
+		fill_grids(m * N_CAST(glm::uint, s) + c, { existing->get_tile_w(), existing->get_tile_h() }, layer, sprite_bank::s_invalid);
 	}
 
 
