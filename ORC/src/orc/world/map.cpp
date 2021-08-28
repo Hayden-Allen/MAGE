@@ -64,6 +64,9 @@ namespace orc
 	}
 	void map::set_tile_at(const glm::uvec2& pos, size_t layer, sprite* const sprite)
 	{
+		if (!sprite)
+			return;
+
 		constexpr size_t s = n::c::tiles_per_chunk_side;
 		const glm::uvec2 map_pos = pos / N_CAST(glm::uint, s), chunk_pos = pos % N_CAST(glm::uint, s);
 

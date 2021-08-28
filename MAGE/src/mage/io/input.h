@@ -1,5 +1,6 @@
 #pragma once
 #include "pch.h"
+#include "input_key.h"
 #include "mage/log.h"
 #include <glm/glm.hpp>
 
@@ -14,6 +15,8 @@ namespace mage
 		MAGE_DCM(input);
 	public:
 		bool is_key_pressed(int key) const { return key_pressed(key); }
+		template<typename ... args>
+		bool are_keys_pressed(const args& ... keys) const { return (is_key_pressed(keys) && ...); }
 		bool is_mouse_pressed(int button) const { return mouse_pressed(button); }
 		float get_mouse_x() const { return mouse_x(); }
 		float get_mouse_y() const { return mouse_y(); }

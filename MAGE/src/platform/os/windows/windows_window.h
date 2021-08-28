@@ -20,6 +20,20 @@ namespace mage
 		{
 			glfwSwapInterval((m_vsync = enabled) ? 1 : 0);
 		}
+		std::string open_file_dialog(const char* filters) const override
+		{
+			return file_dialog("Open File", filters, OFN_FILEMUSTEXIST | OFN_EXPLORER);
+		}
+		std::string open_multi_file_dialog(const char* filters) const override
+		{
+			return file_dialog("Open Files", filters, OFN_FILEMUSTEXIST | OFN_ALLOWMULTISELECT | OFN_EXPLORER);
+		}
+		std::string save_file_dialog(const char* filters) const override
+		{
+			return file_dialog("Save File", filters, 0);
+		}
+	protected:
+		std::string file_dialog(const char* name, const char* filters, uint32_t flags) const override;
 	private:
 		static bool s_glfw_init;
 	private:

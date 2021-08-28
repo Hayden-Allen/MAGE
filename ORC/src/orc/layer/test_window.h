@@ -20,12 +20,6 @@ namespace orc
 			ImGui::Text("%.2fms | %.2ffps", e.get_delta_time(), 1000.f / e.get_delta_time());
 			ImGui::NewLine();
 			ImGui::DragFloat("camera_rotation", &m_layer->m_camera_rotation, .01f, 0.f, 2 * glm::pi<float>());
-			ImGui::NewLine();
-			if (ImGui::Button("SAVE"))
-			{
-				mage::output_file out("res/map.orc");
-				m_layer->m_map->save(out);
-			}
 		}
 	};
 }

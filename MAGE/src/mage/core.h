@@ -12,3 +12,5 @@
 #define MAGE_CAST(T, x) static_cast<T>(x)
 #define MAGE_PUN(T, x) *(T*)&x
 #define MAGE_MTU ::mage::gfx::context::get_max_texture_units()
+#define MAGE_APP ::mage::application::get()
+#define MAGE_WIN ::mage::application::get().get_window()

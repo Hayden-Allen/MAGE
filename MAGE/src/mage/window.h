@@ -37,6 +37,9 @@ namespace mage
 	public:
 		virtual void set_vsync(bool enabled) = 0;
 		virtual void* get_native_window() const = 0;
+		virtual std::string open_file_dialog(const char* filters) const = 0;
+		virtual std::string open_multi_file_dialog(const char* filters) const = 0;
+		virtual std::string save_file_dialog(const char* filters) const = 0;
 		static window* create(const window_constructor& c);
 		const std::string& get_title() const
 		{
@@ -60,6 +63,8 @@ namespace mage
 			m_clear(c.clear),
 			m_context(nullptr)
 		{}
+	protected:
+		virtual std::string file_dialog(const char* name, const char* filters, uint32_t flags) const = 0;
 	};
 }
 

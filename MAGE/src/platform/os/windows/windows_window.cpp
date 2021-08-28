@@ -48,6 +48,32 @@ namespace mage
 
 
 
+	std::string windows_window::file_dialog(const char* name, const char* filters, uint32_t flags) const
+	{
+		OPENFILENAMEA ofn;
+		CHAR szFile[260] = { 0 };
+		ZeroMemory(&ofn, sizeof(OPENFILENAME));
+		ofn.lStructSize = sizeof(OPENFILENAME);
+		ofn.hwndOwner = glfwGetWin32Window(MAGE_CAST(GLFWwindow*, get_native_window()));
+		ofn.lpstrFile = szFile;
+		ofn.nMaxFile = sizeof(szFile);
+		ofn.lpstrFilter = filters;
+		ofn.nFilterIndex = 1;
+		ofn.lpstrTitle = name;
+		ofn.Flags = OFN_PATHMUSTEXIST | OFN_NOCHANGEDIR | flags;
+
+		if (GetOpenFileNameA(&ofn) == TRUE)
+		{
+			for (size_t i = 0; !(ofn.lpstrFile[i] == 0 && ofn.lpstrFile[i + 1] == 0); i++)
+				if (ofn.lpstrFile[i] == 0)
+					ofn.lpstrFile[i] = '|';
+			return ofn.lpstrFile;
+		}
+		return std::string();
+	}
+
+
+
 	/**
 	 * GLFW callbacks
 	 */
