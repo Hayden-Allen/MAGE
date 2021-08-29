@@ -54,7 +54,7 @@ namespace orc
 	private:
 		sprite_batch_bank::handle m_handle;
 		size_t m_max_tile_count, m_next_tile;
-		// maps a sprite_bank to its local index in this batch
+		// maps a sprite to its local index in this batch
 		std::unordered_map<sprite_bank::handle, size_t> m_sprite_indices;
 		std::unordered_map<sprite_bank::handle, size_t> m_sprite_counts;
 		std::unordered_map<sprite_atlas_bank::handle, size_t> m_atlas_counts;

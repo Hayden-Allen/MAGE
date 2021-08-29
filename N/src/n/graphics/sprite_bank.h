@@ -13,5 +13,6 @@ namespace n
 			serializable_bank<sprite, uint16_t, c::sprite_bank_size>(in)
 		{}
 		MAGE_DCM(sprite_bank);
+		~sprite_bank();
 	};
 }

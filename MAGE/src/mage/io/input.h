@@ -17,6 +17,13 @@ namespace mage
 		bool is_key_pressed(int key) const { return key_pressed(key); }
 		template<typename ... args>
 		bool are_keys_pressed(const args& ... keys) const { return (is_key_pressed(keys) && ...); }
+		bool are_keys_pressed(const std::vector<key::code>& keys) const
+		{
+			for (key::code key : keys)
+				if (!is_key_pressed(key))
+					return false;
+			return true;
+		}
 		bool is_mouse_pressed(int button) const { return mouse_pressed(button); }
 		float get_mouse_x() const { return mouse_x(); }
 		float get_mouse_y() const { return mouse_y(); }

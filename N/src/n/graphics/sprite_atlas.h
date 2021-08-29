@@ -16,7 +16,7 @@ namespace n
 		sprite_atlas(sprite_atlas_bank* const bank);
 		sprite_atlas(mage::input_file& in);
 		MAGE_DCM(sprite_atlas);
-		~sprite_atlas()
+		virtual ~sprite_atlas()
 		{
 			delete m_texture;
 		}

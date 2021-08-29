@@ -160,6 +160,7 @@
     <ClInclude Include="src\mage\graphics\render_object.h" />
     <ClInclude Include="src\mage\graphics\renderer.h" />
     <ClInclude Include="src\mage\graphics\retained_buffer.h" />
+    <ClInclude Include="src\mage\graphics\retained_texture.h" />
     <ClInclude Include="src\mage\graphics\shader.h" />
     <ClInclude Include="src\mage\graphics\shader_preprocessor.h" />
     <ClInclude Include="src\mage\graphics\shader_program.h" />
@@ -202,6 +203,7 @@
     <ClInclude Include="src\platform\graphics\gl\index_buffer.h" />
     <ClInclude Include="src\platform\graphics\gl\retained_buffer.h" />
     <ClInclude Include="src\platform\graphics\gl\retained_index_buffer.h" />
+    <ClInclude Include="src\platform\graphics\gl\retained_texture.h" />
     <ClInclude Include="src\platform\graphics\gl\retained_vertex_buffer.h" />
     <ClInclude Include="src\platform\graphics\gl\shader.h" />
     <ClInclude Include="src\platform\graphics\gl\shader_program.h" />
@@ -230,6 +232,7 @@
     <ClCompile Include="src\platform\graphics\gl\framebuffer_attachment.cpp" />
     <ClCompile Include="src\platform\graphics\gl\index_buffer.cpp" />
     <ClCompile Include="src\platform\graphics\gl\renderer.cpp" />
+    <ClCompile Include="src\platform\graphics\gl\retained_texture.cpp" />
     <ClCompile Include="src\platform\graphics\gl\shader.cpp" />
     <ClCompile Include="src\platform\graphics\gl\shader_program.cpp" />
     <ClCompile Include="src\platform\graphics\gl\texture.cpp" />

@@ -13,5 +13,6 @@ namespace n
 			serializable_bank<sprite_atlas, uint16_t, c::sprite_atlas_bank_size>(in)
 		{}
 		MAGE_DCM(sprite_atlas_bank);
+		~sprite_atlas_bank();
 	};
 }

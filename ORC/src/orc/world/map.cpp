@@ -13,8 +13,8 @@ namespace orc
 	map::~map()
 	{
 		delete m_batches;
-		delete m_atlases;
 		delete m_sprites;
+		delete m_atlases;
 		for (auto& row : m_chunks)
 			for (auto& pair : row.second)
 				delete pair.second;

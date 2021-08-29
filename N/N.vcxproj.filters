@@ -74,5 +74,7 @@
       <Filter>n\graphics</Filter>
     </ClCompile>
     <ClCompile Include="src\pch.cpp" />
+    <ClCompile Include="src\n\graphics\sprite_bank.cpp" />
+    <ClCompile Include="src\n\graphics\sprite_atlas_bank.cpp" />
   </ItemGroup>
 </Project>

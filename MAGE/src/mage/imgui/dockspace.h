@@ -19,13 +19,11 @@ namespace mage::imgui
 		std::vector<window*> m_windows;
 		std::string m_id;
 	protected:
-		dockspace(const std::string& name, const std::string& id, const std::initializer_list<window*>& windows) :
-			window(name, false, s_flags),
+		dockspace(const std::string& name, const std::string& id, const std::vector<menu>& menus, const std::initializer_list<window*>& windows) :
+			window(name, { menus, false, s_flags }),
 			m_windows(windows),
 			m_id(id)
 		{}
-	protected:
-		virtual void dockspace_run(app_draw_event& e) = 0;
 	private:
 		constexpr static ImGuiWindowFlags s_flags = ImGuiWindowFlags_MenuBar | ImGuiWindowFlags_NoDocking | ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoBringToFrontOnFocus | ImGuiWindowFlags_NoNavFocus;
 	private:
@@ -37,8 +35,6 @@ namespace mage::imgui
 				ImGuiID dockspace_id = ImGui::GetID(m_id.c_str());
 				ImGui::DockSpace(dockspace_id, ImVec2(0.f, 0.f), ImGuiDockNodeFlags_None);
 			}
-
-			dockspace_run(e);
 
 			for (window* const w : m_windows)
 				w->render(e);

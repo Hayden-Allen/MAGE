@@ -12,5 +12,6 @@ namespace orc
 			serializable_bank<sprite_atlas, uint16_t, n::c::sprite_atlas_bank_size>(in)
 		{}
 		MAGE_DCM(sprite_atlas_bank);
+		~sprite_atlas_bank();
 	};
 }

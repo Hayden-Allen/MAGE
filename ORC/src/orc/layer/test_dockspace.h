@@ -10,7 +10,7 @@ namespace orc
 	{
 	public:
 		test_dockspace(orc::layer* const layer) :
-			mage::imgui::dockspace(c::test_dockspace_title, c::test_dockspace_id,
+			mage::imgui::dockspace(c::test_dockspace_title, c::test_dockspace_id, s_menus,
 				{
 					new game_window(layer),
 					new test_window(layer)
@@ -23,38 +23,9 @@ namespace orc
 		orc::layer* m_layer;
 		mutable std::string m_last_path;
 	private:
-		void dockspace_run(mage::app_draw_event& e) override
+		void file_open()
 		{
-			if (ImGui::BeginMenuBar())
-			{
-				if (ImGui::BeginMenu("File"))
-				{
-					if (ImGui::MenuItem("Open...", "Ctrl+O"))
-						file_open();
-					else if (ImGui::MenuItem("Save", "Ctrl+S"))
-						file_save();
-					else if (ImGui::MenuItem("Save As...", "Ctrl+Shift+S"))
-						file_save_as();
-
-					ImGui::Separator();
-
-					if (ImGui::MenuItem("Exit"))
-						file_exit();
-
-					ImGui::EndMenu();
-				}
-				ImGui::EndMenuBar();
-			}
-
-			if (mage::input::get().are_keys_pressed(mage::key::O, mage::key::left_control))
-				file_open();
-			if (mage::input::get().are_keys_pressed(mage::key::S, mage::key::left_control, mage::key::left_shift))
-				file_save_as();
-			else if (mage::input::get().are_keys_pressed(mage::key::S, mage::key::left_control))
-				file_save();
-		}
-		void file_open() const
-		{
+			// TODO windows format
 			std::string file = MAGE_WIN.open_file_dialog("ORC World (*.orc)\0*.orc\0\0");
 			if (!file.empty())
 			{
@@ -71,6 +42,7 @@ namespace orc
 		}
 		void file_save_as() const
 		{
+			// TODO windows format
 			std::string file = MAGE_WIN.save_file_dialog("ORC World (*.orc)\0*.orc\0\0");
 			if (!file.empty())
 			{
@@ -83,7 +55,22 @@ namespace orc
 		}
 		void file_exit() const
 		{
+			void(window:: * fn)() = (void(window::*)())&test_dockspace::file_open;
 			mage::application::get().close();
 		}
+	private:
+		const static inline std::vector<menu> s_menus =
+		{
+			{
+				"File",
+				{
+					{ "Open...", "Ctrl+O", { mage::key::left_control, mage::key::O }, mef(&test_dockspace::file_open) },
+					// this should be before regular save because of its shortcut
+					{ "Save As...", "Ctrl+Shift+S", { mage::key::left_control, mage::key::left_shift, mage::key::S }, mef(&test_dockspace::file_save_as) },
+					{ "Save", "Ctrl+S", { mage::key::left_control, mage::key::S }, mef(&test_dockspace::file_save) },
+					{ "Exit", "Alt+F4", { mage::key::left_alt, mage::key::f4 }, mef(&test_dockspace::file_exit) }
+				}
+			}
+		};
 	};
 }

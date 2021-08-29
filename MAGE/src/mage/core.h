@@ -14,3 +14,4 @@
 #define MAGE_MTU ::mage::gfx::context::get_max_texture_units()
 #define MAGE_APP ::mage::application::get()
 #define MAGE_WIN ::mage::application::get().get_window()
+#define MAGE_IN ::mage::input::get()

@@ -13,11 +13,7 @@ namespace mage
 		constexpr static size_t s_invalid = 0, s_placeholder = 1, s_first = 2;
 	public:
 		MAGE_DCM(bank);
-		virtual ~bank()
-		{
-			for (size_t i = 0; i < COUNT; i++)
-				delete m_bank[i];
-		}
+		virtual ~bank() {}
 	public:
 		static bool is_valid(HANDLE h)
 		{
@@ -59,6 +55,8 @@ namespace mage
 
 
 
+#define MAGE_BANK_DTOR(B) \
+	B::~B() { for(size_t i = 0; i < m_next; i++) delete m_bank[i]; }
 	/**
 	 * T must also implement the serializable interface
 	 */

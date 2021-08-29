@@ -253,6 +253,8 @@
     </ClInclude>
     <ClInclude Include="src\mage\imgui\window.h" />
     <ClInclude Include="src\mage\imgui\dockspace.h" />
+    <ClInclude Include="src\mage\graphics\retained_texture.h" />
+    <ClInclude Include="src\platform\graphics\gl\retained_texture.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\mage\application.cpp">
@@ -313,5 +315,6 @@
     <ClCompile Include="src\platform\os\windows\windows_window.cpp">
       <Filter>platform\os\windows</Filter>
     </ClCompile>
+    <ClCompile Include="src\platform\graphics\gl\retained_texture.cpp" />
   </ItemGroup>
 </Project>
