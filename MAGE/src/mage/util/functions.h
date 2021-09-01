@@ -30,7 +30,7 @@ namespace mage
 		delete[] buffer;
 	}
 	template<typename T, size_t N>
-	static void arrprint(T(&arr)[N], const std::string& fmt, const std::string& sep, size_t wrap = 10)
+	static void arrprint(const T(&arr)[N], const std::string& fmt, const std::string& sep, size_t wrap = 10)
 	{
 		arrprint(N, arr, fmt, sep, wrap);
 	}
@@ -46,13 +46,13 @@ namespace mage
 		arrset(N, arr, value, offset);
 	}
 	template<typename T>
-	static void arrcopy(size_t count, T* src, T* dst)
+	static void arrcopy(size_t count, const T* const src, T* const dst)
 	{
 		for (size_t i = 0; i < count; i++)
 			dst[i] = src[i];
 	}
 	template<typename T, size_t N>
-	static void arrcopy(T(&src)[N], T* dst)
+	static void arrcopy(const T(&src)[N], T* const dst)
 	{
 		return arrcopy(N, src, dst);
 	}

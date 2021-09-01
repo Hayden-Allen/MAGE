@@ -17,10 +17,16 @@ namespace mage::gfx
 namespace mage::gl
 {
 	template<GLenum USAGE>
+	index_buffer<USAGE>::index_buffer(size_t count) :
+		mage::gl::buffer<GL_ELEMENT_ARRAY_BUFFER, USAGE, mage::gfx::index_buffer>(count)
+	{
+		MAGE_CORE_TRACE("Create IB {}", this->m_id);
+	}
+	template<GLenum USAGE>
 	index_buffer<USAGE>::index_buffer(s_type* data, size_t count) :
 		mage::gl::buffer<GL_ELEMENT_ARRAY_BUFFER, USAGE, mage::gfx::index_buffer>(count)
 	{
-		mage::gl::buffer<GL_ELEMENT_ARRAY_BUFFER, USAGE, mage::gfx::index_buffer>::write(data, count);
+	mage::gl::buffer<GL_ELEMENT_ARRAY_BUFFER, USAGE, mage::gfx::index_buffer>::write(data, count);
 		MAGE_CORE_TRACE("Create IB {}", this->m_id);
 	}
 }

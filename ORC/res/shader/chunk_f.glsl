@@ -1,6 +1,7 @@
 #version 330 core
 layout(location = 0) out vec4 o_color;
 
+// TODO don't hardcode
 uniform sampler2D u_textures[32];
 // TODO put these in a uniform buffer
 uniform int u_tex_indices[100];

@@ -30,21 +30,6 @@ namespace orc
 
 			m_camera = new n::camera(*this, 1.f * width, 1.f * height, { 0.f, 0.f, 0.f }, m_camera_rotation, .2f);
 
-
-			//sprite_bank* sb = new sprite_bank();
-			//sprite_atlas_bank* ab = new sprite_atlas_bank();
-			//// m_sprite = new sprite(sb, ab, "res/sprite/newSprite2.sprite");
-			//constexpr bool save = false;
-			//if (save)
-			//{
-			//	m_map = new map(ab, sb);
-			//}
-			//else
-			//{
-			//	mage::input_file in("res/map.orc");
-			//	m_map = new map(in);
-			//}
-			//m_sprite = new sprite(sb, ab, "res/sprite/small.sprite");
 			m_map = new map(new sprite_atlas_bank(), new sprite_bank());
 		}
 		MAGE_DCM(layer);
@@ -95,6 +80,7 @@ namespace orc
 			m_framebuffer->draw();
 			return false;
 		}
+		// TODO smooth
 		bool on_key_press(mage::key_press_event& e) override
 		{
 			glm::vec3 pos = m_camera->get_pos();

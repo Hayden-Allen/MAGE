@@ -113,8 +113,8 @@ namespace orc
 			{
 				{ N_CAST(uint8_t, pos.x), N_CAST(uint8_t, pos.y) },
 				{
-					N_CAST(uint8_t, pos.x) + sprite->get_tile_w(),
-					N_CAST(uint8_t, pos.y) + sprite->get_tile_h()
+					N_CAST(uint8_t, pos.x + sprite->get_tile_w()),
+					N_CAST(uint8_t, pos.y + sprite->get_tile_h())
 				}
 			}
 		};

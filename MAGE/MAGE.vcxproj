@@ -186,12 +186,15 @@
     <ClInclude Include="src\mage\util\color.h" />
     <ClInclude Include="src\mage\util\dimensional.h" />
     <ClInclude Include="src\mage\util\functions.h" />
+    <ClInclude Include="src\mage\util\indexed_list.h" />
     <ClInclude Include="src\mage\util\iterable.h" />
+    <ClInclude Include="src\mage\util\movable.h" />
     <ClInclude Include="src\mage\util\point.h" />
     <ClInclude Include="src\mage\util\positional.h" />
     <ClInclude Include="src\mage\util\range.h" />
     <ClInclude Include="src\mage\util\rect.h" />
     <ClInclude Include="src\mage\util\rect_packer.h" />
+    <ClInclude Include="src\mage\util\stateful.h" />
     <ClInclude Include="src\mage\util\typed.h" />
     <ClInclude Include="src\mage\window.h" />
     <ClInclude Include="src\pch.h" />

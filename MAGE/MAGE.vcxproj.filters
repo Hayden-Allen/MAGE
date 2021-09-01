@@ -255,6 +255,9 @@
     <ClInclude Include="src\mage\imgui\dockspace.h" />
     <ClInclude Include="src\mage\graphics\retained_texture.h" />
     <ClInclude Include="src\platform\graphics\gl\retained_texture.h" />
+    <ClInclude Include="src\mage\util\indexed_list.h" />
+    <ClInclude Include="src\mage\util\stateful.h" />
+    <ClInclude Include="src\mage\util\movable.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\mage\application.cpp">

@@ -9,6 +9,8 @@ namespace mage::gl
 	template<GLenum TARGET, GLenum USAGE, typename T>
 	class retained_buffer : public T
 	{
+	protected:
+		using s_type = T::s_type;
 	public:
 		MAGE_DM(retained_buffer);
 		virtual ~retained_buffer()
@@ -24,7 +26,7 @@ namespace mage::gl
 		{
 			glBindBuffer(TARGET, 0);
 		}
-		void update(T::s_type* data, size_t count, size_t offset) const override
+		void update(const s_type* const data, size_t count, size_t offset) const override
 		{
 			MAGE_CORE_ASSERT((offset + count) <= this->m_count, "Retained buffer overflow, consider resizing");
 			bind();
@@ -72,7 +74,7 @@ namespace mage::gl
 			load(in);
 		}
 	protected:
-		void write(T::s_type* data, size_t count) const override
+		void write(const s_type* const data, size_t count) const override
 		{
 			bind();
 			glBufferData(TARGET, count * sizeof(T::s_type), data, USAGE);

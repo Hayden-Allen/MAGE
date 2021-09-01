@@ -146,6 +146,10 @@
     <ClInclude Include="src\n\graphics\wrap\texture.h" />
     <ClInclude Include="src\n\graphics\wrap\vertex_array.h" />
     <ClInclude Include="src\n\world\chunk.h" />
+    <ClInclude Include="src\n\world\dynamic\dynamic.h" />
+    <ClInclude Include="src\n\world\dynamic\dynamic_batch.h" />
+    <ClInclude Include="src\n\world\dynamic\dynamic_batch_list.h" />
+    <ClInclude Include="src\n\world\dynamic\dynamic_list.h" />
     <ClInclude Include="src\n\world\sprite_batch.h" />
     <ClInclude Include="src\n\world\tile.h" />
     <ClInclude Include="src\pch.h" />
@@ -155,6 +159,10 @@
     <ClCompile Include="src\n\graphics\sprite_atlas.cpp" />
     <ClCompile Include="src\n\graphics\sprite_atlas_bank.cpp" />
     <ClCompile Include="src\n\graphics\sprite_bank.cpp" />
+    <ClCompile Include="src\n\world\dynamic\dynamic.cpp" />
+    <ClCompile Include="src\n\world\dynamic\dynamic_batch.cpp" />
+    <ClCompile Include="src\n\world\dynamic\dynamic_batch_list.cpp" />
+    <ClCompile Include="src\n\world\dynamic\dynamic_list.cpp" />
     <ClCompile Include="src\pch.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>
     </ClCompile>

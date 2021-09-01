@@ -50,12 +50,15 @@
 #include "mage/util/color.h"
 #include "mage/util/dimensional.h"
 #include "mage/util/functions.h"
+#include "mage/util/indexed_list.h"
 #include "mage/util/iterable.h"
+#include "mage/util/movable.h"
 #include "mage/util/point.h"
 #include "mage/util/positional.h"
 #include "mage/util/range.h"
 #include "mage/util/rect.h"
 #include "mage/util/rect_packer.h"
+#include "mage/util/stateful.h"
 #include "mage/util/typed.h"
 
 

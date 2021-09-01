@@ -65,6 +65,10 @@
       <Filter>n\world</Filter>
     </ClInclude>
     <ClInclude Include="src\pch.h" />
+    <ClInclude Include="src\n\world\dynamic\dynamic.h" />
+    <ClInclude Include="src\n\world\dynamic\dynamic_list.h" />
+    <ClInclude Include="src\n\world\dynamic\dynamic_batch.h" />
+    <ClInclude Include="src\n\world\dynamic\dynamic_batch_list.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\n\graphics\sprite.cpp">
@@ -76,5 +80,9 @@
     <ClCompile Include="src\pch.cpp" />
     <ClCompile Include="src\n\graphics\sprite_bank.cpp" />
     <ClCompile Include="src\n\graphics\sprite_atlas_bank.cpp" />
+    <ClCompile Include="src\n\world\dynamic\dynamic_batch_list.cpp" />
+    <ClCompile Include="src\n\world\dynamic\dynamic_batch.cpp" />
+    <ClCompile Include="src\n\world\dynamic\dynamic.cpp" />
+    <ClCompile Include="src\n\world\dynamic\dynamic_list.cpp" />
   </ItemGroup>
 </Project>

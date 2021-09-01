@@ -18,3 +18,8 @@
 #include "n/world/chunk.h"
 #include "n/world/sprite_batch.h"
 #include "n/world/tile.h"
+
+#include "n/world/dynamic/dynamic.h"
+#include "n/world/dynamic/dynamic_batch.h"
+#include "n/world/dynamic/dynamic_batch_list.h"
+#include "n/world/dynamic/dynamic_list.h"

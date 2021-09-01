@@ -1,6 +1,7 @@
 #pragma once
 #include "pch.h"
 #include "typed.h"
+#include <glm/glm.hpp>
 
 namespace mage
 {
@@ -27,6 +28,26 @@ namespace mage
 		positional(T x, T y) :
 			m_x(x),
 			m_y(y)
+		{}
+	};
+
+
+	class vector_positional
+	{
+	public:
+		const glm::vec2& get_pos() const
+		{
+			return m_pos;
+		}
+		void set_pos(const glm::vec2& pos)
+		{
+			m_pos = pos;
+		}
+	protected:
+		glm::vec2 m_pos;
+	protected:
+		vector_positional(const glm::vec2& pos) :
+			m_pos(pos)
 		{}
 	};
 }

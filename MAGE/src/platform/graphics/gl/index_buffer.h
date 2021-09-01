@@ -16,6 +16,7 @@ namespace mage::gl
 			MAGE_CORE_TRACE("Delete IB {}", this->m_id);
 		}
 	protected:
+		index_buffer(size_t count);
 		index_buffer(s_type* indices, size_t count);
 	};
 
@@ -24,6 +25,9 @@ namespace mage::gl
 	class static_index_buffer : public mage::gl::index_buffer<GL_STATIC_DRAW>
 	{
 	public:
+		static_index_buffer(size_t count) :
+			index_buffer<GL_STATIC_DRAW>(count)
+		{}
 		static_index_buffer(s_type* indices, size_t count) :
 			index_buffer<GL_STATIC_DRAW>(indices, count)
 		{}
@@ -35,6 +39,9 @@ namespace mage::gl
 	class dynamic_index_buffer : public mage::gl::index_buffer<GL_DYNAMIC_DRAW>
 	{
 	public:
+		dynamic_index_buffer(size_t count) :
+			index_buffer<GL_DYNAMIC_DRAW>(count)
+		{}
 		dynamic_index_buffer(s_type* indices, size_t count) :
 			index_buffer<GL_DYNAMIC_DRAW>(indices, count)
 		{}

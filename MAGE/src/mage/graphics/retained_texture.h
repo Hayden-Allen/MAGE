@@ -68,8 +68,6 @@ namespace mage::gfx
 				for (size_t i = 0; i < count; i++)
 					m_data[i] = (data ? data[i] : 0);
 			}
-			else
-				MAGE_CORE_WARN("retained_texture2d data was nullptr");
 		}
 	protected:
 		void check_bounds(s_type x, s_type y, s_type w, s_type h) const

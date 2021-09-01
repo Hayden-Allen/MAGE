@@ -57,4 +57,10 @@ namespace n::c
 
 	constexpr static size_t sprite_batch_base_size = tiles_per_chunk_layer;
 	constexpr static size_t sprite_batch_max_size = tiles_per_chunk;
+
+
+	constexpr static size_t dynamic_list_size = 1024;
+	// x, y, s, t, i
+	constexpr static size_t floats_per_dynamic_vertex = 5;
+	constexpr static size_t floats_per_dynamic = vertices_per_tile * floats_per_dynamic_vertex;
 }

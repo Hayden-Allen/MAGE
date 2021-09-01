@@ -24,7 +24,7 @@ namespace mage::gl
 		{
 			glBindBuffer(TARGET, 0);
 		}
-		void update(T::s_type* data, size_t count, size_t offset) const override
+		void update(const s_type* const data, size_t count, size_t offset) const override
 		{
 			bind();
 			glBufferSubData(TARGET, offset, count * sizeof(T::s_type), data);
@@ -37,7 +37,7 @@ namespace mage::gl
 			glGenBuffers(1, &this->m_id);
 		}
 	protected:
-		void write(T::s_type* data, size_t count) const override
+		void write(const s_type* const data, size_t count) const override
 		{
 			bind();
 			glBufferData(TARGET, count * sizeof(T::s_type), data, USAGE);
