@@ -1,5 +1,6 @@
 workspace "MAGE"
 	architecture "x64"
+	startproject "ORC"
 
 	configurations
 	{
