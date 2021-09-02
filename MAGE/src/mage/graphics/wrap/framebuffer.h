@@ -39,7 +39,7 @@ namespace mage
 			m_vertex_buffer = new mage::static_vertex_buffer(vertices, coga::arrlen(vertices));
 			m_vertex_array = new mage::static_vertex_array(m_vertex_buffer, { coga::gfx::shader_type::float2, coga::gfx::shader_type::float2 });
 		}
-		MAGE_DCM(framebuffer);
+		COGA_DCM(framebuffer);
 		~framebuffer()
 		{
 			delete m_vertex_array;

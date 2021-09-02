@@ -11,7 +11,7 @@ namespace mage
 		dynamic_batch_list(size_t count) : 
 			coga::indexed_list<dynamic_batch*, size_t, dynamic_batch* const, size_t>(count, nullptr)
 		{}
-		MAGE_DCM(dynamic_batch_list);
+		COGA_DCM(dynamic_batch_list);
 		~dynamic_batch_list();
 	public:
 		size_t add(dynamic_batch* const batch) override

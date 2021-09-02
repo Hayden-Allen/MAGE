@@ -9,7 +9,7 @@ namespace mage
 		uint32_t* indices = new uint32_t[count];
 		// use base pattern [0, 1, 2, 0, 2, 3] but increment by 4 for each successive tile
 		for (size_t i = 0; i < count; i++)
-			indices[i] = MAGE_CAST(uint32_t, i / c::indices_per_tile * c::vertices_per_tile + c::index_buffer_offsets[i % c::indices_per_tile]);
+			indices[i] = COGA_CAST(uint32_t, i / c::indices_per_tile * c::vertices_per_tile + c::index_buffer_offsets[i % c::indices_per_tile]);
 
 		return indices;
 	}

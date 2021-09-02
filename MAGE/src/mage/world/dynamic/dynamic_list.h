@@ -16,7 +16,7 @@ namespace mage
 		friend class dynamic_batch;
 	public:
 		dynamic_list();
-		MAGE_DCM(dynamic_list);
+		COGA_DCM(dynamic_list);
 		~dynamic_list();
 	public:
 		dynamic_list_handle add(dynamic* const d) override;

@@ -27,7 +27,7 @@ namespace mage
 		constexpr size_t count = c::indices_per_tile;
 		uint32_t indices[count];
 		for (size_t i = 0; i < count; i++)
-			indices[i] = MAGE_CAST(uint32_t, dynamic * c::vertices_per_tile + c::index_buffer_offsets[i]);
+			indices[i] = COGA_CAST(uint32_t, dynamic * c::vertices_per_tile + c::index_buffer_offsets[i]);
 		m_indices->update(indices, count, index * count);
 
 		return index;

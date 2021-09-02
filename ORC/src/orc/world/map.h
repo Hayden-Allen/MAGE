@@ -18,7 +18,7 @@ namespace orc
 		{
 			load(in);
 		}
-		MAGE_DCM(map);
+		COGA_DCM(map);
 		~map();
 	public:
 		void save(coga::output_file& out) const override;

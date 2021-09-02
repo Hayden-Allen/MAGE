@@ -13,7 +13,7 @@ namespace orc
 		// chunk(const std::vector<tile>& tiles);
 		chunk(const glm::uvec2& pos);
 		chunk(sprite_batch_bank& sbb, coga::input_file& in);
-		MAGE_DCM(chunk);
+		COGA_DCM(chunk);
 	public:
 		void save(coga::output_file& out) const override;
 		void load(sprite_batch_bank& sbb, coga::input_file& in);

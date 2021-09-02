@@ -28,7 +28,7 @@ namespace orc
 		}
 
 		// generate color data from palette indices
-		const size_t pixels_per_frame = MAGE_CAST(size_t, m_w) * m_h;
+		const size_t pixels_per_frame = COGA_CAST(size_t, m_w) * m_h;
 		uint8_t* const color_data = new uint8_t[mage::c::bytes_per_sprite_pixel * pixels_per_frame * m_frame_count];
 		for (size_t i = 0; i < m_frame_count; i++)
 		{

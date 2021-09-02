@@ -18,7 +18,7 @@ namespace orc
 		{
 			load(in);
 		}
-		MAGE_DC(sprite_batch);
+		COGA_DC(sprite_batch);
 		sprite_batch(sprite_batch&& other) noexcept :
 			mage::sprite_batch_base<mage::static_index_buffer, mage::retained_dynamic_vertex_buffer, mage::dynamic_vertex_array, sprite, sprite_bank>(std::move(other)),
 			m_handle(other.m_handle),

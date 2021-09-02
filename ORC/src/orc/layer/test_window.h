@@ -11,7 +11,7 @@ namespace orc
 			coga::imgui::window(c::test_window_title),
 			m_layer(layer)
 		{}
-		MAGE_DCM(test_window);
+		COGA_DCM(test_window);
 	private:
 		orc::layer* const m_layer;
 	private:

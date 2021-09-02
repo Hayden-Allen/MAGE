@@ -79,7 +79,7 @@ namespace mage
 				const auto& state = s->get_current_frame();
 				// get texture coord offsets for current frame
 				m_offsets[i] = state.offset;
-				m_texture_indices[i] = MAGE_CAST(int, m_atlases.at(state.bank));
+				m_texture_indices[i] = COGA_CAST(int, m_atlases.at(state.bank));
 			}
 			// bind all atlases to their pre-determined indices
 			for (const auto& pair : m_atlases)
@@ -148,7 +148,7 @@ namespace mage
 		{
 			load(in);
 		}
-		MAGE_DC(sprite_batch);
+		COGA_DC(sprite_batch);
 		sprite_batch(sprite_batch&& other) noexcept :
 			sprite_batch_base(std::move(other))
 		{}

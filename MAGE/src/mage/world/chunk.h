@@ -13,7 +13,7 @@ namespace mage
 		{
 			load(in);
 		}
-		MAGE_DCM(chunk_base);
+		COGA_DCM(chunk_base);
 		virtual ~chunk_base() {}
 	public:
 		virtual void save(coga::output_file& out) const override
@@ -51,7 +51,7 @@ namespace mage
 	class chunk final : public chunk_base<sprite_batch>
 	{
 	public:
-		MAGE_DCM(chunk);
+		COGA_DCM(chunk);
 		// batches are owned by each chunk in game builds
 		~chunk()
 		{

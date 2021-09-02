@@ -14,7 +14,7 @@ namespace mage
 		friend class dynamic_list;
 	public:
 		dynamic(dynamic_list& dl, const glm::vec2& pos, const glm::vec2& vel, float speed, const std::unordered_map<std::string, sprite*>& states, const std::string& state);
-		MAGE_DCM(dynamic);
+		COGA_DCM(dynamic);
 	public:		
 		void update(float dt)
 		{

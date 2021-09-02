@@ -19,6 +19,6 @@ namespace mage
 				delete[] samplers;
 			}
 		}
-		MAGE_DCM(shader_program);
+		COGA_DCM(shader_program);
 	};
 }

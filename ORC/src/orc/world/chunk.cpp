@@ -111,10 +111,10 @@ namespace orc
 		{
 			sprite->get_handle(),
 			{
-				{ MAGE_CAST(uint8_t, pos.x), MAGE_CAST(uint8_t, pos.y) },
+				{ COGA_CAST(uint8_t, pos.x), COGA_CAST(uint8_t, pos.y) },
 				{
-					MAGE_CAST(uint8_t, pos.x + sprite->get_tile_w()),
-					MAGE_CAST(uint8_t, pos.y + sprite->get_tile_h())
+					COGA_CAST(uint8_t, pos.x + sprite->get_tile_w()),
+					COGA_CAST(uint8_t, pos.y + sprite->get_tile_h())
 				}
 			}
 		};

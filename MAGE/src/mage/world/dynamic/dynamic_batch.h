@@ -12,7 +12,7 @@ namespace mage
 		friend class dynamic_list;
 	public:
 		dynamic_batch();
-		MAGE_DCM(dynamic_batch);
+		COGA_DCM(dynamic_batch);
 		~dynamic_batch()
 		{
 			delete m_indices;

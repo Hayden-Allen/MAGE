@@ -11,7 +11,7 @@ namespace mage
 		static_vertex_array(COGA_RAN::retained_static_vertex_buffer* const buffer, const s_desc & desc) :
 			COGA_RAN::static_vertex_array(buffer, desc)
 		{}
-		MAGE_DCM(static_vertex_array);
+		COGA_DCM(static_vertex_array);
 	};
 
 
@@ -24,6 +24,6 @@ namespace mage
 		dynamic_vertex_array(COGA_RAN::retained_dynamic_vertex_buffer* const buffer, const s_desc & desc) :
 			COGA_RAN::dynamic_vertex_array(buffer, desc)
 		{}
-		MAGE_DCM(dynamic_vertex_array);
+		COGA_DCM(dynamic_vertex_array);
 	};
 }
