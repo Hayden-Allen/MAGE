@@ -11,7 +11,15 @@
 #define MAGE_BIT(x) (1 << x)
 #define MAGE_CAST(T, x) static_cast<T>(x)
 #define MAGE_PUN(T, x) *(T*)&x
-#define MAGE_MTU ::mage::gfx::context::get_max_texture_units()
-#define MAGE_APP ::mage::application::get()
-#define MAGE_WIN ::mage::application::get().get_window()
-#define MAGE_IN ::mage::input::get()
+#define MAGE_WRAP(CLASS, PARENT, SIG, INIT, ...) \
+	class CLASS final : public COGA_RAN::PARENT { \
+	public: \
+		CLASS SIG : COGA_RAN::PARENT INIT {} \
+		MAGE_DCM(CLASS); \
+		__VA_ARGS__ };
+#define MAGE_WRAP_VIRTUAL(CLASS, PARENT, SIG, INIT, ...) \
+	class CLASS final : public COGA_RAN::PARENT { \
+	public: \
+		CLASS SIG, COGA_RAN::PARENT INIT {} \
+		MAGE_DCM(CLASS); \
+		__VA_ARGS__ };

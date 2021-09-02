@@ -22,7 +22,7 @@ namespace orc
 
 
 
-	void map::save(mage::output_file& out) const
+	void map::save(coga::output_file& out) const
 	{
 		m_batches->save(out);
 		m_sprites->save(out);
@@ -33,7 +33,7 @@ namespace orc
 			for (auto& pair : row.second)
 				pair.second->save(out);
 	}
-	void map::load(mage::input_file& in)
+	void map::load(coga::input_file& in)
 	{
 		m_batches = new sprite_batch_bank(in);
 		m_sprites = new sprite_bank(in);
@@ -48,12 +48,12 @@ namespace orc
 			if (!m_chunks.contains(pos.y))
 				m_chunks.insert({ pos.y, {} });
 			if (m_chunks[pos.y].contains(pos.x))
-				MAGE_ASSERT(false, "Overlapping chunks at <{}, {}>", pos.x, pos.y);
+				COGA_ASSERT(false, "Overlapping chunks at <{}, {}>", pos.x, pos.y);
 
 			m_chunks[pos.y][pos.x] = c;
 		}
 	}
-	void map::draw(const mage::timestep& t, const n::shader_program& shader)
+	void map::draw(const coga::timestep& t, const mage::shader_program& shader)
 	{
 		/**
 		 * TODO bad
@@ -67,8 +67,8 @@ namespace orc
 		if (!sprite)
 			return;
 
-		constexpr size_t s = n::c::tiles_per_chunk_side;
-		const glm::uvec2 map_pos = pos / N_CAST(glm::uint, s), chunk_pos = pos % N_CAST(glm::uint, s);
+		constexpr size_t s = mage::c::tiles_per_chunk_side;
+		const glm::uvec2 map_pos = pos / MAGE_CAST(glm::uint, s), chunk_pos = pos % MAGE_CAST(glm::uint, s);
 
 		try_create_chunk(map_pos);
 
@@ -80,8 +80,8 @@ namespace orc
 	}
 	void map::delete_tile_at(const glm::uvec2& pos, size_t layer)
 	{
-		constexpr size_t s = n::c::tiles_per_chunk_side;
-		const glm::uvec2 map_pos = pos / N_CAST(glm::uint, s), chunk_pos = pos % N_CAST(glm::uint, s);
+		constexpr size_t s = mage::c::tiles_per_chunk_side;
+		const glm::uvec2 map_pos = pos / MAGE_CAST(glm::uint, s), chunk_pos = pos % MAGE_CAST(glm::uint, s);
 
 		// the given tile doesn't exist
 		if (!has_chunk(map_pos) || m_chunks[map_pos.y][map_pos.x]->get_tile_at(chunk_pos, layer) == sprite_bank::s_invalid)
@@ -93,7 +93,7 @@ namespace orc
 		chunk->delete_tile_at(*m_batches, *m_sprites, c, layer);
 		// clear the area covered by root tile. This must be done after chunk::delete_tile_at because that method relies on the sprite handle in the grid
 		const sprite* const existing = m_sprites->get(chunk->get_tile_at(c, layer));
-		fill_grids(m * N_CAST(glm::uint, s) + c, { existing->get_tile_w(), existing->get_tile_h() }, layer, sprite_bank::s_invalid);
+		fill_grids(m * MAGE_CAST(glm::uint, s) + c, { existing->get_tile_w(), existing->get_tile_h() }, layer, sprite_bank::s_invalid);
 	}
 
 
@@ -101,7 +101,7 @@ namespace orc
 	std::pair<glm::uvec2, glm::uvec2> map::find_root(const glm::uvec2& pos, size_t layer) const
 	{
 		// sweep rectangle between given pos and the furthest possible point that could be part of the same tile
-		constexpr static size_t s = n::c::tiles_per_chunk_side;
+		constexpr static size_t s = mage::c::tiles_per_chunk_side;
 		for (size_t i = pos.y; i >= glm::min(0ull, pos.y - s + 1); i--)
 		{
 			for (size_t j = pos.x; j >= glm::min(0ull, pos.x - s + 1); j--)
@@ -111,15 +111,15 @@ namespace orc
 					return { map_pos, chunk_pos };
 			}
 		}
-		MAGE_ASSERT(false, "map::find_root fail");
+		COGA_ASSERT(false, "map::find_root fail");
 		return { {0, 0}, {0, 0} };
 	}
 	void map::fill_grids(const glm::uvec2& pos, const glm::uvec2& dims, size_t layer, sprite_bank::handle h)
 	{
-		constexpr size_t s = n::c::tiles_per_chunk_side;
-		for (size_t i = pos.y; i < N_CAST(size_t, pos.y) + dims.y; i++)
+		constexpr size_t s = mage::c::tiles_per_chunk_side;
+		for (size_t i = pos.y; i < MAGE_CAST(size_t, pos.y) + dims.y; i++)
 		{
-			for (size_t j = pos.x; j < N_CAST(size_t, pos.x) + dims.x; j++)
+			for (size_t j = pos.x; j < MAGE_CAST(size_t, pos.x) + dims.x; j++)
 			{
 				const glm::uvec2 map_pos = { j / s, i / s };
 				chunk* const chunk = try_create_chunk(map_pos);
@@ -129,9 +129,9 @@ namespace orc
 	}
 	bool map::can_set(const glm::uvec2& pos, size_t layer, const sprite* const sprite) const
 	{
-		constexpr size_t s = n::c::tiles_per_chunk_side;
-		for (size_t i = pos.y; i < N_CAST(size_t, pos.y) + sprite->get_tile_h(); i++)
-			for (size_t j = pos.x; j < N_CAST(size_t, pos.x) + sprite->get_tile_w(); j++)
+		constexpr size_t s = mage::c::tiles_per_chunk_side;
+		for (size_t i = pos.y; i < MAGE_CAST(size_t, pos.y) + sprite->get_tile_h(); i++)
+			for (size_t j = pos.x; j < MAGE_CAST(size_t, pos.x) + sprite->get_tile_w(); j++)
 			{
 				const glm::uvec2 map_pos = { j / s, i / s };
 				// this chunk doesn't exist yet. It will be created when the given sprite is added
@@ -153,7 +153,7 @@ namespace orc
 			m_chunks.insert({ pos.y, {} });
 		if (!m_chunks[pos.y].contains(pos.x))
 		{
-			chunk* const c = new chunk(N_CAST(glm::uint, n::c::tiles_per_chunk_side) * pos);
+			chunk* const c = new chunk(MAGE_CAST(glm::uint, mage::c::tiles_per_chunk_side) * pos);
 			m_chunks[pos.y].insert({ pos.x, c });
 			m_chunk_count++;
 			return c;

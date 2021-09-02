@@ -4,14 +4,14 @@
 
 namespace orc
 {
-	class sprite_bank final : public mage::serializable_bank<sprite, uint16_t, n::c::sprite_bank_size>
+	class sprite_bank final : public coga::serializable_bank<sprite, uint16_t, mage::c::sprite_bank_size>
 	{
 	public:
 		sprite_bank() {}
-		sprite_bank(mage::input_file& in) :
-			serializable_bank<sprite, uint16_t, n::c::sprite_bank_size>(in)
+		sprite_bank(coga::input_file& in) :
+			serializable_bank<sprite, uint16_t, mage::c::sprite_bank_size>(in)
 		{}
-		MAGE_DCM(sprite_bank);
+		COGA_DCM(sprite_bank);
 		~sprite_bank();
 	};
 }

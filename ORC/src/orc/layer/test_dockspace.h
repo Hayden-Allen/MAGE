@@ -6,11 +6,11 @@
 
 namespace orc
 {
-	class test_dockspace final : public mage::imgui::dockspace
+	class test_dockspace final : public coga::imgui::dockspace
 	{
 	public:
 		test_dockspace(orc::layer* const layer) :
-			mage::imgui::dockspace(c::test_dockspace_title, c::test_dockspace_id, s_menus,
+			coga::imgui::dockspace(c::test_dockspace_title, c::test_dockspace_id, s_menus,
 				{
 					new game_window(layer),
 					new test_window(layer)
@@ -26,7 +26,7 @@ namespace orc
 		void file_open()
 		{
 			// TODO windows format
-			std::string file = MAGE_WIN.open_file_dialog("ORC World (*.orc)\0*.orc\0\0");
+			std::string file = COGA_WIN.open_file_dialog("ORC World (*.orc)\0*.orc\0\0");
 			if (!file.empty())
 			{
 				m_layer->open_map(file);
@@ -43,7 +43,7 @@ namespace orc
 		void file_save_as() const
 		{
 			// TODO windows format
-			std::string file = MAGE_WIN.save_file_dialog("ORC World (*.orc)\0*.orc\0\0");
+			std::string file = COGA_WIN.save_file_dialog("ORC World (*.orc)\0*.orc\0\0");
 			if (!file.empty())
 			{
 				if (!file.ends_with(".orc"))
@@ -56,7 +56,7 @@ namespace orc
 		void file_exit() const
 		{
 			void(window:: * fn)() = (void(window::*)())&test_dockspace::file_open;
-			mage::application::get().close();
+			COGA_APP.close();
 		}
 	private:
 		const static inline std::vector<menu> s_menus =
@@ -64,11 +64,11 @@ namespace orc
 			{
 				"File",
 				{
-					{ "Open...", "Ctrl+O", { mage::key::left_control, mage::key::O }, mef(&test_dockspace::file_open) },
+					{ "Open...", "Ctrl+O", { coga::key::left_control, coga::key::O }, mef(&test_dockspace::file_open) },
 					// this should be before regular save because of its shortcut
-					{ "Save As...", "Ctrl+Shift+S", { mage::key::left_control, mage::key::left_shift, mage::key::S }, mef(&test_dockspace::file_save_as) },
-					{ "Save", "Ctrl+S", { mage::key::left_control, mage::key::S }, mef(&test_dockspace::file_save) },
-					{ "Exit", "Alt+F4", { mage::key::left_alt, mage::key::f4 }, mef(&test_dockspace::file_exit) }
+					{ "Save As...", "Ctrl+Shift+S", { coga::key::left_control, coga::key::left_shift, coga::key::S }, mef(&test_dockspace::file_save_as) },
+					{ "Save", "Ctrl+S", { coga::key::left_control, coga::key::S }, mef(&test_dockspace::file_save) },
+					{ "Exit", "Alt+F4", { coga::key::left_alt, coga::key::f4 }, mef(&test_dockspace::file_exit) }
 				}
 			}
 		};

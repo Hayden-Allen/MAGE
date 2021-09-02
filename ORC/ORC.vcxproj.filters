@@ -15,6 +15,9 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\orc\constants.h">
+      <Filter>orc</Filter>
+    </ClInclude>
     <ClInclude Include="src\orc\graphics\sprite.h">
       <Filter>orc\graphics</Filter>
     </ClInclude>
@@ -24,10 +27,22 @@
     <ClInclude Include="src\orc\graphics\sprite_atlas_bank.h">
       <Filter>orc\graphics</Filter>
     </ClInclude>
+    <ClInclude Include="src\orc\graphics\sprite_bank.h">
+      <Filter>orc\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="src\orc\layer\game_window.h">
+      <Filter>orc\layer</Filter>
+    </ClInclude>
     <ClInclude Include="src\orc\layer\imgui_layer.h">
       <Filter>orc\layer</Filter>
     </ClInclude>
     <ClInclude Include="src\orc\layer\layer.h">
+      <Filter>orc\layer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\orc\layer\test_dockspace.h">
+      <Filter>orc\layer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\orc\layer\test_window.h">
       <Filter>orc\layer</Filter>
     </ClInclude>
     <ClInclude Include="src\orc\world\chunk.h">
@@ -39,16 +54,13 @@
     <ClInclude Include="src\orc\world\sprite_batch.h">
       <Filter>orc\world</Filter>
     </ClInclude>
+    <ClInclude Include="src\orc\world\sprite_batch_bank.h">
+      <Filter>orc\world</Filter>
+    </ClInclude>
     <ClInclude Include="src\orc\world\sprite_batch_constructor.h">
       <Filter>orc\world</Filter>
     </ClInclude>
     <ClInclude Include="src\pch.h" />
-    <ClInclude Include="src\orc\layer\test_window.h" />
-    <ClInclude Include="src\orc\layer\test_dockspace.h" />
-    <ClInclude Include="src\orc\constants.h" />
-    <ClInclude Include="src\orc\layer\game_window.h" />
-    <ClInclude Include="src\orc\graphics\sprite_bank.h" />
-    <ClInclude Include="src\orc\world\sprite_batch_bank.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp" />
@@ -56,6 +68,12 @@
       <Filter>orc\graphics</Filter>
     </ClCompile>
     <ClCompile Include="src\orc\graphics\sprite_atlas.cpp">
+      <Filter>orc\graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="src\orc\graphics\sprite_atlas_bank.cpp">
+      <Filter>orc\graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="src\orc\graphics\sprite_bank.cpp">
       <Filter>orc\graphics</Filter>
     </ClCompile>
     <ClCompile Include="src\orc\world\chunk.cpp">
@@ -67,12 +85,12 @@
     <ClCompile Include="src\orc\world\sprite_batch.cpp">
       <Filter>orc\world</Filter>
     </ClCompile>
+    <ClCompile Include="src\orc\world\sprite_batch_bank.cpp">
+      <Filter>orc\world</Filter>
+    </ClCompile>
     <ClCompile Include="src\orc\world\sprite_batch_constructor.cpp">
       <Filter>orc\world</Filter>
     </ClCompile>
     <ClCompile Include="src\pch.cpp" />
-    <ClCompile Include="src\orc\world\sprite_batch_bank.cpp" />
-    <ClCompile Include="src\orc\graphics\sprite_bank.cpp" />
-    <ClCompile Include="src\orc\graphics\sprite_atlas_bank.cpp" />
   </ItemGroup>
 </Project>

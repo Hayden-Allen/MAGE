@@ -10,12 +10,12 @@ workspace "MAGE"
 
 outputdir = "%{cfg.buildcfg}-%{cfg.architecture}-%{cfg.system}"
 
-include "MAGE/vendor/GLFW"
-include "MAGE/vendor/glad"
-include "MAGE/vendor/imgui"
+include "COGA/vendor/GLFW"
+include "COGA/vendor/glad"
+include "COGA/vendor/imgui"
 
-project "MAGE"
-	location "MAGE"
+project "COGA"
+	location "COGA"
 	kind "StaticLib"
 	language "C++"
 	cppdialect "C++latest"
@@ -39,7 +39,7 @@ project "MAGE"
 	{
 		"%{prj.name}/",
 		"%{prj.name}/src/",
-		"%{prj.name}/src/mage/",
+		"%{prj.name}/src/coga/",
 		"%{prj.name}/vendor/spdlog/include/",
 		"%{prj.name}/vendor/GLFW/include/",
 		"%{prj.name}/vendor/glad/include/",
@@ -60,32 +60,32 @@ project "MAGE"
 
 		defines
 		{
-			"MAGE_PLATFORM_WINDOWS",
-			"MAGE_RENDER_API_GL",
-			"MAGE_RAN=mage::gl",
-			"MAGE_BUILD_LIB",
+			"COGA_PLATFORM_WINDOWS",
+			"COGA_RENDER_API_GL",
+			"COGA_RAN=coga::gl",
+			"COGA_BUILD_LIB",
 			"_CRT_SECURE_NO_WARNINGS"
 		}
 
 	filter "configurations:Debug"
-		defines "MAGE_DEBUG"
+		defines "COGA_DEBUG"
 		runtime "Debug"
 		symbols "on"
 
 	filter "configurations:Release"
-		defines "MAGE_RELEASE"
+		defines "COGA_RELEASE"
 		runtime "Release"
 		optimize "on"
 
 	filter "configurations:Dist"
-		defines "MAGE_DIST"
+		defines "COGA_DIST"
 		runtime "Release"
 		optimize "on"
 
 
 
-project "N"
-	location "N"
+project "MAGE"
+	location "MAGE"
 	kind "StaticLib"
 	language "C++"
 	cppdialect "C++latest"
@@ -109,18 +109,18 @@ project "N"
 	{
 		"%{prj.name}/",
 		"%{prj.name}/src/",
-		"MAGE/",
-		"MAGE/src/",
-		"MAGE/vendor/spdlog/include/",
-		"MAGE/vendor/GLFW/include/",
-		"MAGE/vendor/glad/include/",
-		"MAGE/vendor/imgui/",
-		"MAGE/vendor/glm"
+		"COGA/",
+		"COGA/src/",
+		"COGA/vendor/spdlog/include/",
+		"COGA/vendor/GLFW/include/",
+		"COGA/vendor/glad/include/",
+		"COGA/vendor/imgui/",
+		"COGA/vendor/glm"
 	}
 
 	links 
 	{
-		"MAGE"
+		"COGA"
 	}
 
 	filter "system:windows"
@@ -128,24 +128,24 @@ project "N"
 
 		defines
 		{
-			"MAGE_PLATFORM_WINDOWS",
-			"MAGE_RENDER_API_GL",
-			"MAGE_RAN=mage::gl",
+			"COGA_PLATFORM_WINDOWS",
+			"COGA_RENDER_API_GL",
+			"COGA_RAN=coga::gl",
 			"_CRT_SECURE_NO_WARNINGS"
 		}
 		
 	filter "configurations:Debug"
-		defines "MAGE_DEBUG"
+		defines "COGA_DEBUG"
 		runtime "Debug"
 		symbols "on"
 
 	filter "configurations:Release"
-		defines "MAGE_RELEASE"
+		defines "COGA_RELEASE"
 		runtime "Release"
 		optimize "on"
 
 	filter "configurations:Dist"
-		defines "MAGE_DIST"
+		defines "COGA_DIST"
 		runtime "Release"
 		optimize "on"
 
@@ -176,20 +176,20 @@ project "ORC"
 	{
 		"%{prj.name}/",
 		"%{prj.name}/src/",
-		"MAGE/",
-		"MAGE/src/",
-		"MAGE/vendor/spdlog/include/",
-		"MAGE/vendor/GLFW/include/",
-		"MAGE/vendor/glad/include/",
-		"MAGE/vendor/imgui/",
-		"MAGE/vendor/glm",
-		"N/src/"
+		"COGA/",
+		"COGA/src/",
+		"COGA/vendor/spdlog/include/",
+		"COGA/vendor/GLFW/include/",
+		"COGA/vendor/glad/include/",
+		"COGA/vendor/imgui/",
+		"COGA/vendor/glm",
+		"MAGE/src/"
 	}
 
 	links
 	{
 		"imgui",
-		"N"
+		"MAGE"
 	}
 
 	filter "system:windows"
@@ -197,23 +197,23 @@ project "ORC"
 
 		defines
 		{
-			"MAGE_PLATFORM_WINDOWS",
-			"MAGE_RENDER_API_GL",
-			"MAGE_RAN=mage::gl",
+			"COGA_PLATFORM_WINDOWS",
+			"COGA_RENDER_API_GL",
+			"COGA_RAN=coga::gl",
 			"_CRT_SECURE_NO_WARNINGS"
 		}
 		
 	filter "configurations:Debug"
-		defines "MAGE_DEBUG"
+		defines "COGA_DEBUG"
 		runtime "Debug"
 		symbols "on"
 
 	filter "configurations:Release"
-		defines "MAGE_RELEASE"
+		defines "COGA_RELEASE"
 		runtime "Release"
 		optimize "on"
 
 	filter "configurations:Dist"
-		defines "MAGE_DIST"
+		defines "COGA_DIST"
 		runtime "Release"
 		optimize "on"

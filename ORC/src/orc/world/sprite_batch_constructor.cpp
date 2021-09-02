@@ -4,7 +4,7 @@
 
 namespace orc
 {
-	bool sprite_batch_constructor::can_contain(const sprite_bank& sb, const n::tile& t) const
+	bool sprite_batch_constructor::can_contain(const sprite_bank& sb, const mage::tile& t) const
 	{
 		// compute the number of atlases that the given tile's sprite uses that are not already part of this batch
 		size_t additional = 0;
@@ -13,7 +13,7 @@ namespace orc
 		// if adding the required atlases for the given tile would result in this batch having more atlases than can bound at a time, reject the tile
 		return (m_atlases.size() + additional) <= get_max_atlas_count();
 	}
-	void sprite_batch_constructor::add(const sprite_bank& sb, const n::tile& t)
+	void sprite_batch_constructor::add(const sprite_bank& sb, const mage::tile& t)
 	{
 		const sprite* const sprite = sb.get(t.sprite);
 		// add any new atlases (m_atlases is a set)

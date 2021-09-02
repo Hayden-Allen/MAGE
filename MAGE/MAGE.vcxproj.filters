@@ -4,320 +4,108 @@
     <Filter Include="mage">
       <UniqueIdentifier>{1F7F9A7C-0BB6-9B0D-B4A2-8110A0B8170F}</UniqueIdentifier>
     </Filter>
-    <Filter Include="mage\event">
-      <UniqueIdentifier>{D0AB93F3-BC63-D540-256B-AE9C11427031}</UniqueIdentifier>
-    </Filter>
     <Filter Include="mage\graphics">
       <UniqueIdentifier>{5F564FA8-CB16-CBDE-9451-145C00D10FBB}</UniqueIdentifier>
     </Filter>
-    <Filter Include="mage\imgui">
-      <UniqueIdentifier>{C927D7F3-B5DF-1841-1EE7-F19C0ABEB331}</UniqueIdentifier>
+    <Filter Include="mage\graphics\wrap">
+      <UniqueIdentifier>{68DC84AE-54C0-4504-BD20-4057A9233086}</UniqueIdentifier>
     </Filter>
-    <Filter Include="mage\input">
-      <UniqueIdentifier>{7EDAD7F3-6A92-1941-D399-F29CBF70B431}</UniqueIdentifier>
+    <Filter Include="mage\world">
+      <UniqueIdentifier>{36C5D5F4-227D-1742-8B84-F09D775BB232}</UniqueIdentifier>
     </Filter>
-    <Filter Include="mage\io">
-      <UniqueIdentifier>{A6F40FB4-12D4-8E4F-1BEC-1926874AF5B0}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="mage\layer">
-      <UniqueIdentifier>{4B2707F4-37DF-4841-A0E6-219D8CBDE331}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="mage\util">
-      <UniqueIdentifier>{EC6DE6F7-58D8-9A6E-A116-4C140DC078C3}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="platform">
-      <UniqueIdentifier>{4A63C33C-3630-1E48-5F49-0CF04B7553D6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="platform\graphics">
-      <UniqueIdentifier>{EA1A7F2C-5631-7DC2-9FA8-08E40BFE4D4A}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="platform\graphics\gl">
-      <UniqueIdentifier>{4C00E25E-388F-6B28-E1AD-7F23CD1B7CCE}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="platform\os">
-      <UniqueIdentifier>{BBED55E0-27A3-CED5-B097-C8AC1C4CC5D9}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="platform\os\windows">
-      <UniqueIdentifier>{15BB2ED6-811C-0CE4-0A8A-529676EA42A3}</UniqueIdentifier>
+    <Filter Include="mage\world\dynamic">
+      <UniqueIdentifier>{CA351EE3-B619-DF38-1F7A-D98B0B7DC9BA}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\mage.h" />
-    <ClInclude Include="src\mage\application.h">
+    <ClInclude Include="src\mage\constants.h">
       <Filter>mage</Filter>
     </ClInclude>
     <ClInclude Include="src\mage\core.h">
       <Filter>mage</Filter>
     </ClInclude>
-    <ClInclude Include="src\mage\entry_point.h">
-      <Filter>mage</Filter>
-    </ClInclude>
-    <ClInclude Include="src\mage\event\app_event.h">
-      <Filter>mage\event</Filter>
-    </ClInclude>
-    <ClInclude Include="src\mage\event\event.h">
-      <Filter>mage\event</Filter>
-    </ClInclude>
-    <ClInclude Include="src\mage\event\event_handler.h">
-      <Filter>mage\event</Filter>
-    </ClInclude>
-    <ClInclude Include="src\mage\event\event_handler_container.h">
-      <Filter>mage\event</Filter>
-    </ClInclude>
-    <ClInclude Include="src\mage\event\event_propagator.h">
-      <Filter>mage\event</Filter>
-    </ClInclude>
-    <ClInclude Include="src\mage\event\key_event.h">
-      <Filter>mage\event</Filter>
-    </ClInclude>
-    <ClInclude Include="src\mage\event\mouse_event.h">
-      <Filter>mage\event</Filter>
-    </ClInclude>
-    <ClInclude Include="src\mage\event\window_event.h">
-      <Filter>mage\event</Filter>
-    </ClInclude>
-    <ClInclude Include="src\mage\graphics\buffer.h">
+    <ClInclude Include="src\mage\graphics\sprite.h">
       <Filter>mage\graphics</Filter>
     </ClInclude>
-    <ClInclude Include="src\mage\graphics\camera.h">
+    <ClInclude Include="src\mage\graphics\sprite_atlas.h">
       <Filter>mage\graphics</Filter>
     </ClInclude>
-    <ClInclude Include="src\mage\graphics\context.h">
+    <ClInclude Include="src\mage\graphics\sprite_atlas_bank.h">
       <Filter>mage\graphics</Filter>
     </ClInclude>
-    <ClInclude Include="src\mage\graphics\framebuffer.h">
+    <ClInclude Include="src\mage\graphics\sprite_atlas_coords.h">
       <Filter>mage\graphics</Filter>
     </ClInclude>
-    <ClInclude Include="src\mage\graphics\framebuffer_attachment.h">
+    <ClInclude Include="src\mage\graphics\sprite_bank.h">
       <Filter>mage\graphics</Filter>
     </ClInclude>
-    <ClInclude Include="src\mage\graphics\render_object.h">
-      <Filter>mage\graphics</Filter>
+    <ClInclude Include="src\mage\graphics\wrap\buffer.h">
+      <Filter>mage\graphics\wrap</Filter>
     </ClInclude>
-    <ClInclude Include="src\mage\graphics\renderer.h">
-      <Filter>mage\graphics</Filter>
+    <ClInclude Include="src\mage\graphics\wrap\camera.h">
+      <Filter>mage\graphics\wrap</Filter>
     </ClInclude>
-    <ClInclude Include="src\mage\graphics\retained_buffer.h">
-      <Filter>mage\graphics</Filter>
+    <ClInclude Include="src\mage\graphics\wrap\framebuffer.h">
+      <Filter>mage\graphics\wrap</Filter>
     </ClInclude>
-    <ClInclude Include="src\mage\graphics\shader.h">
-      <Filter>mage\graphics</Filter>
+    <ClInclude Include="src\mage\graphics\wrap\shader_program.h">
+      <Filter>mage\graphics\wrap</Filter>
     </ClInclude>
-    <ClInclude Include="src\mage\graphics\shader_preprocessor.h">
-      <Filter>mage\graphics</Filter>
+    <ClInclude Include="src\mage\graphics\wrap\texture.h">
+      <Filter>mage\graphics\wrap</Filter>
     </ClInclude>
-    <ClInclude Include="src\mage\graphics\shader_program.h">
-      <Filter>mage\graphics</Filter>
+    <ClInclude Include="src\mage\graphics\wrap\vertex_array.h">
+      <Filter>mage\graphics\wrap</Filter>
     </ClInclude>
-    <ClInclude Include="src\mage\graphics\shader_type.h">
-      <Filter>mage\graphics</Filter>
+    <ClInclude Include="src\mage\world\chunk.h">
+      <Filter>mage\world</Filter>
     </ClInclude>
-    <ClInclude Include="src\mage\graphics\texture.h">
-      <Filter>mage\graphics</Filter>
+    <ClInclude Include="src\mage\world\dynamic\dynamic.h">
+      <Filter>mage\world\dynamic</Filter>
     </ClInclude>
-    <ClInclude Include="src\mage\graphics\texture_options.h">
-      <Filter>mage\graphics</Filter>
+    <ClInclude Include="src\mage\world\dynamic\dynamic_batch.h">
+      <Filter>mage\world\dynamic</Filter>
     </ClInclude>
-    <ClInclude Include="src\mage\graphics\vertex_array.h">
-      <Filter>mage\graphics</Filter>
+    <ClInclude Include="src\mage\world\dynamic\dynamic_batch_list.h">
+      <Filter>mage\world\dynamic</Filter>
     </ClInclude>
-    <ClInclude Include="src\mage\graphics\vertex_array_description.h">
-      <Filter>mage\graphics</Filter>
+    <ClInclude Include="src\mage\world\dynamic\dynamic_list.h">
+      <Filter>mage\world\dynamic</Filter>
     </ClInclude>
-    <ClInclude Include="src\mage\graphics\vertex_buffer_element.h">
-      <Filter>mage\graphics</Filter>
+    <ClInclude Include="src\mage\world\sprite_batch.h">
+      <Filter>mage\world</Filter>
     </ClInclude>
-    <ClInclude Include="src\mage\imgui\layer.h">
-      <Filter>mage\imgui</Filter>
-    </ClInclude>
-    <ClInclude Include="src\mage\io\input.h">
-      <Filter>mage\input</Filter>
-    </ClInclude>
-    <ClInclude Include="src\mage\io\input_key.h">
-      <Filter>mage\input</Filter>
-    </ClInclude>
-    <ClInclude Include="src\mage\io\input_mouse.h">
-      <Filter>mage\input</Filter>
-    </ClInclude>
-    <ClInclude Include="src\mage\io\file.h">
-      <Filter>mage\io</Filter>
-    </ClInclude>
-    <ClInclude Include="src\mage\io\serializable.h">
-      <Filter>mage\io</Filter>
-    </ClInclude>
-    <ClInclude Include="src\mage\layer\layer.h">
-      <Filter>mage\layer</Filter>
-    </ClInclude>
-    <ClInclude Include="src\mage\layer\layer_stack.h">
-      <Filter>mage\layer</Filter>
-    </ClInclude>
-    <ClInclude Include="src\mage\log.h">
-      <Filter>mage</Filter>
-    </ClInclude>
-    <ClInclude Include="src\mage\timestep.h">
-      <Filter>mage</Filter>
-    </ClInclude>
-    <ClInclude Include="src\mage\util\bank.h">
-      <Filter>mage\util</Filter>
-    </ClInclude>
-    <ClInclude Include="src\mage\util\color.h">
-      <Filter>mage\util</Filter>
-    </ClInclude>
-    <ClInclude Include="src\mage\util\dimensional.h">
-      <Filter>mage\util</Filter>
-    </ClInclude>
-    <ClInclude Include="src\mage\util\functions.h">
-      <Filter>mage\util</Filter>
-    </ClInclude>
-    <ClInclude Include="src\mage\util\iterable.h">
-      <Filter>mage\util</Filter>
-    </ClInclude>
-    <ClInclude Include="src\mage\util\point.h">
-      <Filter>mage\util</Filter>
-    </ClInclude>
-    <ClInclude Include="src\mage\util\positional.h">
-      <Filter>mage\util</Filter>
-    </ClInclude>
-    <ClInclude Include="src\mage\util\range.h">
-      <Filter>mage\util</Filter>
-    </ClInclude>
-    <ClInclude Include="src\mage\util\rect.h">
-      <Filter>mage\util</Filter>
-    </ClInclude>
-    <ClInclude Include="src\mage\util\rect_packer.h">
-      <Filter>mage\util</Filter>
-    </ClInclude>
-    <ClInclude Include="src\mage\util\typed.h">
-      <Filter>mage\util</Filter>
-    </ClInclude>
-    <ClInclude Include="src\mage\window.h">
-      <Filter>mage</Filter>
+    <ClInclude Include="src\mage\world\tile.h">
+      <Filter>mage\world</Filter>
     </ClInclude>
     <ClInclude Include="src\pch.h" />
-    <ClInclude Include="src\platform\graphics\gl\buffer.h">
-      <Filter>platform\graphics\gl</Filter>
-    </ClInclude>
-    <ClInclude Include="src\platform\graphics\gl\camera.h">
-      <Filter>platform\graphics\gl</Filter>
-    </ClInclude>
-    <ClInclude Include="src\platform\graphics\gl\context.h">
-      <Filter>platform\graphics\gl</Filter>
-    </ClInclude>
-    <ClInclude Include="src\platform\graphics\gl\framebuffer.h">
-      <Filter>platform\graphics\gl</Filter>
-    </ClInclude>
-    <ClInclude Include="src\platform\graphics\gl\framebuffer_attachment.h">
-      <Filter>platform\graphics\gl</Filter>
-    </ClInclude>
-    <ClInclude Include="src\platform\graphics\gl\index_buffer.h">
-      <Filter>platform\graphics\gl</Filter>
-    </ClInclude>
-    <ClInclude Include="src\platform\graphics\gl\retained_buffer.h">
-      <Filter>platform\graphics\gl</Filter>
-    </ClInclude>
-    <ClInclude Include="src\platform\graphics\gl\retained_index_buffer.h">
-      <Filter>platform\graphics\gl</Filter>
-    </ClInclude>
-    <ClInclude Include="src\platform\graphics\gl\retained_vertex_buffer.h">
-      <Filter>platform\graphics\gl</Filter>
-    </ClInclude>
-    <ClInclude Include="src\platform\graphics\gl\shader.h">
-      <Filter>platform\graphics\gl</Filter>
-    </ClInclude>
-    <ClInclude Include="src\platform\graphics\gl\shader_program.h">
-      <Filter>platform\graphics\gl</Filter>
-    </ClInclude>
-    <ClInclude Include="src\platform\graphics\gl\shader_type.h">
-      <Filter>platform\graphics\gl</Filter>
-    </ClInclude>
-    <ClInclude Include="src\platform\graphics\gl\texture.h">
-      <Filter>platform\graphics\gl</Filter>
-    </ClInclude>
-    <ClInclude Include="src\platform\graphics\gl\texture_options.h">
-      <Filter>platform\graphics\gl</Filter>
-    </ClInclude>
-    <ClInclude Include="src\platform\graphics\gl\vertex_array.h">
-      <Filter>platform\graphics\gl</Filter>
-    </ClInclude>
-    <ClInclude Include="src\platform\graphics\gl\vertex_buffer.h">
-      <Filter>platform\graphics\gl</Filter>
-    </ClInclude>
-    <ClInclude Include="src\platform\os\windows\windows_layer.h">
-      <Filter>platform\os\windows</Filter>
-    </ClInclude>
-    <ClInclude Include="src\platform\os\windows\windows_input.h">
-      <Filter>platform\os\windows</Filter>
-    </ClInclude>
-    <ClInclude Include="src\platform\os\windows\windows_window.h">
-      <Filter>platform\os\windows</Filter>
-    </ClInclude>
-    <ClInclude Include="src\mage\imgui\window.h" />
-    <ClInclude Include="src\mage\imgui\dockspace.h" />
-    <ClInclude Include="src\mage\graphics\retained_texture.h" />
-    <ClInclude Include="src\platform\graphics\gl\retained_texture.h" />
-    <ClInclude Include="src\mage\util\indexed_list.h" />
-    <ClInclude Include="src\mage\util\stateful.h" />
-    <ClInclude Include="src\mage\util\movable.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\mage\application.cpp">
-      <Filter>mage</Filter>
+    <ClCompile Include="src\mage\graphics\sprite.cpp">
+      <Filter>mage\graphics</Filter>
     </ClCompile>
-    <ClCompile Include="src\mage\imgui\build.cpp">
-      <Filter>mage\imgui</Filter>
+    <ClCompile Include="src\mage\graphics\sprite_atlas.cpp">
+      <Filter>mage\graphics</Filter>
     </ClCompile>
-    <ClCompile Include="src\mage\imgui\layer.cpp">
-      <Filter>mage\imgui</Filter>
+    <ClCompile Include="src\mage\graphics\sprite_atlas_bank.cpp">
+      <Filter>mage\graphics</Filter>
     </ClCompile>
-    <ClCompile Include="src\mage\io\file.cpp">
-      <Filter>mage\io</Filter>
+    <ClCompile Include="src\mage\graphics\sprite_bank.cpp">
+      <Filter>mage\graphics</Filter>
     </ClCompile>
-    <ClCompile Include="src\mage\layer\layer_stack.cpp">
-      <Filter>mage\layer</Filter>
+    <ClCompile Include="src\mage\world\dynamic\dynamic.cpp">
+      <Filter>mage\world\dynamic</Filter>
     </ClCompile>
-    <ClCompile Include="src\mage\log.cpp">
-      <Filter>mage</Filter>
+    <ClCompile Include="src\mage\world\dynamic\dynamic_batch.cpp">
+      <Filter>mage\world\dynamic</Filter>
+    </ClCompile>
+    <ClCompile Include="src\mage\world\dynamic\dynamic_batch_list.cpp">
+      <Filter>mage\world\dynamic</Filter>
+    </ClCompile>
+    <ClCompile Include="src\mage\world\dynamic\dynamic_list.cpp">
+      <Filter>mage\world\dynamic</Filter>
     </ClCompile>
     <ClCompile Include="src\pch.cpp" />
-    <ClCompile Include="src\platform\graphics\gl\camera.cpp">
-      <Filter>platform\graphics\gl</Filter>
-    </ClCompile>
-    <ClCompile Include="src\platform\graphics\gl\context.cpp">
-      <Filter>platform\graphics\gl</Filter>
-    </ClCompile>
-    <ClCompile Include="src\platform\graphics\gl\framebuffer.cpp">
-      <Filter>platform\graphics\gl</Filter>
-    </ClCompile>
-    <ClCompile Include="src\platform\graphics\gl\framebuffer_attachment.cpp">
-      <Filter>platform\graphics\gl</Filter>
-    </ClCompile>
-    <ClCompile Include="src\platform\graphics\gl\index_buffer.cpp">
-      <Filter>platform\graphics\gl</Filter>
-    </ClCompile>
-    <ClCompile Include="src\platform\graphics\gl\renderer.cpp">
-      <Filter>platform\graphics\gl</Filter>
-    </ClCompile>
-    <ClCompile Include="src\platform\graphics\gl\shader.cpp">
-      <Filter>platform\graphics\gl</Filter>
-    </ClCompile>
-    <ClCompile Include="src\platform\graphics\gl\shader_program.cpp">
-      <Filter>platform\graphics\gl</Filter>
-    </ClCompile>
-    <ClCompile Include="src\platform\graphics\gl\texture.cpp">
-      <Filter>platform\graphics\gl</Filter>
-    </ClCompile>
-    <ClCompile Include="src\platform\graphics\gl\vertex_buffer.cpp">
-      <Filter>platform\graphics\gl</Filter>
-    </ClCompile>
-    <ClCompile Include="src\platform\os\windows\windows_layer.cpp">
-      <Filter>platform\os\windows</Filter>
-    </ClCompile>
-    <ClCompile Include="src\platform\os\windows\windows_input.cpp">
-      <Filter>platform\os\windows</Filter>
-    </ClCompile>
-    <ClCompile Include="src\platform\os\windows\windows_window.cpp">
-      <Filter>platform\os\windows</Filter>
-    </ClCompile>
-    <ClCompile Include="src\platform\graphics\gl\retained_texture.cpp" />
   </ItemGroup>
 </Project>

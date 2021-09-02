@@ -5,9 +5,9 @@
 namespace orc
 {
 	sprite_batch::sprite_batch(sprite_batch_bank& bank, const glm::uvec2& base) :
-		n::sprite_batch_base<n::static_index_buffer, n::retained_dynamic_vertex_buffer, n::dynamic_vertex_array, sprite, sprite_bank>(base),
+		mage::sprite_batch_base<mage::static_index_buffer, mage::retained_dynamic_vertex_buffer, mage::dynamic_vertex_array, sprite, sprite_bank>(base),
 		m_handle(bank.add(this)),
-		m_max_tile_count(n::c::sprite_batch_base_size),
+		m_max_tile_count(mage::c::sprite_batch_base_size),
 		m_next_tile(0)
 	{
 		resize();
@@ -15,9 +15,9 @@ namespace orc
 
 
 
-	void sprite_batch::save(mage::output_file& out) const
+	void sprite_batch::save(coga::output_file& out) const
 	{
-		n::sprite_batch_base<n::static_index_buffer, n::retained_dynamic_vertex_buffer, n::dynamic_vertex_array, sprite, sprite_bank>::save(out);
+		mage::sprite_batch_base<mage::static_index_buffer, mage::retained_dynamic_vertex_buffer, mage::dynamic_vertex_array, sprite, sprite_bank>::save(out);
 		out.ulong(m_max_tile_count).ulong(m_next_tile);
 
 		out.ulong(m_sprite_indices.size());
@@ -28,9 +28,9 @@ namespace orc
 
 		out.uint(m_handle);
 	}
-	void sprite_batch::load(mage::input_file& in)
+	void sprite_batch::load(coga::input_file& in)
 	{
-		n::sprite_batch_base<n::static_index_buffer, n::retained_dynamic_vertex_buffer, n::dynamic_vertex_array, sprite, sprite_bank>::load(in);
+		mage::sprite_batch_base<mage::static_index_buffer, mage::retained_dynamic_vertex_buffer, mage::dynamic_vertex_array, sprite, sprite_bank>::load(in);
 		m_max_tile_count = in.ulong();
 		m_next_tile = in.ulong();
 
@@ -40,7 +40,7 @@ namespace orc
 			m_sprite_indices.insert({ in.ushort(), in.ulong() });
 
 		create_indices();
-		m_vertices = new n::retained_dynamic_vertex_buffer(in);
+		m_vertices = new mage::retained_dynamic_vertex_buffer(in);
 		create_array();
 
 		m_handle = in.uint();
@@ -50,15 +50,15 @@ namespace orc
 		size_t additional = 0;
 		for (const auto& a : s->get_atlases())
 			additional += !m_atlases.contains(a);
-		return (m_atlases.size() + additional) <= MAGE_MTU;
+		return (m_atlases.size() + additional) <= COGA_MTU;
 	}
-	size_t sprite_batch::add_tile(const sprite_bank& sb, const n::tile& t)
+	size_t sprite_batch::add_tile(const sprite_bank& sb, const mage::tile& t)
 	{
 		// increase storage if this batch is already full
 		if (is_full())
 		{
 			m_max_tile_count *= 2;
-			MAGE_ASSERT(m_max_tile_count < n::c::sprite_batch_max_size, "Chunk is full");
+			COGA_ASSERT(m_max_tile_count < mage::c::sprite_batch_max_size, "Chunk is full");
 			resize();
 		}
 
@@ -74,10 +74,10 @@ namespace orc
 
 		// generate vertex data for new tile
 		const size_t index = get_next();
-		const size_t offset = index * n::c::floats_per_tile;
-		float vertices[n::c::floats_per_tile];
-		n::gen_tile_vertices(sb, t, vertices, m_sprite_indices[handle], m_base_coords);
-		m_vertices->update(vertices, n::c::floats_per_tile, offset);
+		const size_t offset = index * mage::c::floats_per_tile;
+		float vertices[mage::c::floats_per_tile];
+		mage::gen_tile_vertices(sb, t, vertices, m_sprite_indices[handle], m_base_coords);
+		m_vertices->update(vertices, mage::c::floats_per_tile, offset);
 
 		// only increment count if the new tile was added to a non-opening
 		m_next_tile += (index == m_next_tile);
@@ -116,15 +116,15 @@ namespace orc
 
 		create_indices();
 
-		const size_t vertex_count = m_max_tile_count * n::c::vertices_per_tile * n::c::floats_per_tile_vertex;
+		const size_t vertex_count = m_max_tile_count * mage::c::vertices_per_tile * mage::c::floats_per_tile_vertex;
 
 		if (m_vertices)
 			m_vertices->resize(vertex_count);
 		else
 		{
 			float* vertices = new float[vertex_count];
-			mage::arrset(vertex_count, vertices, 0.f);
-			m_vertices = new n::retained_dynamic_vertex_buffer(vertices, vertex_count);
+			coga::arrset(vertex_count, vertices, 0.f);
+			m_vertices = new mage::retained_dynamic_vertex_buffer(vertices, vertex_count);
 			delete[] vertices;
 		}
 
@@ -133,18 +133,18 @@ namespace orc
 	void sprite_batch::create_indices()
 	{
 		// gen new index buffer. TODO make retained?
-		uint32_t* indices = n::gen_indices(m_max_tile_count);
-		m_indices = new n::static_index_buffer(indices, m_max_tile_count);
+		uint32_t* indices = mage::gen_indices(m_max_tile_count);
+		m_indices = new mage::static_index_buffer(indices, m_max_tile_count);
 		delete[] indices;
 	}
 	void sprite_batch::create_array()
 	{
 		// (x, y), (s, t), (i)
-		m_vertex_array = new n::dynamic_vertex_array(m_vertices,
+		m_vertex_array = new mage::dynamic_vertex_array(m_vertices,
 			{
-				mage::gfx::shader_type::float2,
-				mage::gfx::shader_type::float2,
-				mage::gfx::shader_type::float1
+				coga::gfx::shader_type::float2,
+				coga::gfx::shader_type::float2,
+				coga::gfx::shader_type::float1
 			}
 		);
 	}
@@ -160,14 +160,14 @@ namespace orc
 	}
 	void sprite_batch::add_sprite(sprite_bank::handle s)
 	{
-		n::sprite_batch_base<n::static_index_buffer, n::retained_dynamic_vertex_buffer, n::dynamic_vertex_array, sprite, sprite_bank>::add_sprite(s);
+		mage::sprite_batch_base<mage::static_index_buffer, mage::retained_dynamic_vertex_buffer, mage::dynamic_vertex_array, sprite, sprite_bank>::add_sprite(s);
 		if (!m_sprite_counts.contains(s))
 			m_sprite_counts.insert({ s, 0 });
 		m_sprite_counts[s]++;
 	}
 	void sprite_batch::remove_sprite(sprite_bank::handle s)
 	{
-		n::sprite_batch_base<n::static_index_buffer, n::retained_dynamic_vertex_buffer, n::dynamic_vertex_array, sprite, sprite_bank>::remove_sprite(s);
+		mage::sprite_batch_base<mage::static_index_buffer, mage::retained_dynamic_vertex_buffer, mage::dynamic_vertex_array, sprite, sprite_bank>::remove_sprite(s);
 
 		auto& ref = m_sprite_counts[s];
 		ref--;
@@ -176,7 +176,7 @@ namespace orc
 	}
 	void sprite_batch::add_atlas(sprite_atlas_bank::handle atlas)
 	{
-		n::sprite_batch_base<n::static_index_buffer, n::retained_dynamic_vertex_buffer, n::dynamic_vertex_array, sprite, sprite_bank>::add_atlas(atlas);
+		mage::sprite_batch_base<mage::static_index_buffer, mage::retained_dynamic_vertex_buffer, mage::dynamic_vertex_array, sprite, sprite_bank>::add_atlas(atlas);
 
 		if (!m_atlas_counts.contains(atlas))
 			m_atlas_counts.insert({ atlas, 0 });
@@ -184,8 +184,8 @@ namespace orc
 	}
 	void sprite_batch::delete_tile(size_t offset)
 	{
-		float vertices[n::c::floats_per_tile] = { 0.f };
-		m_vertices->update(vertices, n::c::floats_per_tile, offset);
-		m_openings.push_back(offset / n::c::floats_per_tile);
+		float vertices[mage::c::floats_per_tile] = { 0.f };
+		m_vertices->update(vertices, mage::c::floats_per_tile, offset);
+		m_openings.push_back(offset / mage::c::floats_per_tile);
 	}
 }

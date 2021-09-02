@@ -7,12 +7,12 @@
 namespace orc
 {
 	chunk::chunk(const glm::uvec2& pos) :
-		n::chunk_base<sprite_batch>(pos),
+		mage::chunk_base<sprite_batch>(pos),
 		m_tile_count(0),
 		m_grid{ 0 }
 	{}
-	chunk::chunk(sprite_batch_bank& sbb, mage::input_file& in) :
-		n::chunk_base<sprite_batch>({ 0, 0 }),
+	chunk::chunk(sprite_batch_bank& sbb, coga::input_file& in) :
+		mage::chunk_base<sprite_batch>({ 0, 0 }),
 		m_tile_count(0),
 		m_grid{ 0 }
 	{
@@ -21,16 +21,16 @@ namespace orc
 
 
 
-	void chunk::save(mage::output_file& out) const
+	void chunk::save(coga::output_file& out) const
 	{
-		n::chunk_base<sprite_batch>::save(out);
+		mage::chunk_base<sprite_batch>::save(out);
 
 		out.ulong(m_batches.size());
 		for (const auto& batch : m_batches)
 			out.uint(batch->get_handle());
 
 		out.ulong(m_tile_count);
-		out.write(m_grid, n::c::tiles_per_chunk);
+		out.write(m_grid, mage::c::tiles_per_chunk);
 
 		const size_t layer_count = m_tile_offsets.size();
 		out.ulong(layer_count);
@@ -59,7 +59,7 @@ namespace orc
 			}
 		}
 	}
-	void chunk::load(sprite_batch_bank& sbb, mage::input_file& in)
+	void chunk::load(sprite_batch_bank& sbb, coga::input_file& in)
 	{
 		load(in);
 		
@@ -69,7 +69,7 @@ namespace orc
 			m_batches.push_back(sbb.get(in.uint()));
 		
 		m_tile_count = in.ulong();
-		in.read(m_grid, n::c::tiles_per_chunk);
+		in.read(m_grid, mage::c::tiles_per_chunk);
 
 		const size_t layer_count = in.ulong();
 		m_tile_offsets.reserve(layer_count);
@@ -107,14 +107,14 @@ namespace orc
 
 		sprite_batch* added_to = nullptr;
 		size_t offset = 0;
-		n::tile t =
+		mage::tile t =
 		{
 			sprite->get_handle(),
 			{
-				{ N_CAST(uint8_t, pos.x), N_CAST(uint8_t, pos.y) },
+				{ MAGE_CAST(uint8_t, pos.x), MAGE_CAST(uint8_t, pos.y) },
 				{
-					N_CAST(uint8_t, pos.x + sprite->get_tile_w()),
-					N_CAST(uint8_t, pos.y + sprite->get_tile_h())
+					MAGE_CAST(uint8_t, pos.x + sprite->get_tile_w()),
+					MAGE_CAST(uint8_t, pos.y + sprite->get_tile_h())
 				}
 			}
 		};
@@ -135,7 +135,7 @@ namespace orc
 		if (!added)
 		{
 			added_to = new sprite_batch(sbb, m_coords);
-			MAGE_ASSERT(added_to->can_contain(sprite), "Invalid tile");
+			COGA_ASSERT(added_to->can_contain(sprite), "Invalid tile");
 			offset = added_to->add_tile(sb, t);
 			m_batches.push_back(added_to);
 		}
@@ -181,33 +181,33 @@ namespace orc
 
 	size_t chunk::get_index(const glm::uvec2& pos, size_t layer)
 	{
-		MAGE_ASSERT(pos.x < n::c::tiles_per_chunk_side && pos.y < n::c::tiles_per_chunk_side, "Invalid chunk coordinates <{}, {}>", pos.x, pos.y);
-		MAGE_ASSERT(layer < n::c::layers_per_chunk, "Invalid chunk layer {}", layer);
+		COGA_ASSERT(pos.x < mage::c::tiles_per_chunk_side && pos.y < mage::c::tiles_per_chunk_side, "Invalid chunk coordinates <{}, {}>", pos.x, pos.y);
+		COGA_ASSERT(layer < mage::c::layers_per_chunk, "Invalid chunk layer {}", layer);
 
-		return (layer * n::c::tiles_per_chunk_layer) + (pos.y * n::c::tiles_per_chunk_side) + pos.x;
+		return (layer * mage::c::tiles_per_chunk_layer) + (pos.y * mage::c::tiles_per_chunk_side) + pos.x;
 	}
 	//void chunk::set_grid(const glm::uvec2& pos, size_t layer, const sprite* const s, bool add)
 	//{
-	//	for (size_t i = pos.y; i < N_CAST(size_t, pos.y) + s->get_tile_h(); i++)
+	//	for (size_t i = pos.y; i < MAGE_CAST(size_t, pos.y) + s->get_tile_h(); i++)
 	//	{
-	//		for (size_t j = pos.x; j < N_CAST(size_t, pos.x) + s->get_tile_w(); j++)
+	//		for (size_t j = pos.x; j < MAGE_CAST(size_t, pos.x) + s->get_tile_w(); j++)
 	//		{
 	//			// other chunks must handle this themselves
-	//			if (i >= n::c::tiles_per_chunk_side || j >= n::c::tiles_per_chunk_side)
+	//			if (i >= mage::c::tiles_per_chunk_side || j >= mage::c::tiles_per_chunk_side)
 	//				continue;
 	//			// If adding, set only the root tile to the sprite's index and make the rest placeholders. If deleting, set all to invalid.
 	//			const sprite_bank::handle index = (add ? ((i == pos.y && j == pos.x) ? s->get_handle() : sprite_bank::s_placeholder) : sprite_bank::s_invalid);
 	//			m_grid[get_index({ j, i }, layer)] = index;
-	//			MAGE_TRACE("<{}, {}> => {}", j, i, index);
+	//			COGA_TRACE("<{}, {}> => {}", j, i, index);
 	//		}
 	//	}
 	//}
 	/*void chunk::fill_grid(const glm::uvec2& pos, const glm::uvec2& dim, size_t layer, sprite_bank::handle h)
 	{
-		for (size_t i = pos.y; i < N_CAST(size_t, pos.y) + dim.y; i++)
-			for (size_t j = pos.x; j < N_CAST(size_t, pos.x) + dim.x; j++)
+		for (size_t i = pos.y; i < MAGE_CAST(size_t, pos.y) + dim.y; i++)
+			for (size_t j = pos.x; j < MAGE_CAST(size_t, pos.x) + dim.x; j++)
 			{
-				MAGE_ASSERT(j < n::c::tiles_per_chunk_side&& i < n::c::tiles_per_chunk_side, "Invalid dims");
+				COGA_ASSERT(j < mage::c::tiles_per_chunk_side&& i < mage::c::tiles_per_chunk_side, "Invalid dims");
 				m_grid[get_index({ j, i }, layer)] = h;
 			}
 	}*/

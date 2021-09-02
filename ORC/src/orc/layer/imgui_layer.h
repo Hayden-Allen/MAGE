@@ -4,22 +4,22 @@
 
 namespace orc
 {
-	class imgui_layer final : public mage::imgui::windows_layer
+	class imgui_layer final : public coga::imgui::windows_layer
 	{
 	public:
 		imgui_layer(orc::layer* const layer) :
-			mage::imgui::windows_layer("ORC ImGui"),
+			coga::imgui::windows_layer("ORC ImGui"),
 			m_test_dockspace(layer)
 		{
-			MAGE_ERROR("CREATE ORC IMGUI LAYER");
+			COGA_ERROR("CREATE ORC IMGUI LAYER");
 		}
-		MAGE_DCM(imgui_layer);
+		COGA_DCM(imgui_layer);
 		~imgui_layer()
 		{
-			MAGE_ERROR("DELETE ORC IMGUI LAYER");
+			COGA_ERROR("DELETE ORC IMGUI LAYER");
 		}
 	public:
-		bool on_app_draw(mage::app_draw_event& e) override
+		bool on_app_draw(coga::app_draw_event& e) override
 		{
 			m_test_dockspace.render(e);
 			return false;

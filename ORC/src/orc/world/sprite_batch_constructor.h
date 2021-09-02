@@ -20,15 +20,15 @@ namespace orc
 			m_tiles(other.m_tiles)
 		{}
 	public:
-		bool can_contain(const sprite_bank& sb, const n::tile& t) const;
-		void add(const sprite_bank& sb, const n::tile& t);
+		bool can_contain(const sprite_bank& sb, const mage::tile& t) const;
+		void add(const sprite_bank& sb, const mage::tile& t);
 	private:
-		std::unordered_set<n::sprite_atlas_bank::handle> m_atlases;
-		std::unordered_map<const sprite*, std::vector<n::tile>> m_tiles;
+		std::unordered_set<mage::sprite_atlas_bank::handle> m_atlases;
+		std::unordered_map<const sprite*, std::vector<mage::tile>> m_tiles;
 	private:
 		static size_t get_max_atlas_count()
 		{
-			return mage::gfx::context::get_max_texture_units();
+			return coga::gfx::context::get_max_texture_units();
 		}
 	};
 }

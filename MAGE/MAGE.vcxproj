@@ -76,8 +76,8 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
-      <PreprocessorDefinitions>MAGE_PLATFORM_WINDOWS;MAGE_RENDER_API_GL;MAGE_RAN=mage::gl;MAGE_BUILD_LIB;_CRT_SECURE_NO_WARNINGS;MAGE_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>.;src;src\mage;vendor\spdlog\include;vendor\GLFW\include;vendor\glad\include;vendor\imgui;vendor\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>COGA_PLATFORM_WINDOWS;COGA_RENDER_API_GL;COGA_RAN=coga::gl;_CRT_SECURE_NO_WARNINGS;COGA_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>.;src;..\COGA;..\COGA\src;..\COGA\vendor\spdlog\include;..\COGA\vendor\GLFW\include;..\COGA\vendor\glad\include;..\COGA\vendor\imgui;..\COGA\vendor\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
@@ -87,17 +87,14 @@
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
-    <Lib>
-      <AdditionalDependencies>opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
-    </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
-      <PreprocessorDefinitions>MAGE_PLATFORM_WINDOWS;MAGE_RENDER_API_GL;MAGE_RAN=mage::gl;MAGE_BUILD_LIB;_CRT_SECURE_NO_WARNINGS;MAGE_RELEASE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>.;src;src\mage;vendor\spdlog\include;vendor\GLFW\include;vendor\glad\include;vendor\imgui;vendor\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>COGA_PLATFORM_WINDOWS;COGA_RENDER_API_GL;COGA_RAN=coga::gl;_CRT_SECURE_NO_WARNINGS;COGA_RELEASE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>.;src;..\COGA;..\COGA\src;..\COGA\vendor\spdlog\include;..\COGA\vendor\GLFW\include;..\COGA\vendor\glad\include;..\COGA\vendor\imgui;..\COGA\vendor\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
@@ -111,17 +108,14 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
-    <Lib>
-      <AdditionalDependencies>opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
-    </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Dist|x64'">
     <ClCompile>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
-      <PreprocessorDefinitions>MAGE_PLATFORM_WINDOWS;MAGE_RENDER_API_GL;MAGE_RAN=mage::gl;MAGE_BUILD_LIB;_CRT_SECURE_NO_WARNINGS;MAGE_DIST;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>.;src;src\mage;vendor\spdlog\include;vendor\GLFW\include;vendor\glad\include;vendor\imgui;vendor\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>COGA_PLATFORM_WINDOWS;COGA_RENDER_API_GL;COGA_RAN=coga::gl;_CRT_SECURE_NO_WARNINGS;COGA_DIST;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>.;src;..\COGA;..\COGA\src;..\COGA\vendor\spdlog\include;..\COGA\vendor\GLFW\include;..\COGA\vendor\glad\include;..\COGA\vendor\imgui;..\COGA\vendor\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
@@ -135,124 +129,47 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
-    <Lib>
-      <AdditionalDependencies>opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
-    </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="src\mage.h" />
-    <ClInclude Include="src\mage\application.h" />
+    <ClInclude Include="src\mage\constants.h" />
     <ClInclude Include="src\mage\core.h" />
-    <ClInclude Include="src\mage\entry_point.h" />
-    <ClInclude Include="src\mage\event\app_event.h" />
-    <ClInclude Include="src\mage\event\event.h" />
-    <ClInclude Include="src\mage\event\event_handler.h" />
-    <ClInclude Include="src\mage\event\event_handler_container.h" />
-    <ClInclude Include="src\mage\event\event_propagator.h" />
-    <ClInclude Include="src\mage\event\key_event.h" />
-    <ClInclude Include="src\mage\event\mouse_event.h" />
-    <ClInclude Include="src\mage\event\window_event.h" />
-    <ClInclude Include="src\mage\graphics\buffer.h" />
-    <ClInclude Include="src\mage\graphics\camera.h" />
-    <ClInclude Include="src\mage\graphics\context.h" />
-    <ClInclude Include="src\mage\graphics\framebuffer.h" />
-    <ClInclude Include="src\mage\graphics\framebuffer_attachment.h" />
-    <ClInclude Include="src\mage\graphics\render_object.h" />
-    <ClInclude Include="src\mage\graphics\renderer.h" />
-    <ClInclude Include="src\mage\graphics\retained_buffer.h" />
-    <ClInclude Include="src\mage\graphics\retained_texture.h" />
-    <ClInclude Include="src\mage\graphics\shader.h" />
-    <ClInclude Include="src\mage\graphics\shader_preprocessor.h" />
-    <ClInclude Include="src\mage\graphics\shader_program.h" />
-    <ClInclude Include="src\mage\graphics\shader_type.h" />
-    <ClInclude Include="src\mage\graphics\texture.h" />
-    <ClInclude Include="src\mage\graphics\texture_options.h" />
-    <ClInclude Include="src\mage\graphics\vertex_array.h" />
-    <ClInclude Include="src\mage\graphics\vertex_array_description.h" />
-    <ClInclude Include="src\mage\graphics\vertex_buffer_element.h" />
-    <ClInclude Include="src\mage\imgui\dockspace.h" />
-    <ClInclude Include="src\mage\imgui\layer.h" />
-    <ClInclude Include="src\mage\imgui\window.h" />
-    <ClInclude Include="src\mage\io\input.h" />
-    <ClInclude Include="src\mage\io\input_key.h" />
-    <ClInclude Include="src\mage\io\input_mouse.h" />
-    <ClInclude Include="src\mage\io\file.h" />
-    <ClInclude Include="src\mage\io\serializable.h" />
-    <ClInclude Include="src\mage\layer\layer.h" />
-    <ClInclude Include="src\mage\layer\layer_stack.h" />
-    <ClInclude Include="src\mage\log.h" />
-    <ClInclude Include="src\mage\timestep.h" />
-    <ClInclude Include="src\mage\util\bank.h" />
-    <ClInclude Include="src\mage\util\color.h" />
-    <ClInclude Include="src\mage\util\dimensional.h" />
-    <ClInclude Include="src\mage\util\functions.h" />
-    <ClInclude Include="src\mage\util\indexed_list.h" />
-    <ClInclude Include="src\mage\util\iterable.h" />
-    <ClInclude Include="src\mage\util\movable.h" />
-    <ClInclude Include="src\mage\util\point.h" />
-    <ClInclude Include="src\mage\util\positional.h" />
-    <ClInclude Include="src\mage\util\range.h" />
-    <ClInclude Include="src\mage\util\rect.h" />
-    <ClInclude Include="src\mage\util\rect_packer.h" />
-    <ClInclude Include="src\mage\util\stateful.h" />
-    <ClInclude Include="src\mage\util\typed.h" />
-    <ClInclude Include="src\mage\window.h" />
+    <ClInclude Include="src\mage\graphics\sprite.h" />
+    <ClInclude Include="src\mage\graphics\sprite_atlas.h" />
+    <ClInclude Include="src\mage\graphics\sprite_atlas_bank.h" />
+    <ClInclude Include="src\mage\graphics\sprite_atlas_coords.h" />
+    <ClInclude Include="src\mage\graphics\sprite_bank.h" />
+    <ClInclude Include="src\mage\graphics\wrap\buffer.h" />
+    <ClInclude Include="src\mage\graphics\wrap\camera.h" />
+    <ClInclude Include="src\mage\graphics\wrap\framebuffer.h" />
+    <ClInclude Include="src\mage\graphics\wrap\shader_program.h" />
+    <ClInclude Include="src\mage\graphics\wrap\texture.h" />
+    <ClInclude Include="src\mage\graphics\wrap\vertex_array.h" />
+    <ClInclude Include="src\mage\world\chunk.h" />
+    <ClInclude Include="src\mage\world\dynamic\dynamic.h" />
+    <ClInclude Include="src\mage\world\dynamic\dynamic_batch.h" />
+    <ClInclude Include="src\mage\world\dynamic\dynamic_batch_list.h" />
+    <ClInclude Include="src\mage\world\dynamic\dynamic_list.h" />
+    <ClInclude Include="src\mage\world\sprite_batch.h" />
+    <ClInclude Include="src\mage\world\tile.h" />
     <ClInclude Include="src\pch.h" />
-    <ClInclude Include="src\platform\graphics\gl\buffer.h" />
-    <ClInclude Include="src\platform\graphics\gl\camera.h" />
-    <ClInclude Include="src\platform\graphics\gl\context.h" />
-    <ClInclude Include="src\platform\graphics\gl\framebuffer.h" />
-    <ClInclude Include="src\platform\graphics\gl\framebuffer_attachment.h" />
-    <ClInclude Include="src\platform\graphics\gl\index_buffer.h" />
-    <ClInclude Include="src\platform\graphics\gl\retained_buffer.h" />
-    <ClInclude Include="src\platform\graphics\gl\retained_index_buffer.h" />
-    <ClInclude Include="src\platform\graphics\gl\retained_texture.h" />
-    <ClInclude Include="src\platform\graphics\gl\retained_vertex_buffer.h" />
-    <ClInclude Include="src\platform\graphics\gl\shader.h" />
-    <ClInclude Include="src\platform\graphics\gl\shader_program.h" />
-    <ClInclude Include="src\platform\graphics\gl\shader_type.h" />
-    <ClInclude Include="src\platform\graphics\gl\texture.h" />
-    <ClInclude Include="src\platform\graphics\gl\texture_options.h" />
-    <ClInclude Include="src\platform\graphics\gl\vertex_array.h" />
-    <ClInclude Include="src\platform\graphics\gl\vertex_buffer.h" />
-    <ClInclude Include="src\platform\os\windows\windows_layer.h" />
-    <ClInclude Include="src\platform\os\windows\windows_input.h" />
-    <ClInclude Include="src\platform\os\windows\windows_window.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\mage\application.cpp" />
-    <ClCompile Include="src\mage\imgui\build.cpp" />
-    <ClCompile Include="src\mage\imgui\layer.cpp" />
-    <ClCompile Include="src\mage\io\file.cpp" />
-    <ClCompile Include="src\mage\layer\layer_stack.cpp" />
-    <ClCompile Include="src\mage\log.cpp" />
+    <ClCompile Include="src\mage\graphics\sprite.cpp" />
+    <ClCompile Include="src\mage\graphics\sprite_atlas.cpp" />
+    <ClCompile Include="src\mage\graphics\sprite_atlas_bank.cpp" />
+    <ClCompile Include="src\mage\graphics\sprite_bank.cpp" />
+    <ClCompile Include="src\mage\world\dynamic\dynamic.cpp" />
+    <ClCompile Include="src\mage\world\dynamic\dynamic_batch.cpp" />
+    <ClCompile Include="src\mage\world\dynamic\dynamic_batch_list.cpp" />
+    <ClCompile Include="src\mage\world\dynamic\dynamic_list.cpp" />
     <ClCompile Include="src\pch.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="src\platform\graphics\gl\camera.cpp" />
-    <ClCompile Include="src\platform\graphics\gl\context.cpp" />
-    <ClCompile Include="src\platform\graphics\gl\framebuffer.cpp" />
-    <ClCompile Include="src\platform\graphics\gl\framebuffer_attachment.cpp" />
-    <ClCompile Include="src\platform\graphics\gl\index_buffer.cpp" />
-    <ClCompile Include="src\platform\graphics\gl\renderer.cpp" />
-    <ClCompile Include="src\platform\graphics\gl\retained_texture.cpp" />
-    <ClCompile Include="src\platform\graphics\gl\shader.cpp" />
-    <ClCompile Include="src\platform\graphics\gl\shader_program.cpp" />
-    <ClCompile Include="src\platform\graphics\gl\texture.cpp" />
-    <ClCompile Include="src\platform\graphics\gl\vertex_buffer.cpp" />
-    <ClCompile Include="src\platform\os\windows\windows_layer.cpp" />
-    <ClCompile Include="src\platform\os\windows\windows_input.cpp" />
-    <ClCompile Include="src\platform\os\windows\windows_window.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="vendor\GLFW\GLFW.vcxproj">
-      <Project>{154B857C-0182-860D-AA6E-6C109684020F}</Project>
-    </ProjectReference>
-    <ProjectReference Include="vendor\glad\glad.vcxproj">
-      <Project>{DD62977C-C999-980D-7286-7E105E9C140F}</Project>
-    </ProjectReference>
-    <ProjectReference Include="vendor\imgui\imgui.vcxproj">
-      <Project>{0098A80F-6CAC-D0C0-352E-7420A101CDF1}</Project>
+    <ProjectReference Include="..\COGA\COGA.vcxproj">
+      <Project>{5F26837C-4B5D-840D-F449-6A10E05F000F}</Project>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

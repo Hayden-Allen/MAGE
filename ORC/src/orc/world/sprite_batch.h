@@ -9,18 +9,18 @@ namespace orc
 {
 	class sprite;
 
-	class sprite_batch final : public n::sprite_batch_base<n::static_index_buffer, n::retained_dynamic_vertex_buffer, n::dynamic_vertex_array, sprite, sprite_bank>
+	class sprite_batch final : public mage::sprite_batch_base<mage::static_index_buffer, mage::retained_dynamic_vertex_buffer, mage::dynamic_vertex_array, sprite, sprite_bank>
 	{
 	public:
 		sprite_batch(sprite_batch_bank& bank, const glm::uvec2& base);
-		sprite_batch(mage::input_file& in) :
-			n::sprite_batch_base<n::static_index_buffer, n::retained_dynamic_vertex_buffer, n::dynamic_vertex_array, sprite, sprite_bank>({ 0, 0 })
+		sprite_batch(coga::input_file& in) :
+			mage::sprite_batch_base<mage::static_index_buffer, mage::retained_dynamic_vertex_buffer, mage::dynamic_vertex_array, sprite, sprite_bank>({ 0, 0 })
 		{
 			load(in);
 		}
-		N_DC(sprite_batch);
+		MAGE_DC(sprite_batch);
 		sprite_batch(sprite_batch&& other) noexcept :
-			n::sprite_batch_base<n::static_index_buffer, n::retained_dynamic_vertex_buffer, n::dynamic_vertex_array, sprite, sprite_bank>(std::move(other)),
+			mage::sprite_batch_base<mage::static_index_buffer, mage::retained_dynamic_vertex_buffer, mage::dynamic_vertex_array, sprite, sprite_bank>(std::move(other)),
 			m_handle(other.m_handle),
 			m_max_tile_count(other.m_max_tile_count),
 			m_next_tile(other.m_next_tile),
@@ -30,14 +30,14 @@ namespace orc
 			m_openings(std::move(other.m_openings))
 		{}
 	public:
-		void save(mage::output_file& out) const override;
-		void load(mage::input_file& in) override;
+		void save(coga::output_file& out) const override;
+		void load(coga::input_file& in) override;
 		bool can_contain(const sprite* const s) const override;
-		size_t add_tile(const sprite_bank& sb, const n::tile& t) override;
+		size_t add_tile(const sprite_bank& sb, const mage::tile& t) override;
 		void delete_tile(const sprite* const s, size_t offset);
-		void draw(const mage::timestep& t, sprite_bank* const sb, const sprite_atlas_bank* const ab, const n::shader_program& shader)
+		void draw(const coga::timestep& t, sprite_bank* const sb, const sprite_atlas_bank* const ab, const mage::shader_program& shader)
 		{
-			n::sprite_batch_base<n::static_index_buffer, n::retained_dynamic_vertex_buffer, n::dynamic_vertex_array, sprite, sprite_bank>::draw(t, sb, ab, shader);
+			mage::sprite_batch_base<mage::static_index_buffer, mage::retained_dynamic_vertex_buffer, mage::dynamic_vertex_array, sprite, sprite_bank>::draw(t, sb, ab, shader);
 		}
 		bool is_empty() const
 		{
