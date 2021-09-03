@@ -14,6 +14,7 @@ outputdir = "%{cfg.buildcfg}-%{cfg.architecture}-%{cfg.system}"
 include "COGA/vendor/GLFW"
 include "COGA/vendor/glad"
 include "COGA/vendor/imgui"
+include "MAGE/vendor/hasl"
 
 project "COGA"
 	location "COGA"

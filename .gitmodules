@@ -10,3 +10,6 @@
 [submodule "MAGE/vendor/glm"]
 	path = MAGE/vendor/glm
 	url = https://github.com/g-truc/glm
+[submodule "MAGE/vendor/hasl"]
+	path = MAGE/vendor/hasl
+	url = https://github.com/Hayden-Allen/hasl.git
