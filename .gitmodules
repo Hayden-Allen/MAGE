@@ -13,3 +13,6 @@
 [submodule "MAGE/vendor/hasl"]
 	path = MAGE/vendor/hasl
 	url = https://github.com/Hayden-Allen/hasl.git
+[submodule "MAGE/vendor/COGA"]
+	path = MAGE/vendor/COGA
+	url = https://github.com/Hayden-Allen/COGA.git

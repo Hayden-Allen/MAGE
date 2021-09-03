@@ -1,6 +1,5 @@
 #pragma once
-#include <coga.h>
-#include "coga/entry_point.h"
 #include <mage.h>
-#include <imgui.h>
+// must be included after mage.h because that includes coga.h, which this needs
+#include <coga/entry_point.h>
 #include "orc/constants.h"

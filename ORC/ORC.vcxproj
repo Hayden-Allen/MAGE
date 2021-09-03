@@ -80,7 +80,7 @@
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>COGA_PLATFORM_WINDOWS;COGA_RENDER_API_GL;COGA_RAN=coga::gl;_CRT_SECURE_NO_WARNINGS;COGA_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>.;src;..\COGA;..\COGA\src;..\COGA\vendor\spdlog\include;..\COGA\vendor\GLFW\include;..\COGA\vendor\glad\include;..\COGA\vendor\imgui;..\COGA\vendor\glm;..\MAGE\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;src;..\MAGE;..\MAGE\src;..\MAGE\vendor\COGA;..\MAGE\vendor\COGA\src;..\MAGE\vendor\COGA\vendor\spdlog\include;..\MAGE\vendor\COGA\vendor\GLFW\include;..\MAGE\vendor\COGA\vendor\glad\include;..\MAGE\vendor\COGA\vendor\imgui;..\MAGE\vendor\COGA\vendor\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
@@ -97,7 +97,7 @@
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>COGA_PLATFORM_WINDOWS;COGA_RENDER_API_GL;COGA_RAN=coga::gl;_CRT_SECURE_NO_WARNINGS;COGA_RELEASE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>.;src;..\COGA;..\COGA\src;..\COGA\vendor\spdlog\include;..\COGA\vendor\GLFW\include;..\COGA\vendor\glad\include;..\COGA\vendor\imgui;..\COGA\vendor\glm;..\MAGE\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;src;..\MAGE;..\MAGE\src;..\MAGE\vendor\COGA;..\MAGE\vendor\COGA\src;..\MAGE\vendor\COGA\vendor\spdlog\include;..\MAGE\vendor\COGA\vendor\GLFW\include;..\MAGE\vendor\COGA\vendor\glad\include;..\MAGE\vendor\COGA\vendor\imgui;..\MAGE\vendor\COGA\vendor\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
@@ -118,7 +118,7 @@
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>COGA_PLATFORM_WINDOWS;COGA_RENDER_API_GL;COGA_RAN=coga::gl;_CRT_SECURE_NO_WARNINGS;COGA_DIST;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>.;src;..\COGA;..\COGA\src;..\COGA\vendor\spdlog\include;..\COGA\vendor\GLFW\include;..\COGA\vendor\glad\include;..\COGA\vendor\imgui;..\COGA\vendor\glm;..\MAGE\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;src;..\MAGE;..\MAGE\src;..\MAGE\vendor\COGA;..\MAGE\vendor\COGA\src;..\MAGE\vendor\COGA\vendor\spdlog\include;..\MAGE\vendor\COGA\vendor\GLFW\include;..\MAGE\vendor\COGA\vendor\glad\include;..\MAGE\vendor\COGA\vendor\imgui;..\MAGE\vendor\COGA\vendor\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
@@ -167,9 +167,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\COGA\vendor\imgui\imgui.vcxproj">
-      <Project>{0098A80F-6CAC-D0C0-352E-7420A101CDF1}</Project>
-    </ProjectReference>
     <ProjectReference Include="..\MAGE\MAGE.vcxproj">
       <Project>{9F66887C-8B9D-890D-348A-6F1020A0050F}</Project>
     </ProjectReference>
