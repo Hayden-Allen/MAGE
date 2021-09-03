@@ -20,6 +20,7 @@ project "MAGE"
 	language "C++"
 	cppdialect "C++latest"
 	staticruntime "on"
+	flags "MultiProcessorCompile"
 	
 	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
@@ -82,12 +83,16 @@ project "MAGE"
 
 
 
+
+
+
 project "ORC"
 	location "ORC"
 	kind "ConsoleApp"
 	language "C++"
 	cppdialect "C++latest"
 	staticruntime "on"
+	flags "MultiProcessorCompile"
 
 	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
