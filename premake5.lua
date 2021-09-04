@@ -46,7 +46,8 @@ project "MAGE"
 		"MAGE/vendor/COGA/vendor/GLFW/include/",
 		"MAGE/vendor/COGA/vendor/glad/include/",
 		"MAGE/vendor/COGA/vendor/imgui/",
-		"MAGE/vendor/COGA/vendor/glm"
+		"MAGE/vendor/COGA/vendor/glm",
+		"MAGE/vendor/HASL/src/"
 	}
 
 	links 
@@ -120,7 +121,8 @@ project "ORC"
 		"MAGE/vendor/COGA/vendor/GLFW/include/",
 		"MAGE/vendor/COGA/vendor/glad/include/",
 		"MAGE/vendor/COGA/vendor/imgui/",
-		"MAGE/vendor/COGA/vendor/glm"
+		"MAGE/vendor/COGA/vendor/glm",
+		"MAGE/vendor/HASL/src/"
 	}
 
 	links

@@ -1,5 +1,4 @@
 #pragma once
-#include "pch.h"
 
 namespace mage::c
 {
@@ -22,6 +21,8 @@ namespace mage::c
 	constexpr static size_t sprite_bank_size = 65536;
 	// this should be WAY more than any game could possibly use, but technically each sprite is allowed to use up to a full atlas (as defined implicitly by sprite_atlas_size), so that case needs to be accounted for.
 	constexpr static size_t sprite_atlas_bank_size = 65536;
+	// Each chunk has 6 layers. Each layer is represented by AT MOST a single sprite batch. Therefore, a map can contain up to 512 * 512 chunks.
+	constexpr static size_t sprite_batch_bank_size = 512 * 512 * 6;
 
 
 	// a sampler2D array in GLSL to which textures are bound
@@ -63,4 +64,9 @@ namespace mage::c
 	// x, y, s, t, i
 	constexpr static size_t floats_per_dynamic_vertex = 5;
 	constexpr static size_t floats_per_dynamic = vertices_per_tile * floats_per_dynamic_vertex;
+
+
+	// 4kb each
+	constexpr static size_t script_stack_size = 4096 / (sizeof(uint64_t) / sizeof(uint8_t));
+	constexpr static size_t script_ram_size = 4096;
 }

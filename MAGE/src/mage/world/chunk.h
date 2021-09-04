@@ -9,10 +9,6 @@ namespace mage
 	class chunk_base : public coga::serializable
 	{
 	public:
-		chunk_base(coga::input_file& in)
-		{
-			load(in);
-		}
 		COGA_DCM(chunk_base);
 		virtual ~chunk_base() {}
 	public:
@@ -41,6 +37,9 @@ namespace mage
 		std::vector<T*> m_batches;
 		glm::uvec2 m_coords;
 	protected:
+		chunk_base() :
+			m_coords({0.f, 0.f})
+		{}
 		chunk_base(const glm::uvec2& pos) :
 			m_coords(pos)
 		{}
@@ -51,6 +50,10 @@ namespace mage
 	class chunk final : public chunk_base<sprite_batch>
 	{
 	public:
+		chunk(coga::input_file& in)
+		{
+			load(in);
+		}
 		COGA_DCM(chunk);
 		// batches are owned by each chunk in game builds
 		~chunk()
@@ -63,10 +66,10 @@ namespace mage
 		{
 			COGA_ASSERT(false, "Cannot save an mage::chunk");
 		}
+		// load a built orc::chunk
 		virtual void load(coga::input_file& in) override
 		{
-			m_coords.x = in.uint();
-			m_coords.y = in.uint();
+			chunk_base<sprite_batch>::load(in);
 
 			const size_t batch_count = in.ulong();
 			m_batches.reserve(batch_count);

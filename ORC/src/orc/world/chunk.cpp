@@ -19,8 +19,17 @@ namespace orc
 		load(sbb, in);
 	}
 
+	
 
+	// TODO must line up with mage::chunk::load
+	/*void chunk::build(coga::output_file& out) const
+	{
+		mage::chunk_base<sprite_batch>::save(out);
 
+		out.ulong(m_batches.size());
+		for (const auto& batch : m_batches)
+			batch->save(out);
+	}*/
 	void chunk::save(coga::output_file& out) const
 	{
 		mage::chunk_base<sprite_batch>::save(out);

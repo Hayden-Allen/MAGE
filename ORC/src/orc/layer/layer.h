@@ -15,6 +15,8 @@ namespace orc
 	public:
 		layer() :
 			coga::layer("ORC"),
+			m_vm(new mage::sasm::vm()),
+			m_script(new mage::sasm::script("res/script/test.sasm", m_vm)),
 			m_map(nullptr),
 			m_shader_program(nullptr),
 			m_camera(nullptr),
@@ -35,6 +37,8 @@ namespace orc
 		~layer()
 		{
 			COGA_ERROR("DELETE ORC LAYER");
+			delete m_vm;
+			delete m_script;
 			delete m_map;
 			delete m_framebuffer;
 			delete m_shader_program;
@@ -55,6 +59,8 @@ namespace orc
 	private:
 		constexpr static float s_camera_zoom_delta = .01f, s_camera_zoom_min = .01f, s_camera_zoom_max = 2.f, s_camera_move_delta = .1f;
 	private:
+		mage::sasm::vm* m_vm;
+		mage::sasm::script* m_script;
 		map* m_map;
 		mage::framebuffer* m_framebuffer;
 		mage::shader_program* m_shader_program;
@@ -77,6 +83,12 @@ namespace orc
 
 			// draw framebuffer onto screen
 			m_framebuffer->draw();
+
+
+			hasl::sasm::script_runtime rt = { e.get_time(), e.get_delta_time(), nullptr, {} };
+			m_vm->run(*m_script, rt, { 0.f, 0.f });
+
+
 			return false;
 		}
 		// TODO smooth

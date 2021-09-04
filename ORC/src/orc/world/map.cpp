@@ -5,23 +5,27 @@
 namespace orc
 {
 	map::map(sprite_atlas_bank* const atlases, sprite_bank* const sprites) :
-		m_batches(new sprite_batch_bank()),
-		m_atlases(atlases),
-		m_sprites(sprites),
-		m_chunk_count(0)
+		mage::map_base<sprite_atlas_bank, sprite_bank, sprite_batch_bank, chunk>(atlases, sprites),
+		m_batches(new sprite_batch_bank())
 	{}
 	map::~map()
 	{
 		delete m_batches;
-		delete m_sprites;
-		delete m_atlases;
-		for (auto& row : m_chunks)
-			for (auto& pair : row.second)
-				delete pair.second;
 	}
 
 
 
+	// TODO must line up with mage::map::load
+	/*void map::build(coga::output_file& out) const
+	{
+		m_sprites->save(out);
+		m_atlases->save(out);
+
+		out.ulong(m_chunk_count);
+		for (auto& row : m_chunks)
+			for (auto& pair : row.second)
+				pair.second->save(out);
+	}*/
 	void map::save(coga::output_file& out) const
 	{
 		m_batches->save(out);
@@ -36,10 +40,9 @@ namespace orc
 	void map::load(coga::input_file& in)
 	{
 		m_batches = new sprite_batch_bank(in);
-		m_sprites = new sprite_bank(in);
-		m_atlases = new sprite_atlas_bank(in);
+		mage::map_base<sprite_atlas_bank, sprite_bank, sprite_batch_bank, chunk>::load(in);
 
-		m_chunk_count = in.ulong();
+
 		for (size_t i = 0; i < m_chunk_count; i++)
 		{
 			chunk* c = new chunk(*m_batches, in);
@@ -52,15 +55,6 @@ namespace orc
 
 			m_chunks[pos.y][pos.x] = c;
 		}
-	}
-	void map::draw(const coga::timestep& t, const mage::shader_program& shader)
-	{
-		/**
-		 * TODO bad
-		 */
-		for (auto& row : m_chunks)
-			for (auto& pair : row.second)
-				pair.second->draw(t, m_sprites, m_atlases, shader);
 	}
 	void map::set_tile_at(const glm::uvec2& pos, size_t layer, sprite* const sprite)
 	{

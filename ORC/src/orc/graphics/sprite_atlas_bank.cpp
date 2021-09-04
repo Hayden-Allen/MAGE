@@ -4,5 +4,5 @@
 
 namespace orc
 {
-	MAGE_BANK_DTOR(sprite_atlas_bank);
+	COGA_BANK_DTOR(sprite_atlas_bank);
 }

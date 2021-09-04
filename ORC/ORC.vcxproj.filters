@@ -93,4 +93,7 @@
     </ClCompile>
     <ClCompile Include="src\pch.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="res\script\test.sasm" />
+  </ItemGroup>
 </Project>

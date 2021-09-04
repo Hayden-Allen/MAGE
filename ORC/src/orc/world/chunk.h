@@ -10,7 +10,6 @@ namespace orc
 	{
 		friend class map;
 	public:
-		// chunk(const std::vector<tile>& tiles);
 		chunk(const glm::uvec2& pos);
 		chunk(sprite_batch_bank& sbb, coga::input_file& in);
 		COGA_DCM(chunk);

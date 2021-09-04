@@ -15,8 +15,13 @@
 #include "mage/graphics/wrap/texture.h"
 #include "mage/graphics/wrap/vertex_array.h"
 
+#include "mage/script/wrap/script.h"
+#include "mage/script/wrap/vm.h"
+
 #include "mage/world/chunk.h"
+#include "mage/world/map.h"
 #include "mage/world/sprite_batch.h"
+#include "mage/world/sprite_batch_bank.h"
 #include "mage/world/tile.h"
 
 #include "mage/world/dynamic/dynamic.h"

@@ -9,9 +9,8 @@ namespace orc
 	class chunk;
 	class sprite;
 
-	class map final : public coga::serializable
+	class map final : public mage::map_base<sprite_atlas_bank, sprite_bank, sprite_batch_bank, chunk>
 	{
-		typedef std::unordered_map<size_t, std::unordered_map<size_t, chunk*>> grid;
 	public:
 		map(sprite_atlas_bank* const atlases, sprite_bank* const sprites);
 		map(coga::input_file& in)
@@ -23,15 +22,10 @@ namespace orc
 	public:
 		void save(coga::output_file& out) const override;
 		void load(coga::input_file& in) override;
-		void draw(const coga::timestep& t, const mage::shader_program& shader);
 		void set_tile_at(const glm::uvec2& pos, size_t layer, sprite* const sprite);
 		void delete_tile_at(const glm::uvec2& pos, size_t layer);
 	private:
 		sprite_batch_bank* m_batches;
-		sprite_atlas_bank* m_atlases;
-		sprite_bank* m_sprites;
-		grid m_chunks;
-		size_t m_chunk_count;
 	private:
 		std::pair<glm::uvec2, glm::uvec2> find_root(const glm::uvec2& pos, size_t layer) const;
 		void fill_grids(const glm::uvec2& pos, const glm::uvec2& dims, size_t layer, sprite_bank::handle h);

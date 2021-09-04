@@ -80,6 +80,10 @@
       <Filter>mage\world</Filter>
     </ClInclude>
     <ClInclude Include="src\pch.h" />
+    <ClInclude Include="src\mage\script\wrap\vm.h" />
+    <ClInclude Include="src\mage\script\wrap\script.h" />
+    <ClInclude Include="src\mage\world\map.h" />
+    <ClInclude Include="src\mage\world\sprite_batch_bank.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\mage\graphics\sprite.cpp">
@@ -107,5 +111,6 @@
       <Filter>mage\world\dynamic</Filter>
     </ClCompile>
     <ClCompile Include="src\pch.cpp" />
+    <ClCompile Include="src\mage\world\sprite_batch_bank.cpp" />
   </ItemGroup>
 </Project>
