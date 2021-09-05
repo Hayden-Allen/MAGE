@@ -56,6 +56,11 @@ namespace orc
 			coga::output_file out(fp);
 			m_map->save(out);
 		}
+		void build_map(const std::string& fp)
+		{
+			coga::output_file out(fp);
+			m_map->build(out);
+		}
 	private:
 		constexpr static float s_camera_zoom_delta = .01f, s_camera_zoom_min = .01f, s_camera_zoom_max = 2.f, s_camera_move_delta = .1f;
 	private:

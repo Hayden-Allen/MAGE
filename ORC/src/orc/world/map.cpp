@@ -16,19 +16,8 @@ namespace orc
 
 
 	// TODO must line up with mage::map::load
-	/*void map::build(coga::output_file& out) const
+	void map::build(coga::output_file& out) const
 	{
-		m_sprites->save(out);
-		m_atlases->save(out);
-
-		out.ulong(m_chunk_count);
-		for (auto& row : m_chunks)
-			for (auto& pair : row.second)
-				pair.second->save(out);
-	}*/
-	void map::save(coga::output_file& out) const
-	{
-		m_batches->save(out);
 		m_sprites->save(out);
 		m_atlases->save(out);
 
@@ -37,6 +26,11 @@ namespace orc
 			for (auto& pair : row.second)
 				pair.second->save(out);
 	}
+	void map::save(coga::output_file& out) const
+	{
+		m_batches->save(out);
+		build(out);
+	}
 	void map::load(coga::input_file& in)
 	{
 		m_batches = new sprite_batch_bank(in);
@@ -44,17 +38,7 @@ namespace orc
 
 
 		for (size_t i = 0; i < m_chunk_count; i++)
-		{
-			chunk* c = new chunk(*m_batches, in);
-
-			const auto& pos = c->get_pos();
-			if (!m_chunks.contains(pos.y))
-				m_chunks.insert({ pos.y, {} });
-			if (m_chunks[pos.y].contains(pos.x))
-				COGA_ASSERT(false, "Overlapping chunks at <{}, {}>", pos.x, pos.y);
-
-			m_chunks[pos.y][pos.x] = c;
-		}
+			add_chunk(new chunk(*m_batches, in));
 	}
 	void map::set_tile_at(const glm::uvec2& pos, size_t layer, sprite* const sprite)
 	{

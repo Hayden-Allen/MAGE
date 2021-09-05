@@ -54,6 +54,17 @@ namespace mage
 			m_sprites(sprites),
 			m_chunk_count(0)
 		{}
+	protected:
+		void add_chunk(C* const c)
+		{
+			const auto& pos = c->get_pos();
+			if (!m_chunks.contains(pos.y))
+				m_chunks.insert({ pos.y, {} });
+			if (m_chunks[pos.y].contains(pos.x))
+				COGA_ASSERT(false, "Overlapping chunks at <{}, {}>", pos.x, pos.y);
+
+			m_chunks[pos.y][pos.x] = c;
+		}
 	};
 
 
@@ -75,17 +86,7 @@ namespace mage
 			map_base<sprite_atlas_bank, sprite_bank, sprite_batch_bank, chunk>::load(in);
 
 			for (size_t i = 0; i < m_chunk_count; i++)
-			{
-				chunk* c = new chunk(in);
-
-				const auto& pos = c->get_pos();
-				if (!m_chunks.contains(pos.y))
-					m_chunks.insert({ pos.y, {} });
-				if (m_chunks[pos.y].contains(pos.x))
-					COGA_ASSERT(false, "Overlapping chunks at <{}, {}>", pos.x, pos.y);
-
-				m_chunks[pos.y][pos.x] = c;
-			}
+				add_chunk(new chunk(in));
 		}
 	};
 }

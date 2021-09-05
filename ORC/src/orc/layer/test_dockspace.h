@@ -17,11 +17,12 @@ namespace orc
 				}
 			),
 			m_layer(layer),
-			m_last_path("")
+			m_save_path(""),
+			m_build_path("")
 		{}
 	private:
 		orc::layer* m_layer;
-		mutable std::string m_last_path;
+		mutable std::string m_save_path, m_build_path;
 	private:
 		void file_open()
 		{
@@ -30,32 +31,33 @@ namespace orc
 			if (!file.empty())
 			{
 				m_layer->open_map(file);
-				m_last_path = file;
+				m_save_path = file;
 			}
 		}
 		void file_save() const
 		{
-			if (m_last_path.empty())
+			if (m_save_path.empty())
 				file_save_as();
 			else
-				m_layer->save_map(m_last_path);
+				m_layer->save_map(m_save_path);
 		}
 		void file_save_as() const
 		{
-			// TODO windows format
-			std::string file = COGA_WIN.save_file_dialog("ORC World (*.orc)\0*.orc\0\0");
-			if (!file.empty())
-			{
-				if (!file.ends_with(".orc"))
-					file += ".orc";
-				m_layer->save_map(file);
-				if (m_last_path.empty())
-					m_last_path = file;
-			}
+			file_as(&layer::save_map, "ORC World", ".orc", m_save_path);
+		}
+		void file_build() const
+		{
+			if (m_build_path.empty())
+				file_build_as();
+			else
+				m_layer->build_map(m_build_path);
+		}
+		void file_build_as() const
+		{
+			file_as(&layer::build_map, "MAGE World", ".mage", m_build_path);
 		}
 		void file_exit() const
 		{
-			void(window:: * fn)() = (void(window::*)())&test_dockspace::file_open;
 			COGA_APP.close();
 		}
 	private:
@@ -64,13 +66,40 @@ namespace orc
 			{
 				"File",
 				{
-					{ "Open...", "Ctrl+O", { coga::key::left_control, coga::key::O }, mef(&test_dockspace::file_open) },
-					// this should be before regular save because of its shortcut
-					{ "Save As...", "Ctrl+Shift+S", { coga::key::left_control, coga::key::left_shift, coga::key::S }, mef(&test_dockspace::file_save_as) },
-					{ "Save", "Ctrl+S", { coga::key::left_control, coga::key::S }, mef(&test_dockspace::file_save) },
-					{ "Exit", "Alt+F4", { coga::key::left_alt, coga::key::f4 }, mef(&test_dockspace::file_exit) }
+					{
+						{ "Open...", "Ctrl+O", { coga::key::left_control, coga::key::O }, mef(&test_dockspace::file_open) },
+						// this should be before regular save because of its shortcut
+						{ "Save As...", "Ctrl+Shift+S", { coga::key::left_control, coga::key::left_shift, coga::key::S }, mef(&test_dockspace::file_save_as) },
+						{ "Save", "Ctrl+S", { coga::key::left_control, coga::key::S }, mef(&test_dockspace::file_save) }
+					},
+					{
+						{ "Build As...", "Ctrl+Shift+B", { coga::key::left_control, coga::key::left_shift, coga::key::B }, mef(&test_dockspace::file_build_as) },
+						{ "Build", "Ctrl+B", { coga::key::left_control, coga::key::B }, mef(&test_dockspace::file_build) }
+					},
+					{
+						{ "Exit", "Alt+F4", { coga::key::left_alt, coga::key::f4 }, mef(&test_dockspace::file_exit) }
+					}	
 				}
 			}
 		};
+	private:
+		template<typename T>
+		void file_as(T fn, const std::string& name, const std::string& ext, std::string& cache) const
+		{
+			char buf[128] = { 0 };
+			sprintf_s(buf, "%s (*%s)\0*%s\0\0", name.c_str(), ext.c_str(), ext.c_str());
+			// TODO this only works on Windows
+			std::string file = COGA_WIN.save_file_dialog(buf);
+			if (!file.empty())
+			{
+				if (!file.ends_with(ext))
+					file += ext;
+
+				(m_layer->*(fn))(file);
+
+				if (cache.empty())
+					cache = file;
+			}
+		}
 	};
 }

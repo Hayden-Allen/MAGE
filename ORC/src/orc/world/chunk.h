@@ -3,10 +3,13 @@
 #include "sprite_batch.h"
 #include "sprite_batch_bank.h"
 #include "orc/graphics/sprite_atlas_bank.h"
+#include "orc/util/buildable.h"
 
 namespace orc
 {
-	class chunk final : public mage::chunk_base<sprite_batch>
+	class chunk final :
+		public mage::chunk_base<sprite_batch>,
+		public buildable
 	{
 		friend class map;
 	public:
@@ -14,6 +17,7 @@ namespace orc
 		chunk(sprite_batch_bank& sbb, coga::input_file& in);
 		COGA_DCM(chunk);
 	public:
+		void build(coga::output_file& out) const override;
 		void save(coga::output_file& out) const override;
 		void load(sprite_batch_bank& sbb, coga::input_file& in);
 		void set_tile_at(sprite_batch_bank& sbb, const sprite_bank& sb, const glm::uvec2& pos, size_t layer, sprite* const sprite);

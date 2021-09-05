@@ -148,6 +148,7 @@
     <ClInclude Include="src\orc\layer\layer.h" />
     <ClInclude Include="src\orc\layer\test_dockspace.h" />
     <ClInclude Include="src\orc\layer\test_window.h" />
+    <ClInclude Include="src\orc\util\buildable.h" />
     <ClInclude Include="src\orc\world\chunk.h" />
     <ClInclude Include="src\orc\world\map.h" />
     <ClInclude Include="src\orc\world\sprite_batch.h" />
