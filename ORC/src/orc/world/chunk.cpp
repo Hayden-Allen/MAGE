@@ -166,9 +166,9 @@ namespace orc
 		const auto& batch = sbb.get(pair.first);
 		const sprite* const sprite = sb.get(old);
 		batch->delete_tile(sprite, pair.second);
-		// TODO properly
 		if (batch->is_empty())
 		{
+			// TODO properly
 			m_batches.erase(std::find(m_batches.begin(), m_batches.end(), batch));
 			sbb.remove(batch->get_handle());
 		}

@@ -97,8 +97,8 @@ namespace orc
 			m_framebuffer->draw();
 
 
-			hasl::sasm::script_runtime rt = { e.get_time(), e.get_delta_time(), nullptr, {} };
-			m_vm->run(*m_script, rt, { 0.f, 0.f });
+			/*hasl::sasm::script_runtime rt = { e.get_time(), e.get_delta_time(), nullptr, {} };
+			m_vm->run(*m_script, rt, { 0.f, 0.f });*/
 
 
 			return false;
