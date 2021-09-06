@@ -28,6 +28,10 @@ namespace orc
 		void load(coga::input_file& in) override;
 		void set_tile_at(const glm::uvec2& pos, size_t layer, sprite* const sprite);
 		void delete_tile_at(const glm::uvec2& pos, size_t layer);
+		sprite_bank* const get_sprite_bank()
+		{
+			return m_sprites;
+		}
 	private:
 		sprite_batch_bank* m_batches;
 	private:

@@ -168,7 +168,10 @@ namespace orc
 		batch->delete_tile(sprite, pair.second);
 		// TODO properly
 		if (batch->is_empty())
+		{
 			m_batches.erase(std::find(m_batches.begin(), m_batches.end(), batch));
+			sbb.remove(batch->get_handle());
+		}
 
 		// account for NxN tiles
 		for (size_t i = pos.y; i < pos.y + sprite->get_tile_h(); i++)
@@ -180,6 +183,8 @@ namespace orc
 		}
 		if (m_tile_offsets[layer].empty())
 			m_tile_offsets.erase(layer);
+
+		m_tile_count--;
 	}
 	sprite_bank::handle chunk::get_tile_at(const glm::uvec2& pos, size_t layer) const
 	{

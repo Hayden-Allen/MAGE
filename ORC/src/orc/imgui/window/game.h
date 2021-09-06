@@ -1,13 +1,13 @@
 #pragma once
 #include "pch.h"
-#include "layer.h"
+#include "orc/layer/layer.h"
 
-namespace orc
+namespace orc::window
 {
-	class game_window final : public coga::imgui::window
+	class game final : public coga::imgui::window
 	{
 	public:
-		game_window(layer* const layer) :
+		game(layer* const layer) :
 			coga::imgui::window(c::game_window_title),
 			m_layer(layer)
 		{}
@@ -27,7 +27,7 @@ namespace orc
 				// get mouse pos in OpenGL screen space [-1, 1]
 				glm::vec2 mouse = get_mouse_pos();
 				const auto& size = get_display_size();
-				mouse = coga::range(-1.f, 1.f).map_from(mouse, { 0.f, size.x }, { 0.f, size.y });
+				mouse = coga::range(-1.f, 1.f).map_from(mouse, { 0.f, std::max(1.f, size.x) }, { 0.f, std::max(1.f, size.y) });
 
 				const glm::ivec4 world_mouse = cam * glm::vec4(mouse, 0.f, 1.f);
 

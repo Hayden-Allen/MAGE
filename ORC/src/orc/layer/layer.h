@@ -7,11 +7,18 @@
 namespace orc
 {
 	class imgui_layer;
+	namespace window
+	{
+		class game;
+		class debug;
+		class sprite;
+	}
 
 	class layer final : public coga::layer
 	{
-		friend class game_window;
-		friend class test_window;
+		friend class window::game;
+		friend class window::debug;
+		friend class window::sprite;
 	public:
 		layer() :
 			coga::layer("ORC"),
@@ -19,8 +26,7 @@ namespace orc
 			m_script(new mage::sasm::script("res/script/test.sasm", m_vm)),
 			m_map(nullptr),
 			m_shader_program(nullptr),
-			m_camera(nullptr),
-			m_camera_rotation(0.f)
+			m_camera(nullptr)
 		{
 			COGA_ERROR("CREATE ORC LAYER");
 
@@ -29,13 +35,12 @@ namespace orc
 
 			m_shader_program = new mage::shader_program("res/shader/chunk_v.glsl", "res/shader/chunk_f.glsl", true);
 
-			m_camera = new mage::camera(*this, 1.f * width, 1.f * height, { 0.f, 0.f, 0.f }, m_camera_rotation, .2f);
+			m_camera = new mage::camera(*this, 1.f * width, 1.f * height, { 0.f, 0.f, 0.f }, 0.f, .2f);
 
-			/*sprite_atlas_bank* sab = new sprite_atlas_bank();
+			sprite_atlas_bank* sab = new sprite_atlas_bank();
 			m_sb = new sprite_bank();
-			m_sprite = new sprite(m_sb, sab, "res/sprite/big.sprite");
-			m_map = new map(sab, m_sb);*/
-			m_map = new map(new sprite_atlas_bank(), m_sb = new sprite_bank());
+			new sprite(m_sb, sab, "res/sprite/big.sprite");
+			m_map = new map(sab, m_sb);
 		}
 		COGA_DCM(layer);
 		~layer()
@@ -54,6 +59,7 @@ namespace orc
 			delete m_map;
 			coga::input_file in(fp);
 			m_map = new map(in);
+			m_sb = m_map->get_sprite_bank();
 		}
 		void save_map(const std::string& fp)
 		{
@@ -75,16 +81,12 @@ namespace orc
 		mage::framebuffer* m_framebuffer;
 		mage::shader_program* m_shader_program;
 		mage::camera* m_camera;
-		float m_camera_rotation;
 	private:
 		bool on_app_draw(coga::app_draw_event& e) override
 		{
 			// draw onto framebuffer
 			m_framebuffer->bind();
 			coga::gfx::renderer::clear();
-
-			// update camera values from imgui_layer
-			m_camera->set_rotation(m_camera_rotation);
 
 			// upload camera and draw map
 			m_shader_program->bind();

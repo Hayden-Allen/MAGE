@@ -37,8 +37,13 @@ namespace orc
 		{
 			return m_h / mage::c::pixels_per_sprite_side;
 		}
+		const std::string& get_filepath() const
+		{
+			return m_filepath;
+		}
 	private:
 		std::unordered_set<sprite_atlas_bank::handle> m_atlases;
+		std::string m_filepath;
 	private:
 		bool add_to_atlas(sprite_atlas* const atlas, const uint8_t* const color_data, size_t i);
 	};

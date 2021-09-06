@@ -78,6 +78,14 @@ namespace orc
 		// clear the area covered by root tile. This must be done after chunk::delete_tile_at because that method relies on the sprite handle in the grid
 		const sprite* const existing = m_sprites->get(chunk->get_tile_at(c, layer));
 		fill_grids(m * COGA_CAST(glm::uint, s) + c, { existing->get_tile_w(), existing->get_tile_h() }, layer, sprite_bank::s_invalid);
+
+		if (chunk->is_empty())
+		{
+			m_chunks[m.y].erase(m.x);
+			if (m_chunks[m.y].empty())
+				m_chunks.erase(m.y);
+			delete chunk;
+		}
 	}
 
 

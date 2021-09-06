@@ -7,7 +7,8 @@
 namespace orc
 {
 	sprite::sprite(sprite_bank* const sb, sprite_atlas_bank* const ab, const std::string& fp) :
-		mage::sprite(sb->add(this))
+		mage::sprite(sb->add(this)),
+		m_filepath(fp)
 	{
 		coga::input_file data(fp);
 
@@ -88,6 +89,10 @@ namespace orc
 	{
 		mage::sprite::save(out);
 
+		out.ulong(m_filepath.size());
+		for (size_t i = 0; i < m_filepath.size(); i++)
+			out.ubyte(COGA_CAST(uint8_t, m_filepath[i]));
+
 		out.ulong(m_atlases.size());
 		for (const auto& a : m_atlases)
 			out.ushort(a);
@@ -95,6 +100,15 @@ namespace orc
 	void sprite::load(coga::input_file& in)
 	{
 		mage::sprite::load(in);
+
+		// include '\0'
+		const size_t fp_length = in.ulong() + 1;
+		char* buf = new char[fp_length];
+		for (size_t i = 0; i < fp_length - 1; i++)
+			buf[i] = COGA_CAST(char, in.ubyte());
+		buf[fp_length - 1] = 0;
+		m_filepath = std::string(buf);
+		delete[] buf;
 
 		const size_t atlas_count = in.ulong();
 		m_atlases.reserve(atlas_count);

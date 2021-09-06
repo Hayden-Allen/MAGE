@@ -33,7 +33,7 @@
     <ClInclude Include="src\orc\graphics\sprite_bank.h">
       <Filter>orc\graphics</Filter>
     </ClInclude>
-    <ClInclude Include="src\orc\layer\game_window.h">
+    <ClInclude Include="src\orc\imgui\window\game.h">
       <Filter>orc\layer</Filter>
     </ClInclude>
     <ClInclude Include="src\orc\layer\imgui_layer.h">
@@ -42,10 +42,10 @@
     <ClInclude Include="src\orc\layer\layer.h">
       <Filter>orc\layer</Filter>
     </ClInclude>
-    <ClInclude Include="src\orc\layer\test_dockspace.h">
+    <ClInclude Include="src\orc\imgui\dockspace.h">
       <Filter>orc\layer</Filter>
     </ClInclude>
-    <ClInclude Include="src\orc\layer\test_window.h">
+    <ClInclude Include="src\orc\imgui\window\debug.h">
       <Filter>orc\layer</Filter>
     </ClInclude>
     <ClInclude Include="src\orc\util\buildable.h">
@@ -68,6 +68,7 @@
     </ClInclude>
     <ClInclude Include="src\pch.h" />
     <ClInclude Include="src\orc\util\buildable_bank.h" />
+    <ClInclude Include="src\orc\imgui\window\sprite.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp" />
