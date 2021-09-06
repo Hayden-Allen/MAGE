@@ -15,10 +15,10 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{C90D880B-3517-887C-BE92-9E7C2A9B937C}</ProjectGuid>
+    <ProjectGuid>{A666887C-929D-890D-3B8A-6F1027A0050F}</ProjectGuid>
     <IgnoreWarnCompileDuplicatedFilename>true</IgnoreWarnCompileDuplicatedFilename>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>ORC</RootNamespace>
+    <RootNamespace>MAGL</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -55,23 +55,23 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <OutDir>..\bin\Debug-x86_64-windows\ORC\</OutDir>
-    <IntDir>..\bin-int\Debug-x86_64-windows\ORC\</IntDir>
-    <TargetName>ORC</TargetName>
+    <OutDir>..\bin\Debug-x86_64-windows\MAGL\</OutDir>
+    <IntDir>..\bin-int\Debug-x86_64-windows\MAGL\</IntDir>
+    <TargetName>MAGL</TargetName>
     <TargetExt>.exe</TargetExt>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
-    <OutDir>..\bin\Release-x86_64-windows\ORC\</OutDir>
-    <IntDir>..\bin-int\Release-x86_64-windows\ORC\</IntDir>
-    <TargetName>ORC</TargetName>
+    <OutDir>..\bin\Release-x86_64-windows\MAGL\</OutDir>
+    <IntDir>..\bin-int\Release-x86_64-windows\MAGL\</IntDir>
+    <TargetName>MAGL</TargetName>
     <TargetExt>.exe</TargetExt>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Dist|x64'">
     <LinkIncremental>false</LinkIncremental>
-    <OutDir>..\bin\Dist-x86_64-windows\ORC\</OutDir>
-    <IntDir>..\bin-int\Dist-x86_64-windows\ORC\</IntDir>
-    <TargetName>ORC</TargetName>
+    <OutDir>..\bin\Dist-x86_64-windows\MAGL\</OutDir>
+    <IntDir>..\bin-int\Dist-x86_64-windows\MAGL\</IntDir>
+    <TargetName>MAGL</TargetName>
     <TargetExt>.exe</TargetExt>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -138,36 +138,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="src\orc\constants.h" />
-    <ClInclude Include="src\orc\graphics\sprite.h" />
-    <ClInclude Include="src\orc\graphics\sprite_atlas.h" />
-    <ClInclude Include="src\orc\graphics\sprite_atlas_bank.h" />
-    <ClInclude Include="src\orc\graphics\sprite_bank.h" />
-    <ClInclude Include="src\orc\layer\game_window.h" />
-    <ClInclude Include="src\orc\layer\imgui_layer.h" />
-    <ClInclude Include="src\orc\layer\layer.h" />
-    <ClInclude Include="src\orc\layer\test_dockspace.h" />
-    <ClInclude Include="src\orc\layer\test_window.h" />
-    <ClInclude Include="src\orc\util\buildable.h" />
-    <ClInclude Include="src\orc\util\buildable_bank.h" />
-    <ClInclude Include="src\orc\world\chunk.h" />
-    <ClInclude Include="src\orc\world\map.h" />
-    <ClInclude Include="src\orc\world\sprite_batch.h" />
-    <ClInclude Include="src\orc\world\sprite_batch_bank.h" />
-    <ClInclude Include="src\orc\world\sprite_batch_constructor.h" />
+    <ClInclude Include="src\layer.h" />
     <ClInclude Include="src\pch.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp" />
-    <ClCompile Include="src\orc\graphics\sprite.cpp" />
-    <ClCompile Include="src\orc\graphics\sprite_atlas.cpp" />
-    <ClCompile Include="src\orc\graphics\sprite_atlas_bank.cpp" />
-    <ClCompile Include="src\orc\graphics\sprite_bank.cpp" />
-    <ClCompile Include="src\orc\world\chunk.cpp" />
-    <ClCompile Include="src\orc\world\map.cpp" />
-    <ClCompile Include="src\orc\world\sprite_batch.cpp" />
-    <ClCompile Include="src\orc\world\sprite_batch_bank.cpp" />
-    <ClCompile Include="src\orc\world\sprite_batch_constructor.cpp" />
     <ClCompile Include="src\pch.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>
     </ClCompile>

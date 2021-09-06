@@ -10,6 +10,9 @@
     <Filter Include="orc\layer">
       <UniqueIdentifier>{D5E1A3E3-414C-585A-8A8A-0900F63336AF}</UniqueIdentifier>
     </Filter>
+    <Filter Include="orc\util">
+      <UniqueIdentifier>{36FF301E-22CC-8B29-4BE5-79D13711C1B7}</UniqueIdentifier>
+    </Filter>
     <Filter Include="orc\world">
       <UniqueIdentifier>{C07F72E4-2CEA-265B-7528-D800E1D104B0}</UniqueIdentifier>
     </Filter>
@@ -45,6 +48,9 @@
     <ClInclude Include="src\orc\layer\test_window.h">
       <Filter>orc\layer</Filter>
     </ClInclude>
+    <ClInclude Include="src\orc\util\buildable.h">
+      <Filter>orc\util</Filter>
+    </ClInclude>
     <ClInclude Include="src\orc\world\chunk.h">
       <Filter>orc\world</Filter>
     </ClInclude>
@@ -61,7 +67,7 @@
       <Filter>orc\world</Filter>
     </ClInclude>
     <ClInclude Include="src\pch.h" />
-    <ClInclude Include="src\orc\util\buildable.h" />
+    <ClInclude Include="src\orc\util\buildable_bank.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp" />
@@ -93,8 +99,5 @@
       <Filter>orc\world</Filter>
     </ClCompile>
     <ClCompile Include="src\pch.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="res\script\test.sasm" />
   </ItemGroup>
 </Project>

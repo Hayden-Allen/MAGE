@@ -9,7 +9,7 @@ namespace orc
 		rect_packer<uint32_t, mage::sprite_atlas_coords, uint8_t>(mage::c::sprite_atlas_size, mage::c::sprite_atlas_size)
 	{
 		m_handle = bank->add(this);
-		m_texture = new mage::retained_texture2d(mage::sprite_atlas::m_w, mage::sprite_atlas::m_h, mage::c::bytes_per_sprite_pixel * mage::sprite_atlas::m_w * mage::sprite_atlas::m_h, nullptr, s_texture_options);
+		m_texture = new mage::retained_texture2d(mage::sprite_atlas::m_w, mage::sprite_atlas::m_h, mage::c::bytes_per_sprite_pixel * mage::sprite_atlas::m_w * mage::sprite_atlas::m_h, s_texture_options);
 	}
 	sprite_atlas::sprite_atlas(coga::input_file& in) :
 		mage::sprite_atlas(in),
@@ -18,10 +18,14 @@ namespace orc
 
 
 
-	void sprite_atlas::save(coga::output_file& out) const
+	void sprite_atlas::build(coga::output_file& out) const
 	{
 		out.ushort(m_handle);
 		m_texture->save(out, 0, 0, m_x_max, m_y_max);
+	}
+	void sprite_atlas::save(coga::output_file& out) const
+	{
+		build(out);
 		coga::rect_packer<uint32_t, mage::sprite_atlas_coords, uint8_t>::save(out);
 	}
 	void sprite_atlas::load(coga::input_file& in)

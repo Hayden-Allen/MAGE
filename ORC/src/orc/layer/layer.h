@@ -31,7 +31,11 @@ namespace orc
 
 			m_camera = new mage::camera(*this, 1.f * width, 1.f * height, { 0.f, 0.f, 0.f }, m_camera_rotation, .2f);
 
-			m_map = new map(new sprite_atlas_bank(), new sprite_bank());
+			/*sprite_atlas_bank* sab = new sprite_atlas_bank();
+			m_sb = new sprite_bank();
+			m_sprite = new sprite(m_sb, sab, "res/sprite/big.sprite");
+			m_map = new map(sab, m_sb);*/
+			m_map = new map(new sprite_atlas_bank(), m_sb = new sprite_bank());
 		}
 		COGA_DCM(layer);
 		~layer()
@@ -66,6 +70,7 @@ namespace orc
 	private:
 		mage::sasm::vm* m_vm;
 		mage::sasm::script* m_script;
+		sprite_bank* m_sb;
 		map* m_map;
 		mage::framebuffer* m_framebuffer;
 		mage::shader_program* m_shader_program;

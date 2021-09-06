@@ -24,14 +24,16 @@ namespace mage
 		static_index_buffer,
 		static_index_buffer,
 		(s_type* indices, size_t tiles),
-		(indices, tiles * c::indices_per_tile)
+		(indices, tiles * c::indices_per_tile),
+		static_index_buffer(coga::input_file& in) : COGA_RAN::static_index_buffer(in) {}
 	);
 	MAGE_WRAP
 	(
 		dynamic_index_buffer,
 		dynamic_index_buffer,
 		(s_type* indices, size_t tiles),
-		(indices, tiles* c::indices_per_tile)
+		(indices, tiles* c::indices_per_tile),
+		dynamic_index_buffer(coga::input_file& in) : COGA_RAN::dynamic_index_buffer(in) {}
 	);
 	MAGE_WRAP
 	(
@@ -62,14 +64,16 @@ namespace mage
 		static_vertex_buffer,
 		static_vertex_buffer,
 		(s_type* vertices, size_t count),
-		(vertices, count)
+		(vertices, count),
+		static_vertex_buffer(coga::input_file& in) : COGA_RAN::static_vertex_buffer(in) {}
 	);
 	MAGE_WRAP
 	(
 		dynamic_vertex_buffer,
 		dynamic_vertex_buffer,
 		(s_type* vertices, size_t count),
-		(vertices, count)
+		(vertices, count),
+		dynamic_vertex_buffer(coga::input_file& in) : COGA_RAN::dynamic_vertex_buffer(in) {}
 	);
 	MAGE_WRAP
 	(

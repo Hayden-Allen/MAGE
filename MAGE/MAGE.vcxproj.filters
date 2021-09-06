@@ -10,6 +10,12 @@
     <Filter Include="mage\graphics\wrap">
       <UniqueIdentifier>{68DC84AE-54C0-4504-BD20-4057A9233086}</UniqueIdentifier>
     </Filter>
+    <Filter Include="mage\script">
+      <UniqueIdentifier>{A3986085-0F4E-D97A-9842-D35104F7CF7E}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="mage\script\wrap">
+      <UniqueIdentifier>{2C294EF1-1822-6D43-4154-52C82DAC4C4F}</UniqueIdentifier>
+    </Filter>
     <Filter Include="mage\world">
       <UniqueIdentifier>{36C5D5F4-227D-1742-8B84-F09D775BB232}</UniqueIdentifier>
     </Filter>
@@ -58,6 +64,12 @@
     <ClInclude Include="src\mage\graphics\wrap\vertex_array.h">
       <Filter>mage\graphics\wrap</Filter>
     </ClInclude>
+    <ClInclude Include="src\mage\script\wrap\script.h">
+      <Filter>mage\script\wrap</Filter>
+    </ClInclude>
+    <ClInclude Include="src\mage\script\wrap\vm.h">
+      <Filter>mage\script\wrap</Filter>
+    </ClInclude>
     <ClInclude Include="src\mage\world\chunk.h">
       <Filter>mage\world</Filter>
     </ClInclude>
@@ -73,17 +85,19 @@
     <ClInclude Include="src\mage\world\dynamic\dynamic_list.h">
       <Filter>mage\world\dynamic</Filter>
     </ClInclude>
+    <ClInclude Include="src\mage\world\map.h">
+      <Filter>mage\world</Filter>
+    </ClInclude>
     <ClInclude Include="src\mage\world\sprite_batch.h">
+      <Filter>mage\world</Filter>
+    </ClInclude>
+    <ClInclude Include="src\mage\world\sprite_batch_bank.h">
       <Filter>mage\world</Filter>
     </ClInclude>
     <ClInclude Include="src\mage\world\tile.h">
       <Filter>mage\world</Filter>
     </ClInclude>
     <ClInclude Include="src\pch.h" />
-    <ClInclude Include="src\mage\script\wrap\vm.h" />
-    <ClInclude Include="src\mage\script\wrap\script.h" />
-    <ClInclude Include="src\mage\world\map.h" />
-    <ClInclude Include="src\mage\world\sprite_batch_bank.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\mage\graphics\sprite.cpp">
@@ -110,7 +124,9 @@
     <ClCompile Include="src\mage\world\dynamic\dynamic_list.cpp">
       <Filter>mage\world\dynamic</Filter>
     </ClCompile>
+    <ClCompile Include="src\mage\world\sprite_batch_bank.cpp">
+      <Filter>mage\world</Filter>
+    </ClCompile>
     <ClCompile Include="src\pch.cpp" />
-    <ClCompile Include="src\mage\world\sprite_batch_bank.cpp" />
   </ItemGroup>
 </Project>

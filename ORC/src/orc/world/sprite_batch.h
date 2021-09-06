@@ -4,12 +4,15 @@
 #include "sprite_batch_constructor.h"
 #include "orc/graphics/sprite_atlas_bank.h"
 #include "orc/graphics/sprite_bank.h"
+#include "orc/util/buildable.h"
 
 namespace orc
 {
 	class sprite;
 
-	class sprite_batch final : public mage::sprite_batch_base<mage::static_index_buffer, mage::retained_dynamic_vertex_buffer, mage::dynamic_vertex_array, sprite, sprite_bank>
+	class sprite_batch final :
+		public mage::sprite_batch_base<mage::static_index_buffer, mage::retained_dynamic_vertex_buffer, mage::dynamic_vertex_array, sprite, sprite_bank>,
+		public buildable
 	{
 	public:
 		sprite_batch(sprite_batch_bank& bank, const glm::uvec2& base);
@@ -22,7 +25,6 @@ namespace orc
 		sprite_batch(sprite_batch&& other) noexcept :
 			mage::sprite_batch_base<mage::static_index_buffer, mage::retained_dynamic_vertex_buffer, mage::dynamic_vertex_array, sprite, sprite_bank>(std::move(other)),
 			m_handle(other.m_handle),
-			m_max_tile_count(other.m_max_tile_count),
 			m_next_tile(other.m_next_tile),
 			m_sprite_indices(std::move(other.m_sprite_indices)),
 			m_sprite_counts(std::move(other.m_sprite_counts)),
@@ -30,6 +32,7 @@ namespace orc
 			m_openings(std::move(other.m_openings))
 		{}
 	public:
+		void build(coga::output_file& out) const override;
 		void save(coga::output_file& out) const override;
 		void load(coga::input_file& in) override;
 		bool can_contain(const sprite* const s) const override;
@@ -53,7 +56,7 @@ namespace orc
 		}
 	private:
 		sprite_batch_bank::handle m_handle;
-		size_t m_max_tile_count, m_next_tile;
+		size_t m_next_tile;
 		// maps a sprite to its local index in this batch
 		std::unordered_map<sprite_bank::handle, size_t> m_sprite_indices;
 		std::unordered_map<sprite_bank::handle, size_t> m_sprite_counts;
@@ -61,10 +64,8 @@ namespace orc
 		mutable std::vector<size_t> m_openings;
 	private:
 		void resize();
-		void create_indices();
-		void create_array();
 		size_t get_next() const;
-		void add_sprite(sprite_bank::handle s) override;
+		void add_sprite(sprite_bank::handle s);
 		void remove_sprite(sprite_bank::handle s) override;
 		void add_atlas(sprite_atlas_bank::handle atlas) override;
 		void delete_tile(size_t offset) override;

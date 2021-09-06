@@ -28,7 +28,7 @@ namespace orc
 
 		out.ulong(m_batches.size());
 		for (const auto& batch : m_batches)
-			batch->save(out);
+			batch->build(out);
 	}
 	void chunk::save(coga::output_file& out) const
 	{

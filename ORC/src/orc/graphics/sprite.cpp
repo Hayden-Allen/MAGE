@@ -80,6 +80,10 @@ namespace orc
 
 
 
+	void sprite::build(coga::output_file& out) const
+	{
+		mage::sprite::save(out);
+	}
 	void sprite::save(coga::output_file& out) const
 	{
 		mage::sprite::save(out);

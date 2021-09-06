@@ -18,6 +18,17 @@ namespace orc
 	// TODO must line up with mage::map::load
 	void map::build(coga::output_file& out) const
 	{
+		m_sprites->build(out);
+		m_atlases->build(out);
+
+		out.ulong(m_chunk_count);
+		for (auto& row : m_chunks)
+			for (auto& pair : row.second)
+				pair.second->build(out);
+	}
+	void map::save(coga::output_file& out) const
+	{
+		m_batches->save(out);
 		m_sprites->save(out);
 		m_atlases->save(out);
 
@@ -25,11 +36,6 @@ namespace orc
 		for (auto& row : m_chunks)
 			for (auto& pair : row.second)
 				pair.second->save(out);
-	}
-	void map::save(coga::output_file& out) const
-	{
-		m_batches->save(out);
-		build(out);
 	}
 	void map::load(coga::input_file& in)
 	{
@@ -79,10 +85,14 @@ namespace orc
 	std::pair<glm::uvec2, glm::uvec2> map::find_root(const glm::uvec2& pos, size_t layer) const
 	{
 		// sweep rectangle between given pos and the furthest possible point that could be part of the same tile
-		constexpr static size_t s = mage::c::tiles_per_chunk_side;
-		for (size_t i = pos.y; i >= glm::min(0ull, pos.y - s + 1); i--)
+		constexpr size_t s = mage::c::tiles_per_chunk_side;
+
+		// these need to be signed because minx/miny can be 0, so indices need to be able to go negative for the loop to terminate
+		const int maxx = COGA_CAST(int, pos.x), minx = COGA_CAST(int, std::min(0ull, pos.x - s + 1));
+		const int maxy = COGA_CAST(int, pos.y), miny = COGA_CAST(int, std::min(0ull, pos.y - s + 1));
+		for (int i = maxy; i >= miny; i--)
 		{
-			for (size_t j = pos.x; j >= glm::min(0ull, pos.x - s + 1); j--)
+			for (int j = maxx; j >= minx; j--)
 			{
 				glm::uvec2 map_pos = { j / s, i / s }, chunk_pos = { j % s, i % s };
 				if (has_chunk(map_pos) && sprite_bank::is_valid(m_chunks.at(map_pos.y).at(map_pos.x)->get_tile_at(chunk_pos, layer)))
@@ -90,7 +100,7 @@ namespace orc
 			}
 		}
 		COGA_ASSERT(false, "map::find_root fail");
-		return { {0, 0}, {0, 0} };
+		return { { 0, 0 }, { 0, 0 } };
 	}
 	void map::fill_grids(const glm::uvec2& pos, const glm::uvec2& dims, size_t layer, sprite_bank::handle h)
 	{

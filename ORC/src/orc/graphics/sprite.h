@@ -1,6 +1,7 @@
 #pragma once
 #include "pch.h"
 #include "orc/graphics/sprite_atlas_bank.h"
+#include "orc/util/buildable.h"
 
 namespace orc
 {
@@ -8,7 +9,9 @@ namespace orc
 	class sprite_atlas_bank;
 	class sprite_bank;
 
-	class sprite final : public mage::sprite
+	class sprite final :
+		public mage::sprite,
+		public buildable
 	{
 	public:
 		sprite(sprite_bank* const sb, sprite_atlas_bank* const ab, const std::string& fp);
@@ -19,6 +22,7 @@ namespace orc
 		}
 		COGA_DCM(sprite);
 	public:
+		void build(coga::output_file& out) const override;
 		void save(coga::output_file& out) const override;
 		void load(coga::input_file& in) override;
 		const std::unordered_set<sprite_atlas_bank::handle>& get_atlases() const

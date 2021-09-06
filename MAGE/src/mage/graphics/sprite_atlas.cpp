@@ -22,11 +22,7 @@ namespace mage
 
 	void sprite_atlas::save(coga::output_file& out) const
 	{
-		// save index in bank
-		out.ushort(m_handle);
-
-		// save texture
-		m_texture->save(out);
+		COGA_ASSERT(false, "Cannot save a mage::sprite_atlas");
 	}
 	void sprite_atlas::load(coga::input_file& in)
 	{

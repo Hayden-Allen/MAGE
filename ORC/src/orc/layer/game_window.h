@@ -34,7 +34,7 @@ namespace orc
 				if (world_mouse.x >= 0 && world_mouse.y >= 0)
 				{
 					if (coga::input::get().is_mouse_pressed(0))
-						m_layer->m_map->set_tile_at(world_mouse, 0, nullptr);
+						m_layer->m_map->set_tile_at(world_mouse, 0, m_layer->m_sb->get(2));
 					else if (coga::input::get().is_mouse_pressed(coga::mouse::button::right))
 						m_layer->m_map->delete_tile_at(world_mouse, 0);
 				}
