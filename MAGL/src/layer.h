@@ -19,7 +19,7 @@ namespace magl
 			const uint32_t width = COGA_WIN.get_w(), height = COGA_WIN.get_h();
 			m_camera = new mage::camera(*this, 1.f * width, 1.f * height, { 0.f, 0.f, 0.f }, 0.f, .2f);
 
-			open_map("res/test.mage");
+			open_map("res/blah.mage");
 		}
 		COGA_DCM(layer);
 		~layer()
