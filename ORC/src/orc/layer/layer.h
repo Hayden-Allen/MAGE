@@ -41,6 +41,13 @@ namespace orc
 			m_sb = new sprite_bank();
 			new sprite(m_sb, sab, "res/sprite/big.sprite");
 			m_map = new map(sab, m_sb);
+
+
+			m_vm = new mage::sasm::vm();
+			m_script = new mage::sasm::script("res/script/test.sasm", m_vm);
+			hasl::sasm::script_runtime rt = { 0.f, 0.f, nullptr, {} };
+			m_vm->run(*m_script, rt, { 0.f, 0.f });
+			m_vm->mem_dump();
 		}
 		COGA_DCM(layer);
 		~layer()
