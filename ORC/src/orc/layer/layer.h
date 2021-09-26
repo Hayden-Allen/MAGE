@@ -22,8 +22,8 @@ namespace orc
 	public:
 		layer() :
 			coga::layer("ORC"),
-			m_vm(new mage::sasm::vm()),
-			m_script(new mage::sasm::script("res/script/test.sasm", m_vm)),
+			m_vm(nullptr),
+			m_script(nullptr),
 			m_map(nullptr),
 			m_shader_program(nullptr),
 			m_camera(nullptr)
@@ -44,7 +44,16 @@ namespace orc
 
 
 			m_vm = new mage::sasm::vm();
-			m_script = new mage::sasm::script("res/script/test.sasm", m_vm);
+			if (false)
+			{
+				m_script = new mage::sasm::script("res/script/test.sasm", m_vm);
+				std::ofstream out("res/script/bin.sasm");
+				m_script->serialize(out);
+				out.close();
+			}
+			else
+				m_script = hasl::sasm::deserialize<mage::sasm::script>("res/script/bin.sasm", m_vm);
+
 			hasl::sasm::script_runtime rt = { 0.f, 0.f, nullptr, {} };
 			m_vm->run(*m_script, rt, { 0.f, 0.f });
 			m_vm->mem_dump();
