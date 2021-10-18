@@ -1,9 +1,9 @@
 #pragma once
 #include "pch.h"
 #include "orc/layer/layer.h"
-#include "orc/imgui/window/debug.h"
-#include "orc/imgui/window/game.h"
-#include "orc/imgui/window/sprite.h"
+#include "orc/imgui/window/debug_window.h"
+#include "orc/imgui/window/game_window.h"
+#include "orc/imgui/window/sprite/sprite_window.h"
 
 namespace orc
 {
@@ -13,9 +13,9 @@ namespace orc
 		dockspace(orc::layer* const layer) :
 			coga::imgui::dockspace(c::dockspace_title, c::dockspace_id, s_menus,
 				{
-					new orc::window::game(layer),
-					new orc::window::debug(layer),
-					new orc::window::sprite(layer)
+					new orc::window::game_window(layer),
+					new orc::window::debug_window(layer),
+					new orc::window::sprite_window(layer)
 				}
 			),
 			m_layer(layer),
@@ -28,7 +28,7 @@ namespace orc
 	private:
 		void file_open()
 		{
-			// TODO windows format
+			// TODO this is windows-only
 			std::string file = COGA_WIN.open_file_dialog("ORC World (*.orc)\0*.orc\0\0");
 			if (!file.empty())
 			{

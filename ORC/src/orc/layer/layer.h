@@ -9,21 +9,20 @@ namespace orc
 	class imgui_layer;
 	namespace window
 	{
-		class game;
-		class debug;
-		class sprite;
+		class game_window;
+		class debug_window;
+		class sprite_window;
 	}
 
 	class layer final : public coga::layer
 	{
-		friend class window::game;
-		friend class window::debug;
-		friend class window::sprite;
+		friend class dockspace;
+		friend class window::game_window;
+		friend class window::debug_window;
+		friend class window::sprite_window;
 	public:
 		layer() :
 			coga::layer("ORC"),
-			m_vm(nullptr),
-			m_script(nullptr),
 			m_map(nullptr),
 			m_shader_program(nullptr),
 			m_camera(nullptr)
@@ -43,7 +42,7 @@ namespace orc
 			m_map = new map(sab, m_sb);
 
 
-			m_vm = new mage::sasm::vm();
+			/*m_vm = new mage::sasm::vm();
 			if (false)
 			{
 				m_script = new mage::sasm::script("res/script/test.sasm", m_vm);
@@ -56,14 +55,12 @@ namespace orc
 
 			hasl::sasm::script_runtime rt = { 0.f, 0.f, nullptr, {} };
 			m_vm->run(*m_script, rt, { 0.f, 0.f });
-			m_vm->mem_dump();
+			m_vm->mem_dump();*/
 		}
 		COGA_DCM(layer);
 		~layer()
 		{
 			COGA_ERROR("DELETE ORC LAYER");
-			delete m_vm;
-			delete m_script;
 			delete m_map;
 			delete m_framebuffer;
 			delete m_shader_program;
@@ -90,8 +87,6 @@ namespace orc
 	private:
 		constexpr static float s_camera_zoom_delta = .01f, s_camera_zoom_min = .01f, s_camera_zoom_max = 2.f, s_camera_move_delta = .1f;
 	private:
-		mage::sasm::vm* m_vm;
-		mage::sasm::script* m_script;
 		sprite_bank* m_sb;
 		map* m_map;
 		mage::framebuffer* m_framebuffer;
@@ -111,11 +106,6 @@ namespace orc
 
 			// draw framebuffer onto screen
 			m_framebuffer->draw();
-
-
-			/*hasl::sasm::script_runtime rt = { e.get_time(), e.get_delta_time(), nullptr, {} };
-			m_vm->run(*m_script, rt, { 0.f, 0.f });*/
-
 
 			return false;
 		}

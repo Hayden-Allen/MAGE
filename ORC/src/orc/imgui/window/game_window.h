@@ -4,10 +4,10 @@
 
 namespace orc::window
 {
-	class game final : public coga::imgui::window
+	class game_window final : public coga::imgui::window
 	{
 	public:
-		game(layer* const layer) :
+		game_window(layer* const layer) :
 			coga::imgui::window(c::game_window_title),
 			m_layer(layer)
 		{}

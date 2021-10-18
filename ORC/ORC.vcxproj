@@ -143,12 +143,13 @@
     <ClInclude Include="src\orc\graphics\sprite_atlas.h" />
     <ClInclude Include="src\orc\graphics\sprite_atlas_bank.h" />
     <ClInclude Include="src\orc\graphics\sprite_bank.h" />
-    <ClInclude Include="src\orc\imgui\window\game.h" />
-    <ClInclude Include="src\orc\imgui\window\sprite.h" />
+    <ClInclude Include="src\orc\imgui\window\game_window.h" />
+    <ClInclude Include="src\orc\imgui\window\sprite\file_tree_node.h" />
+    <ClInclude Include="src\orc\imgui\window\sprite\sprite_window.h" />
     <ClInclude Include="src\orc\layer\imgui_layer.h" />
     <ClInclude Include="src\orc\layer\layer.h" />
     <ClInclude Include="src\orc\imgui\dockspace.h" />
-    <ClInclude Include="src\orc\imgui\window\debug.h" />
+    <ClInclude Include="src\orc\imgui\window\debug_window.h" />
     <ClInclude Include="src\orc\util\buildable.h" />
     <ClInclude Include="src\orc\util\buildable_bank.h" />
     <ClInclude Include="src\orc\world\chunk.h" />
@@ -164,6 +165,7 @@
     <ClCompile Include="src\orc\graphics\sprite_atlas.cpp" />
     <ClCompile Include="src\orc\graphics\sprite_atlas_bank.cpp" />
     <ClCompile Include="src\orc\graphics\sprite_bank.cpp" />
+    <ClCompile Include="src\orc\imgui\window\sprite\file_tree_node.cpp" />
     <ClCompile Include="src\orc\world\chunk.cpp" />
     <ClCompile Include="src\orc\world\map.cpp" />
     <ClCompile Include="src\orc\world\sprite_batch.cpp" />

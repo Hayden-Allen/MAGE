@@ -38,6 +38,14 @@ namespace mage
 				for (auto& pair : row.second)
 					pair.second->draw(t, m_sprites, m_atlases, shader);
 		}
+		SAB* get_atlas_bank()
+		{
+			return m_atlases;
+		}
+		SB* get_sprite_bank()
+		{
+			return m_sprites;
+		}
 	protected:
 		SAB* m_atlases;
 		SB* m_sprites;

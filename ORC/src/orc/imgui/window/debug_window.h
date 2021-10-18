@@ -4,14 +4,14 @@
 
 namespace orc::window
 {
-	class debug final : public coga::imgui::window
+	class debug_window final : public coga::imgui::window
 	{
 	public:
-		debug(layer* const layer) :
+		debug_window(layer* const layer) :
 			coga::imgui::window(c::debug_window_title),
 			m_layer(layer)
 		{}
-		COGA_DCM(debug);
+		COGA_DCM(debug_window);
 	private:
 		orc::layer* const m_layer;
 	private:
