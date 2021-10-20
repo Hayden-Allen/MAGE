@@ -1,18 +1,22 @@
 #pragma once
 #include "pch.h"
 #include "orc/layer/layer.h"
+#include "sprite/sprite_window.h"
 
 namespace orc::window
 {
 	class game_window final : public coga::imgui::window
 	{
 	public:
-		game_window(layer* const layer) :
+		game_window(layer* const layer, const sprite_window* const sprites) :
 			coga::imgui::window(c::game_window_title),
-			m_layer(layer)
+			m_layer(layer),
+			m_selected(&sprites->m_selected)
 		{}
+	public:
 	private:
 		orc::layer* const m_layer;
+		const sprite*const* m_selected;
 	private:
 		void run(coga::app_draw_event& e) override
 		{
@@ -31,11 +35,12 @@ namespace orc::window
 
 				const glm::ivec4 world_mouse = cam * glm::vec4(mouse, 0.f, 1.f);
 
-				if (world_mouse.x >= 0 && world_mouse.y >= 0)
+				// if in bounds
+				if (*m_selected && world_mouse.x >= 0 && world_mouse.y >= 0)
 				{
-					if (coga::input::get().is_mouse_pressed(0))
-						m_layer->m_map->set_tile_at(world_mouse, 0, m_layer->m_sb->get(2));
-					else if (coga::input::get().is_mouse_pressed(coga::mouse::button::right))
+					if (COGA_IN.is_mouse_left())
+						m_layer->m_map->set_tile_at(world_mouse, 0, *m_selected);
+					else if (COGA_IN.is_mouse_right())
 						m_layer->m_map->delete_tile_at(world_mouse, 0);
 				}
 			}

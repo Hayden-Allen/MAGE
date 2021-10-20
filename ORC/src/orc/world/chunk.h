@@ -20,7 +20,7 @@ namespace orc
 		void build(coga::output_file& out) const override;
 		void save(coga::output_file& out) const override;
 		void load(sprite_batch_bank& sbb, coga::input_file& in);
-		void set_tile_at(sprite_batch_bank& sbb, const sprite_bank& sb, const glm::uvec2& pos, size_t layer, sprite* const sprite);
+		void set_tile_at(sprite_batch_bank& sbb, const sprite_bank& sb, const glm::uvec2& pos, size_t layer, const sprite* const sprite);
 		void delete_tile_at(sprite_batch_bank& sbb, const sprite_bank& sb, const glm::uvec2& pos, size_t layer);
 		sprite_bank::handle get_tile_at(const glm::uvec2& pos, size_t layer) const;
 		bool is_empty() const

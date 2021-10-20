@@ -11,17 +11,16 @@ namespace orc
 	{
 	public:
 		dockspace(orc::layer* const layer) :
-			coga::imgui::dockspace(c::dockspace_title, c::dockspace_id, s_menus,
-				{
-					new orc::window::game_window(layer),
-					new orc::window::debug_window(layer),
-					new orc::window::sprite_window(layer)
-				}
-			),
+			coga::imgui::dockspace(c::dockspace_title, c::dockspace_id, s_menus, {}),
 			m_layer(layer),
 			m_save_path(""),
 			m_build_path("")
-		{}
+		{
+			auto sprite_window = new orc::window::sprite_window(layer);
+			m_windows.push_back(sprite_window);
+			m_windows.push_back(new orc::window::game_window(layer, sprite_window));
+			m_windows.push_back(new orc::window::debug_window(layer));
+		}
 	private:
 		orc::layer* m_layer;
 		mutable std::string m_save_path, m_build_path;

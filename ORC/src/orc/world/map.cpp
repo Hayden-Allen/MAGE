@@ -4,6 +4,10 @@
 
 namespace orc
 {
+	map::map() :
+		mage::map_base<sprite_atlas_bank, sprite_bank, sprite_batch_bank, chunk>(new sprite_atlas_bank(), new sprite_bank()),
+		m_batches(new sprite_batch_bank())
+	{}
 	map::map(sprite_atlas_bank* const atlases, sprite_bank* const sprites) :
 		mage::map_base<sprite_atlas_bank, sprite_bank, sprite_batch_bank, chunk>(atlases, sprites),
 		m_batches(new sprite_batch_bank())
@@ -46,7 +50,7 @@ namespace orc
 		for (size_t i = 0; i < m_chunk_count; i++)
 			add_chunk(new chunk(*m_batches, in));
 	}
-	void map::set_tile_at(const glm::uvec2& pos, size_t layer, sprite* const sprite)
+	void map::set_tile_at(const glm::uvec2& pos, size_t layer, const sprite* const sprite)
 	{
 		if (!sprite)
 			return;

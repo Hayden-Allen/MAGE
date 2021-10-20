@@ -15,6 +15,7 @@ namespace orc
 		public buildable
 	{
 	public:
+		map();
 		map(sprite_atlas_bank* const atlases, sprite_bank* const sprites);
 		map(coga::input_file& in)
 		{
@@ -26,7 +27,7 @@ namespace orc
 		void build(coga::output_file& out) const override;
 		void save(coga::output_file& out) const override;
 		void load(coga::input_file& in) override;
-		void set_tile_at(const glm::uvec2& pos, size_t layer, sprite* const sprite);
+		void set_tile_at(const glm::uvec2& pos, size_t layer, const sprite* const sprite);
 		void delete_tile_at(const glm::uvec2& pos, size_t layer);
 		sprite_bank* const get_sprite_bank()
 		{

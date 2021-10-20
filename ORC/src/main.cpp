@@ -26,5 +26,5 @@ namespace orc
 
 coga::application* coga::create_application()
 {
-	return new orc::application(coga::window_constructor("Otherworldly Realm Creator", 1280, 720, false, { 0.f, 0.f, 1.f, 1.f }));
+	return new orc::application(coga::window_constructor("Otherworldly Realm Creator", 1280, 720, true, { 0.f, 0.f, 1.f, 1.f }));
 }

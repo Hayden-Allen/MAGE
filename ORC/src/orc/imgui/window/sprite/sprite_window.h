@@ -7,6 +7,7 @@ namespace orc::window
 {
 	class sprite_window final : public coga::imgui::window
 	{
+		friend class game_window;
 	public:
 		sprite_window(layer* layer) :
 			coga::imgui::window(c::sprite_window_title, { .menus = s_menus }),
@@ -31,22 +32,46 @@ namespace orc::window
 		{
 			ImGui::Columns(2);
 
-			sprite* result = m_root->draw();
-			if (result)
-				m_selected = result;
+			sprite* selected = m_root->draw();
+			if (selected)
+				m_selected = selected;
 
-			if (m_selected)
-			{
-				ImGui::NextColumn();
-				ImGui::Text("%u\n", m_selected->get_handle());
-			}
+			ImGui::NextColumn();
+
+			if(m_selected)
+				ImGui::Text("%d\n", m_selected->get_handle());
 
 			ImGui::Columns(1);
 		}
 		void file_open()
 		{
-			std::string path = COGA_WIN.open_file_dialog("MAGE Sprite (*.sprite)\0*.sprite\0\0");
-			if (!path.empty())
+			// platform independent; implemented in respective *_window.cpp
+			const char separator_token = COGA_WIN.get_multi_file_separator_token();
+
+			std::string path = COGA_WIN.open_multi_file_dialog("MAGE Sprite (*.sprite)\0*.sprite\0\0");
+			size_t separator = path.find(separator_token);
+
+			// multiple files
+			if (separator != std::string::npos)
+			{
+				// path of the directory that selected files are in
+				std::string dir = path.substr(0, separator) + c::file_tree_separator_token;
+				while (separator != std::string::npos)
+				{
+					// index of next separator token
+					const size_t next_separator = path.find(separator_token, separator + 1);
+					// sanitized index (for use in substr)
+					const size_t end = std::min(next_separator, path.size());
+
+					// add file at path `<base_dir>/<file_name>`
+					m_root->add_file(dir + path.substr(separator + 1, end - separator - 1));
+					
+					// advance to next file
+					separator = next_separator;
+				}
+			}
+			// single file
+			else if (!path.empty())
 				m_root->add_file(path);
 		}
 	private:

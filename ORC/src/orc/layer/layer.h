@@ -36,10 +36,11 @@ namespace orc
 
 			m_camera = new mage::camera(*this, 1.f * width, 1.f * height, { 0.f, 0.f, 0.f }, 0.f, .2f);
 
-			sprite_atlas_bank* sab = new sprite_atlas_bank();
+			/*sprite_atlas_bank* sab = new sprite_atlas_bank();
 			m_sb = new sprite_bank();
 			new sprite(m_sb, sab, "res/sprite/big.sprite");
-			m_map = new map(sab, m_sb);
+			m_map = new map(sab, m_sb);*/
+			m_map = new map();
 
 
 			/*m_vm = new mage::sasm::vm();

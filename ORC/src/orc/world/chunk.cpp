@@ -106,10 +106,8 @@ namespace orc
 			m_tile_offsets.insert({ layer, row });
 		}
 	}
-	void chunk::set_tile_at(sprite_batch_bank& sbb, const sprite_bank& sb, const glm::uvec2& pos, size_t layer, sprite* const sprite)
+	void chunk::set_tile_at(sprite_batch_bank& sbb, const sprite_bank& sb, const glm::uvec2& pos, size_t layer, const sprite* const sprite)
 	{
-		// done by map::set_tile_at
-		// set_grid(pos, layer, sprite, true);
 		// only the root tile should have this index (others should be placeholders)
 		m_grid[get_index(pos, layer)] = sprite->get_handle();
 		m_tile_count++;

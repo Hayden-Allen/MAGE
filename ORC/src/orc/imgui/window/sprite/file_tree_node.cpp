@@ -14,12 +14,6 @@ namespace orc
 	{}
 	file_tree_node::~file_tree_node()
 	{
-		for (const auto& pair : m_files)
-		{
-			// TODO delete pixel data from atlases
-			m_sprite_bank->remove(pair.second->get_handle());
-			delete pair.second;
-		}
 		for (const auto& pair : m_folders)
 			delete pair.second;
 	}
@@ -28,7 +22,7 @@ namespace orc
 
 	void file_tree_node::add_file(std::string path)
 	{
-		std::replace_if(path.begin(), path.end(), [](char c) { return c == '\\'; }, s_separator_token);
+		clean_path(path);
 		add_file(path, path);
 	}
 	void file_tree_node::remove_file(const std::string& name)
@@ -67,13 +61,13 @@ namespace orc
 
 	void file_tree_node::add_file(const std::string& path, const std::string& stub)
 	{
-		const size_t separator_index = stub.find_first_of(s_separator_token);
+		const size_t separator_index = stub.find_first_of(c::file_tree_separator_token);
 		// this is the terminal node
 		if (separator_index == std::string::npos)
 		{
-			const size_t type_index = stub.find_first_of(s_extension_token);
+			const size_t type_index = stub.find_first_of(c::file_tree_extension_token);
 			// no or invalid file extension
-			if (type_index == std::string::npos || stub.substr(type_index + 1) != s_valid_extension)
+			if (type_index == std::string::npos || stub.substr(type_index + 1) != c::file_tree_valid_extension)
 			{
 				COGA_ERROR("Only '.sprite' files can be added");
 				return;
@@ -111,18 +105,18 @@ namespace orc
 		ImGui::PushID(*id++);
 
 		// if this node is open
-		ImGui::PushStyleColor(ImGuiCol_Text, s_folder_color);
+		ImGui::PushStyleColor(ImGuiCol_Text, c::file_tree_folder_color);
 		if (ImGui::TreeNodeEx(m_name.c_str(), has_files() ? ImGuiTreeNodeFlags_None : ImGuiTreeNodeFlags_DefaultOpen))
 		{
 			ImGui::PopStyleColor();
 			for (const auto& pair : m_folders)
 				result = pair.second->draw(path, id);
-			ImGui::PushStyleColor(ImGuiCol_Text, s_file_color);
+			ImGui::PushStyleColor(ImGuiCol_Text, c::file_tree_file_color);
 			for (const auto& pair : m_files)
 			{
 				ImGui::PushID(*id++);
 
-				ImGui::TreeNodeEx(pair.first.c_str(), s_imgui_flags);
+				ImGui::TreeNodeEx(pair.first.c_str(), c::file_tree_imgui_flags);
 				// this is the currently selected sprite
 				if (ImGui::IsItemClicked())
 					result = pair.second;
